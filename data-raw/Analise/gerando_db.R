@@ -26,7 +26,30 @@ json_df_games <- func_criar_tabela(df_games_selected, debug = T)
 jsonlite::write_json(json_df_games, "data-raw/dados-manipulados/database.json")
 feather::write_feather(json_df_games, "data-raw/dados-manipulados/database.feather")
 
-# ## Investigando languages
-# 
-# lang <- unique(df_games_selected$language) 
-# df_lang_backup <- as.data.frame(lang)
+### Adicionando dados ao mongoDB
+
+## Dados padrão do mongo
+mongo_db_user <- config::get("mongo_db_user", file = "config/config.yml")
+mongo_db_password <- config::get("mongo_db_password", file = "config/config.yml")
+mongo_db_url_extra <- config::get("mongo_db_url_extra", file = "config/config.yml")
+mongo_database <- config::get("mongo_database", file = "config/config.yml")
+
+url_srv <- paste0("mongodb+srv://", mongo_db_user, ":", mongo_db_password, mongo_db_url_extra)
+
+mongo_collection <- config::get("mongo_collection", file = "config/config.yml")
+mongo_db <- mongolite::mongo(collection = mongo_collection, db = mongo_database, url = url_srv, verbose = TRUE)
+
+## Banco de dados de contagem
+mongo_db$drop()
+mongo_db$insert(json_df_games)
+
+## Inserindo os dados no mongoDB, banco de dados completo
+mongo_db <- mongolite::mongo(collection = "steamDataFull", db = mongo_database, url = url_srv, verbose = TRUE)
+mongo_db$drop()
+mongo_db$insert(df_games)
+
+
+## Inserindo os dados no mongoDB, banco de dados selecionado
+mongo_db <- mongolite::mongo(collection = "steamDataPreProc", db = mongo_database, url = url_srv, verbose = TRUE)
+mongo_db$drop()
+mongo_db$insert(df_games_selected)
