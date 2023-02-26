@@ -23,8 +23,8 @@ df_games_selected <- func_manip_vars(df_games, debug = F)
 ## Gerando database, formato json para o mongodb
 json_df_games <- func_criar_tabela(df_games_selected, debug = T)
 
-jsonlite::write_json(json_df_games, "data-raw/dados-manipulados/database.json")
-feather::write_feather(json_df_games, "data-raw/dados-manipulados/database.feather")
+# jsonlite::write_json(json_df_games, "data-raw/dados-manipulados/database.json")
+# feather::write_feather(json_df_games, "data-raw/dados-manipulados/database.feather")
 
 ### Adicionando dados ao mongoDB
 
@@ -36,7 +36,7 @@ mongo_database <- config::get("mongo_database", file = "config/config.yml")
 
 url_srv <- paste0("mongodb+srv://", mongo_db_user, ":", mongo_db_password, mongo_db_url_extra)
 
-mongo_collection <- config::get("mongo_collection", file = "config/config.yml")
+mongo_collection <- config::get("mongo_collection_counts", file = "config/config.yml")
 mongo_db <- mongolite::mongo(collection = mongo_collection, db = mongo_database, url = url_srv, verbose = TRUE)
 
 ## Banco de dados de contagem
@@ -53,3 +53,4 @@ mongo_db$insert(df_games)
 mongo_db <- mongolite::mongo(collection = "steamDataPreProc", db = mongo_database, url = url_srv, verbose = TRUE)
 mongo_db$drop()
 mongo_db$insert(df_games_selected)
+

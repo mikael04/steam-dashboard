@@ -395,22 +395,6 @@ summary(df_games$`Required age`)
 
 ## 4.0 Análise do MongoDB ----
 
-# source("data-raw/")
-library(mongolite)
-
-## Inserindo os dados no mongoDB
-mongo_db$insert(df_games)
-
-mongo_db_user <- config::get("mongo_db_user", file = "config/config.yml")
-mongo_db_password <- config::get("mongo_db_password", file = "config/config.yml")
-mongo_db_url_extra <- config::get("mongo_db_url_extra", file = "config/config.yml")
-mongo_database <- config::get("mongo_database", file = "config/config.yml")
-mongo_collection <- config::get("mongo_collection", file = "config/config.yml")
-
-url_srv <- paste0("mongodb+srv://", mongo_db_user, ":", mongo_db_password, mongo_db_url_extra)
-
-mongo_db <- mongolite::mongo(collection = mongo_collection, db = mongo_database, url = url_srv, verbose = TRUE)
-
 vars <- mongo_db$distinct("variavel")
 years <- mongo_db$distinct("release_year")
 languages <- mongo_db$distinct("language")
