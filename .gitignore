@@ -3,7 +3,8 @@
 .Rdata
 .httr-oauth
 .DS_Store
-data-raw/*
+data-raw/dados-manipulados/*
+data-raw/steam-data/*
 config/*
 data-raw/dados-manipulados/database.feather
 data-raw/dados-manipulados/database.json

@@ -1,0 +1,221 @@
+---
+title: "AnaliseExploratoria"
+author: "Mikael M Coletto"
+format: html
+editor: source
+---
+
+```{r, setup, include=FALSE}
+knitr::opts_knit$set(root.dir = '/mnt/Netac-Dados/Projetos/R/steam-dashboard')
+```
+
+# Análise dos dados da Steam
+
+## Objetivo
+
+A ideia desta análise é ilustrar os conhecimentos adquiridos em R, passando pelos pontos de análise exploratória, construção de um dashboard para visualização de dados e por fim trabalhar com modelos de predição para alguns possíveis problemas da indústria.
+
+## Primeiro problema
+
+Somos um estúdio de jogos e queremos analisar qual gênero/categoria de jogo tem mais sucesso na steam, mais público e melhores avaliações, também queremos analisar qual faixa de preço é mais interessante para o lançamento desse novo jogo.
+
+### Primeiro passo - Análise exploratória
+
+Inicialmente iremos fazer uma análise exploratória de algumas bases de dados e suas variáveis que podem ser interessantes para determinar sucesso de um jogo, a faixa de preço, a quantidade de vendas e relacionar essas questões aos gêneros e categorias. Foram feitas análises de três bases de dados, a primeira mais completa, e as duas seguintes mais focadas em reviews de usuários.
+
+#### Base de dados - 1
+
+A base de dados usada para esta análise se encontra no Kaggle, através deste link:
+
+<https://www.kaggle.com/datasets/fronkongames/steam-games-dataset>
+
+##### Skimr
+
+Usarei o Skimr para a base de dados completa e verificarei quais dados podem ser melhor investigados.
+
+```{r, mongoCon, echo = T, result = 'hide', message = F, warning = F, error = F}
+# ## Dados de conexão com o banco da Steam no mongo
+# mongolite::mongo_options(log_level = 1)
+# mongo_db_user <- config::get("mongo_db_user", file = "config/config.yml")
+# mongo_db_password <- config::get("mongo_db_password", file = "config/config.yml")
+# mongo_db_url_extra <- config::get("mongo_db_url_extra", file = "config/config.yml")
+# mongo_database <- config::get("mongo_database", file = "config/config.yml")
+# mongo_collection <- config::get("mongo_collection_full", file = "config/config.yml")
+# 
+# url_srv <- paste0("mongodb+srv://", mongo_db_user, ":", mongo_db_password, mongo_db_url_extra)
+# mongo_db <- mongolite::mongo(collection = mongo_collection, db = mongo_database, url = url_srv, verbose = TRUE)
+# 
+# ## Lendo e criando um dataframe com os dados do mongoDB
+# df_full <- as.data.frame(mongo_db$find())
+
+df_full <- data.table::fread("data-raw/steam-data/db-1/games.csv")
+```
+
+```{r, skimr}
+skimr::skim(df_full)
+```
+
+```{r, cleanNames}
+## Usaremos a função do Janitor para editar os nomes das colunas e torná-las mais fáceis de serem manipuladas
+## E então faremos a seleção das colunas que serão analisadas
+
+df_selected <- df_full |> 
+  janitor::clean_names() |>
+  dplyr::select(app_id, name, developers, publishers, categories, genres, tags, release_date, estimated_owners, peak_ccu, price, windows, mac, linux, metacritic_score, user_score, positive, negative, recommendations, average_playtime_forever, median_playtime_forever, average_playtime_two_weeks, median_playtime_two_weeks) |> 
+  dplyr::mutate(release_date = lubridate::mdy(release_date)) 
+```
+
+##### Removendo Softwares e não jogos
+
+Após a análise inicial, foi detectado que existiam nesta base de dados softwares que não eram considerados jogos, portanto eles serão excluídos para que não comprometam as futuras análises.
+
+Vamos utilizar a variável `genres` para identificar os gêneros que não são jogos.
+
+```{r, genresNotGames}
+
+# ## Colunas categories, genres, separando em linhas
+# df_selected <- df_selected |>
+#   tidyr::separate_rows(categories, sep = ",") |> 
+#   tidyr::separate_rows(genres, sep = ",")
+
+
+notGames <- c("Utilities", "Design & Illustration", "Animation & Modeling", "Game Development", "Photo Editing", "Audio Production", "Video Production", "Accounting", "Movie", "Documentary", "Episodic", "Short", "Tutorial", "360 Video")
+
+# unique(df_selected$genres)
+df_selected_gen <- df_selected |> 
+  dplyr::filter(!(genres %in% notGames))
+
+## Esses eram dois jogos que foram investigados
+## Eles possuíam categorias Movie e Documentary também, então esses registros foram apagados e os demais foram mantidos
+
+# df_full_search <- df_full |> 
+#   dplyr::filter(Name %in% c("Spacelords", "CAT SUDOKU🐱"))
+
+```
+
+##### Escolhendo as variáveis
+
+Após uma análise inicial das tabelas geradas pelo `skimr`, selecionei algumas variáveis que seriam analisadas mais profundamente. A começar pelas variáveis relativas a notas, críticas e avaliações dos jogos.
+
+```{r, varReview}
+library(ggplot2)
+
+ggplot(df_selected_gen, aes(metacritic_score)) +
+  geom_histogram() +
+  theme_minimal() +
+  labs(title = "Histograma da variável Metacritic Score",
+       x = "Score",
+       y = "Contagem")
+```
+
+Pelo Histograma podemos ver que a variável *Metacritic Score* (renomeada para metacritic_score) não é muito interessante, seu preenchimento foi visto como completo pelo skim, porém quase em sua totalidade as notas são "0", ou seja, não temos uma nota definida para avaliar os jogos.
+
+Outras variáveis de avaliação como *Reviews*, *User Score*, e *Recommendations*, foram analisadas porém apresentaram pouco úteis, ou por terem um preenchimento muito baixo ou por envolverem outros tipos de dados (que não fossem uma avaliação direta).
+
+##### Nova métrica de avaliações
+
+A única métrica que parece interessante de avaliação dos jogos, é a de avaliações positivas e negativas (as variáveis *Positive* e *Negative*).
+
+Para isso foi criado uma nova variável, que mede a taxa de avaliações positivas e negativas de um jogo, chamada *overall_rate*.
+
+```{r, var_overallRate}
+df_selected_gen$overall <- df_selected_gen$positive/df_selected_gen$negative
+df_selected_gen$overall[1:100]
+```
+
+Analisando essa nova métrica, verificamos que possuímos dados `NaN` e `Inf`, que são resultados, respectivamente, de divisões $0/0$ e de um número número qualquer por zero $x/0$. Os números NaN serão removidos, já que não serão úteis para avaliação dos jogos, já os números Inf e números muito grandes serão investigados mais a fundo.
+
+```{r, NaN-Inf}
+
+df_selected_gen$estimated_owners <- as.factor(df_selected_gen$estimated_owners)
+df_inf <- df_selected_gen |> 
+  dplyr::filter(positive > 20 & (as.integer(estimated_owners) > 3) &
+                overall < Inf) |> 
+  dplyr::select(name, publishers, categories, genres, release_date, estimated_owners, positive, negative, overall)
+
+df_inf$estimated_owners <- as.factor(df_inf$estimated_owners)
+df_inf <- df_inf |> 
+  dplyr::filter(as.integer(estimated_owners) > 3)
+
+# df_inf <- df_selected |> 
+#   dplyr::filter(median_playtime_two_weeks > 0 & release_date > lubridate::as_date("2020-01-01"))
+
+skimr::skim(df_selected_gen[df_selected_gen$positive >= 20, "positive"])
+
+levels(df_selected_gen$estimated_owners)
+```
+
+E então defini mais alguns filtros, de jogos que possivelmente seriam problemáticos. Estabeleci as regras:
+
+1.  O jogo precisa ter pelo menos 20 avaliações positivas.
+
+2.  O jogo precisa ter pelo menos
+
+#### Base de dados - 2
+
+Como os dados de avaliações eram escassas e eu já havia encontrado outras bases de dados, decidi analisar outras bases e verificar se possuía outra que fosse mais interessante com propósito de verificar dados de avaliação dos jogos.
+
+```{r, db-4}
+df_reviews <- data.table::fread("data-raw/steam-data/db-4/dataset.csv")
+
+name <- unique(df_reviews$app_name)
+
+unique(df_reviews$review_score)
+
+df_reviews$positive <- dplyr::if_else(df_reviews$review_score == 1, 1, 0)
+df_reviews$negative <- dplyr::if_else(df_reviews$review_score == -1, 1, 0)
+
+df_reviews_group <- df_reviews |> 
+  dplyr::group_by(app_id) |> 
+  dplyr::summarise(count_positive = sum(positive),
+                   count_negative = sum(negative)) |> 
+  dplyr::distinct(app_id, .keep_all = T) |> 
+  dplyr::ungroup() |> 
+  dplyr::inner_join(df_reviews[!duplicated(df_reviews[, c("app_id", "app_name")]), c("app_id", "app_name")])
+  
+  
+df_reviews_head <- df_reviews |> 
+  dplyr::slice_sample(prop = 0.1)
+
+db_unique <- df_reviews[!duplicated(df_reviews[, c("app_id", "app_name")]), c("app_id", "app_name")]
+
+
+# df_reviews <- data.table::fread("data-raw/steam-data/db-5/GamesAndRecommendation/recommendations.csv")
+```
+
+Após uma investigação da base, verifiquei que ela era um pouco antiga, por não possuir títulos como o "Counter-Strike: Global Offensive", portanto deixei ela de lado e parti para a análise da outra base de recomendações.
+
+#### Base de dados - 3
+
+```{r, db-5}
+df_reviews <- data.table::fread("data-raw/steam-data/db-5/recommendations.csv")
+df_games <- data.table::fread("data-raw/steam-data/db-5/games.csv")
+
+app_ids <- unique(df_reviews$app_id)
+
+df_reviews_group <- df_reviews |> 
+dplyr::mutate(positive = dplyr::if_else(is_recommended, 1, 0),
+              negative = dplyr::if_else(!is_recommended, 1, 0)) |> 
+dplyr::group_by(app_id) |> 
+dplyr::summarise(count_positive = sum(positive),
+                 count_negative = sum(negative)) |> 
+dplyr::distinct(app_id, .keep_all = T) |> 
+dplyr::ungroup() |> 
+  dplyr::inner_join(df_games[, c("app_id", "title", "positive_ratio", "user_reviews", "date_release")])
+```
+
+Após a análise desta nova base de dados, concluí que ela possui sim dados mais atualizados de jogos (com jogos datados de fev/2023), mas possui menos dados relacionados a línguas suportadas (tanto legendas quanto áudios), dados de pico de usuários, dados de DLC, dados de empresas (como sites, e-mail de suporte, imagem do jogo), dados do Metacritic (por mais que não tenham sido úteis) e dados de tempo de jogo. Então utilizarei ela apenas para verificar a avaliação dos usuários (através das colunas `positive_ratio` e `user_reviews`).
+
+#### Diferenças entre base 1 e 3
+
+```{r, compareDBs}
+games_antijoin_1 <- dplyr::anti_join(df_games[, c("app_id", "title", "user_reviews", "date_release")], df_selected_gen[, c("app_id", "name")])
+games_antijoin_2 <- dplyr::anti_join(df_selected_gen[, c("app_id", "name", "positive", "release_date")], df_games[, c("app_id", "title")])
+
+dplyr::n_distinct(df_selected_gen$app_id)
+dplyr::n_distinct(df_games$app_id)
+
+search_in_1 <- df_games[stringr::str_detect(df_games$title, "Rainbow Six"),]
+search_in_2 <- df_selected_gen[stringr::str_detect(df_selected_gen$name, "Rainbow Six"),]
+
+```
