@@ -240,7 +240,7 @@ Porém, ao contrário da base anterior, neste caso todos os jogos "duplicados" s
 
 #### Diferenças entre base 1 e 3
 
-```{r, compareDBs}
+```{r, compareDBs, eval=FALSE}
 
 ## Antijoins através do ID
 games_antijoin_games_app_id <- dplyr::anti_join(df_games[, c("app_id", "title", "user_reviews", "date_release")], df_selected_gen[, c("app_id", "name")],
@@ -308,25 +308,144 @@ Também foi analisado novamente as duplicatas que foram geradas, e novamente foi
 Agora adicionaremos à base agrupada os dados referentes às informações do jogo, inicialmente adicionando através de outro arquivo presente nos arquivos da base 3.
 
 ```{r, addingInfo}
-# df_info <- jsonlite::fromJSON("data-raw/steam-data/db-3/games_metadata.json")
-library(jsonlite)
-out <- lapply(readLines("data-raw/steam-data/db-3/games_metadata.json"), fromJSON)
+run_join <- F
+if(run_join){
+  library(jsonlite)
+  out <- lapply(readLines("data-raw/steam-data/db-3/games_metadata.json"), fromJSON)
+  
+  ## Unindo o terceiro elemento da lista
+  for(i in 1:length(out)){
+    purrr::pluck(out, i, 3)<-paste0(purrr::pluck(out, i, 3), collapse = ",")
+  }
+  
+  ## Transformando em um dataframe para unir à outra base
+  df_metadata <- do.call(rbind.data.frame, out)
+  
+  ## Adicionando coluna de tags do df_metadata, e adicionando colunas de categoria, genero e tags extra do df anterior
+  df_all_games <- dplyr::left_join(df_all_games, df_metadata, by = "app_id") |> 
+    dplyr::select(-description) |> 
+    dplyr::left_join(df_selected |> 
+                       dplyr::select(app_id, categories, genres, tags) |> 
+                       dplyr::rename(tags_extra = tags),
+                     by = "app_id")
 
-## Unindo o terceiro elemento da lista
-for(i in 1:length(out)){
-  purrr::pluck(out, i, 3)<-paste0(purrr::pluck(out, i, 3), collapse = ",")
+  ## Escrevendo nova base para não precisar rodar os joins e comparações todas as vezes
+  if(!dir.exists("data-raw/steam-data/db-created")){
+    dir.create("data-raw/steam-data/db-created")
+  }
+  data.table::fwrite(df_all_games, "data-raw/steam-data/db-created/db-reviews-join.csv")
+  
+}else{
+  df_all_games <- data.table::fread("data-raw/steam-data/db-created/db-reviews-join.csv")
 }
 
-## Transformando em um dataframe para unir à outra base
-df_metadata <- do.call(rbind.data.frame, out)
+## Substituindo células em branco por NA no caso de estar lendo o csv
+if(!run_join){
+  df_all_games <- df_all_games |> 
+    dplyr::mutate(categories = ifelse(categories == "", NA, categories),
+                  genres = ifelse(genres == "", NA, genres),
+                  tags = ifelse(tags == "", NA, tags),
+                  tags_extra = ifelse(tags_extra == "", NA, tags_extra))
+}
 
-## Adicionando coluna de tags do df_metadata, e adicionando colunas de categoria, genero e tags extra do df anterior
-df_all_games_ <- dplyr::left_join(df_all_games, df_metadata, by = "app_id") |> 
-  dplyr::select(-description) |> 
-  dplyr::left_join(df_selected |> 
-                     dplyr::select(app_id, categories, genres, tags) |> 
-                     dplyr::rename(tags_extra = tags),
-                   by = "app_id")
+## Verificando quantos jogos não possuem categorias, gêneros ou tags/tags_extra definidos
+nrow(df_all_games[is.na(categories), ])
+nrow(df_all_games[is.na(genres), ])
+nrow(df_all_games[is.na(tags) & is.na(tags_extra), ])
+```
+
+### Analisando dados dos jogos
+
+Agora que já uni as duas bases, e tenho uma quantidade mais razoável de jogos a serem analisados, precisarei definir qual será a forma de avaliar os estilos/gêneros/categorias dos jogos, por ser uma coluna presente em ambas as bases, a variável `tags` e é uma ótima candidata, porém ela apresenta um número de possibilidades bastante grande e distinta, o que poderia ser prejudicial à análise. Já as outras variáveis `categories` e `genres` que são mais específicas, não estão presentes em aproximadamente 20% da base de dados. A análise será feita inialmente nas três para posterior decisão de qual ou quais usar.
+
+```{r, tags}
+## Verificando as diferenças entre tags de um df e do outro (tags e tags_extra)
+df_tags <- dplyr::select(df_all_games, 
+                         app_id, name, tags, tags_extra)
+df_tags_equal <- df_tags[tags == tags_extra,]
+df_tags_not_equal <- df_tags[tags != tags_extra,]
+
+# nrow(df_tags[is.na(tags_extra), ])
+# nrow(df_tags[is.na(tags), ])
+
+## Primeiro check será em jogos que possuem números de tags diferentes
+tags_dif_ids <- df_tags_not_equal |> 
+  dplyr::select(app_id, tags, tags_extra) |> 
+  dplyr::mutate(check_lenght = ifelse(stringr::str_length(tags) == stringr::str_length(tags_extra), T, F))
+
+## Separamos os que possuem apenas tamanhos diferentes de tags, a ideia inicial é analisar o que temos de diferente, e se for apenas uma ou outra tag a mais, utilizar a combinação destas tags
+df_tags_not_equal_check <- tags_dif_ids[check_lenght == F]
+
+## Os que tem mesmo tamanho mas não tem mesmas tags, provavelmente são elementos em ordens diferentes, então checarei isso
+df_tags_not_equal_check_t <- tags_dif_ids[check_lenght == T]
+
+```
+
+#### Analisando tags de diferentes tamanhos
+
+```{r, tags-diff-size}
+vector_tags <- df_tags_not_equal_check$tags |> 
+  purrr::map(\(x) stringr::str_sort(stringr::str_split_1(x, pattern = ",")))
+
+vector_tags_ex <- df_tags_not_equal_check$tags_extra |> 
+  purrr::map(\(x) stringr::str_sort(stringr::str_split_1(x, pattern = ",")))
+
+vector_tags_aux <- vector_tags[1:5]
+vector_tags_ex_aux <- vector_tags_ex[1:5]
+
+# ## Método de comparação de strings
+# cmp <- NULL
+# for(i in 1:length(vector_tags_aux)){
+#   cmp[[i]] <- ifelse(
+#     (waldo::compare(vector_tags_aux[[i]], vector_tags_ex_aux[[i]])) == F, T, NA)
+# }
+
+## Função para comparar strings por tamanho
+cmp_size <- function(x, y){
+  if(length(x) == length(y)){
+    return(T)
+  }else{
+    return(F)
+  }
+}
+
+## Comparando tamanhos e criando vetor com flag de tamanhos iguais ou não
+diff_sizes <- mapply(cmp_size, vector_tags, vector_tags_ex)
+list_with_both <- NULL
+for(i in 1:length(diff_sizes)){
+  if(!diff_sizes[i]){
+    pluck(list_with_both, i, 1) <- vector_tags_aux[i]
+    pluck(list_with_both, i, 2) <- vector_tags_ex_aux[i]
+    pluck(list_with_both, i, 3) <- df_tags_not_equal[[1]][[i]]
+  }else{
+  pluck(list_with_both, i) <- NULL
+  }
+}
+
+## Analisando tags com diferentes tamanhos
+list_with_both_notNull <- list_with_both
+list_with_both_notNull[sapply(list_with_both_notNull, is.null)] <- NULL
+
+## Criando uma lista com todas as tags q estão presentes em uma coluna e não na outra 
+## (estão em tags e não estão em tags_extra, estão em tags_extra e não estão em tags)
+diff_elem <- NULL
+for(i in 1:length(list_with_both_notNull)){
+  elem_1 <- pluck(list_with_both_notNull, i, 1, 1)
+  elem_2 <- pluck(list_with_both_notNull, i, 2, 1)
+  
+  diff1 <- setdiff(elem_1, elem_2)
+  diff2 <- setdiff(elem_2, elem_1)
+  
+  pluck(diff_elem, i, 1) <- c("1", diff1, "2", diff2)
+  pluck(diff_elem, i, 2) <-pluck(list_with_both_notNull, i, 3)
+}
+
+
+
+## Método de comparação de strings
+# stringdist::stringdist(vector_tags_aux[[4]], vector_tags_ex_aux[[4]])
+
 ```
 
 
+#### Analisando tags diferentes mas mesmo tamanho
