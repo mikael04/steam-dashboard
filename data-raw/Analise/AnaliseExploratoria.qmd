@@ -393,53 +393,20 @@ vector_tags_ex <- df_tags_not_equal_check$tags_extra |>
 vector_tags_aux <- vector_tags[1:5]
 vector_tags_ex_aux <- vector_tags_ex[1:5]
 
-# ## Método de comparação de strings
-# cmp <- NULL
-# for(i in 1:length(vector_tags_aux)){
-#   cmp[[i]] <- ifelse(
-#     (waldo::compare(vector_tags_aux[[i]], vector_tags_ex_aux[[i]])) == F, T, NA)
-# }
-
-## Função para comparar strings por tamanho
-cmp_size <- function(x, y){
-  if(length(x) == length(y)){
-    return(T)
-  }else{
-    return(F)
-  }
-}
-
-## Comparando tamanhos e criando vetor com flag de tamanhos iguais ou não
-diff_sizes <- mapply(cmp_size, vector_tags, vector_tags_ex)
-list_with_both <- NULL
-for(i in 1:length(diff_sizes)){
-  if(!diff_sizes[i]){
-    pluck(list_with_both, i, 1) <- vector_tags_aux[i]
-    pluck(list_with_both, i, 2) <- vector_tags_ex_aux[i]
-    pluck(list_with_both, i, 3) <- df_tags_not_equal[[1]][[i]]
-  }else{
-  pluck(list_with_both, i) <- NULL
-  }
-}
-
-## Analisando tags com diferentes tamanhos
-list_with_both_notNull <- list_with_both
-list_with_both_notNull[sapply(list_with_both_notNull, is.null)] <- NULL
 
 ## Criando uma lista com todas as tags q estão presentes em uma coluna e não na outra 
 ## (estão em tags e não estão em tags_extra, estão em tags_extra e não estão em tags)
 diff_elem <- NULL
-for(i in 1:length(list_with_both_notNull)){
-  elem_1 <- pluck(list_with_both_notNull, i, 1, 1)
-  elem_2 <- pluck(list_with_both_notNull, i, 2, 1)
+for(i in 1:length(vector_tags)){
+  elem_1 <- pluck(vector_tags, i, 1, 1)
+  elem_2 <- pluck(vector_tags_ex, i, 2, 1)
   
   diff1 <- setdiff(elem_1, elem_2)
   diff2 <- setdiff(elem_2, elem_1)
   
   pluck(diff_elem, i, 1) <- c("1", diff1, "2", diff2)
-  pluck(diff_elem, i, 2) <-pluck(list_with_both_notNull, i, 3)
+  pluck(diff_elem, i, 2) <- pluck(df_tags_not_equal_check, 1, i)
 }
-
 
 
 ## Método de comparação de strings
