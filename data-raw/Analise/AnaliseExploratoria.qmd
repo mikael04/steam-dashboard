@@ -384,6 +384,10 @@ df_tags_not_equal_check_t <- tags_dif_ids[check_lenght == T]
 #### Analisando tags de diferentes tamanhos
 
 ```{r, tags-diff-size}
+# df_tags_not_equal_check <- df_tags_not_equal_check |> 
+#   dplyr::mutate(tags_extra = gsub("-", " ", tags_extra))
+library(purrr)
+
 vector_tags <- df_tags_not_equal_check$tags |> 
   purrr::map(\(x) stringr::str_sort(stringr::str_split_1(x, pattern = ",")))
 
@@ -393,21 +397,71 @@ vector_tags_ex <- df_tags_not_equal_check$tags_extra |>
 vector_tags_aux <- vector_tags[1:5]
 vector_tags_ex_aux <- vector_tags_ex[1:5]
 
-
 ## Criando uma lista com todas as tags q estão presentes em uma coluna e não na outra 
 ## (estão em tags e não estão em tags_extra, estão em tags_extra e não estão em tags)
 diff_elem <- NULL
 for(i in 1:length(vector_tags)){
-  elem_1 <- pluck(vector_tags, i, 1, 1)
-  elem_2 <- pluck(vector_tags_ex, i, 2, 1)
+  elem_1 <- pluck(vector_tags, i)
+  elem_2 <- pluck(vector_tags_ex, i)
   
   diff1 <- setdiff(elem_1, elem_2)
   diff2 <- setdiff(elem_2, elem_1)
+  equal <- intersect(elem_1, elem_2)
   
-  pluck(diff_elem, i, 1) <- c("1", diff1, "2", diff2)
-  pluck(diff_elem, i, 2) <- pluck(df_tags_not_equal_check, 1, i)
+  pluck(diff_elem, i, 1) <- paste0(equal, collapse = ",")
+  pluck(diff_elem, i, 2) <- paste0("1 - ", paste0(diff1, collapse = ","), ". 2 - ", paste0(diff2, collapse = ","))
+  pluck(diff_elem, i, 3) <- pluck(df_tags_not_equal_check, 1, i)
 }
 
+## Alterando para DF, para melhor visualização
+
+df_diff <- data.frame(t(sapply(diff_elem, c)))
+colnames(df_diff) <- c("equal", "diff", "id")
+
+df_diff <- df_diff |> 
+  tidyr::separate_wider_delim(diff, ". 2", names = c("first", "seccond")) |> 
+  dplyr::mutate(seccond = paste0("2", seccond)) |> 
+  dplyr::mutate(equal = as.character(equal),
+                id = as.integer(id))
+
+## Palavras com grafias levemente diferentes serão alteradas
+## Roguelike e Roguelite para Rogue-like e Rogue-lite,
+## Base Building para Base-Building
+## e-sports para eSports
+## Football (Soccer) para Soccer
+## Football (American) para Football
+
+pattern_first <- c("1 - ", "Roguelike", "Roguelite", "Base Building", "Football (Soccer)", "Football (American)")
+replacement_first <- c("", "Rogue-like", "Rogue-lite", "Base-Building", "Soccer", "Football")
+pattern_seccond <- c("2 - ", "e-sport")
+replacement_seccond <- c("", "eSport")
+
+df_diff <- df_diff |> 
+  dplyr::mutate(first = stringi::stri_replace_all_regex(first, pattern_first, replacement_first, vectorize_all = F)) |> 
+  dplyr::mutate(seccond = stringi::stri_replace_all_regex(seccond, pattern_seccond, replacement_seccond, vectorize_all = F)) |> 
+  dplyr::rowwise() |> 
+  dplyr::mutate(add_tags = paste0(union(first, seccond), collapse = ",")) |> 
+  dplyr::mutate(add_tags = stringi::stri_replace_all_regex(add_tags, "^,|,$", "", vectorize_all = F))
+
+
+df_diff <- df_diff |> 
+  dplyr::mutate(all = paste0(equal, ",", add_tags))
+
+# df_diff[] <- lapply(df_diff, function(x) { attributes(x) <- NULL; x})
+
+all_ordered <- df_diff$all |> 
+  purrr::map(\(x) stringr::str_sort(stringr::str_split_1(x, pattern = ",")))
+
+tags <- NULL
+for(i in 1:length(all_ordered)){
+  pluck(tags, i) <- paste0(pluck(all_ordered, i), collapse = ",")
+}
+
+df_diff$tags <- as.character(tags)
+
+df_diff <- df_diff |> 
+  dplyr::select(-add_tags, -first, -seccond, -equal, -all) |> 
+  dplyr::ungroup()
 
 ## Método de comparação de strings
 # stringdist::stringdist(vector_tags_aux[[4]], vector_tags_ex_aux[[4]])
@@ -415,4 +469,77 @@ for(i in 1:length(vector_tags)){
 ```
 
 
-#### Analisando tags diferentes mas mesmo tamanho
+#### Analisando tags diferentes
+```{r, tags-same-size}
+vector_tags <- df_tags_not_equal$tags |> 
+  purrr::map(\(x) stringr::str_sort(stringr::str_split_1(x, pattern = ",")))
+
+vector_tags_ex <- df_tags_not_equal$tags_extra |> 
+  purrr::map(\(x) stringr::str_sort(stringr::str_split_1(x, pattern = ",")))
+
+vector_tags_aux <- vector_tags[1:5]
+vector_tags_ex_aux <- vector_tags_ex[1:5]
+
+## Criando uma lista com todas as tags q estão presentes em uma coluna e não na outra 
+## (estão em tags e não estão em tags_extra, estão em tags_extra e não estão em tags)
+diff_elem <- NULL
+for(i in 1:length(vector_tags)){
+  elem_1 <- pluck(vector_tags, i)
+  elem_2 <- pluck(vector_tags_ex, i)
+  
+  diff1 <- setdiff(elem_1, elem_2)
+  diff2 <- setdiff(elem_2, elem_1)
+  equal <- intersect(elem_1, elem_2)
+  
+  pluck(diff_elem, i, 1) <- paste0(equal, collapse = ",")
+  pluck(diff_elem, i, 2) <- paste0("1 - ", paste0(diff1, collapse = ","), ". 2 - ", paste0(diff2, collapse = ","))
+  pluck(diff_elem, i, 3) <- pluck(df_tags_not_equal, 1, i)
+}
+
+## Alterando para DF, para melhor visualização
+df_diff <- data.frame(t(sapply(diff_elem, c)))
+colnames(df_diff) <- c("equal", "diff", "id")
+
+df_diff <- df_diff |> 
+  tidyr::separate_wider_delim(diff, ". 2", names = c("first", "seccond")) |> 
+  dplyr::mutate(seccond = paste0("2", seccond)) |> 
+  dplyr::mutate(equal = as.character(equal),
+                id = as.integer(id))
+## Palavras com grafias levemente diferentes serão alteradas
+## Roguelike e Roguelite para Rogue-like e Rogue-lite,
+## Base Building para Base-Building
+## e-sports para eSports
+## Football (Soccer) para Soccer
+## Football (American) para Football
+## Puzzle Platformer para Puzzle-Platformer
+
+## Investigando tags com mesmo tamanho, buscando pequenas alterações na escrita
+df_diff_ <- df_diff |> 
+  dplyr::filter(!(first == "1 - ") & !(seccond == "2 - ")) |> 
+  dplyr::filter(stringr::str_length(first) == stringr::str_length(seccond))
+
+## Função para ordenar strings
+order_strings <- function(strings){
+  # teste_interno <- F
+  # if(teste_interno){
+#   strings <- "Anime,Dating Sim,Female Protagonist,Otome,Romance,Simulation,Singleplayer,Story Rich,Visual Novel,Choices Matter"
+  # }
+  all_ordered <- strings |> 
+    purrr::map(\(x) stringr::str_sort(stringr::str_split_1(x, pattern = ",")))
+  
+  all_ordered <- paste0(unlist(all_ordered), collapse = ",")
+  all_ordered
+}
+
+## Adicionando tags às tags básicas
+df_diff <- df_diff |> 
+  dplyr::mutate(all = ifelse(!(first == "1 - "), paste0(equal, ",", gsub("1 - ", "", first)), equal)) |> 
+  dplyr::mutate(all = ifelse(!(seccond == "2 - "), paste0(all, ",", gsub("2 - ", "", seccond)), all)) |> 
+  dplyr::rowwise() |> 
+  dplyr::mutate(all = order_strings(all)) |> 
+  dplyr::ungroup()
+
+df_diff <- df_diff |> 
+  dplyr::select(id, all)
+
+```
