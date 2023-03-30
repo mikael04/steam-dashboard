@@ -1,4 +1,12 @@
-
+```{r, header}
+########################################################################################## #
+#'  Parte do arquivo de análise exploratória
+#'  Arquivo focado na análise da terceira base
+#' 
+#'  Autor: Mikael Marin Coletto
+#'  Data: 13/03/23
+########################################################################################## #
+```
 ```{r, db-5}
 df_reviews <- data.table::fread("data-raw/steam-data/db-3/recommendations.csv")
 df_games <- data.table::fread("data-raw/steam-data/db-3/games.csv")
@@ -14,7 +22,6 @@ Após a análise desta nova base de dados, concluí que ela possui sim dados mai
 O mesmo processo de deduplicação precisou ser feito na nova base.
 
 ```{r, dedup-newbase}
-library(janitor)
 df_dupli <- df_games |> 
   janitor::get_dupes(title)
 ```

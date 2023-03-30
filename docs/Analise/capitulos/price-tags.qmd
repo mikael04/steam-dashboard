@@ -1,0 +1,11 @@
+```{r, header}
+########################################################################################## #
+#'  Parte do arquivo de análise exploratória
+#'  Arquivo focado em uma análise exploratória da relação preço vs tags
+#' 
+#'  Autor: Mikael Marin Coletto
+#'  Data: 30/03/23
+########################################################################################## #
+```
+
+```

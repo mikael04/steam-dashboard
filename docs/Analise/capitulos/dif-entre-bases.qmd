@@ -1,3 +1,12 @@
+```{r, header}
+########################################################################################## #
+#'  Parte do arquivo de análise exploratória
+#'  Arquivo focado em verificar a diferença entre as bases
+#' 
+#'  Autor: Mikael Marin Coletto
+#'  Data: 12/03/23
+########################################################################################## #
+```
 
 ```{r, compareDBs, eval=FALSE}
 

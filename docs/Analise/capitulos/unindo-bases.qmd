@@ -1,3 +1,15 @@
+```{r, header}
+########################################################################################## #
+#'  Parte do arquivo de análise exploratória
+#'  Arquivo focado na união das duas bases utilizadas
+#' 
+#'  Autor: Mikael Marin Coletto
+#'  Data: 12/03/23
+########################################################################################## #
+
+## 0.1 - Bibliotecas e scripts fontes----
+
+```
 
 ```{r, joinDBs}
 
