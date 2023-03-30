@@ -8,3 +8,4 @@ data-raw/steam-data/*
 config/*
 data-raw/dados-manipulados/database.feather
 data-raw/dados-manipulados/database.json
+docs/Analises/Analise_Exploratoria_files/*

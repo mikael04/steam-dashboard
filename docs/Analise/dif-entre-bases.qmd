@@ -1,0 +1,40 @@
+
+```{r, compareDBs, eval=FALSE}
+
+## Antijoins através do ID
+games_antijoin_games_app_id <- dplyr::anti_join(df_games[, c("app_id", "title", "user_reviews", "date_release")], df_selected_gen[, c("app_id", "name")],
+                                                by = "app_id")
+
+# ## Antijoin após remover os IDs não encontrados, utilizando o nome dos jogos
+# games_antijoin_games_name <- dplyr::anti_join(df_games[, c("app_id", "title", "user_reviews", "date_release")], df_selected_gen[, c("app_id", "name")], by = c("title" = "name"))
+# 
+# ## Verificando os jogos que foram excluídos pelo ID mas possuíam nomes iguais
+# games_antijoin_games <- dplyr::anti_join(games_antijoin_games_app_id, games_antijoin_games_name)
+
+games_antijoin_sel_app_id <- dplyr::anti_join(df_selected_gen[, c("app_id", "name", "positive", "release_date")], df_games[, c("app_id", "title")],
+                                              by = "app_id")
+# 
+# games_antijoin_sel_name <- dplyr::anti_join(games_antijoin_sel_app_id, df_games[, c("app_id", "title")], by = c("name" = "title"))
+# 
+# ## Verificando os jogos que foram excluídos pelo ID mas possuíam nomes iguais
+# games_antijoin_sel <- dplyr::anti_join(games_antijoin_sel_app_id, games_antijoin_sel_name)
+
+df_games <- df_games |> 
+  dplyr::rename(name = title)
+
+games_fulljoin <- dplyr::full_join(df_games[, c("app_id", "name", "user_reviews", "date_release")], df_selected_gen[, c("app_id", "name", "release_date")], by = "app_id")
+
+games_fulljoin <- dplyr::full_join(df_games, df_selected_gen, by = "app_id") |> 
+  dplyr::select(app_id, name_games = name.x, rating, positive_ratio, user_reviews, 
+                name_sel = name.y, overall, positive, negative, recommendations,
+                date_release, release_date)
+
+games_fulljoin_date <- games_fulljoin |> 
+  dplyr::filter(release_date != date_release)
+
+# search_in_1 <- df_games[stringr::str_detect(df_games$name, "Rainbow Six"),]
+# search_in_2 <- df_selected_gen[stringr::str_detect(df_selected_gen$name, "Rainbow Six"),]
+
+```
+
+Usei o `anti_join` como método para avaliar os jogos que estávam apenas em uma das bases e não na outra. Ao verificar os resultados, percebi que a base 1 excluíu muitos jogos devido aos filtros aplicados, principalmente os filtros relacionados a avaliações positivas, e os mesmos jogos na base 3 apresentavam um número de reviews positivos maior, portanto, utilizarei a base 3 e farei a adição dos jogos da base 1 que não estão presentes na base 3 para criar um único banco de dados de jogos. Para um primeiro momento onde farei a avaliação de recomendações, trabalharei dessa forma, posteriormente junto à base 3 de recomendação existe uma outra base com informações dos jogos e será posteriormente agregada para adicionar informações.

@@ -1,0 +1,212 @@
+---
+title: "Analise Exploratoria"
+author: "Mikael M Coletto"
+format: html
+editor: source
+execute: 
+  cache: FALSE
+---
+
+```{r, setup, include=FALSE}
+knitr::opts_knit$set(root.dir = '/mnt/Netac-Dados/Projetos/R/steam-dashboard',
+                     cache.lazy = FALSE)
+path_quarto <- "../../"
+source(paste0(path_quarto, "R/fct_order_strings.R"))
+```
+
+# Análise dos dados da Steam
+
+## Objetivo
+
+A ideia desta análise é ilustrar os conhecimentos adquiridos em R, passando pelos pontos de análise exploratória, construção de um dashboard para visualização de dados e por fim trabalhar com modelos de predição para alguns possíveis problemas da indústria.
+
+## Primeiro problema
+
+Somos um estúdio de jogos e queremos analisar qual gênero/categoria de jogo tem mais sucesso na steam, mais público e melhores avaliações, também queremos analisar qual faixa de preço é mais interessante para o lançamento desse novo jogo.
+
+### Primeiro passo - Análise exploratória
+
+Inicialmente iremos fazer uma análise exploratória de algumas bases de dados e suas variáveis que podem ser interessantes para determinar sucesso de um jogo, a faixa de preço, a quantidade de vendas e relacionar essas questões aos gêneros e categorias. Foram feitas análises de três bases de dados, a primeira mais completa, e as duas seguintes mais focadas em reviews de usuários.
+
+#### Base de dados - 1
+
+```{r, child="docs/Analise/analise-base-1.qmd"}
+```
+
+#### Base de dados - 2
+
+```{r, child="docs/Analise/analise-base-2.qmd"}
+```
+
+#### Base de dados - 3
+
+```{r, child="docs/Analise/analise-base-3.qmd"}
+```
+
+#### Diferenças entre base 1 e 3
+
+```{r, child="docs/Analise/dif-entre-bases.qmd"}
+```
+
+#### Unindo as bases
+
+
+```{r, child="docs/Analise/unindo-bases.qmd"}
+```
+
+### Analisando dados dos jogos
+
+Agora que já uni as duas bases, e tenho uma quantidade mais razoável de jogos a serem analisados, precisarei definir qual será a forma de avaliar os estilos/gêneros/categorias dos jogos, por ser uma coluna presente em ambas as bases, a variável `tags` é uma ótima candidata, porém ela apresenta um número de possibilidades bastante grande e distinta, o que poderia ser prejudicial à análise. Já as outras variáveis `categories` e `genres` que são mais específicas, não estão presentes em aproximadamente 20% da base de dados. A análise será feita inicialmente nas três para posterior decisão de qual ou quais usar.
+
+#### Categorias
+
+```{r, categs-count}
+df_all_games |> 
+  dplyr::filter(!(is.na(categories)) & categories != "") |> 
+  nrow()
+```
+
+Ou seja, temos aproximadamente 20% da base de dados sem nenhuma informação de categorias, a variável poderia ser utilizada, porém com algumas ressalvas.
+
+#### Gêneros
+
+```{r, genres-count}
+df_all_games |> 
+  dplyr::filter(!(is.na(genres)) & genres != "") |> 
+  nrow()
+```
+
+Novamente, cerca de 20% da base sem informações de gênero.
+
+#### Categorias e Gênero
+
+```{r, categs-genres-count}
+df_all_games |> 
+  dplyr::filter(!(is.na(categories)) & categories != "") |> 
+  dplyr::filter(!(is.na(genres)) & genres != "") |> 
+  nrow()
+```
+
+E, para efeito de comparação, podemos ver que os valores sem categorias e gênero são as mesmas observações, o que faz bastante sentido já que foram unidas e uma das duas bases não possuía essas colunas.
+
+#### Tags
+
+```{r, tags-count}
+df_all_games |> 
+  dplyr::filter(!(is.na(tags)) & tags != "" ||
+                  (is.na(tags_extra)) & tags_extra != "") |> 
+  nrow()
+```
+
+Já no caso das tags, temos todas as observações com tags ou tags_extra (o que também faz sentido, já que unimos duas bases diferentes e uma delas possuia a coluna tags e a outra tags_extra).
+
+Portanto, faremos uma análise mais aprofundada para gerar uma única coluna que possa ser analisada.
+
+```{r, tags}
+## Verificando as diferenças entre tags de um df e do outro (tags e tags_extra)
+df_tags <- dplyr::select(df_all_games, 
+                         app_id, title, tags, tags_extra)
+df_tags_equal <- df_tags[tags == tags_extra,]
+df_tags_not_equal <- df_tags[tags != tags_extra,]
+
+# nrow(df_tags[is.na(tags_extra), ])
+# nrow(df_tags[is.na(tags), ])
+
+## Primeiro check será em jogos que possuem números de tags diferentes
+tags_dif_ids <- df_tags_not_equal |> 
+  dplyr::select(app_id, tags, tags_extra) |> 
+  dplyr::mutate(check_lenght = ifelse(stringr::str_length(tags) == stringr::str_length(tags_extra), T, F))
+
+```
+
+##### Analisando tags diferentes
+
+```{r, tags-all}
+library(purrr)
+vector_tags <- df_tags_not_equal$tags |> 
+  purrr::map(\(x) stringr::str_sort(stringr::str_split_1(x, pattern = ",")))
+
+vector_tags_ex <- df_tags_not_equal$tags_extra |> 
+  purrr::map(\(x) stringr::str_sort(stringr::str_split_1(x, pattern = ",")))
+
+vector_tags_aux <- vector_tags[1:5]
+vector_tags_ex_aux <- vector_tags_ex[1:5]
+
+## Criando uma lista com todas as tags q estão presentes em uma coluna e não na outra 
+## (estão em tags e não estão em tags_extra, estão em tags_extra e não estão em tags)
+diff_elem <- NULL
+for(i in 1:length(vector_tags)){
+  elem_1 <- pluck(vector_tags, i)
+  elem_2 <- pluck(vector_tags_ex, i)
+  
+  diff1 <- setdiff(elem_1, elem_2)
+  diff2 <- setdiff(elem_2, elem_1)
+  equal <- intersect(elem_1, elem_2)
+  
+  pluck(diff_elem, i, 1) <- paste0(equal, collapse = ",")
+  pluck(diff_elem, i, 2) <- paste0("1 - ", paste0(diff1, collapse = ","), ". 2 - ", paste0(diff2, collapse = ","))
+  pluck(diff_elem, i, 3) <- pluck(df_tags_not_equal, 1, i)
+}
+
+## Alterando para DF, para melhor visualização
+df_diff <- data.frame(t(sapply(diff_elem, c)))
+colnames(df_diff) <- c("equal", "diff", "id")
+
+df_diff <- df_diff |> 
+  tidyr::separate_wider_delim(diff, ". 2", names = c("first", "seccond")) |> 
+  dplyr::mutate(seccond = paste0("2", seccond)) |> 
+  dplyr::mutate(equal = as.character(equal),
+                id = as.integer(id))
+## Palavras com grafias levemente diferentes serão alteradas
+## Roguelike e Roguelite para Rogue-like e Rogue-lite,
+## Base Building para Base-Building
+## e-sports para eSports
+## Football (Soccer) para Soccer
+## Football (American) para Football
+## Puzzle Platformer para Puzzle-Platformer
+
+## Investigando tags com mesmo tamanho, buscando pequenas alterações na escrita
+df_diff_ <- df_diff |> 
+  dplyr::filter(!(first == "1 - ") & !(seccond == "2 - ")) |> 
+  dplyr::filter(stringr::str_length(first) == stringr::str_length(seccond))
+
+## Adicionando tags às tags básicas
+df_diff <- df_diff |> 
+  dplyr::mutate(all = ifelse(!(first == "1 - "), paste0(equal, ",", gsub("1 - ", "", first)), equal)) |> 
+  dplyr::mutate(all = ifelse(!(seccond == "2 - "), paste0(all, ",", gsub("2 - ", "", seccond)), all)) |> 
+  dplyr::rowwise() |> 
+  dplyr::mutate(all = function_order_strings(all)) |> 
+  dplyr::ungroup()
+
+df_diff <- df_diff |> 
+  dplyr::select(id, all)
+```
+
+##### Visualzando tags mais frequentes
+
+Após a organização e certa limpeza das tags, vou começar com uma visualização simples para identificar as tags mais utilizadas (e as menos utilizadas). Esse processo poderá ser feito no futuro para as outras variáveis de categoria e gênero, de forma similar, já que a estrutura das variáveis é a mesma.
+
+```{r, count-tags}
+all_ordered <- df_diff$all |> 
+    purrr::map(\(x) stringr::str_sort(stringr::str_split_1(x, pattern = ",")))
+
+## Colocando tudo numa única lista para contagem
+all_string_listwise <- tolower(unlist(lapply(all_ordered, unique)))
+
+## Fazendo a contagem e transformando em um dataframe, podemos verifiicar diretamente na tabela
+df_tags_count <- as.data.frame(table(all_string_listwise), stringsAsFactors = F)
+## Renomeando colunas
+names(df_tags_count) <- c("tag", "count")
+
+## Utilllizamos as 20 tags que mais aparecem e criamos uma nova tabela para visualização
+df_tags_count |> 
+  dplyr::arrange(desc(count)) |> 
+  dplyr::slice_head(n = 20) |> 
+  DT::datatable()
+
+```
+#### Investigando preços
+
+Vamos agora nos debruçar sobre as faixas de preços e em seguida faremos um cruzamento dos dados de preços e tags
+
+

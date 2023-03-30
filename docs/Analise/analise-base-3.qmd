@@ -1,0 +1,22 @@
+
+```{r, db-5}
+df_reviews <- data.table::fread("data-raw/steam-data/db-3/recommendations.csv")
+df_games <- data.table::fread("data-raw/steam-data/db-3/games.csv")
+
+df_games <- df_games |> 
+  dplyr::filter(positive_ratio < 100 & user_reviews > 20)
+```
+
+Após a análise desta nova base de dados, concluí que ela possui sim dados mais atualizados de jogos (com jogos datados de fev/2023), mas possui menos dados relacionados a línguas suportadas (tanto legendas quanto áudios), dados de pico de usuários, dados de DLC, dados de empresas (como sites, e-mail de suporte, imagem do jogo), dados do Metacritic (por mais que não tenham sido úteis) e dados de tempo de jogo. Então utilizarei ela apenas para verificar a avaliação dos usuários (através das colunas `positive_ratio` e `user_reviews`). Serão aplicados filtros análogos, não podemos ter apenas avaliações positivas (`positive_ratio == 100`) e para reviews precisamos ter pelo menos 20 (`user_reviews > 20`).
+
+##### Deduplicação
+
+O mesmo processo de deduplicação precisou ser feito na nova base.
+
+```{r, dedup-newbase}
+library(janitor)
+df_dupli <- df_games |> 
+  janitor::get_dupes(title)
+```
+
+Porém, ao contrário da base anterior, neste caso todos os jogos "duplicados" se tratavam de jogos diferentes que possuíam o mesmo nome, portanto nenhum deles foi removido.

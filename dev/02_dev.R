@@ -29,6 +29,7 @@ golem::add_fct( "get_colnames_df" )
 golem::add_fct( "help_genres" ) 
 golem::add_fct( "help_dev_names" ) 
 golem::add_fct( "manip_vars" ) 
+golem::add_fct( "order_strings" )
 # golem::add_utils( "helpers" )
 
 ## External resources
