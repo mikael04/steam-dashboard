@@ -1,0 +1,45 @@
+```{r, header-price}
+########################################################################################## #
+#'  Parte do arquivo de análise exploratória
+#'  Arquivo focado em uma análise exploratória da relação preço vs tags
+#' 
+#'  Autor: Mikael Marin Coletto
+#'  Data: 30/03/23
+########################################################################################## #
+
+## 0.1 - Bibliotecas e scripts fontes----
+library(ggplot2)
+```
+
+```{r, price}
+## Usado para escrever o qmd, porém não preciso utilizar ao rodar a análise completa (outro qmd já fará a leitura desse arquivo)
+## df_all_games <- data.table::fread(here::here("data-raw/steam-data/db-created/db-reviews-join.csv"))
+
+df_tags_count <- data.table::fread(here::here("data-raw/created-tables/df-tags-count.csv"))
+
+## Selecionando apenas colunas utilizadas
+df_payed_games <- df_all_games |> 
+  dplyr::filter(price_final > 0) |> 
+  dplyr::select(app_id, price_final)
+
+## Verificando menor valor (em dólares)
+min(df_payed_games$price_final)
+## Verificando maior valor (em dólares)
+max(df_payed_games$price_final)
+## Verificando valor central (em dólares)
+median(df_payed_games$price_final)
+
+## Verificando quartis
+quartis <- quantile(df_payed_games$price_final, probs = c(0, 0.25, 0.5, 0.75, 1))
+
+```
+
+Aqui já podemos tirar algumas conclusões, de que a faixa de preço dos jogos pagos é relativamente baixa, apesar de termos jogos mais caros (com o máximo sendo de $270). Vamos analisar com mais cautela as faixas de preços dos jogos, já que será uma das bases de decisão na escolha do tipo de jogo a ser lançado.
+
+#### Visualizações das faixas de preço
+
+```{r, graph-price}
+ggplot(df_payed_games, aes(y = price_final)) +
+  geom_boxplot() +
+  theme_minimal()
+```

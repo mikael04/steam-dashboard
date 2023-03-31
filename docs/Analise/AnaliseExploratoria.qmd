@@ -7,7 +7,7 @@ execute:
   cache: FALSE
 ---
 
-```{r, setup, include=FALSE}
+```{r setup, include=FALSE}
 knitr::opts_knit$set(root.dir = '/mnt/Netac-Dados/Projetos/R/steam-dashboard',
                      cache.lazy = FALSE)
 path_quarto <- "../../"
@@ -108,6 +108,6 @@ Portanto, faremos uma análise mais aprofundada para gerar uma única coluna que
 
 Vamos agora nos debruçar sobre as faixas de preços e em seguida faremos um cruzamento dos dados de preços e tags.
 
-```{r, child="docs/Analise/capitulos/price-tags.qmd"}
+```{r, child="docs/Analise/capitulos/price.qmd"}
 ```
 

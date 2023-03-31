@@ -1,4 +1,4 @@
-```{r, header}
+```{r, header-unindo-bases}
 ########################################################################################## #
 #'  Parte do arquivo de análise exploratória
 #'  Arquivo focado na união das duas bases utilizadas
@@ -62,7 +62,7 @@ if(run_join){
   data.table::fwrite(df_all_games, "data-raw/steam-data/db-created/db-reviews-join.csv")
   
 }else{
-  df_all_games <- data.table::fread("data-raw/steam-data/db-created/db-reviews-join.csv")
+  df_all_games <- data.table::fread(here::here("data-raw/steam-data/db-created/db-reviews-join.csv")
 }
 
 ## Substituindo células em branco por NA no caso de estar lendo o csv

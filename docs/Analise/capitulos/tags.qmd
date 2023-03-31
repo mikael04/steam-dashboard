@@ -1,4 +1,4 @@
-```{r, header}
+```{r, header-tags}
 ########################################################################################## #
 #'  Parte do arquivo de análise exploratória
 #'  Arquivo focado em analisar as variáveis de tags da base unida
@@ -105,6 +105,8 @@ all_string_listwise <- tolower(unlist(lapply(all_ordered, unique)))
 df_tags_count <- as.data.frame(table(all_string_listwise), stringsAsFactors = F)
 ## Renomeando colunas
 names(df_tags_count) <- c("tag", "count")
+
+data.table::fwrite(df_tags_count, here::here("data-raw/created-tables/df-tags-count.csv"))
 
 ## Utilllizamos as 20 tags que mais aparecem e criamos uma nova tabela para visualização
 df_tags_count |> 
