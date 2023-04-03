@@ -10,8 +10,8 @@ library(dplyr)
 library(data.table)
 library(dtplyr)
 
-source("R/fct_help_genres.R")
-source("R/fct_help_dev_names.R")
+source("R/fct-auxiliares/fct_help_genres.R")
+source("R/fct-auxiliares/fct_help_dev_names.R")
 
 # 1. Dados de generos ----
 dados <- read.table("data-raw/steam-data/db-0/applicationGenres.csv", col.names = paste("V",1:25), fill = T, sep = ",")

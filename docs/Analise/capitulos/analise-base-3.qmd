@@ -6,12 +6,16 @@
 #'  Autor: Mikael Marin Coletto
 #'  Data: 13/03/23
 ########################################################################################## #
-```
-```{r, db-5}
-df_reviews <- data.table::fread("data-raw/steam-data/db-3/recommendations.csv")
-df_games <- data.table::fread("data-raw/steam-data/db-3/games.csv")
 
-df_games <- df_games |> 
+## 0.1 - Bibliotecas e scripts fontes----
+source(here::here("R/fct-auxiliares/fct_filter_notGames.R"))
+```
+
+```{r, db-5}
+df_reviews <- data.table::fread(here::here("data-raw/steam-data/db-3/recommendations.csv"))
+df_games_3 <- data.table::fread(here::here("data-raw/steam-data/db-3/games.csv"))
+
+df_games_3 <- df_games_3 |> 
   dplyr::filter(positive_ratio < 100 & user_reviews > 20)
 ```
 
@@ -22,8 +26,41 @@ Após a análise desta nova base de dados, concluí que ela possui sim dados mai
 O mesmo processo de deduplicação precisou ser feito na nova base.
 
 ```{r, dedup-newbase}
-df_dupli <- df_games |> 
+df_dupli <- df_games_3 |> 
   janitor::get_dupes(title)
 ```
 
 Porém, ao contrário da base anterior, neste caso todos os jogos "duplicados" se tratavam de jogos diferentes que possuíam o mesmo nome, portanto nenhum deles foi removido.
+
+##### Adicionando coluna de tags através de outra base (também da base 3)
+
+```{r, add-tags}
+library(jsonlite)
+out <- lapply(readLines(here::here("data-raw/steam-data/db-3/games_metadata.json")), fromJSON)
+
+## Unindo o terceiro elemento da lista
+for(i in 1:length(out)){
+  purrr::pluck(out, i, 3)<-paste0(purrr::pluck(out, i, 3), collapse = ",")
+}
+
+## Transformando em um dataframe para unir à outra base
+df_metadata <- do.call(rbind.data.frame, out)
+
+## Adicionando coluna de tags do df_metadata, e adicionando colunas de categoria, genero e tags extra do df anterior
+df_games_3_complete <- dplyr::left_join(df_games_3, df_metadata, by = "app_id") |> 
+  dplyr::select(-description)
+```
+
+
+##### Removendo não jogos
+
+```{r, tagsNotGames}
+## Categorias consideradas não jogos
+notGames <- c("Utilities", "Design & Illustration", "Animation & Modeling", "Game Development", "Photo Editing", "Audio Production", "Video Production", "Accounting", "Movie", "Documentary", "Episodic", "Short", "Tutorial", "360 Video")
+
+## Filtrando categorias consideradas não jogos
+df_games_selTags <- func_filter_not_games(df_games_3_complete, notGames, mode = 2)
+## mode = 2, comparação com tags
+
+# data.table::fwrite(df_games_selTags, here::here("data-raw/created-tables/db-games-3.csv"))
+```

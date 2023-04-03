@@ -1,0 +1,44 @@
+```{r, header-well-reviewed}
+########################################################################################## #
+#'  Parte do arquivo de análise exploratória
+#'  Arquivo focado em uma análise exploratória da relação preço vs tags
+#' 
+#'  Autor: Mikael Marin Coletto
+#'  Data: 30/03/23
+########################################################################################## #
+
+## 0.1 - Bibliotecas e scripts fontes----
+library(ggplot2)
+```
+
+```{r, well-reviewed}
+df_well_reviewed <- df_all_games |> 
+  dplyr::filter(user_reviews > 50000 & date_release > '2019-01-01') |>
+  dplyr::arrange(desc(user_reviews)) |> 
+  dplyr::slice_head(n = 30)
+```
+
+A avaliação dos 30 jogos com mais avaliações de usuários, que foram lançádos após 2019 e possuem pelo menos 50000 avaliações, numa primeira avaliação não mostrou trouxe nenhuma conclusão, existem jogos baratos que foram lançados e fizeram sucesso, como Phasmophobia, Valheim e Raft, existem jogos que são gratuitos e lucram através de itens cosméticos como o Apex Legends, Destiny 2 (que foi pago e se tornou gratuito), Lost Ark, e existem jogos caros que foram lançados e fizeram sucesso, como CyberPunk 2077, Elden Ring, Red Dead Redemption 2, Forza e Sekiro. 
+
+
+```{r, positive-ratio}
+df_best_ratio <- df_all_games |> 
+  dplyr::filter(user_reviews > 10000 & date_release > '2019-01-01') |>
+  dplyr::arrange(desc(positive_ratio)) |>
+  dplyr::slice_head(n = 50)
+
+## Menor valor de preço
+min(df_best_ratio$price_final, df_best_ratio$price_original)
+## Maior valor de preço
+max(df_best_ratio$price_final, df_best_ratio$price_original)
+## Mediana de valores de preço
+median(df_best_ratio$price_original)
+
+## Verificando quartis
+quantile(df_best_ratio$price_original, probs = c(0, 0.25, 0.5, 0.75, 1))
+
+```
+
+Uma outra forma de avaliar os jogos, que é o índice de avaliações positivas, parece ter trazido uma variedade de jogos menos abrangente, apesar de, no top 50 avaliações positivas, ainda encontrarmos alguns jogos com preço perto da margem de "topo", que seria $60, boa parte deles está nas faixas entre 9-25 dólares.
+
+O que pode indicar uma faixa de preço interessante para o lançamento de um jogo. Porém, vamos tentar analisar outros aspectos usando análises mais complexas.

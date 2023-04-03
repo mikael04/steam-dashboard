@@ -10,6 +10,7 @@
 ## 0.1 - Bibliotecas e scripts fontes----
 library(ggplot2)
 # library(janitor)
+source(here::here("R/fct-auxiliares/fct_filter_notGames.R"))
 ```
 
 
@@ -36,7 +37,7 @@ A base de dados usada para esta análise se encontra no Kaggle, através deste l
 # ## Lendo e criando um dataframe com os dados do mongoDB
 # df_full <- as.data.frame(mongo_db$find())
 
-df_full <- data.table::fread("data-raw/steam-data/db-1/games.csv")
+df_full <- data.table::fread(here::here("data-raw/steam-data/db-1/games.csv"))
 ```
 
 ```{r, skimr}
@@ -60,25 +61,12 @@ Após a análise inicial, foi detectado que existiam nesta base de dados softwar
 Vamos utilizar a variável `genres` para identificar os gêneros que não são jogos.
 
 ```{r, genresNotGames}
-
-# ## Colunas categories, genres, separando em linhas
-# df_selected <- df_selected |>
-#   tidyr::separate_rows(categories, sep = ",") |> 
-#   tidyr::separate_rows(genres, sep = ",")
-
-
+## Categorias consideradas não jogos
 notGames <- c("Utilities", "Design & Illustration", "Animation & Modeling", "Game Development", "Photo Editing", "Audio Production", "Video Production", "Accounting", "Movie", "Documentary", "Episodic", "Short", "Tutorial", "360 Video")
 
-# unique(df_selected$genres)
-df_selected_gen <- df_selected |> 
-  dplyr::filter(!(genres %in% notGames))
-
-## Esses eram dois jogos que foram investigados
-## Eles possuíam categorias Movie e Documentary também, então esses registros foram apagados e os demais foram mantidos
-
-# df_full_search <- df_full |> 
-#   dplyr::filter(Name %in% c("Spacelords", "CAT SUDOKU🐱"))
-
+## Filtrando categorias consideradas não jogos
+df_selected_gen <- func_filter_not_games(df_selected, notGames, mode = 1)
+## mode = 1, comparação com genres
 ```
 
 ##### Escolhendo as variáveis
@@ -161,6 +149,8 @@ df_dupli <- df_selected_gen |>
 df_selected_gen <- df_selected_gen |> 
   dplyr::arrange(name, desc(as.integer(estimated_owners)), desc(overall)) |> 
   dplyr::distinct(name, .keep_all = T)
+
+# data.table::fwrite(df_selected_gen, here::here("data-raw/created-tables/db-games-1.csv"))
 ```
 
 Então a regra criada para este filtro respeitará, primeiro o número de jogadores, o jogo que possuir mais jogadores permanecerá na base, segundo, em caso de empate do primeiro, o jogo com melhor avaliação.
