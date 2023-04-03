@@ -9,9 +9,19 @@
 
 ## 0.1 - Bibliotecas e scripts fontes----
 library(purrr)
+source(here::here("R/fct-auxiliares/fct_order_strings.R"))
 ```
 
 ```{r, tags}
+teste_interno <- F
+if(teste_interno){
+  df_all_games <- data.table::fread(here::here("data-raw/steam-data/db-created/db-reviews-join.csv")) |> 
+    dplyr::mutate(categories = ifelse(categories == "", NA, categories),
+                  genres = ifelse(genres == "", NA, genres),
+                  tags = ifelse(tags == "", NA, tags),
+                  tags_extra = ifelse(tags_extra == "", NA, tags_extra))
+}
+
 ## Verificando as diferenças entre tags de um df e do outro (tags e tags_extra)
 df_tags <- dplyr::select(df_all_games, 
                          app_id, title, tags, tags_extra)
@@ -65,6 +75,12 @@ df_diff <- df_diff |>
   dplyr::mutate(seccond = paste0("2", seccond)) |> 
   dplyr::mutate(equal = as.character(equal),
                 id = as.integer(id))
+
+## Investigando tags com mesmo tamanho, buscando pequenas alterações na escrita
+df_diff_ <- df_diff |> 
+  dplyr::filter(!(first == "1 - ") & !(seccond == "2 - ")) |> 
+  dplyr::filter(stringr::str_length(first) == stringr::str_length(seccond))
+
 ## Palavras com grafias levemente diferentes serão alteradas
 ## Roguelike e Roguelite para Rogue-like e Rogue-lite,
 ## Base Building para Base-Building
@@ -73,10 +89,8 @@ df_diff <- df_diff |>
 ## Football (American) para Football
 ## Puzzle Platformer para Puzzle-Platformer
 
-## Investigando tags com mesmo tamanho, buscando pequenas alterações na escrita
-df_diff_ <- df_diff |> 
-  dplyr::filter(!(first == "1 - ") & !(seccond == "2 - ")) |> 
-  dplyr::filter(stringr::str_length(first) == stringr::str_length(seccond))
+func_ajustando_tags <- function(df_diff, debug)
+
 
 ## Adicionando tags às tags básicas
 df_diff <- df_diff |> 
@@ -108,10 +122,10 @@ names(df_tags_count) <- c("tag", "count")
 
 data.table::fwrite(df_tags_count, here::here("data-raw/created-tables/df-tags-count.csv"))
 
-## Utilllizamos as 20 tags que mais aparecem e criamos uma nova tabela para visualização
+## Utilllizamos as 50 tags que mais aparecem e criamos uma nova tabela para visualização
 df_tags_count |> 
   dplyr::arrange(desc(count)) |> 
-  dplyr::slice_head(n = 20) |> 
+  dplyr::slice_head(n = 50) |> 
   DT::datatable()
 ```
 

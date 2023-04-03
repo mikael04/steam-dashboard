@@ -118,8 +118,12 @@ Vamos agora nos debruçar sobre as faixas de preços e em seguida faremos um cru
 
 
 ```{r}
-## Variáveis que podem ser relevantes para prever o sucesso (medido por positive_ratio)
-## windiws, linux, mac, price_final, steam_deck, tags_all
+## Variáveis (independentes) que podem ser relevantes para prever o sucesso (medido por positive_ratio)
+## windows (binária, dummie), linux (binária, dummie), mac (binária, dummie),
+## price_final (numérica, discreta), steam_deck (binária, dummie),
+## tags_all (categórica, precisa ser transformada em dummies)
+
+## Variável target (dependente) positive_ratio, numérica
 ```
 
 

@@ -39,6 +39,6 @@ quantile(df_best_ratio$price_original, probs = c(0, 0.25, 0.5, 0.75, 1))
 
 ```
 
-Uma outra forma de avaliar os jogos, que é o índice de avaliações positivas, parece ter trazido uma variedade de jogos menos abrangente, apesar de, no top 50 avaliações positivas, ainda encontrarmos alguns jogos com preço perto da margem de "topo", que seria $60, boa parte deles está nas faixas entre 9-25 dólares.
+Uma outra forma de avaliar os jogos, que é a taxa de avaliações positivas, parece ter trazido uma variedade de jogos menos abrangente, apesar de, no top 50 avaliações positivas, ainda encontrarmos alguns jogos com preço perto da margem de "topo", que seria $60, boa parte deles está nas faixas entre 9-25 dólares.
 
 O que pode indicar uma faixa de preço interessante para o lançamento de um jogo. Porém, vamos tentar analisar outros aspectos usando análises mais complexas.
