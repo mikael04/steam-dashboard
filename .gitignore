@@ -8,4 +8,5 @@ data-raw/steam-data/*
 config/*
 data-raw/dados-manipulados/database.feather
 data-raw/dados-manipulados/database.json
-docs/Analises/Analise_Exploratoria_files/*
+docs/Analise/Analise_Exploratoria_files/*
+docs/Analise/capitulos/9-price-tags_files/*
