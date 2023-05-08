@@ -9,4 +9,8 @@ config/*
 data-raw/dados-manipulados/database.feather
 data-raw/dados-manipulados/database.json
 docs/Analise/Analise_Exploratoria_files/*
+docs/Analise/Analise_Exploratoria_files/libs/*
 docs/Analise/capitulos/9-price-tags_files/*
+docs/Analise/capitulos/test_cache/*
+docs/Analise/capitulos/test_files/*
+
