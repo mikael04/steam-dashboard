@@ -1,9 +1,13 @@
 ########################################################################################## #
 #'  Script/Função/módulo criado para filtrar generos do tipo não jogo
 #'  que são passados por parâmetro
-#'  Também é utilizado outro parâmetro de modo, sendo:
+#'  1. A função 1 filtra o dataframe inteiro e devolve o df, é utilizado por
+#'  parâmetro de modo, sendo:
 #'  mode == 1, comparação com gêneros
 #'  mode == 2, comparação com tags
+#'  mode == 3, comparação com tags_all
+#'  
+#'  2. Filtrando por linha (modo pipeável), nesse caso substituirá a coluna por "notGame"
 #' 
 #'  Autor: Mikael Marin Coletto
 #'  Data: 
@@ -11,7 +15,7 @@
 
 ## 0.1 - Bibliotecas e scripts fontes----
 
-## 1.0 - Script/Função ----
+## 1. - Função para filtrar um dataframe inteiro ----
 func_filter_not_games <- function(df_selected, notGames_vector, mode){
   if(mode == 1){
     df_selected <- df_selected |> 
@@ -21,6 +25,10 @@ func_filter_not_games <- function(df_selected, notGames_vector, mode){
     df_selected <- df_selected |> 
       dplyr::filter(!(tags %in% notGames_vector))
   }
+  if(mode == 3){
+    df_selected <- df_selected |> 
+      dplyr::filter(!(tags_all %in% notGames_vector))
+  }
   return(df_selected)
   
   ## Esses eram dois jogos que foram investigados
@@ -29,3 +37,20 @@ func_filter_not_games <- function(df_selected, notGames_vector, mode){
   # df_full_search <- df_full |> 
   #   dplyr::filter(Name %in% c("Spacelords", "CAT SUDOKU🐱"))
 }
+
+## 2. Função para filtrar por linhas
+func_filter_not_games_line <- function(row, notGames_vector){
+  teste_interno <- F
+  if(teste_interno){
+    row <- "Utilities"
+    notGames_vector <- notGames
+  }
+  if(row %in% notGames_vector){
+    return("notGame")
+    # print("If")
+  }else{
+    return(row)
+    # print("Else")
+  }
+}
+
