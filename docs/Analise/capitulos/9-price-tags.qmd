@@ -1,0 +1,363 @@
+```{r, header-price-tags-1, echo=FALSE, message=FALSE}
+########################################################################################## #
+#'  Parte do arquivo de análise exploratória
+#'  Analisando preços e tags
+#' 
+#'  Autor: Mikael Marin Coletto
+#'  Data: 11/03/23
+########################################################################################## #
+
+## 0.1 - Bibliotecas e scripts fontes----
+library(ggplot2)
+library(dplyr)
+# library(janitor)
+source(here::here("R/fct-auxiliares/fct_filter_not_games.R"))
+switch_overwrite_initial_tables <- F
+```
+
+## Categorias e performance em reviews
+
+```{r, tag-price-group, echo=F}
+  if(switch_overwrite_initial_tables){
+  df_all_games <- data.table::fread(here::here("data-raw/created-tables/db-all-games-tags-all.csv"))
+  ## Categorias consideradas não jogos
+  notGames <- c("Utilities", "Design & Illustration", "Animation & Modeling", "Game Development", "Photo Editing", "Audio Production", "Video Production", "Accounting", "Movie", "Documentary", "Episodic", "Short", "Software", "Tutorial", "360 Video", "Software Training",  "Web Publishing")
+  notGames_genres <- paste0(notGames, collapse = "|")
+  
+  ## Recategorizando variável de preços
+  df_all_games <- df_all_games |> 
+    dplyr::mutate(price_categ = dplyr::case_when(price_original > 60 ~ "Muito Caro",
+                                          price_original > 40 ~ "Caro",
+                                          price_original > 20 ~ "Medio",
+                                          price_original > 10 ~ "Barato",
+                                          price_original > 0 ~ "Muito Barato",
+                                          price_original == 0 ~ "Free"))
+  
+  ## dataframe com dados de preço e tags, para avaliação de performance das tags e dos preços
+  df_price_categ <- df_all_games |> 
+    dplyr::select(app_id, title, price_categ, tags_all, genres) |> 
+    dplyr::filter(!stringr::str_detect(genres, notGames_genres)) |> 
+    tidyr::separate_longer_delim(tags_all, delim = ",") |>  
+    dplyr::rowwise() |> 
+    dplyr::mutate(tags_all = func_filter_not_games_line(tags_all, notGames)) |> 
+    dplyr::filter(tags_all != "notGame")
+  
+  df_price_count <- df_price_categ |> 
+    dplyr::select(app_id, price_categ) |> 
+    dplyr::distinct(app_id, .keep_all = T) |> 
+    dplyr::group_by(price_categ) |> 
+    dplyr::summarise(count = n()) |> 
+    dplyr::mutate(total = sum(count),
+                  percentage = round(100*count/total, 2)) |> 
+    dplyr::select(-total)
+  
+  ## Criando tabela de agrupamento (contagem)
+  df_price_categ <- df_price_categ |> 
+    dplyr::group_by(tags_all, price_categ) |>
+    dplyr::summarise(count = n()) |> 
+    dplyr::ungroup()
+  
+  ## Escrevendo tabelas
+  data.table::fwrite(df_price_categ, here::here("data-raw/created-tables/df-price-categ.csv"))
+  data.table::fwrite(df_price_count, here::here("data-raw/created-tables/df-price-count.csv"))
+  
+}else{
+  df_all_games <- data.table::fread(here::here("data-raw/created-tables/db-all-games-tags-all.csv"))
+  df_price_categ <- data.table::fread(here::here("data-raw/created-tables/df-price-categ.csv"))
+  df_price_count <- data.table::fread(here::here("data-raw/created-tables/df-price-count.csv"))
+}
+
+total_jogos <- sum(df_price_count$count)
+
+df_categs <- df_price_categ |> 
+  dplyr::group_by(tags_all) |> 
+  dplyr::summarise(games = sum(count)) |> 
+  dplyr::ungroup()
+
+```
+
+Vou fazer um agrupamento entre as categorias (na base, definida como "tags") dos jogos e uma recategorização para a variável de preços, visando facilitar a comparação entre os jogos. Essa recategorização irá replicar cada jogo separando as categorias, portanto teremos ao final um número de linhas muito maior que o número de jogos da nossa base inicial, porque cada jogo pode possuir um número de 1 à `r (max(stringr::str_count(df_all_games$tags_all, ","))+1)` categorias.
+
+O número de **categorias distintas** na base de dados é de **`r length(unique(df_price_categ$tags_all))`**, e para cada categoria, a **média** de vezes em que ela aparece nos jogos é de **`r round(mean(df_categs$games),0)`** e a mediana é de **`r median(df_categs$games)`**, e pela diferença entre média e mediana percebemos que a **distribuição** dos jogos por cada categoria é bastante **irregular**, analisaremos então esta diferença de outra forma.
+
+```{r, graph-dist-categs, echo=FALSE}
+ggplot(df_categs, aes(x = games, fill = after_stat(count))) +
+  geom_histogram(bins = 20) +
+  scale_fill_gradient(low = "lightblue", high = "blue") +
+  theme_minimal() +
+  labs(title = "Distribuição das categorias nos jogos",
+       subtitle = "Quantas vezes cada categoria apareceu nos jogos",
+       alt = "Histograma de distribuição da contagem de categorias nos jogos",
+       x = "Distribuição",
+       y = "Contagem",
+       fill = "")
+```
+
+Utilizando o histograma vemos quantas vezes cada categoria apareceu, e temos uma grande parte distribuída entre as primeiras barras, porém podemos observar algumas barras muito menores que aparecem mais vezes, ou seja, categorias que aparecem em muitos jogos. Algumas dessas mais frequentes inclusive estão presentes em mais de metade dos **`r total_jogos` jogos**.
+
+## Análise por faixa de preço
+
+A nossa análise será feita nas faixas de preço definidas, os jogos foram separados em gratuitos (preço = 0), jogos muito baratos (preço entre \$0.01 e \$9.99), jogos baratos (preço entre \$10.01 e \$19.99), jogos médios (preço entre \$20.01 e \$39.99), jogos caros (preço entre \$40.01 e \$59.99) e jogos muito caros (preço de $60 ou mais).
+
+### Avaliando os jogos muito caros (Muito Caro)
+
+```{r, tag-price-verExp-mean-median, echo = FALSE}
+## Verificando média e mediana por categoria "Muito Caro"
+mean_verExp <- round(mean(df_price_categ$count[df_price_categ$price_categ == "Muito Caro"]), 2)
+median_verExp <- round(median(df_price_categ$count[df_price_categ$price_categ == "Muito Caro"]), 2)
+```
+
+Definimos essa faixa de preço dos muito caros como jogos acima de 60 dólares, e podemos ver pelos valores de média (`r mean_verExp`) e mediana (`r median_verExp`).
+
+```{r, tag-price-verExp, echo = FALSE}
+
+## Separando as 20 categorias que mais aparecem
+df_price_categ_verExp <- df_price_categ |> 
+  dplyr::filter(price_categ == "Muito Caro") |> 
+  dplyr::arrange(desc(count)) |> 
+  dplyr::slice_head(n = 20)
+
+df_price_categ_verExp |> 
+  gt::gt()
+```
+
+Vemos que a maioria das categorias possui poucas amostras, ou seja, na nossa base de dados e em geral na Steam, poucos jogos são lançados acima dos $60.
+
+Em comparação com a população de jogos, a amostra para essa categoria é pequena comparada ao tamanho da nossa base de dados, do total de **`r total_jogos`** apenas **`r round(100*sum(df_price_count[df_price_count$price_categ == "Muito Caro",]$count)/sum(df_price_count$count),2)`%** ou `r df_price_count[df_price_count$price_categ == "Muito Caro"]$count` jogos (compondo um total de `r sum(df_price_categ[df_price_categ$price_categ == "Muito Caro",]$count)` tags) estão nesta faixa de valores.
+
+### Avaliando os jogos caros (Caro)
+
+```{r, tag-price-exp-mean-median, echo = FALSE}
+## Verificando média e mediana por categoria "Caro"
+mean_exp <- round(mean(df_price_categ$count[df_price_categ$price_categ == "Caro"]), 2)
+median_exp <- round(median(df_price_categ$count[df_price_categ$price_categ == "Caro"]), 2)
+```
+
+Já nos jogos caros, entre 40 e 60 dólares, vemos valores de média (`r mean_verExp`) e mediana (`r median_verExp`), ainda bastante diferentes, indicando novamente uma distribuição não-normal.
+
+```{r, tag-price-exp}
+## Separando as 20 categorias que mais aparecem
+df_price_categ_exp <- df_price_categ |> 
+  dplyr::filter(price_categ == "Caro") |> 
+  dplyr::arrange(desc(count)) |> 
+  dplyr::slice_head(n = 20)
+
+df_price_categ_exp |> 
+  gt::gt()
+```
+
+O número de contagem por categoria já é consideravelmente maior, ou seja temos uma quantidade de jogos maior nessa faixa de preços.
+
+Os números de comparando com a população de jogos já é superior, com **`r round(100*sum(df_price_count[df_price_count$price_categ == "Caro",]$count)/sum(df_price_count$count),2)`%** dos jogos, ou `r df_price_count[df_price_count$price_categ == "Caro"]$count` jogos (compondo um total de `r sum(df_price_categ[df_price_categ$price_categ == "Caro",]$count)` tags) estão nesse segmento.
+
+
+### Avaliando os jogos medianos (Medio)
+
+```{r, tag-price-med-mean-median, echo = FALSE}
+## Verificando média e mediana por categoria "Medio"
+mean_med <- round(mean(df_price_categ$count[df_price_categ$price_categ == "Medio"]), 2)
+median_med <- round(median(df_price_categ$count[df_price_categ$price_categ == "Medio"]), 2)
+```
+
+Os jogos de preço médio, entre 20 e 40 dólares, vemos valores de média (`r mean_med`) e mediana (`r median_med`), também com grande variação.
+
+```{r, tag-price-med}
+## Separando as 20 categorias que mais aparecem
+df_price_categ_med <- df_price_categ |> 
+  dplyr::filter(price_categ == "Medio") |> 
+  dplyr::arrange(desc(count)) |> 
+  dplyr::slice_head(n = 20)
+
+df_price_categ_med
+```
+
+
+Os números de comparando com a população de jogos tiveram mais um aumento, com **`r round(100*sum(df_price_count[df_price_count$price_categ == "Caro",]$count)/sum(df_price_count$count),2)`%** dos jogos, ou `r df_price_count[df_price_count$price_categ == "Caro"]$count` jogos (compondo um total de `r sum(df_price_categ[df_price_categ$price_categ == "Caro",]$count)` tags) estão nesse segmento, mostrando como quando descemos as faixas de preço, existe mais competição,.
+
+### Avaliando os jogos "baratos" (Barato)
+
+```{r, tag-price-low-mean-median, echo = FALSE}
+## Verificando média e mediana por categoria "Barato"
+mean_low <- round(mean(df_price_categ$count[df_price_categ$price_categ == "Barato"]), 2)
+median_low <- round(median(df_price_categ$count[df_price_categ$price_categ == "Barato"]), 2)
+```
+
+
+
+```{r, tag-price-low}
+## Separando as 20 categorias que mais aparecem
+df_price_categ_low <- df_price_categ |> 
+  dplyr::filter(price_categ == "Barato") |> 
+  dplyr::arrange(desc(count)) |> 
+  dplyr::slice_head(n = 20)
+
+df_price_categ_low
+```
+
+### Avaliando os jogos "muito baratos" (Muito Barato)
+
+```{r, tag-price-verLow-mean-median, echo = FALSE}
+## Verificando média e mediana por categoria "Muito Barato"
+mean_verLow <- round(mean(df_price_categ$count[df_price_categ$price_categ == "Muito Barato"]), 2)
+median_verLow <- round(median(df_price_categ$count[df_price_categ$price_categ == "Muito Barato"]), 2)
+```
+
+
+
+```{r, tag-price-verLow}
+## Separando as 20 categorias que mais aparecem
+df_price_categ_verLow <- df_price_categ |> 
+  dplyr::filter(price_categ == "Muito Barato") |> 
+  dplyr::arrange(desc(count)) |> 
+  dplyr::slice_head(n = 20)
+
+df_price_categ_verLow
+```
+
+### Avaliando os jogos gratuitos (Free)
+
+```{r, tag-price-free-mean-median, echo = FALSE}
+## Verificando média e mediana por categoria "Free"
+mean_free <- round(mean(df_price_categ$count[df_price_categ$price_categ == "Free"]), 2)
+median_free <- round(median(df_price_categ$count[df_price_categ$price_categ == "Free"]), 2)
+```
+
+
+
+```{r, tag-price-free}
+## Separando as 20 categorias que mais aparecem
+df_price_categ_free <- df_price_categ |> 
+  dplyr::filter(price_categ == "Free") |> 
+  dplyr::arrange(desc(count)) |> 
+  dplyr::slice_head(n = 20)
+
+df_price_categ_free
+```
+
+### Visualizando top categorias por faixa de preço
+
+```{r, r-cbind-categoria-preco}
+
+## Visualizar no formato de tabelas
+df_price_categ_all <- cbind(df_price_categ_verExp, df_price_categ_exp, df_price_categ_med, df_price_categ_low, df_price_categ_verLow, df_price_categ_free) |> 
+  dplyr::rename(tags_verExp = 1, price_verExp = 2, count_verExp = 3,
+                tags_exp = 4, price_exp = 5, count_exp = 6,
+                tags_med = 7, price_med = 8, count_med = 9,
+                tags_low = 10, price_low = 11, count_low = 12,
+                tags_verLow = 13, price_verLow = 14, count_verLow = 15,
+                tags_free = 16, price_free = 17, count_free = 18) |> 
+  dplyr::select(-2, -5, -8, -11, -14, -17) |> 
+  dplyr::mutate(prop_free = round(count_free/sum(count_free)*100, 2), 
+                prop_verLow = round(count_verLow/sum(count_verLow)*100, 2),
+                prop_low = round(count_low/sum(count_low)*100, 2), 
+                prop_med = round(count_med/sum(count_med)*100, 2), 
+                prop_exp = round(count_exp/sum(count_exp)*100, 2), 
+                prop_verExp = round(count_verExp/sum(count_verExp)*100, 2)) |> 
+  dplyr::select(tags_free, count_free, prop_free,
+                tags_verLow, count_verLow,prop_verLow,
+                tags_low, count_low, prop_low,
+                tags_med, count_med, prop_med,
+                tags_exp, count_exp, prop_exp,
+                tags_verExp, count_verExp, prop_verExp)
+
+
+df_tab <- df_price_categ_all
+
+newline <- data.frame(tags_free = "Total", prop_free = sum(df_tab$count_free),
+                      tags_verLow = "Total", prop_verLow = sum(df_tab$count_verLow),
+                      tags_low = "Total", prop_low = sum(df_tab$count_low),
+                      tags_med = "Total", prop_med = sum(df_tab$count_med),
+                      tags_exp = "Total", prop_exp = sum(df_tab$count_exp),
+                      tags_verExp = "Total", prop_verExp = sum(df_tab$count_verExp))
+
+df_tab <- df_tab |> 
+  dplyr::select(-dplyr::starts_with("count")) |>
+  dplyr::slice_head(n = 20)
+
+df_tab <- rbind(df_tab, newline)
+
+tabela_categ_all <- df_tab |> 
+  DT::datatable()
+
+## Usar na construção do gráfico
+df_price_categ_all <- rbind(df_price_categ_verExp |> dplyr::slice_head(n = 10), 
+                            df_price_categ_exp |> dplyr::slice_head(n = 10),
+                            df_price_categ_med |> dplyr::slice_head(n = 10),
+                            df_price_categ_low |> dplyr::slice_head(n = 10),
+                            df_price_categ_verLow |> dplyr::slice_head(n = 10),
+                            df_price_categ_free |> dplyr::slice_head(n = 10)) |> 
+  dplyr::group_by(price_categ) |> 
+  dplyr::mutate(prop = round(count/sum(count)*100, 2),
+                price_categ = as.factor(price_categ),
+                price_categ = forcats::fct_relevel(price_categ, "Free", "Muito Barato", "Barato", "Medio", "Caro", "Muito Caro")) |> 
+  dplyr::ungroup()
+
+ggplot(df_price_categ_all, aes(x = price_categ, y = prop, group = tags_all, colour = tags_all)) +
+  geom_line() +
+  theme_minimal() +
+  labs()
+
+### Trabalhar com  Highlight Table ou Spark Lines ou Small Multiples
+
+```
+
+### Trabalhando com uma tabela no formato highlight table
+
+```{r}
+library(gt)
+library(tidyverse)
+
+df_tab[1:20,] |> 
+  mutate(`Free` = prop_free, `Muito Barato Price` = prop_verLow, `Barato Price` = prop_low,
+         `Medio Price` = prop_med, `Caro` = prop_exp, `Muito Caro` = prop_verExp) |> 
+  gt() |> 
+  data_color(
+    columns = c(`Free`, `Muito Barato Price`, `Barato Price`,
+                `Medio Price`, `Caro`, `Muito Caro`),
+    fn = scales::col_numeric(
+      palette = c("#DAE9E8", "#2A7DC0"),
+      domain = NULL
+    ),
+    apply_to = "fill"
+  ) |> 
+cols_merge(
+  columns = c(`Free`, tags_free),
+  pattern = "{2}") |> 
+  cols_merge(
+    columns = c(`Muito Barato Price`, tags_verLow),
+    pattern = "{2}") |> 
+  cols_merge(
+    columns = c(`Barato Price`, tags_low),
+    pattern = "{2}") |> 
+  cols_merge(
+    columns = c(`Medio Price`, tags_med),
+    pattern = "{2}") |> 
+  cols_merge(
+    columns = c(`Caro`, tags_exp),
+    pattern = "{2}") |> 
+  cols_merge(
+    columns = c(`Muito Caro`, tags_verExp),
+    pattern = "{2}") |> 
+cols_move_to_start(c(`Free`, `Muito Barato Price`, `Barato Price`,
+                       `Medio Price`, `Caro`, `Muito Caro`)) |> 
+  gt::cols_hide(columns = contains(c("tags", "prop")))
+
+
+```
+
+```{r creating-fig-palette, echo=FALSE}
+library(scales)
+# pal <- col_bin("Greens", domain = 0:100)
+# show_col(pal(sort(runif(10, 60, 100))))
+
+df_tab_prob <- df_tab |> 
+  dplyr::select(contains("prop_")) |> 
+  dplyr::filter(row_number() < n())
+brks_all <- quantile(df_tab_prob, probs = seq(.05, .95, .1), na.rm = TRUE)
+
+# ggsave("data-raw/ranking_color_palette.png", show_col(col_numeric(c("#DAE9E8", "#2A7DC0"), domain = NULL)(brks_all), labels = F))
+# 
+# min(df_tab_prob$prop_free, df_tab_prob$prop_low, df_tab_prob$prop_verLow, df_tab_prob$prop_med, df_tab_prob$prop_exp, df_tab_prob$prop_verExp)
+# max(df_tab_prob$prop_free, df_tab_prob$prop_low, df_tab_prob$prop_verLow, df_tab_prob$prop_med, df_tab_prob$prop_exp, df_tab_prob$prop_verExp)
+
+```

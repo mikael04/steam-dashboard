@@ -1,0 +1,107 @@
+```{r, header-price}
+########################################################################################## #
+#'  Parte do arquivo de análise exploratória
+#'  Arquivo focado em uma análise exploratória da relação preço vs tags
+#' 
+#'  Autor: Mikael Marin Coletto
+#'  Data: 30/03/23
+########################################################################################## #
+
+## 0.1 - Bibliotecas e scripts fontes----
+library(ggplot2)
+```
+
+```{r, price}
+# ## Usado para escrever o qmd, porém não preciso utilizar ao rodar a análise completa (outro qmd já fará a leitura desse arquivo)
+# df_all_games <- data.table::fread(here::here("data-raw/created-tables/db-all-games-tags-all.csv"))
+# ## Base 1
+# df_base_1 <- data.table::fread(here::here("data-raw/created-tables/db-games-1.csv"))
+# ## Base 3
+# df_base_3 <- data.table::fread(here::here("data-raw/created-tables/db-games-3.csv"))
+
+df_tags_count <- data.table::fread(here::here("data-raw/created-tables/df-tags-count.csv"))
+
+## Selecionando apenas colunas utilizadas
+df_payed_games <- df_all_games |> 
+  dplyr::filter(price_final > 0 & price_original > 0)
+
+## Verificando menor valor (em dólares)
+min(df_payed_games$price_original)
+## Verificando maior valor (em dólares)
+max(df_payed_games$price_original)
+## Verificando valor central (em dólares)
+median(df_payed_games$price_original)
+
+## Verificando quartis
+quantile(df_payed_games$price_original, probs = c(0, 0.25, 0.5, 0.75, 1))
+
+## Verificando decis
+quantile(df_payed_games$price_original, probs = c(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1))
+quantile(df_payed_games$price_final, probs = c(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1))
+decis <- quantile(df_payed_games$price_original, probs = c(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1))
+
+```
+
+Aqui já podemos tirar algumas conclusões, de que a faixa de preço dos jogos pagos é relativamente baixa, apesar de termos jogos mais caros (com o máximo sendo de $270). Vamos analisar com mais cautela as faixas de preços dos jogos, já que será uma das bases de decisão na escolha do tipo de jogo a ser lançado.
+Também nos decis comparamos a faixa de preço do jogo lançada, que será utilizada para as visualizações e análises, com a faixa de preço atual. Em geral vemos uma variação para baixo nos decis, indicando que os jogos abaixo dos $19.99 tendem a cair de preço com o tempo, o que é visto com frequência para quem acompanha os preços da Steam, quando os jogos começam a ficar mais velhos, é comum existirem cortes de preços e promoções para tentar aumentar o número de vendas de um jogo.
+
+#### Visualizações das faixas de preço
+
+```{r, graph-price-all}
+ggplot(df_payed_games, aes(y = price_original)) +
+  geom_boxplot() +
+  theme_minimal() +
+  xlim(-2, 2) +
+  labs(title = "Distribuição dos preços de jogos",
+      subtitle = "Preço em dólares",
+      alt = "Gráfico de distribuição do preço dos jogos em dólares",
+      x = "",
+      y = "") +
+  theme(axis.text.x=element_blank(),
+        axis.ticks.x=element_blank())
+```
+
+E depois de remover os 10% inferiores e superiores:
+
+```{r, graph-price-cut}
+ggplot(df_payed_games[(df_payed_games$price_original >= decis[2] & df_payed_games$price_original <= decis[10]),], 
+       aes(y = price_original)) +
+  geom_boxplot() +
+  theme_minimal() +
+  xlim(-2, 2) +
+  labs(title = "Distribuição dos preços de jogos",
+      subtitle = "Preço em dólares",
+      alt = "Gráfico de distribuição do preço dos jogos em dólares",
+      x = "",
+      y = "") +
+  theme(axis.text.x=element_blank(),
+        axis.ticks.x=element_blank()) +
+  scale_y_continuous(breaks=seq(0, 30, 5))
+```
+
+Observamos então uma distribuição com menos valores discrepantes, sem os possíveis outliers.
+
+Vamos investigar a hipótese da possibilidade de descartar estes jogos, inicialmente eu defendo a exclusão dos mais caros, pois costumeiramente são os jogos mais famosos e conhecidos, que já tem seu público definido e podem se dar ao luxo de cobrar mais caro. Já os jogos mais baratos, imagino que sejam jogos menores e que não se encaixam na nossa proposta de um jogo que fosse lucrativo, muitas vezes também são jogos mais antigos que foram tendo cortes de preços para continuarem vendendo. De qualquer forma, investigaremos nos dados ambas as hipóteses.
+
+##### Investigando os 10% mais caros
+
+```{r, 10_pricier}
+# browser()
+df_all_games_pricier <- df_payed_games |> 
+  dplyr::filter(price_original >= decis[10]) |>
+  dplyr::select(app_id, title, date_release, rating, positive_ratio, user_reviews, price_original, price_final, tags_all)
+```
+
+##### Investigando os 10% mais baratos
+
+```{r, 10_cheaper}
+df_all_games_cheaper <- df_all_games |> 
+  dplyr::filter(price_original <= decis[2]) |>
+  dplyr::select(app_id, title, date_release, rating, positive_ratio, user_reviews, price_original, price_final, tags_all)
+
+```
+
+Após a análise dos preços mais baratos, verifiquei que alguns jogos gratuitos ainda estavam na base, decidi investigar uma nova forma de jogos, que tem crescido bastante em popularidade, que são os jogos gratuitos e que possuem microtransações. Jogos que costumam fazer receita através da venda de itens cosméticos dentro do próprio jogo, ou algum sistema de assinatura que garanta benefícios (normalmente cosméticos também, mas algumas vezes de facilitação para o jogador).
+
+
+Para isso, vou olhar na base unificada os jogos que estão bem avaliados e são mais recentes, para tentar identificar se esse pode se tornar um caminho viável.

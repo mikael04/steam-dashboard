@@ -15,7 +15,8 @@ tag,count
 6dof,76
 abstract,133
 action,4290
-action roguelike,391
+action rogue-like,6
+action roguelike,385
 action rpg,549
 action rts,37
 action-adventure,725
@@ -41,8 +42,7 @@ audio production,26
 auto battler,52
 automation,105
 automobile sim,170
-base building,546
-base-building,531
+base-building,553
 baseball,9
 based on a novel,39
 basketball,13
@@ -126,7 +126,6 @@ dungeon crawler,470
 dungeons & dragons,28
 dynamic narration,49
 dystopian,156
-e-sports,146
 early access,1396
 economy,326
 education,254
@@ -136,7 +135,7 @@ emotional,285
 epic,46
 episodic,54
 escape room,89
-esports,154
+esports,155
 experience,38
 experimental,150
 exploration,1447
@@ -155,7 +154,6 @@ flight,153
 fmv,73
 football,48
 football (american),25
-football (soccer),27
 foreign,22
 fps,847
 free to play,455
@@ -299,8 +297,7 @@ psychedelic,149
 psychological,177
 psychological horror,839
 puzzle,1706
-puzzle platformer,471
-puzzle-platformer,448
+puzzle-platformer,473
 pve,326
 pvp,644
 quick-time events,44
@@ -318,11 +315,10 @@ retro,1115
 rhythm,122
 robots,209
 rock music,10
-rogue-like,781
-rogue-lite,693
-roguelike,781
-roguelike deckbuilder,77
-roguelite,699
+rogue-like,794
+rogue-like deckbuilder,6
+rogue-lite,713
+roguelike deckbuilder,71
 roguevania,21
 romance,405
 rome,25
@@ -354,7 +350,7 @@ sniper,32
 snooker,6
 snow,28
 snowboarding,4
-soccer,25
+soccer,27
 social deduction,18
 software,92
 software training,26
@@ -405,7 +401,8 @@ tower defense,196
 trackir,15
 trading,84
 trading card game,53
-traditional roguelike,59
+traditional rogue-like,2
+traditional roguelike,57
 trains,60
 transhumanism,25
 transportation,53

@@ -1,0 +1,109 @@
+```{r, header-base-3}
+########################################################################################## #
+#'  Parte do arquivo de análise exploratória
+#'  Arquivo focado na análise da terceira base
+#' 
+#'  Autor: Mikael Marin Coletto
+#'  Data: 13/03/23
+########################################################################################## #
+
+## 0.1 - Bibliotecas e scripts fontes----
+source(here::here("R/fct-auxiliares/fct_filter_not_games.R"))
+```
+
+```{r, db-3}
+df_base_3_reviews <- data.table::fread(here::here("data-raw/steam-data/db-3/recommendations.csv"))
+df_base_3 <- data.table::fread(here::here("data-raw/steam-data/db-3/games.csv"))
+
+df_base_3_users <- data.table::fread(here::here("data-raw/steam-data/db-3/users.csv"))
+
+```
+
+Após a análise desta nova base de dados, concluí que ela possui sim dados mais atualizados de jogos (com jogos datados de fev/2023), mas possui menos dados relacionados a línguas suportadas (tanto legendas quanto áudios), dados de pico de usuários, dados de DLC, dados de empresas (como sites, e-mail de suporte, imagem do jogo), dados do Metacritic (por mais que não tenham sido úteis) e dados de tempo de jogo. Então utilizarei ela apenas para verificar a avaliação dos usuários (através das colunas `positive_ratio` e `user_reviews`).
+
+##### Filtrando dados inválidos
+
+```{r, filtro-base-3}
+
+
+## Criando uma variável do tipo fator para número de donos estimados
+levels_owners <- c("0 - 0", "0 - 20000", "20000 - 50000", "50000 - 100000", 
+                   "100000 - 200000", "200000 - 500000", "500000 - 1000000",
+                   "1000000 - 2000000", "2000000 - 5000000", "5000000 - 10000000", 
+                   "10000000 - 20000000", "20000000 - 50000000", "50000000 - 100000000",
+                   "100000000 - 200000000")
+
+df_selected_gen$estimated_owners <- as.factor(df_selected_gen$estimated_owners)
+df_selected_gen$estimated_owners <- factor(df_selected_gen$estimated_owners, levels = levels_owners)
+
+## Verificando dados que serão considerados inválidos
+df_100 <- df_selected_gen |> 
+  dplyr::filter(positive < 20 & (overall == 100)) |> 
+  dplyr::select(name, publishers, categories, genres, release_date, estimated_owners, positive, negative, overall)
+
+## Filtrando regras
+df_selected_gen <- df_selected_gen |> 
+  dplyr::filter(positive > 20 & 
+                  ((as.integer(estimated_owners) > 2 & price > 0) | 
+                     (as.integer(estimated_owners) > 3 & price == 0)) &
+                  overall < 100)
+
+
+df_base_3 <- df_base_3 |> 
+  dplyr::filter(positive_ratio < 100 & user_reviews > 20)
+
+# skimr::skim(df_selected_gen)
+```
+
+Aplicando novamente os filtros utilizados para as bases anteriores, mas adaptando para as colunas desta nova base. Agora, utilizaremos a variável `positive_ratio` para filtrar as avaliações positivas e avaliação geral, e estimaremos o número total de usuários através da junção com a tabela de usuários, que possui dados de usuários, seus produtos e reviews feitos.
+
+E então defini mais alguns filtros, de jogos que possivelmente seriam problemáticos. Estabeleci as regras:
+
+1.  O jogo precisa ter pelo menos 20 avaliações positivas.
+
+2.  O jogo precisa ter pelo menos uma avaliação negativa (para que a avaliação não seja de 100%).
+
+3.  O jogo precisa ter pelo menos 50 mil usuários no caso de ser gratuito, e pelo menos 20 mil usuários para jogos pagos.
+
+##### Deduplicação
+
+O mesmo processo de deduplicação precisou ser feito na nova base.
+
+```{r, dedup-newbase}
+df_dupli <- df_base_3 |> 
+  janitor::get_dupes(title)
+```
+
+Porém, ao contrário da base anterior, neste caso todos os jogos "duplicados" se tratavam de jogos diferentes que possuíam o mesmo nome, portanto nenhum deles foi removido.
+
+##### Adicionando coluna de tags através de outra base (também da base 3)
+
+```{r, add-tags}
+library(jsonlite)
+out <- lapply(readLines(here::here("data-raw/steam-data/db-3/games_metadata.json")), fromJSON)
+
+## Unindo o terceiro elemento da lista
+for(i in 1:length(out)){
+  purrr::pluck(out, i, 3)<-paste0(purrr::pluck(out, i, 3), collapse = ",")
+}
+
+## Transformando em um dataframe para unir à outra base
+df_metadata <- do.call(rbind.data.frame, out)
+
+## Adicionando coluna de tags do df_metadata, e adicionando colunas de categoria, genero e tags extra do df anterior
+df_base_3_complete <- dplyr::left_join(df_base_3, df_metadata, by = "app_id") |> 
+  dplyr::select(-description)
+```
+
+##### Removendo não jogos
+
+```{r, tagsNotGames}
+## Categorias consideradas não jogos
+notGames <- c("Utilities", "Design & Illustration", "Animation & Modeling", "Game Development", "Photo Editing", "Audio Production", "Video Production", "Accounting", "Movie", "Documentary", "Episodic", "Short", "Tutorial", "360 Video")
+
+## Filtrando categorias consideradas não jogos
+df_games_selTags <- func_filter_not_games(df_base_3_complete, notGames, mode = 2)
+## mode = 2, comparação com tags
+
+# data.table::fwrite(df_games_selTags, here::here("data-raw/created-tables/db-games-3.csv"))
+```
