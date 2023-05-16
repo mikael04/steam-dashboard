@@ -58,11 +58,12 @@ switch_overwrite_initial_tables <- F
     dplyr::ungroup()
   
   ## Escrevendo tabelas
+  data.table::fwrite(df_all_games, here::here("data-raw/created-tables/db-all-games-tags-all-price-categ.csv"))
   data.table::fwrite(df_price_categ, here::here("data-raw/created-tables/df-price-categ.csv"))
   data.table::fwrite(df_price_count, here::here("data-raw/created-tables/df-price-count.csv"))
   
 }else{
-  df_all_games <- data.table::fread(here::here("data-raw/created-tables/db-all-games-tags-all.csv"))
+  df_all_games <- data.table::fread(here::here("data-raw/created-tables/db-all-games-tags-all-price-categ.csv"))
   df_price_categ <- data.table::fread(here::here("data-raw/created-tables/df-price-categ.csv"))
   df_price_count <- data.table::fread(here::here("data-raw/created-tables/df-price-count.csv"))
 }
@@ -105,9 +106,10 @@ A nossa análise será feita nas faixas de preço definidas, os jogos foram sepa
 ## Verificando média e mediana por categoria "Muito Caro"
 mean_verExp <- round(mean(df_price_categ$count[df_price_categ$price_categ == "Muito Caro"]), 2)
 median_verExp <- round(median(df_price_categ$count[df_price_categ$price_categ == "Muito Caro"]), 2)
+sd_verExp <- round(sd(df_price_categ$count[df_price_categ$price_categ == "Muito Caro"]), 2)
 ```
 
-Definimos essa faixa de preço dos muito caros como jogos acima de 60 dólares, e podemos ver pelos valores de média (`r mean_verExp`) e mediana (`r median_verExp`).
+Definimos essa faixa de preço dos muito caros como jogos acima de 60 dólares, e podemos ver pelos valores de média (`r mean_verExp`) e mediana (`r median_verExp`) são próximos, aliados ao desvio padão que também não é alto (`r sd_verExp`), ou seja, temos pouca variação do número de jogos por categoria nessa faixa de preço.
 
 ```{r, tag-price-verExp, echo = FALSE}
 
@@ -121,7 +123,7 @@ df_price_categ_verExp |>
   gt::gt()
 ```
 
-Vemos que a maioria das categorias possui poucas amostras, ou seja, na nossa base de dados e em geral na Steam, poucos jogos são lançados acima dos $60.
+Vemos também que a maioria das categorias possui poucas amostras, ou seja, na nossa base de dados e em geral na Steam, poucos jogos são lançados acima dos $60 independente da categoria.
 
 Em comparação com a população de jogos, a amostra para essa categoria é pequena comparada ao tamanho da nossa base de dados, do total de **`r total_jogos`** apenas **`r round(100*sum(df_price_count[df_price_count$price_categ == "Muito Caro",]$count)/sum(df_price_count$count),2)`%** ou `r df_price_count[df_price_count$price_categ == "Muito Caro"]$count` jogos (compondo um total de `r sum(df_price_categ[df_price_categ$price_categ == "Muito Caro",]$count)` tags) estão nesta faixa de valores.
 
@@ -131,9 +133,10 @@ Em comparação com a população de jogos, a amostra para essa categoria é peq
 ## Verificando média e mediana por categoria "Caro"
 mean_exp <- round(mean(df_price_categ$count[df_price_categ$price_categ == "Caro"]), 2)
 median_exp <- round(median(df_price_categ$count[df_price_categ$price_categ == "Caro"]), 2)
+sd_exp <- round(sd(df_price_categ$count[df_price_categ$price_categ == "Caro"]), 2)
 ```
 
-Já nos jogos caros, entre 40 e 60 dólares, vemos valores de média (`r mean_verExp`) e mediana (`r median_verExp`), ainda bastante diferentes, indicando novamente uma distribuição não-normal.
+Já nos jogos caros, entre 40 e 60 dólares, vemos valores de média (`r mean_exp`) e mediana (`r median_exp`), agora com uma diferença maior, indicando uma distribuição não-normal. O desvio padrão aumentou (`r sd_exp`), junto com a diferença entre média e mediana indica uma variação maior entre categorias.
 
 ```{r, tag-price-exp}
 ## Separando as 20 categorias que mais aparecem
@@ -157,9 +160,10 @@ Os números de comparando com a população de jogos já é superior, com **`r r
 ## Verificando média e mediana por categoria "Medio"
 mean_med <- round(mean(df_price_categ$count[df_price_categ$price_categ == "Medio"]), 2)
 median_med <- round(median(df_price_categ$count[df_price_categ$price_categ == "Medio"]), 2)
+sd_med <- round(sd(df_price_categ$count[df_price_categ$price_categ == "Medio"]), 2)
 ```
 
-Os jogos de preço médio, entre 20 e 40 dólares, vemos valores de média (`r mean_med`) e mediana (`r median_med`), também com grande variação.
+Os jogos de preço médio, entre 20 e 40 dólares, vemos valores de média (`r mean_med`), mediana (`r median_med`) e desvio padrão (`r sd_med`) novamente com acréscimo de variação.
 
 ```{r, tag-price-med}
 ## Separando as 20 categorias que mais aparecem
@@ -171,8 +175,7 @@ df_price_categ_med <- df_price_categ |>
 df_price_categ_med
 ```
 
-
-Os números de comparando com a população de jogos tiveram mais um aumento, com **`r round(100*sum(df_price_count[df_price_count$price_categ == "Caro",]$count)/sum(df_price_count$count),2)`%** dos jogos, ou `r df_price_count[df_price_count$price_categ == "Caro"]$count` jogos (compondo um total de `r sum(df_price_categ[df_price_categ$price_categ == "Caro",]$count)` tags) estão nesse segmento, mostrando como quando descemos as faixas de preço, existe mais competição,.
+Os números de continua crescendo na faixa de preço continua crescendo, com **`r round(100*sum(df_price_count[df_price_count$price_categ == "Medio",]$count)/sum(df_price_count$count),2)`%** dos jogos, ou `r df_price_count[df_price_count$price_categ == "Medio"]$count` jogos (compondo um total de `r sum(df_price_categ[df_price_categ$price_categ == "Medio",]$count)` tags) estão nesse segmento, um aumento de 10% na quantidade de jogos comparados à faixa de preço anterior.
 
 ### Avaliando os jogos "baratos" (Barato)
 
@@ -180,9 +183,10 @@ Os números de comparando com a população de jogos tiveram mais um aumento, co
 ## Verificando média e mediana por categoria "Barato"
 mean_low <- round(mean(df_price_categ$count[df_price_categ$price_categ == "Barato"]), 2)
 median_low <- round(median(df_price_categ$count[df_price_categ$price_categ == "Barato"]), 2)
+sd_low <- round(sd(df_price_categ$count[df_price_categ$price_categ == "Barato"]), 2)
 ```
 
-
+Nos jogos de preço baixo, entre 10 e 20 dólares, a variação continua a aumentar temos de média `r mean_low`, mediana `r median_low` e desvio padrão `r sd_low`. O que pode ser explicado pelo aumento do número de jogos e concentração de jogos em algumas categorias.
 
 ```{r, tag-price-low}
 ## Separando as 20 categorias que mais aparecem
@@ -194,15 +198,18 @@ df_price_categ_low <- df_price_categ |>
 df_price_categ_low
 ```
 
+Os números de continua crescendo na faixa de preço continua crescendo, com **`r round(100*sum(df_price_count[df_price_count$price_categ == "Barato",]$count)/sum(df_price_count$count),2)`%** dos jogos, ou `r df_price_count[df_price_count$price_categ == "Barato"]$count` jogos (compondo um total de `r sum(df_price_categ[df_price_categ$price_categ == "Barato",]$count)` tags) estão nesse segmento, ou seja, temos praticamente um terço dos jogos disponíveis na steam.
+
 ### Avaliando os jogos "muito baratos" (Muito Barato)
 
 ```{r, tag-price-verLow-mean-median, echo = FALSE}
 ## Verificando média e mediana por categoria "Muito Barato"
 mean_verLow <- round(mean(df_price_categ$count[df_price_categ$price_categ == "Muito Barato"]), 2)
 median_verLow <- round(median(df_price_categ$count[df_price_categ$price_categ == "Muito Barato"]), 2)
+sd_verLow <- round(sd(df_price_categ$count[df_price_categ$price_categ == "Muito Barato"]), 2)
 ```
 
-
+Para os jogos de preço, de preços até 10 dólares, classificados como "Muito Baratos" temos variações ainda crescentes mas mais próximos da categoria anterior, a média é de`r mean_verLow`, mediana `r median_verLow` e o desvio padrão `r sd_verLow`.
 
 ```{r, tag-price-verLow}
 ## Separando as 20 categorias que mais aparecem
@@ -214,15 +221,18 @@ df_price_categ_verLow <- df_price_categ |>
 df_price_categ_verLow
 ```
 
+Os números na faixa de preço crescem um pouco mais, com **`r round(100*sum(df_price_count[df_price_count$price_categ == "Muito Barato",]$count)/sum(df_price_count$count),2)`%** dos jogos, ou `r df_price_count[df_price_count$price_categ == "Muito Barato"]$count` jogos (compondo um total de `r sum(df_price_categ[df_price_categ$price_categ == "Muito Barato",]$count)` tags) estão nesse segmento, ou seja, temos praticamente quase metade dos jogos aqui nesta categoria. Se pensarmos nas duas categorias de jogos mais baratas, temos quase 80% dos jogos da base de dados, sem dúvida onde os jogos estão mais concentrados.
+
 ### Avaliando os jogos gratuitos (Free)
 
 ```{r, tag-price-free-mean-median, echo = FALSE}
 ## Verificando média e mediana por categoria "Free"
 mean_free <- round(mean(df_price_categ$count[df_price_categ$price_categ == "Free"]), 2)
 median_free <- round(median(df_price_categ$count[df_price_categ$price_categ == "Free"]), 2)
+sd_free <- round(sd(df_price_categ$count[df_price_categ$price_categ == "Free"]), 2)
 ```
 
-
+Na última categoria de preços, os jogos gratuitos, as variações diminuem. A média é de`r mean_free`, mediana `r median_free` e o desvio padrão `r sd_free`.
 
 ```{r, tag-price-free}
 ## Separando as 20 categorias que mais aparecem
@@ -233,6 +243,14 @@ df_price_categ_free <- df_price_categ |>
 
 df_price_categ_free
 ```
+
+Agora temos uma diminução condiserável do número de jogos, podendo ser causada tanto pelas filtragens, sendo uma delas a quantidade de avaliações e usuários por jogo, quanto a própria baixa popularidade desta categoria de preço, com **`r round(100*sum(df_price_count[df_price_count$price_categ == "Free",]$count)/sum(df_price_count$count),2)`%** dos jogos, ou `r df_price_count[df_price_count$price_categ == "Free"]$count` jogos (compondo um total de `r sum(df_price_categ[df_price_categ$price_categ == "Free",]$count)` tags) nesse segmento, ou seja, essa categoria tem números mais próximos da categoria "Caro" do que das de jogos médios e baratos.
+
+## Resumo das faixas de preço
+
+Um ponto interessante e que foi observado após a 
+
+Como observamos, boa parte dos jogos da Steam, cerca de 80%, que se encaixaram nos nossos filtros de avaliações positivas e números de usuários, estão nas faixas de preço até \$20 (de \$0-10 como "Muito Baratos" e de \$10-20 como "Baratos"), são jogos que exibem uma grande diversidade de categorias e classificações. É um comportamento interessante, porque por serem jogos baratos, contam com o preço como forma de atrair usuários, e podem pensar em estratégias diferentes de acertar um público alvo. 
 
 ### Visualizando top categorias por faixa de preço
 

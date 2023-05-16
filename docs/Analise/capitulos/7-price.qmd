@@ -36,14 +36,17 @@ median(df_payed_games$price_original)
 quantile(df_payed_games$price_original, probs = c(0, 0.25, 0.5, 0.75, 1))
 
 ## Verificando decis
+# Preço original
 quantile(df_payed_games$price_original, probs = c(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1))
+# Preço final
 quantile(df_payed_games$price_final, probs = c(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1))
+
 decis <- quantile(df_payed_games$price_original, probs = c(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1))
 
 ```
 
 Aqui já podemos tirar algumas conclusões, de que a faixa de preço dos jogos pagos é relativamente baixa, apesar de termos jogos mais caros (com o máximo sendo de $270). Vamos analisar com mais cautela as faixas de preços dos jogos, já que será uma das bases de decisão na escolha do tipo de jogo a ser lançado.
-Também nos decis comparamos a faixa de preço do jogo lançada, que será utilizada para as visualizações e análises, com a faixa de preço atual. Em geral vemos uma variação para baixo nos decis, indicando que os jogos abaixo dos $19.99 tendem a cair de preço com o tempo, o que é visto com frequência para quem acompanha os preços da Steam, quando os jogos começam a ficar mais velhos, é comum existirem cortes de preços e promoções para tentar aumentar o número de vendas de um jogo.
+Também nos decis comparamos a faixa de preço do jogo lançada, que será utilizada para as visualizações e análises, com a faixa de preço atual. Em geral vemos uma variação para baixo nos decis quando comparamos o preço de lançamento e o preço atual, indicando que os jogos tendem a cair de preço com o tempo, o que é visto com frequência para quem acompanha os preços da Steam, quando os jogos começam a ficar mais velhos, é comum existirem cortes de preços e promoções para tentar aumentar o número de vendas.
 
 #### Visualizações das faixas de preço
 
@@ -91,6 +94,8 @@ df_all_games_pricier <- df_payed_games |>
   dplyr::filter(price_original >= decis[10]) |>
   dplyr::select(app_id, title, date_release, rating, positive_ratio, user_reviews, price_original, price_final, tags_all)
 ```
+
+Podemos ver muitos jogos considerados "AAA", jogos de grandes editoras e publicadoras, como The Witcher 3, Cyberpunk 2077, Red Dead Redemption 2, e alguns um pouco menores mas que fizeram bastante sucesso como Rust, DayZ, Deep Rock Galactica. Com preços variando de \$29.99 até \$269.99, sendo que em geral os jogos vão até $109.99 (Tekken 7), e muitos dos jogos acima de $69
 
 ##### Investigando os 10% mais baratos
 
