@@ -12,15 +12,16 @@ library(purrr)
 library(dplyr)
 source(here::here("R/fct-auxiliares/fct_order_strings.R"))
 source(here::here("R/fct-auxiliares/fct_ajustando_tags.R"))
+source(here::here("R/fct-auxiliares/fct_filter_not_games.R"))
 ```
 
 ```{r, tags}
 teste_interno <- T
 if(teste_interno){
-  df_all_games <- data.table::fread(here::here("data-raw/steam-data/db-created/db-reviews-join.csv")) |> 
-    dplyr::mutate(categories = ifelse(categories == "", NA, categories),
+df_all_games <- data.table::fread(here::here("data-raw/created-tables/db-reviews-join.csv")) |> 
+    dplyr::mutate(tags = ifelse(tags == "", NA, tags),
+                  categories = ifelse(categories == "", NA, categories),
                   genres = ifelse(genres == "", NA, genres),
-                  tags = ifelse(tags == "", NA, tags),
                   tags_extra = ifelse(tags_extra == "", NA, tags_extra))
 }
 
@@ -29,6 +30,9 @@ df_tags <- dplyr::select(df_all_games,
                          app_id, title, tags, tags_extra)
 df_tags_equal <- df_tags[tags == tags_extra,]
 df_tags_not_equal <- df_tags[tags != tags_extra,]
+
+# df_tags_equal_ <- df_tags_equal
+# df_tags_not_equal_ <- df_tags_not_equal
 
 # nrow(df_tags[is.na(tags_extra), ])
 # nrow(df_tags[is.na(tags), ])
@@ -48,7 +52,6 @@ tags_dif_ids <- df_tags_not_equal |>
 ### não é possível de forma tão simples, talvez usando trible? (lista dentro do df)
 ### Gerar uma lista com os elementos e fazer um "union" entre elas e um "intersect"
 ### XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX ####
-
 
 vector_tags <- df_tags_not_equal$tags |> 
   purrr::map(\(x) stringr::str_sort(stringr::str_split_1(x, pattern = ",")))
@@ -130,15 +133,54 @@ df_tags_count |>
   DT::datatable()
 ```
 
-```{r, df-newtags}
-df_tags_not_equal$tags_all <- df_diff$tags
-df_tags_equal$tags_all <- df_tags_equal$tags
+```{r, df-newTags}
+# df_tags_not_equal$tags_all <- df_diff$tags
+# df_tags_equal$tags_all <- df_tags_equal$tags
+
+df_diff <- dplyr::rename(df_diff, tags_all = tags, app_id = id)
+
+df_tags_equal <- dplyr::rename(df_tags_equal, tags_all = tags) |> 
+  dplyr::select(-tags_extra)
+df_tags_not_equal <- dplyr::inner_join(df_tags_not_equal, df_diff, by = "app_id") |> 
+  dplyr::select(-tags, -tags_extra)
+
 df_all_games_newtags <- rbind(df_tags_equal, df_tags_not_equal) |> 
   dplyr::select(app_id, tags_all)
 
-df_all_games <- dplyr::inner_join(df_all_games, df_all_games_newtags, by="app_id") |> 
+df_all_games_newtags <- dplyr::inner_join(df_all_games, df_all_games_newtags, by="app_id") |> 
   dplyr::select(-tags, -tags_extra)
 
-data.table::fwrite(df_all_games, here::here("data-raw/created-tables/db-all-games-tags-all.csv"))
+## Adicionando jogos que tinham tags ou tags_extra NA, e não foram comparados
+df_all_games_na <- df_all_games |> 
+  dplyr::filter(is.na(tags) | is.na(tags_extra)) |> 
+  dplyr::mutate(tags_all = ifelse(is.na(tags), tags_extra, tags)) |> 
+  dplyr::select(-tags, -tags_extra)
 
+df_all_games <- rbind(df_all_games_newtags, df_all_games_na)
+
+```
+
+```{r, filter-notGames}
+## Categorias consideradas não jogos
+notGames <- c("360 Video", "Accounting", "Animation & Modeling", "Audio Production", "Design & Illustration", "Documentary", "Episodic", "Game Development", "Movie", "Photo Editing", "Short", "Software", "Software Training", "Tutorial", "Utilities", "Video Production", "Web Publishing")
+notGames_genres <- paste0(notGames, collapse = "|")
+
+## dataframe filtrando generos e tags que não são considerados jogos
+df_all_games_split <- df_all_games |> 
+  dplyr::filter(is.na(genres) | !stringr::str_detect(genres, notGames_genres)) |> 
+  tidyr::separate_longer_delim(tags_all, delim = ",") |>  
+  dplyr::rowwise() |> 
+  dplyr::mutate(tags_all = func_filter_not_games_line(tags_all, notGames)) |> 
+  dplyr::filter(tags_all != "notGame")
+
+data.table::fwrite(df_all_games_split, here::here("data-raw/created-tables/db-all-games-tags-all-split.csv"))
+
+df_all_games_filt <- df_all_games_split |> 
+  dplyr::group_by(app_id) |> 
+  dplyr::mutate(tags_all_ = paste0(tags_all, collapse = ",")) |> 
+  dplyr::distinct(app_id, .keep_all = T) |> 
+  dplyr::select(-tags_all) |> 
+  dplyr::rename(tags_all = tags_all_)
+
+data.table::fwrite(df_all_games_filt, here::here("data-raw/created-tables/db-all-games-tags-all.csv"))
 ```

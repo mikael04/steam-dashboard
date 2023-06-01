@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-1.2.475">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -116,44 +116,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 
 </div>
-<p>Vou fazer um agrupamento entre as categorias (na base, definida como “tags”) dos jogos e uma recategorização para a variável de preços, visando facilitar a comparação entre os jogos. Essa recategorização irá replicar cada jogo separando as categorias, portanto teremos ao final um número de linhas muito maior que o número de jogos da nossa base inicial, porque cada jogo pode possuir um número de 1 à 39 categorias.</p>
-<p>O número de <strong>categorias distintas</strong> na base de dados é de <strong>430</strong>, e para cada categoria, a <strong>média</strong> de vezes em que ela aparece nos jogos é de <strong>478</strong> e a mediana é de <strong>176</strong>, e pela diferença entre média e mediana percebemos que a <strong>distribuição</strong> dos jogos por cada categoria é bastante <strong>irregular</strong>, analisaremos então esta diferença de outra forma.</p>
+<p>Vou fazer um agrupamento entre as categorias (na base, definida como “tags”) dos jogos e uma recategorização para a variável de preços, visando facilitar a comparação entre os jogos. Essa recategorização irá replicar cada jogo separando as categorias, portanto teremos ao final um número de linhas muito maior que o número de jogos da nossa base inicial, porque cada jogo pode possuir um número de 1 à 41 categorias.</p>
+<p>O número de <strong>categorias distintas</strong> na base de dados é de <strong>432</strong>, e para cada categoria, a <strong>média</strong> de vezes em que ela aparece nos jogos é de <strong>522</strong> e a mediana é de <strong>182</strong>, e pela diferença entre média e mediana percebemos que a <strong>distribuição</strong> dos jogos por categoria é bastante <strong>irregular</strong>, analisaremos então esta diferença de outra forma.</p>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="9-price-tags_files/figure-html/graph-dist-categs-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Utilizando o histograma vemos quantas vezes cada categoria apareceu, e temos uma grande parte distribuída entre as primeiras barras, porém podemos observar algumas barras muito menores que aparecem mais vezes, ou seja, categorias que aparecem em muitos jogos. Algumas dessas mais frequentes inclusive estão presentes em mais de metade dos <strong>13099 jogos</strong>.</p>
+<p>Utilizando o histograma vemos quantas vezes cada categoria apareceu, e temos uma grande parte distribuída entre as primeiras barras, porém podemos observar algumas barras muito menores que aparecem mais vezes, ou seja, categorias que aparecem em muitos jogos. Algumas dessas mais frequentes inclusive estão presentes em mais de metade dos <strong>14902 jogos</strong>.</p>
 </section>
 <section id="análise-por-faixa-de-preço" class="level2">
 <h2 class="anchored" data-anchor-id="análise-por-faixa-de-preço">Análise por faixa de preço</h2>
-<p>A nossa análise será feita nas faixas de preço definidas, os jogos foram separados em gratuitos (preço = 0), jogos muito baratos (preço entre $0.01 e $9.99), jogos baratos (preço entre $10.01 e $19.99), jogos médios (preço entre $20.01 e $39.99), jogos caros (preço entre $40.01 e $59.99) e jogos muito caros (preço de $60 ou mais).</p>
+<p>A nossa análise será feita nas faixas de preço definidas, os jogos foram separados em gratuitos (preço = 0), jogos muito baratos (preço entre $0.01 e $10.00), jogos baratos (preço entre $10.01 e $20.00), jogos médios (preço entre $20.01 e $40.00), jogos caros (preço entre $40.01 e $60.00) e jogos muito caros (preço de $60.01 ou mais).</p>
 <section id="avaliando-os-jogos-muito-caros-muito-caro" class="level3">
 <h3 class="anchored" data-anchor-id="avaliando-os-jogos-muito-caros-muito-caro">Avaliando os jogos muito caros (Muito Caro)</h3>
 <div class="cell">
 
 </div>
-<p>Definimos essa faixa de preço dos muito caros como jogos acima de 60 dólares, e podemos ver pelos valores de média (2.36) e mediana (2).</p>
+<p>Definimos essa faixa de preço dos muito caros como jogos acima de 60 dólares, e podemos ver pelos valores de média (2.08) e mediana (1) são próximos, aliados ao desvio padão que também não é alto (2.15), ou seja, temos pouca variação do número de jogos por categoria nessa faixa de preço.</p>
 <div class="cell">
 <div class="cell-output-display">
 
-<div id="qdpssoqeph" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#qdpssoqeph table {
+<div id="hlljcejzsn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#hlljcejzsn table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#qdpssoqeph thead, #qdpssoqeph tbody, #qdpssoqeph tfoot, #qdpssoqeph tr, #qdpssoqeph td, #qdpssoqeph th {
+#hlljcejzsn thead, #hlljcejzsn tbody, #hlljcejzsn tfoot, #hlljcejzsn tr, #hlljcejzsn td, #hlljcejzsn th {
   border-style: none;
 }
 
-#qdpssoqeph p {
+#hlljcejzsn p {
   margin: 0;
   padding: 0;
 }
 
-#qdpssoqeph .gt_table {
+#hlljcejzsn .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -179,12 +179,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-left-color: #D3D3D3;
 }
 
-#qdpssoqeph .gt_caption {
+#hlljcejzsn .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#qdpssoqeph .gt_title {
+#hlljcejzsn .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -196,7 +196,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-bottom-width: 0;
 }
 
-#qdpssoqeph .gt_subtitle {
+#hlljcejzsn .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -208,7 +208,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-top-width: 0;
 }
 
-#qdpssoqeph .gt_heading {
+#hlljcejzsn .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -220,13 +220,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-color: #D3D3D3;
 }
 
-#qdpssoqeph .gt_bottom_border {
+#hlljcejzsn .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qdpssoqeph .gt_col_headings {
+#hlljcejzsn .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -241,7 +241,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-color: #D3D3D3;
 }
 
-#qdpssoqeph .gt_col_heading {
+#hlljcejzsn .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -261,7 +261,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   overflow-x: hidden;
 }
 
-#qdpssoqeph .gt_column_spanner_outer {
+#hlljcejzsn .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -273,15 +273,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 4px;
 }
 
-#qdpssoqeph .gt_column_spanner_outer:first-child {
+#hlljcejzsn .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qdpssoqeph .gt_column_spanner_outer:last-child {
+#hlljcejzsn .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qdpssoqeph .gt_column_spanner {
+#hlljcejzsn .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -293,11 +293,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   width: 100%;
 }
 
-#qdpssoqeph .gt_spanner_row {
+#hlljcejzsn .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#qdpssoqeph .gt_group_heading {
+#hlljcejzsn .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -323,7 +323,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   text-align: left;
 }
 
-#qdpssoqeph .gt_empty_group_heading {
+#hlljcejzsn .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -338,15 +338,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   vertical-align: middle;
 }
 
-#qdpssoqeph .gt_from_md > :first-child {
+#hlljcejzsn .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qdpssoqeph .gt_from_md > :last-child {
+#hlljcejzsn .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qdpssoqeph .gt_row {
+#hlljcejzsn .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -365,7 +365,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   overflow-x: hidden;
 }
 
-#qdpssoqeph .gt_stub {
+#hlljcejzsn .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -378,7 +378,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-#qdpssoqeph .gt_stub_row_group {
+#hlljcejzsn .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -392,15 +392,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   vertical-align: top;
 }
 
-#qdpssoqeph .gt_row_group_first td {
+#hlljcejzsn .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#qdpssoqeph .gt_row_group_first th {
+#hlljcejzsn .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#qdpssoqeph .gt_summary_row {
+#hlljcejzsn .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -410,16 +410,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-#qdpssoqeph .gt_first_summary_row {
+#hlljcejzsn .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#qdpssoqeph .gt_first_summary_row.thick {
+#hlljcejzsn .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#qdpssoqeph .gt_last_summary_row {
+#hlljcejzsn .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -429,7 +429,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-bottom-color: #D3D3D3;
 }
 
-#qdpssoqeph .gt_grand_summary_row {
+#hlljcejzsn .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -439,7 +439,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-#qdpssoqeph .gt_first_grand_summary_row {
+#hlljcejzsn .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -449,7 +449,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-top-color: #D3D3D3;
 }
 
-#qdpssoqeph .gt_last_grand_summary_row_top {
+#hlljcejzsn .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -459,11 +459,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-bottom-color: #D3D3D3;
 }
 
-#qdpssoqeph .gt_striped {
+#hlljcejzsn .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qdpssoqeph .gt_table_body {
+#hlljcejzsn .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -472,7 +472,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-bottom-color: #D3D3D3;
 }
 
-#qdpssoqeph .gt_footnotes {
+#hlljcejzsn .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -486,7 +486,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-color: #D3D3D3;
 }
 
-#qdpssoqeph .gt_footnote {
+#hlljcejzsn .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -495,7 +495,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-#qdpssoqeph .gt_sourcenotes {
+#hlljcejzsn .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -509,7 +509,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-color: #D3D3D3;
 }
 
-#qdpssoqeph .gt_sourcenote {
+#hlljcejzsn .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -517,63 +517,63 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-#qdpssoqeph .gt_left {
+#hlljcejzsn .gt_left {
   text-align: left;
 }
 
-#qdpssoqeph .gt_center {
+#hlljcejzsn .gt_center {
   text-align: center;
 }
 
-#qdpssoqeph .gt_right {
+#hlljcejzsn .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qdpssoqeph .gt_font_normal {
+#hlljcejzsn .gt_font_normal {
   font-weight: normal;
 }
 
-#qdpssoqeph .gt_font_bold {
+#hlljcejzsn .gt_font_bold {
   font-weight: bold;
 }
 
-#qdpssoqeph .gt_font_italic {
+#hlljcejzsn .gt_font_italic {
   font-style: italic;
 }
 
-#qdpssoqeph .gt_super {
+#hlljcejzsn .gt_super {
   font-size: 65%;
 }
 
-#qdpssoqeph .gt_footnote_marks {
+#hlljcejzsn .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#qdpssoqeph .gt_asterisk {
+#hlljcejzsn .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#qdpssoqeph .gt_indent_1 {
+#hlljcejzsn .gt_indent_1 {
   text-indent: 5px;
 }
 
-#qdpssoqeph .gt_indent_2 {
+#hlljcejzsn .gt_indent_2 {
   text-indent: 10px;
 }
 
-#qdpssoqeph .gt_indent_3 {
+#hlljcejzsn .gt_indent_3 {
   text-indent: 15px;
 }
 
-#qdpssoqeph .gt_indent_4 {
+#hlljcejzsn .gt_indent_4 {
   text-indent: 20px;
 }
 
-#qdpssoqeph .gt_indent_5 {
+#hlljcejzsn .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -587,66 +587,66 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </tr>
   </thead>
   <tbody class="gt_table_body">
+    <tr><td headers="tags_all" class="gt_row gt_left">Indie</td>
+<td headers="price_categ" class="gt_row gt_left">Muito Caro</td>
+<td headers="count" class="gt_row gt_right">14</td></tr>
     <tr><td headers="tags_all" class="gt_row gt_left">Singleplayer</td>
 <td headers="price_categ" class="gt_row gt_left">Muito Caro</td>
 <td headers="count" class="gt_row gt_right">13</td></tr>
-    <tr><td headers="tags_all" class="gt_row gt_left">Indie</td>
-<td headers="price_categ" class="gt_row gt_left">Muito Caro</td>
-<td headers="count" class="gt_row gt_right">12</td></tr>
-    <tr><td headers="tags_all" class="gt_row gt_left">Simulation</td>
-<td headers="price_categ" class="gt_row gt_left">Muito Caro</td>
-<td headers="count" class="gt_row gt_right">8</td></tr>
-    <tr><td headers="tags_all" class="gt_row gt_left">Strategy</td>
-<td headers="price_categ" class="gt_row gt_left">Muito Caro</td>
-<td headers="count" class="gt_row gt_right">8</td></tr>
-    <tr><td headers="tags_all" class="gt_row gt_left">Action</td>
-<td headers="price_categ" class="gt_row gt_left">Muito Caro</td>
-<td headers="count" class="gt_row gt_right">7</td></tr>
-    <tr><td headers="tags_all" class="gt_row gt_left">3D</td>
-<td headers="price_categ" class="gt_row gt_left">Muito Caro</td>
-<td headers="count" class="gt_row gt_right">6</td></tr>
-    <tr><td headers="tags_all" class="gt_row gt_left">Multiplayer</td>
-<td headers="price_categ" class="gt_row gt_left">Muito Caro</td>
-<td headers="count" class="gt_row gt_right">6</td></tr>
-    <tr><td headers="tags_all" class="gt_row gt_left">RPG</td>
-<td headers="price_categ" class="gt_row gt_left">Muito Caro</td>
-<td headers="count" class="gt_row gt_right">6</td></tr>
-    <tr><td headers="tags_all" class="gt_row gt_left">2D</td>
-<td headers="price_categ" class="gt_row gt_left">Muito Caro</td>
-<td headers="count" class="gt_row gt_right">5</td></tr>
     <tr><td headers="tags_all" class="gt_row gt_left">Adventure</td>
 <td headers="price_categ" class="gt_row gt_left">Muito Caro</td>
-<td headers="count" class="gt_row gt_right">5</td></tr>
+<td headers="count" class="gt_row gt_right">9</td></tr>
+    <tr><td headers="tags_all" class="gt_row gt_left">Action</td>
+<td headers="price_categ" class="gt_row gt_left">Muito Caro</td>
+<td headers="count" class="gt_row gt_right">8</td></tr>
+    <tr><td headers="tags_all" class="gt_row gt_left">Female Protagonist</td>
+<td headers="price_categ" class="gt_row gt_left">Muito Caro</td>
+<td headers="count" class="gt_row gt_right">8</td></tr>
+    <tr><td headers="tags_all" class="gt_row gt_left">Story Rich</td>
+<td headers="price_categ" class="gt_row gt_left">Muito Caro</td>
+<td headers="count" class="gt_row gt_right">8</td></tr>
+    <tr><td headers="tags_all" class="gt_row gt_left">2D</td>
+<td headers="price_categ" class="gt_row gt_left">Muito Caro</td>
+<td headers="count" class="gt_row gt_right">7</td></tr>
     <tr><td headers="tags_all" class="gt_row gt_left">Atmospheric</td>
 <td headers="price_categ" class="gt_row gt_left">Muito Caro</td>
-<td headers="count" class="gt_row gt_right">5</td></tr>
-    <tr><td headers="tags_all" class="gt_row gt_left">Exploration</td>
+<td headers="count" class="gt_row gt_right">7</td></tr>
+    <tr><td headers="tags_all" class="gt_row gt_left">Great Soundtrack</td>
+<td headers="price_categ" class="gt_row gt_left">Muito Caro</td>
+<td headers="count" class="gt_row gt_right">6</td></tr>
+    <tr><td headers="tags_all" class="gt_row gt_left">Horror</td>
+<td headers="price_categ" class="gt_row gt_left">Muito Caro</td>
+<td headers="count" class="gt_row gt_right">6</td></tr>
+    <tr><td headers="tags_all" class="gt_row gt_left">Simulation</td>
+<td headers="price_categ" class="gt_row gt_left">Muito Caro</td>
+<td headers="count" class="gt_row gt_right">6</td></tr>
+    <tr><td headers="tags_all" class="gt_row gt_left">Anime</td>
 <td headers="price_categ" class="gt_row gt_left">Muito Caro</td>
 <td headers="count" class="gt_row gt_right">5</td></tr>
-    <tr><td headers="tags_all" class="gt_row gt_left">Replay Value</td>
+    <tr><td headers="tags_all" class="gt_row gt_left">Multiplayer</td>
 <td headers="price_categ" class="gt_row gt_left">Muito Caro</td>
 <td headers="count" class="gt_row gt_right">5</td></tr>
-    <tr><td headers="tags_all" class="gt_row gt_left">Sandbox</td>
-<td headers="price_categ" class="gt_row gt_left">Muito Caro</td>
-<td headers="count" class="gt_row gt_right">5</td></tr>
-    <tr><td headers="tags_all" class="gt_row gt_left">Building</td>
-<td headers="price_categ" class="gt_row gt_left">Muito Caro</td>
-<td headers="count" class="gt_row gt_right">4</td></tr>
-    <tr><td headers="tags_all" class="gt_row gt_left">Colorful</td>
-<td headers="price_categ" class="gt_row gt_left">Muito Caro</td>
-<td headers="count" class="gt_row gt_right">4</td></tr>
-    <tr><td headers="tags_all" class="gt_row gt_left">Difficult</td>
-<td headers="price_categ" class="gt_row gt_left">Muito Caro</td>
-<td headers="count" class="gt_row gt_right">4</td></tr>
-    <tr><td headers="tags_all" class="gt_row gt_left">Early Access</td>
-<td headers="price_categ" class="gt_row gt_left">Muito Caro</td>
-<td headers="count" class="gt_row gt_right">4</td></tr>
-    <tr><td headers="tags_all" class="gt_row gt_left">Open World</td>
-<td headers="price_categ" class="gt_row gt_left">Muito Caro</td>
-<td headers="count" class="gt_row gt_right">4</td></tr>
     <tr><td headers="tags_all" class="gt_row gt_left">Pixel Graphics</td>
 <td headers="price_categ" class="gt_row gt_left">Muito Caro</td>
+<td headers="count" class="gt_row gt_right">5</td></tr>
+    <tr><td headers="tags_all" class="gt_row gt_left">Strategy</td>
+<td headers="price_categ" class="gt_row gt_left">Muito Caro</td>
+<td headers="count" class="gt_row gt_right">5</td></tr>
+    <tr><td headers="tags_all" class="gt_row gt_left">Casual</td>
+<td headers="price_categ" class="gt_row gt_left">Muito Caro</td>
 <td headers="count" class="gt_row gt_right">4</td></tr>
+    <tr><td headers="tags_all" class="gt_row gt_left">Controller</td>
+<td headers="price_categ" class="gt_row gt_left">Muito Caro</td>
+<td headers="count" class="gt_row gt_right">4</td></tr>
+    <tr><td headers="tags_all" class="gt_row gt_left">Fantasy</td>
+<td headers="price_categ" class="gt_row gt_left">Muito Caro</td>
+<td headers="count" class="gt_row gt_right">4</td></tr>
+    <tr><td headers="tags_all" class="gt_row gt_left">RPG</td>
+<td headers="price_categ" class="gt_row gt_left">Muito Caro</td>
+<td headers="count" class="gt_row gt_right">4</td></tr>
+    <tr><td headers="tags_all" class="gt_row gt_left">Classic</td>
+<td headers="price_categ" class="gt_row gt_left">Muito Caro</td>
+<td headers="count" class="gt_row gt_right">3</td></tr>
   </tbody>
   
   
@@ -654,15 +654,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-<p>Vemos que a maioria das categorias possui poucas amostras, ou seja, na nossa base de dados e em geral na Steam, poucos jogos são lançados acima dos $60.</p>
-<p>Em comparação com a população de jogos, a amostra para essa categoria é pequena comparada ao tamanho da nossa base de dados, do total de <strong>13099</strong> apenas <strong>0.16%</strong> ou 21 jogos (compondo um total de 293 tags) estão nesta faixa de valores.</p>
+<p>Vemos também que a maioria das categorias possui poucas amostras, ou seja, na nossa base de dados e em geral na Steam, poucos jogos são lançados acima dos $60 independente da categoria.</p>
+<p>Em comparação com a população de jogos, a amostra para essa categoria é pequena comparada ao tamanho da nossa base de dados, do total de <strong>14902</strong> apenas <strong>0.14%</strong> ou 21 jogos (compondo um total de 300 tags) estão nesta faixa de valores.</p>
 </section>
 <section id="avaliando-os-jogos-caros-caro" class="level3">
 <h3 class="anchored" data-anchor-id="avaliando-os-jogos-caros-caro">Avaliando os jogos caros (Caro)</h3>
 <div class="cell">
 
 </div>
-<p>Já nos jogos dos jogos caros, entre 40 e 60 dólares, vemos valores de média (2.36) e mediana (2), ainda bastante diferentes, indicando novamente uma distribuição não-normal.</p>
+<p>Já nos jogos caros, entre 40 e 60 dólares, vemos valores de média (15.34) e mediana (6), agora com uma diferença maior, indicando uma distribuição não-normal. O desvio padrão aumentou (26.91), junto com a diferença entre média e mediana indica uma variação maior entre categorias.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Separando as 20 categorias que mais aparecem</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>df_price_categ_exp <span class="ot">&lt;-</span> df_price_categ <span class="sc">|&gt;</span> </span>
@@ -674,23 +674,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div id="fhvjwlagsg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#fhvjwlagsg table {
+<div id="mahtxysgtr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#mahtxysgtr table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#fhvjwlagsg thead, #fhvjwlagsg tbody, #fhvjwlagsg tfoot, #fhvjwlagsg tr, #fhvjwlagsg td, #fhvjwlagsg th {
+#mahtxysgtr thead, #mahtxysgtr tbody, #mahtxysgtr tfoot, #mahtxysgtr tr, #mahtxysgtr td, #mahtxysgtr th {
   border-style: none;
 }
 
-#fhvjwlagsg p {
+#mahtxysgtr p {
   margin: 0;
   padding: 0;
 }
 
-#fhvjwlagsg .gt_table {
+#mahtxysgtr .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -716,12 +716,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-left-color: #D3D3D3;
 }
 
-#fhvjwlagsg .gt_caption {
+#mahtxysgtr .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#fhvjwlagsg .gt_title {
+#mahtxysgtr .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -733,7 +733,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-bottom-width: 0;
 }
 
-#fhvjwlagsg .gt_subtitle {
+#mahtxysgtr .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -745,7 +745,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-top-width: 0;
 }
 
-#fhvjwlagsg .gt_heading {
+#mahtxysgtr .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -757,13 +757,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-color: #D3D3D3;
 }
 
-#fhvjwlagsg .gt_bottom_border {
+#mahtxysgtr .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#fhvjwlagsg .gt_col_headings {
+#mahtxysgtr .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -778,7 +778,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-color: #D3D3D3;
 }
 
-#fhvjwlagsg .gt_col_heading {
+#mahtxysgtr .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -798,7 +798,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   overflow-x: hidden;
 }
 
-#fhvjwlagsg .gt_column_spanner_outer {
+#mahtxysgtr .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -810,15 +810,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 4px;
 }
 
-#fhvjwlagsg .gt_column_spanner_outer:first-child {
+#mahtxysgtr .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#fhvjwlagsg .gt_column_spanner_outer:last-child {
+#mahtxysgtr .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#fhvjwlagsg .gt_column_spanner {
+#mahtxysgtr .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -830,11 +830,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   width: 100%;
 }
 
-#fhvjwlagsg .gt_spanner_row {
+#mahtxysgtr .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#fhvjwlagsg .gt_group_heading {
+#mahtxysgtr .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -860,7 +860,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   text-align: left;
 }
 
-#fhvjwlagsg .gt_empty_group_heading {
+#mahtxysgtr .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -875,15 +875,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   vertical-align: middle;
 }
 
-#fhvjwlagsg .gt_from_md > :first-child {
+#mahtxysgtr .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#fhvjwlagsg .gt_from_md > :last-child {
+#mahtxysgtr .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#fhvjwlagsg .gt_row {
+#mahtxysgtr .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -902,7 +902,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   overflow-x: hidden;
 }
 
-#fhvjwlagsg .gt_stub {
+#mahtxysgtr .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -915,7 +915,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-#fhvjwlagsg .gt_stub_row_group {
+#mahtxysgtr .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -929,15 +929,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   vertical-align: top;
 }
 
-#fhvjwlagsg .gt_row_group_first td {
+#mahtxysgtr .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#fhvjwlagsg .gt_row_group_first th {
+#mahtxysgtr .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#fhvjwlagsg .gt_summary_row {
+#mahtxysgtr .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -947,16 +947,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-#fhvjwlagsg .gt_first_summary_row {
+#mahtxysgtr .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#fhvjwlagsg .gt_first_summary_row.thick {
+#mahtxysgtr .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#fhvjwlagsg .gt_last_summary_row {
+#mahtxysgtr .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -966,7 +966,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-bottom-color: #D3D3D3;
 }
 
-#fhvjwlagsg .gt_grand_summary_row {
+#mahtxysgtr .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -976,7 +976,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-#fhvjwlagsg .gt_first_grand_summary_row {
+#mahtxysgtr .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -986,7 +986,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-top-color: #D3D3D3;
 }
 
-#fhvjwlagsg .gt_last_grand_summary_row_top {
+#mahtxysgtr .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -996,11 +996,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-bottom-color: #D3D3D3;
 }
 
-#fhvjwlagsg .gt_striped {
+#mahtxysgtr .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#fhvjwlagsg .gt_table_body {
+#mahtxysgtr .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1009,7 +1009,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-bottom-color: #D3D3D3;
 }
 
-#fhvjwlagsg .gt_footnotes {
+#mahtxysgtr .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1023,7 +1023,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-color: #D3D3D3;
 }
 
-#fhvjwlagsg .gt_footnote {
+#mahtxysgtr .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1032,7 +1032,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-#fhvjwlagsg .gt_sourcenotes {
+#mahtxysgtr .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1046,7 +1046,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-color: #D3D3D3;
 }
 
-#fhvjwlagsg .gt_sourcenote {
+#mahtxysgtr .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1054,63 +1054,63 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-#fhvjwlagsg .gt_left {
+#mahtxysgtr .gt_left {
   text-align: left;
 }
 
-#fhvjwlagsg .gt_center {
+#mahtxysgtr .gt_center {
   text-align: center;
 }
 
-#fhvjwlagsg .gt_right {
+#mahtxysgtr .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#fhvjwlagsg .gt_font_normal {
+#mahtxysgtr .gt_font_normal {
   font-weight: normal;
 }
 
-#fhvjwlagsg .gt_font_bold {
+#mahtxysgtr .gt_font_bold {
   font-weight: bold;
 }
 
-#fhvjwlagsg .gt_font_italic {
+#mahtxysgtr .gt_font_italic {
   font-style: italic;
 }
 
-#fhvjwlagsg .gt_super {
+#mahtxysgtr .gt_super {
   font-size: 65%;
 }
 
-#fhvjwlagsg .gt_footnote_marks {
+#mahtxysgtr .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#fhvjwlagsg .gt_asterisk {
+#mahtxysgtr .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#fhvjwlagsg .gt_indent_1 {
+#mahtxysgtr .gt_indent_1 {
   text-indent: 5px;
 }
 
-#fhvjwlagsg .gt_indent_2 {
+#mahtxysgtr .gt_indent_2 {
   text-indent: 10px;
 }
 
-#fhvjwlagsg .gt_indent_3 {
+#mahtxysgtr .gt_indent_3 {
   text-indent: 15px;
 }
 
-#fhvjwlagsg .gt_indent_4 {
+#mahtxysgtr .gt_indent_4 {
   text-indent: 20px;
 }
 
-#fhvjwlagsg .gt_indent_5 {
+#mahtxysgtr .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1126,64 +1126,64 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <tbody class="gt_table_body">
     <tr><td headers="tags_all" class="gt_row gt_left">Singleplayer</td>
 <td headers="price_categ" class="gt_row gt_left">Caro</td>
-<td headers="count" class="gt_row gt_right">197</td></tr>
+<td headers="count" class="gt_row gt_right">231</td></tr>
     <tr><td headers="tags_all" class="gt_row gt_left">Action</td>
 <td headers="price_categ" class="gt_row gt_left">Caro</td>
-<td headers="count" class="gt_row gt_right">150</td></tr>
-    <tr><td headers="tags_all" class="gt_row gt_left">Adventure</td>
-<td headers="price_categ" class="gt_row gt_left">Caro</td>
-<td headers="count" class="gt_row gt_right">134</td></tr>
+<td headers="count" class="gt_row gt_right">194</td></tr>
     <tr><td headers="tags_all" class="gt_row gt_left">Indie</td>
 <td headers="price_categ" class="gt_row gt_left">Caro</td>
-<td headers="count" class="gt_row gt_right">134</td></tr>
-    <tr><td headers="tags_all" class="gt_row gt_left">Strategy</td>
+<td headers="count" class="gt_row gt_right">175</td></tr>
+    <tr><td headers="tags_all" class="gt_row gt_left">Adventure</td>
 <td headers="price_categ" class="gt_row gt_left">Caro</td>
-<td headers="count" class="gt_row gt_right">105</td></tr>
+<td headers="count" class="gt_row gt_right">157</td></tr>
     <tr><td headers="tags_all" class="gt_row gt_left">Multiplayer</td>
 <td headers="price_categ" class="gt_row gt_left">Caro</td>
-<td headers="count" class="gt_row gt_right">95</td></tr>
-    <tr><td headers="tags_all" class="gt_row gt_left">Atmospheric</td>
-<td headers="price_categ" class="gt_row gt_left">Caro</td>
-<td headers="count" class="gt_row gt_right">91</td></tr>
-    <tr><td headers="tags_all" class="gt_row gt_left">Simulation</td>
-<td headers="price_categ" class="gt_row gt_left">Caro</td>
-<td headers="count" class="gt_row gt_right">87</td></tr>
-    <tr><td headers="tags_all" class="gt_row gt_left">Casual</td>
-<td headers="price_categ" class="gt_row gt_left">Caro</td>
-<td headers="count" class="gt_row gt_right">84</td></tr>
+<td headers="count" class="gt_row gt_right">117</td></tr>
     <tr><td headers="tags_all" class="gt_row gt_left">RPG</td>
 <td headers="price_categ" class="gt_row gt_left">Caro</td>
-<td headers="count" class="gt_row gt_right">82</td></tr>
+<td headers="count" class="gt_row gt_right">115</td></tr>
+    <tr><td headers="tags_all" class="gt_row gt_left">Strategy</td>
+<td headers="price_categ" class="gt_row gt_left">Caro</td>
+<td headers="count" class="gt_row gt_right">108</td></tr>
+    <tr><td headers="tags_all" class="gt_row gt_left">Simulation</td>
+<td headers="price_categ" class="gt_row gt_left">Caro</td>
+<td headers="count" class="gt_row gt_right">103</td></tr>
+    <tr><td headers="tags_all" class="gt_row gt_left">Atmospheric</td>
+<td headers="price_categ" class="gt_row gt_left">Caro</td>
+<td headers="count" class="gt_row gt_right">99</td></tr>
+    <tr><td headers="tags_all" class="gt_row gt_left">Casual</td>
+<td headers="price_categ" class="gt_row gt_left">Caro</td>
+<td headers="count" class="gt_row gt_right">94</td></tr>
     <tr><td headers="tags_all" class="gt_row gt_left">2D</td>
 <td headers="price_categ" class="gt_row gt_left">Caro</td>
-<td headers="count" class="gt_row gt_right">77</td></tr>
+<td headers="count" class="gt_row gt_right">88</td></tr>
     <tr><td headers="tags_all" class="gt_row gt_left">Story Rich</td>
 <td headers="price_categ" class="gt_row gt_left">Caro</td>
-<td headers="count" class="gt_row gt_right">74</td></tr>
-    <tr><td headers="tags_all" class="gt_row gt_left">Anime</td>
-<td headers="price_categ" class="gt_row gt_left">Caro</td>
-<td headers="count" class="gt_row gt_right">69</td></tr>
+<td headers="count" class="gt_row gt_right">88</td></tr>
     <tr><td headers="tags_all" class="gt_row gt_left">Great Soundtrack</td>
 <td headers="price_categ" class="gt_row gt_left">Caro</td>
-<td headers="count" class="gt_row gt_right">60</td></tr>
+<td headers="count" class="gt_row gt_right">82</td></tr>
+    <tr><td headers="tags_all" class="gt_row gt_left">Anime</td>
+<td headers="price_categ" class="gt_row gt_left">Caro</td>
+<td headers="count" class="gt_row gt_right">79</td></tr>
     <tr><td headers="tags_all" class="gt_row gt_left">Co-op</td>
 <td headers="price_categ" class="gt_row gt_left">Caro</td>
-<td headers="count" class="gt_row gt_right">53</td></tr>
+<td headers="count" class="gt_row gt_right">77</td></tr>
     <tr><td headers="tags_all" class="gt_row gt_left">Open World</td>
 <td headers="price_categ" class="gt_row gt_left">Caro</td>
-<td headers="count" class="gt_row gt_right">53</td></tr>
+<td headers="count" class="gt_row gt_right">74</td></tr>
+    <tr><td headers="tags_all" class="gt_row gt_left">Difficult</td>
+<td headers="price_categ" class="gt_row gt_left">Caro</td>
+<td headers="count" class="gt_row gt_right">60</td></tr>
+    <tr><td headers="tags_all" class="gt_row gt_left">Funny</td>
+<td headers="price_categ" class="gt_row gt_left">Caro</td>
+<td headers="count" class="gt_row gt_right">60</td></tr>
+    <tr><td headers="tags_all" class="gt_row gt_left">Shooter</td>
+<td headers="price_categ" class="gt_row gt_left">Caro</td>
+<td headers="count" class="gt_row gt_right">58</td></tr>
     <tr><td headers="tags_all" class="gt_row gt_left">Fantasy</td>
 <td headers="price_categ" class="gt_row gt_left">Caro</td>
-<td headers="count" class="gt_row gt_right">49</td></tr>
-    <tr><td headers="tags_all" class="gt_row gt_left">Sci-fi</td>
-<td headers="price_categ" class="gt_row gt_left">Caro</td>
-<td headers="count" class="gt_row gt_right">47</td></tr>
-    <tr><td headers="tags_all" class="gt_row gt_left">Cute</td>
-<td headers="price_categ" class="gt_row gt_left">Caro</td>
-<td headers="count" class="gt_row gt_right">46</td></tr>
-    <tr><td headers="tags_all" class="gt_row gt_left">Exploration</td>
-<td headers="price_categ" class="gt_row gt_left">Caro</td>
-<td headers="count" class="gt_row gt_right">46</td></tr>
+<td headers="count" class="gt_row gt_right">56</td></tr>
   </tbody>
   
   
@@ -1192,13 +1192,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>O número de contagem por categoria já é consideravelmente maior, ou seja temos uma quantidade de jogos maior nessa faixa de preços.</p>
-<p>Os números de comparando com a população de jogos já é superior, com <strong>2.26%</strong> dos jogos, ou 296 jogos (compondo um total de 4755 tags) estão nesse segmento.</p>
+<p>Os números de comparando com a população de jogos já é superior, com <strong>2.34%</strong> dos jogos, ou 348 jogos (compondo um total de 5569 tags) estão nesse segmento.</p>
 </section>
 <section id="avaliando-os-jogos-medianos-medio" class="level3">
 <h3 class="anchored" data-anchor-id="avaliando-os-jogos-medianos-medio">Avaliando os jogos medianos (Medio)</h3>
 <div class="cell">
 
 </div>
+<p>Os jogos de preço médio, entre 20 e 40 dólares, vemos valores de média (66.27), mediana (22) e desvio padrão (127.66) novamente com acréscimo de variação.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Separando as 20 categorias que mais aparecem</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df_price_categ_med <span class="ot">&lt;-</span> df_price_categ <span class="sc">|&gt;</span> </span>
@@ -1209,34 +1210,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>df_price_categ_med</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            tags_all price_categ count
- 1:     Singleplayer       Medio  1174
- 2:        Adventure       Medio   868
- 3:            Indie       Medio   832
- 4:           Action       Medio   805
- 5:       Story Rich       Medio   485
- 6:           Casual       Medio   483
- 7:       Simulation       Medio   481
- 8:      Atmospheric       Medio   468
- 9:              RPG       Medio   465
-10:               2D       Medio   459
-11:      Multiplayer       Medio   443
-12:         Strategy       Medio   430
-13: Great Soundtrack       Medio   345
-14:            Anime       Medio   314
+ 1:     Singleplayer       Medio  1165
+ 2:            Indie       Medio   982
+ 3:        Adventure       Medio   909
+ 4:           Action       Medio   877
+ 5:      Multiplayer       Medio   534
+ 6:              RPG       Medio   523
+ 7:       Simulation       Medio   506
+ 8:           Casual       Medio   503
+ 9:      Atmospheric       Medio   497
+10:         Strategy       Medio   481
+11:       Story Rich       Medio   467
+12:               2D       Medio   427
+13: Great Soundtrack       Medio   402
+14:       Open World       Medio   369
 15:          Fantasy       Medio   306
-16:      Exploration       Medio   289
-17:       Open World       Medio   286
-18:           Puzzle       Medio   285
-19:     First-Person       Medio   279
-20:            Funny       Medio   269</code></pre>
+16:     First-Person       Medio   305
+17:            Anime       Medio   288
+18:           Puzzle       Medio   280
+19:            Co-op       Medio   278
+20:     Early Access       Medio   274</code></pre>
 </div>
 </div>
+<p>Os números de continua crescendo na faixa de preço continua crescendo, com <strong>11.46%</strong> dos jogos, ou 1708 jogos (compondo um total de 27567 tags) estão nesse segmento, um aumento de 10% na quantidade de jogos comparados à faixa de preço anterior.</p>
 </section>
 <section id="avaliando-os-jogos-baratos-barato" class="level3">
 <h3 class="anchored" data-anchor-id="avaliando-os-jogos-baratos-barato">Avaliando os jogos “baratos” (Barato)</h3>
 <div class="cell">
 
 </div>
+<p>Nos jogos de preço baixo, entre 10 e 20 dólares, a variação continua a aumentar temos de média 158.78, mediana 56 e desvio padrão 309.79. O que pode ser explicado pelo aumento do número de jogos e concentração de jogos em algumas categorias.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Separando as 20 categorias que mais aparecem</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>df_price_categ_low <span class="ot">&lt;-</span> df_price_categ <span class="sc">|&gt;</span> </span>
@@ -1247,34 +1250,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>df_price_categ_low</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>              tags_all price_categ count
- 1:       Singleplayer      Barato  3112
- 2:              Indie      Barato  2541
- 3:          Adventure      Barato  2263
- 4:             Action      Barato  2140
- 5:             Casual      Barato  1470
- 6:                 2D      Barato  1405
- 7:         Story Rich      Barato  1245
- 8:        Atmospheric      Barato  1224
- 9:         Simulation      Barato  1143
-10:                RPG      Barato  1141
-11:           Strategy      Barato  1115
-12:        Multiplayer      Barato  1110
-13:   Great Soundtrack      Barato   960
-14:             Puzzle      Barato   852
-15:              Anime      Barato   833
-16:              Funny      Barato   780
-17:            Fantasy      Barato   778
-18: Female Protagonist      Barato   766
-19:        Exploration      Barato   714
-20:               Cute      Barato   705</code></pre>
+ 1:       Singleplayer      Barato  2835
+ 2:              Indie      Barato  2578
+ 3:          Adventure      Barato  2229
+ 4:             Action      Barato  2102
+ 5:             Casual      Barato  1317
+ 6:                 2D      Barato  1206
+ 7:        Multiplayer      Barato  1196
+ 8:        Atmospheric      Barato  1188
+ 9:         Simulation      Barato  1168
+10:           Strategy      Barato  1143
+11:                RPG      Barato  1132
+12:         Story Rich      Barato  1128
+13:   Great Soundtrack      Barato   993
+14:             Puzzle      Barato   781
+15:              Funny      Barato   725
+16:       First-Person      Barato   720
+17:              Anime      Barato   706
+18:         Open World      Barato   679
+19: Female Protagonist      Barato   678
+20:            Fantasy      Barato   674</code></pre>
 </div>
 </div>
+<p>Os números de continua crescendo na faixa de preço continua crescendo, com <strong>28.28%</strong> dos jogos, ou 4215 jogos (compondo um total de 67166 tags) estão nesse segmento, ou seja, temos praticamente um terço dos jogos disponíveis na steam.</p>
 </section>
 <section id="avaliando-os-jogos-muito-baratos-muito-barato" class="level3">
 <h3 class="anchored" data-anchor-id="avaliando-os-jogos-muito-baratos-muito-barato">Avaliando os jogos “muito baratos” (Muito Barato)</h3>
 <div class="cell">
 
 </div>
+<p>Para os jogos de preço, de preços até 10 dólares, classificados como “Muito Baratos” temos variações ainda crescentes mas mais próximos da categoria anterior, a média é de201.94, mediana 71 e o desvio padrão 404.38.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Separando as 20 categorias que mais aparecem</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df_price_categ_verLow <span class="ot">&lt;-</span> df_price_categ <span class="sc">|&gt;</span> </span>
@@ -1284,35 +1289,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>df_price_categ_verLow</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>              tags_all  price_categ count
- 1:       Singleplayer Muito Barato  3775
- 2:              Indie Muito Barato  3639
- 3:          Adventure Muito Barato  2754
- 4:             Action Muito Barato  2605
- 5:             Casual Muito Barato  2401
- 6:                 2D Muito Barato  1853
- 7:        Atmospheric Muito Barato  1512
- 8:         Simulation Muito Barato  1487
- 9:           Strategy Muito Barato  1459
-10:                RPG Muito Barato  1365
-11:         Story Rich Muito Barato  1334
-12:             Puzzle Muito Barato  1322
-13:        Multiplayer Muito Barato  1241
-14:               Cute Muito Barato  1020
-15:   Great Soundtrack Muito Barato  1016
-16:              Anime Muito Barato   995
-17:              Funny Muito Barato   965
-18:     Pixel Graphics Muito Barato   961
-19:       First-Person Muito Barato   902
-20: Female Protagonist Muito Barato   856</code></pre>
+<pre><code>            tags_all  price_categ count
+ 1:            Indie Muito Barato  3739
+ 2:     Singleplayer Muito Barato  3613
+ 3:        Adventure Muito Barato  2753
+ 4:           Action Muito Barato  2742
+ 5:           Casual Muito Barato  2224
+ 6:               2D Muito Barato  1630
+ 7:         Strategy Muito Barato  1531
+ 8:       Simulation Muito Barato  1513
+ 9:      Atmospheric Muito Barato  1455
+10:              RPG Muito Barato  1389
+11:      Multiplayer Muito Barato  1374
+12:       Story Rich Muito Barato  1217
+13:           Puzzle Muito Barato  1206
+14: Great Soundtrack Muito Barato  1040
+15:     First-Person Muito Barato   943
+16:            Funny Muito Barato   907
+17:            Anime Muito Barato   893
+18:           Horror Muito Barato   861
+19:   Pixel Graphics Muito Barato   843
+20:          Fantasy Muito Barato   791</code></pre>
 </div>
 </div>
+<p>Os números na faixa de preço crescem um pouco mais, com <strong>39.59%</strong> dos jogos, ou 5900 jogos (compondo um total de 85824 tags) estão nesse segmento, ou seja, temos praticamente quase metade dos jogos aqui nesta categoria. Se pensarmos nas duas categorias de jogos mais baratas, temos quase 80% dos jogos da base de dados, sem dúvida onde os jogos estão mais concentrados.</p>
 </section>
 <section id="avaliando-os-jogos-gratuitos-free" class="level3">
 <h3 class="anchored" data-anchor-id="avaliando-os-jogos-gratuitos-free">Avaliando os jogos gratuitos (Free)</h3>
 <div class="cell">
 
 </div>
+<p>Na última categoria de preços, os jogos gratuitos, as variações diminuem. A média é de93.79, mediana 33 e o desvio padrão 182.39.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Separando as 20 categorias que mais aparecem</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>df_price_categ_free <span class="ot">&lt;-</span> df_price_categ <span class="sc">|&gt;</span> </span>
@@ -1322,30 +1329,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>df_price_categ_free</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>            tags_all price_categ count
- 1:     Singleplayer        Free   404
- 2:            Indie        Free   359
- 3:        Adventure        Free   306
- 4:           Action        Free   294
- 5:           Casual        Free   258
- 6:      Multiplayer        Free   199
- 7:              RPG        Free   190
- 8:         Strategy        Free   190
- 9:     Free to Play        Free   180
-10:               2D        Free   178
-11:       Simulation        Free   169
-12:      Atmospheric        Free   154
-13:       Story Rich        Free   134
-14:          Fantasy        Free   117
-15:           Puzzle        Free   116
-16: Great Soundtrack        Free   110
-17:            Funny        Free   105
-18:            Anime        Free    99
-19:     First-Person        Free    96
-20:            Co-op        Free    95</code></pre>
+<pre><code>          tags_all price_categ count
+ 1:          Indie        Free  1576
+ 2:   Singleplayer        Free  1514
+ 3:         Action        Free  1216
+ 4:      Adventure        Free  1163
+ 5:         Casual        Free  1071
+ 6:   Free to Play        Free   958
+ 7:    Multiplayer        Free   723
+ 8:             2D        Free   704
+ 9:            RPG        Free   690
+10:       Strategy        Free   662
+11:     Simulation        Free   629
+12:     Story Rich        Free   545
+13:    Atmospheric        Free   533
+14:          Anime        Free   469
+15:   Early Access        Free   455
+16:         Puzzle        Free   418
+17:   First-Person        Free   395
+18: Pixel Graphics        Free   391
+19:             3D        Free   387
+20:    Exploration        Free   373</code></pre>
 </div>
 </div>
+<p>Agora temos uma diminução condiserável do número de jogos, podendo ser causada tanto pelas filtragens, sendo uma delas a quantidade de avaliações e usuários por jogo, quanto a própria baixa popularidade desta categoria de preço, com <strong>18.19%</strong> dos jogos, ou 2710 jogos (compondo um total de 38923 tags) nesse segmento, ou seja, essa categoria tem números mais próximos da categoria “Caro” do que das de jogos médios e baratos.</p>
 </section>
+</section>
+<section id="resumo-das-faixas-de-preço" class="level2">
+<h2 class="anchored" data-anchor-id="resumo-das-faixas-de-preço">Resumo das faixas de preço</h2>
+<p>Um ponto interessante e que foi observado após a</p>
+<p>Como observamos, boa parte dos jogos da Steam, cerca de 80%, que se encaixaram nos nossos filtros de avaliações positivas e números de usuários, estão nas faixas de preço até $20 (de $0-10 como “Muito Baratos” e de $10-20 como “Baratos”), são jogos que exibem uma grande diversidade de categorias e classificações. É um comportamento interessante, porque por serem jogos baratos, contam com o preço como forma de atrair usuários, e podem pensar em estratégias diferentes de acertar um público alvo.</p>
 <section id="visualizando-top-categorias-por-faixa-de-preço" class="level3">
 <h3 class="anchored" data-anchor-id="visualizando-top-categorias-por-faixa-de-preço">Visualizando top categorias por faixa de preço</h3>
 <div class="cell">
@@ -1465,23 +1478,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">cols_hide</span>(<span class="at">columns =</span> <span class="fu">contains</span>(<span class="fu">c</span>(<span class="st">"tags"</span>, <span class="st">"prop"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div id="vtiigiuohb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#vtiigiuohb table {
+<div id="usmznkjzau" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#usmznkjzau table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#vtiigiuohb thead, #vtiigiuohb tbody, #vtiigiuohb tfoot, #vtiigiuohb tr, #vtiigiuohb td, #vtiigiuohb th {
+#usmznkjzau thead, #usmznkjzau tbody, #usmznkjzau tfoot, #usmznkjzau tr, #usmznkjzau td, #usmznkjzau th {
   border-style: none;
 }
 
-#vtiigiuohb p {
+#usmznkjzau p {
   margin: 0;
   padding: 0;
 }
 
-#vtiigiuohb .gt_table {
+#usmznkjzau .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1507,12 +1520,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-left-color: #D3D3D3;
 }
 
-#vtiigiuohb .gt_caption {
+#usmznkjzau .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#vtiigiuohb .gt_title {
+#usmznkjzau .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1524,7 +1537,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-bottom-width: 0;
 }
 
-#vtiigiuohb .gt_subtitle {
+#usmznkjzau .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1536,7 +1549,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-top-width: 0;
 }
 
-#vtiigiuohb .gt_heading {
+#usmznkjzau .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1548,13 +1561,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-color: #D3D3D3;
 }
 
-#vtiigiuohb .gt_bottom_border {
+#usmznkjzau .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#vtiigiuohb .gt_col_headings {
+#usmznkjzau .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1569,7 +1582,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-color: #D3D3D3;
 }
 
-#vtiigiuohb .gt_col_heading {
+#usmznkjzau .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1589,7 +1602,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   overflow-x: hidden;
 }
 
-#vtiigiuohb .gt_column_spanner_outer {
+#usmznkjzau .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1601,15 +1614,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 4px;
 }
 
-#vtiigiuohb .gt_column_spanner_outer:first-child {
+#usmznkjzau .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#vtiigiuohb .gt_column_spanner_outer:last-child {
+#usmznkjzau .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#vtiigiuohb .gt_column_spanner {
+#usmznkjzau .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1621,11 +1634,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   width: 100%;
 }
 
-#vtiigiuohb .gt_spanner_row {
+#usmznkjzau .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#vtiigiuohb .gt_group_heading {
+#usmznkjzau .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1651,7 +1664,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   text-align: left;
 }
 
-#vtiigiuohb .gt_empty_group_heading {
+#usmznkjzau .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1666,15 +1679,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   vertical-align: middle;
 }
 
-#vtiigiuohb .gt_from_md > :first-child {
+#usmznkjzau .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#vtiigiuohb .gt_from_md > :last-child {
+#usmznkjzau .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#vtiigiuohb .gt_row {
+#usmznkjzau .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1693,7 +1706,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   overflow-x: hidden;
 }
 
-#vtiigiuohb .gt_stub {
+#usmznkjzau .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1706,7 +1719,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-#vtiigiuohb .gt_stub_row_group {
+#usmznkjzau .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1720,15 +1733,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   vertical-align: top;
 }
 
-#vtiigiuohb .gt_row_group_first td {
+#usmznkjzau .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#vtiigiuohb .gt_row_group_first th {
+#usmznkjzau .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#vtiigiuohb .gt_summary_row {
+#usmznkjzau .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1738,16 +1751,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-#vtiigiuohb .gt_first_summary_row {
+#usmznkjzau .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#vtiigiuohb .gt_first_summary_row.thick {
+#usmznkjzau .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#vtiigiuohb .gt_last_summary_row {
+#usmznkjzau .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1757,7 +1770,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-bottom-color: #D3D3D3;
 }
 
-#vtiigiuohb .gt_grand_summary_row {
+#usmznkjzau .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1767,7 +1780,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-#vtiigiuohb .gt_first_grand_summary_row {
+#usmznkjzau .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1777,7 +1790,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-top-color: #D3D3D3;
 }
 
-#vtiigiuohb .gt_last_grand_summary_row_top {
+#usmznkjzau .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1787,11 +1800,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-bottom-color: #D3D3D3;
 }
 
-#vtiigiuohb .gt_striped {
+#usmznkjzau .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#vtiigiuohb .gt_table_body {
+#usmznkjzau .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1800,7 +1813,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-bottom-color: #D3D3D3;
 }
 
-#vtiigiuohb .gt_footnotes {
+#usmznkjzau .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1814,7 +1827,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-color: #D3D3D3;
 }
 
-#vtiigiuohb .gt_footnote {
+#usmznkjzau .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1823,7 +1836,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-#vtiigiuohb .gt_sourcenotes {
+#usmznkjzau .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1837,7 +1850,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-color: #D3D3D3;
 }
 
-#vtiigiuohb .gt_sourcenote {
+#usmznkjzau .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1845,63 +1858,63 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-#vtiigiuohb .gt_left {
+#usmznkjzau .gt_left {
   text-align: left;
 }
 
-#vtiigiuohb .gt_center {
+#usmznkjzau .gt_center {
   text-align: center;
 }
 
-#vtiigiuohb .gt_right {
+#usmznkjzau .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#vtiigiuohb .gt_font_normal {
+#usmznkjzau .gt_font_normal {
   font-weight: normal;
 }
 
-#vtiigiuohb .gt_font_bold {
+#usmznkjzau .gt_font_bold {
   font-weight: bold;
 }
 
-#vtiigiuohb .gt_font_italic {
+#usmznkjzau .gt_font_italic {
   font-style: italic;
 }
 
-#vtiigiuohb .gt_super {
+#usmznkjzau .gt_super {
   font-size: 65%;
 }
 
-#vtiigiuohb .gt_footnote_marks {
+#usmznkjzau .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#vtiigiuohb .gt_asterisk {
+#usmznkjzau .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#vtiigiuohb .gt_indent_1 {
+#usmznkjzau .gt_indent_1 {
   text-indent: 5px;
 }
 
-#vtiigiuohb .gt_indent_2 {
+#usmznkjzau .gt_indent_2 {
   text-indent: 10px;
 }
 
-#vtiigiuohb .gt_indent_3 {
+#usmznkjzau .gt_indent_3 {
   text-indent: 15px;
 }
 
-#vtiigiuohb .gt_indent_4 {
+#usmznkjzau .gt_indent_4 {
   text-indent: 20px;
 }
 
-#vtiigiuohb .gt_indent_5 {
+#usmznkjzau .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1918,126 +1931,126 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td headers="Free" class="gt_row gt_right" style="background-color: #2A7DC0; color: #FFFFFF;">Singleplayer</td>
-<td headers="Muito Barato Price" class="gt_row gt_right" style="background-color: #2A7DC0; color: #FFFFFF;">Singleplayer</td>
+    <tr><td headers="Free" class="gt_row gt_right" style="background-color: #2A7DC0; color: #FFFFFF;">Indie</td>
+<td headers="Muito Barato Price" class="gt_row gt_right" style="background-color: #2A7DC0; color: #FFFFFF;">Indie</td>
 <td headers="Barato Price" class="gt_row gt_right" style="background-color: #2A7DC0; color: #FFFFFF;">Singleplayer</td>
 <td headers="Medio Price" class="gt_row gt_right" style="background-color: #2A7DC0; color: #FFFFFF;">Singleplayer</td>
 <td headers="Caro" class="gt_row gt_right" style="background-color: #2A7DC0; color: #FFFFFF;">Singleplayer</td>
-<td headers="Muito Caro" class="gt_row gt_right" style="background-color: #2A7DC0; color: #FFFFFF;">Singleplayer</td></tr>
-    <tr><td headers="Free" class="gt_row gt_right" style="background-color: #508CC6; color: #FFFFFF;">Indie</td>
-<td headers="Muito Barato Price" class="gt_row gt_right" style="background-color: #3882C2; color: #FFFFFF;">Indie</td>
-<td headers="Barato Price" class="gt_row gt_right" style="background-color: #6295CA; color: #FFFFFF;">Indie</td>
-<td headers="Medio Price" class="gt_row gt_right" style="background-color: #74A0CE; color: #FFFFFF;">Adventure</td>
-<td headers="Caro" class="gt_row gt_right" style="background-color: #709DCD; color: #FFFFFF;">Action</td>
-<td headers="Muito Caro" class="gt_row gt_right" style="background-color: #4988C5; color: #FFFFFF;">Indie</td></tr>
-    <tr><td headers="Free" class="gt_row gt_right" style="background-color: #719ECD; color: #FFFFFF;">Adventure</td>
-<td headers="Muito Barato Price" class="gt_row gt_right" style="background-color: #76A1CE; color: #FFFFFF;">Adventure</td>
-<td headers="Barato Price" class="gt_row gt_right" style="background-color: #77A1CF; color: #FFFFFF;">Adventure</td>
-<td headers="Medio Price" class="gt_row gt_right" style="background-color: #7BA4D0; color: #FFFFFF;">Indie</td>
-<td headers="Caro" class="gt_row gt_right" style="background-color: #82A8D1; color: #000000;">Adventure</td>
-<td headers="Muito Caro" class="gt_row gt_right" style="background-color: #98B7D7; color: #000000;">Simulation</td></tr>
-    <tr><td headers="Free" class="gt_row gt_right" style="background-color: #77A2CF; color: #FFFFFF;">Action</td>
-<td headers="Muito Barato Price" class="gt_row gt_right" style="background-color: #7FA7D1; color: #000000;">Action</td>
-<td headers="Barato Price" class="gt_row gt_right" style="background-color: #7FA7D1; color: #000000;">Action</td>
-<td headers="Medio Price" class="gt_row gt_right" style="background-color: #80A7D1; color: #000000;">Action</td>
-<td headers="Caro" class="gt_row gt_right" style="background-color: #82A8D1; color: #000000;">Indie</td>
-<td headers="Muito Caro" class="gt_row gt_right" style="background-color: #98B7D7; color: #000000;">Strategy</td></tr>
-    <tr><td headers="Free" class="gt_row gt_right" style="background-color: #8BAED3; color: #000000;">Casual</td>
-<td headers="Muito Barato Price" class="gt_row gt_right" style="background-color: #8AAED3; color: #000000;">Casual</td>
-<td headers="Barato Price" class="gt_row gt_right" style="background-color: #ABC5DC; color: #000000;">Casual</td>
-<td headers="Medio Price" class="gt_row gt_right" style="background-color: #B7CEDF; color: #000000;">Story Rich</td>
-<td headers="Caro" class="gt_row gt_right" style="background-color: #A0BDD9; color: #000000;">Strategy</td>
-<td headers="Muito Caro" class="gt_row gt_right" style="background-color: #A9C3DB; color: #000000;">Action</td></tr>
-    <tr><td headers="Free" class="gt_row gt_right" style="background-color: #A8C3DB; color: #000000;">Multiplayer</td>
-<td headers="Muito Barato Price" class="gt_row gt_right" style="background-color: #A7C2DB; color: #000000;">2D</td>
-<td headers="Barato Price" class="gt_row gt_right" style="background-color: #AFC8DD; color: #000000;">2D</td>
-<td headers="Medio Price" class="gt_row gt_right" style="background-color: #B7CEDF; color: #000000;">Casual</td>
-<td headers="Caro" class="gt_row gt_right" style="background-color: #AAC4DB; color: #000000;">Multiplayer</td>
-<td headers="Muito Caro" class="gt_row gt_right" style="background-color: #B9D0DF; color: #000000;">3D</td></tr>
-    <tr><td headers="Free" class="gt_row gt_right" style="background-color: #ADC6DC; color: #000000;">RPG</td>
+<td headers="Muito Caro" class="gt_row gt_right" style="background-color: #2A7DC0; color: #FFFFFF;">Indie</td></tr>
+    <tr><td headers="Free" class="gt_row gt_right" style="background-color: #3A82C2; color: #FFFFFF;">Singleplayer</td>
+<td headers="Muito Barato Price" class="gt_row gt_right" style="background-color: #3881C2; color: #FFFFFF;">Singleplayer</td>
+<td headers="Barato Price" class="gt_row gt_right" style="background-color: #4A89C5; color: #FFFFFF;">Indie</td>
+<td headers="Medio Price" class="gt_row gt_right" style="background-color: #5C92C9; color: #FFFFFF;">Indie</td>
+<td headers="Caro" class="gt_row gt_right" style="background-color: #5E93C9; color: #FFFFFF;">Action</td>
+<td headers="Muito Caro" class="gt_row gt_right" style="background-color: #4486C4; color: #FFFFFF;">Singleplayer</td></tr>
+    <tr><td headers="Free" class="gt_row gt_right" style="background-color: #6E9CCC; color: #FFFFFF;">Action</td>
+<td headers="Muito Barato Price" class="gt_row gt_right" style="background-color: #749FCE; color: #FFFFFF;">Adventure</td>
+<td headers="Barato Price" class="gt_row gt_right" style="background-color: #6A9ACC; color: #FFFFFF;">Adventure</td>
+<td headers="Medio Price" class="gt_row gt_right" style="background-color: #6C9ACC; color: #FFFFFF;">Adventure</td>
+<td headers="Caro" class="gt_row gt_right" style="background-color: #719ECD; color: #FFFFFF;">Indie</td>
+<td headers="Muito Caro" class="gt_row gt_right" style="background-color: #88ACD3; color: #000000;">Adventure</td></tr>
+    <tr><td headers="Free" class="gt_row gt_right" style="background-color: #75A0CE; color: #FFFFFF;">Adventure</td>
+<td headers="Muito Barato Price" class="gt_row gt_right" style="background-color: #75A0CE; color: #FFFFFF;">Action</td>
+<td headers="Barato Price" class="gt_row gt_right" style="background-color: #75A0CE; color: #FFFFFF;">Action</td>
+<td headers="Medio Price" class="gt_row gt_right" style="background-color: #729ECD; color: #FFFFFF;">Action</td>
+<td headers="Caro" class="gt_row gt_right" style="background-color: #83A9D1; color: #000000;">Adventure</td>
+<td headers="Muito Caro" class="gt_row gt_right" style="background-color: #96B6D6; color: #000000;">Action</td></tr>
+    <tr><td headers="Free" class="gt_row gt_right" style="background-color: #82A9D1; color: #000000;">Casual</td>
+<td headers="Muito Barato Price" class="gt_row gt_right" style="background-color: #91B3D5; color: #000000;">Casual</td>
+<td headers="Barato Price" class="gt_row gt_right" style="background-color: #AEC7DD; color: #000000;">Casual</td>
+<td headers="Medio Price" class="gt_row gt_right" style="background-color: #AFC8DD; color: #000000;">Multiplayer</td>
+<td headers="Caro" class="gt_row gt_right" style="background-color: #A6C2DB; color: #000000;">Multiplayer</td>
+<td headers="Muito Caro" class="gt_row gt_right" style="background-color: #96B6D6; color: #000000;">Female Protagonist</td></tr>
+    <tr><td headers="Free" class="gt_row gt_right" style="background-color: #91B3D5; color: #000000;">Free to Play</td>
+<td headers="Muito Barato Price" class="gt_row gt_right" style="background-color: #B0C9DD; color: #000000;">2D</td>
+<td headers="Barato Price" class="gt_row gt_right" style="background-color: #B6CDDF; color: #000000;">2D</td>
+<td headers="Medio Price" class="gt_row gt_right" style="background-color: #B1C9DD; color: #000000;">RPG</td>
+<td headers="Caro" class="gt_row gt_right" style="background-color: #A8C3DB; color: #000000;">RPG</td>
+<td headers="Muito Caro" class="gt_row gt_right" style="background-color: #96B6D6; color: #000000;">Story Rich</td></tr>
+    <tr><td headers="Free" class="gt_row gt_right" style="background-color: #AFC8DD; color: #000000;">Multiplayer</td>
+<td headers="Muito Barato Price" class="gt_row gt_right" style="background-color: #B5CCDE; color: #000000;">Strategy</td>
+<td headers="Barato Price" class="gt_row gt_right" style="background-color: #B7CEDF; color: #000000;">Multiplayer</td>
+<td headers="Medio Price" class="gt_row gt_right" style="background-color: #B4CBDE; color: #000000;">Simulation</td>
+<td headers="Caro" class="gt_row gt_right" style="background-color: #AEC7DD; color: #000000;">Strategy</td>
+<td headers="Muito Caro" class="gt_row gt_right" style="background-color: #A4C0DA; color: #000000;">2D</td></tr>
+    <tr><td headers="Free" class="gt_row gt_right" style="background-color: #B2CADD; color: #000000;">2D</td>
+<td headers="Muito Barato Price" class="gt_row gt_right" style="background-color: #B6CDDF; color: #000000;">Simulation</td>
+<td headers="Barato Price" class="gt_row gt_right" style="background-color: #B7CEDF; color: #000000;">Atmospheric</td>
+<td headers="Medio Price" class="gt_row gt_right" style="background-color: #B4CCDE; color: #000000;">Casual</td>
+<td headers="Caro" class="gt_row gt_right" style="background-color: #B2CBDE; color: #000000;">Simulation</td>
+<td headers="Muito Caro" class="gt_row gt_right" style="background-color: #A4C0DA; color: #000000;">Atmospheric</td></tr>
+    <tr><td headers="Free" class="gt_row gt_right" style="background-color: #B3CBDE; color: #000000;">RPG</td>
 <td headers="Muito Barato Price" class="gt_row gt_right" style="background-color: #B9CFDF; color: #000000;">Atmospheric</td>
-<td headers="Barato Price" class="gt_row gt_right" style="background-color: #B9D0DF; color: #000000;">Story Rich</td>
-<td headers="Medio Price" class="gt_row gt_right" style="background-color: #B7CEDF; color: #000000;">Simulation</td>
-<td headers="Caro" class="gt_row gt_right" style="background-color: #AEC7DC; color: #000000;">Atmospheric</td>
-<td headers="Muito Caro" class="gt_row gt_right" style="background-color: #B9D0DF; color: #000000;">Multiplayer</td></tr>
-    <tr><td headers="Free" class="gt_row gt_right" style="background-color: #ADC6DC; color: #000000;">Strategy</td>
-<td headers="Muito Barato Price" class="gt_row gt_right" style="background-color: #BAD0E0; color: #000000;">Simulation</td>
-<td headers="Barato Price" class="gt_row gt_right" style="background-color: #BAD1E0; color: #000000;">Atmospheric</td>
-<td headers="Medio Price" class="gt_row gt_right" style="background-color: #BAD0E0; color: #000000;">Atmospheric</td>
-<td headers="Caro" class="gt_row gt_right" style="background-color: #B2CADE; color: #000000;">Simulation</td>
-<td headers="Muito Caro" class="gt_row gt_right" style="background-color: #B9D0DF; color: #000000;">RPG</td></tr>
-    <tr><td headers="Free" class="gt_row gt_right" style="background-color: #B1CADD; color: #000000;">Free to Play</td>
-<td headers="Muito Barato Price" class="gt_row gt_right" style="background-color: #BCD2E0; color: #000000;">Strategy</td>
-<td headers="Barato Price" class="gt_row gt_right" style="background-color: #BFD4E1; color: #000000;">Simulation</td>
-<td headers="Medio Price" class="gt_row gt_right" style="background-color: #BAD0E0; color: #000000;">RPG</td>
-<td headers="Caro" class="gt_row gt_right" style="background-color: #B5CCDE; color: #000000;">Casual</td>
-<td headers="Muito Caro" class="gt_row gt_right" style="background-color: #CADCE4; color: #000000;">2D</td></tr>
-    <tr><td headers="Free" class="gt_row gt_right" style="background-color: #B2CBDE; color: #000000;">2D</td>
-<td headers="Muito Barato Price" class="gt_row gt_right" style="background-color: #C0D5E1; color: #000000;">RPG</td>
-<td headers="Barato Price" class="gt_row gt_right" style="background-color: #BFD4E1; color: #000000;">RPG</td>
-<td headers="Medio Price" class="gt_row gt_right" style="background-color: #BBD1E0; color: #000000;">2D</td>
-<td headers="Caro" class="gt_row gt_right" style="background-color: #B7CEDF; color: #000000;">RPG</td>
-<td headers="Muito Caro" class="gt_row gt_right" style="background-color: #CADCE4; color: #000000;">Adventure</td></tr>
-    <tr><td headers="Free" class="gt_row gt_right" style="background-color: #B7CEDF; color: #000000;">Simulation</td>
-<td headers="Muito Barato Price" class="gt_row gt_right" style="background-color: #C2D6E2; color: #000000;">Story Rich</td>
-<td headers="Barato Price" class="gt_row gt_right" style="background-color: #C1D6E1; color: #000000;">Strategy</td>
-<td headers="Medio Price" class="gt_row gt_right" style="background-color: #BED3E1; color: #000000;">Multiplayer</td>
-<td headers="Caro" class="gt_row gt_right" style="background-color: #BCD2E0; color: #000000;">2D</td>
-<td headers="Muito Caro" class="gt_row gt_right" style="background-color: #CADCE4; color: #000000;">Atmospheric</td></tr>
-    <tr><td headers="Free" class="gt_row gt_right" style="background-color: #BED3E1; color: #000000;">Atmospheric</td>
-<td headers="Muito Barato Price" class="gt_row gt_right" style="background-color: #C3D7E2; color: #000000;">Puzzle</td>
-<td headers="Barato Price" class="gt_row gt_right" style="background-color: #C1D6E2; color: #000000;">Multiplayer</td>
-<td headers="Medio Price" class="gt_row gt_right" style="background-color: #C0D5E1; color: #000000;">Strategy</td>
+<td headers="Barato Price" class="gt_row gt_right" style="background-color: #B8CFDF; color: #000000;">Simulation</td>
+<td headers="Medio Price" class="gt_row gt_right" style="background-color: #B5CDDE; color: #000000;">Atmospheric</td>
+<td headers="Caro" class="gt_row gt_right" style="background-color: #B6CDDF; color: #000000;">Atmospheric</td>
+<td headers="Muito Caro" class="gt_row gt_right" style="background-color: #B2CADD; color: #000000;">Great Soundtrack</td></tr>
+    <tr><td headers="Free" class="gt_row gt_right" style="background-color: #B7CEDF; color: #000000;">Strategy</td>
+<td headers="Muito Barato Price" class="gt_row gt_right" style="background-color: #BCD2E0; color: #000000;">RPG</td>
+<td headers="Barato Price" class="gt_row gt_right" style="background-color: #BAD0E0; color: #000000;">Strategy</td>
+<td headers="Medio Price" class="gt_row gt_right" style="background-color: #B8CFDF; color: #000000;">Strategy</td>
+<td headers="Caro" class="gt_row gt_right" style="background-color: #BAD0E0; color: #000000;">Casual</td>
+<td headers="Muito Caro" class="gt_row gt_right" style="background-color: #B2CADD; color: #000000;">Horror</td></tr>
+    <tr><td headers="Free" class="gt_row gt_right" style="background-color: #BBD1E0; color: #000000;">Simulation</td>
+<td headers="Muito Barato Price" class="gt_row gt_right" style="background-color: #BDD2E0; color: #000000;">Multiplayer</td>
+<td headers="Barato Price" class="gt_row gt_right" style="background-color: #BBD1E0; color: #000000;">RPG</td>
+<td headers="Medio Price" class="gt_row gt_right" style="background-color: #BAD0E0; color: #000000;">Story Rich</td>
+<td headers="Caro" class="gt_row gt_right" style="background-color: #BFD4E1; color: #000000;">2D</td>
+<td headers="Muito Caro" class="gt_row gt_right" style="background-color: #B2CADD; color: #000000;">Simulation</td></tr>
+    <tr><td headers="Free" class="gt_row gt_right" style="background-color: #C5D9E3; color: #000000;">Story Rich</td>
+<td headers="Muito Barato Price" class="gt_row gt_right" style="background-color: #C5D8E2; color: #000000;">Story Rich</td>
+<td headers="Barato Price" class="gt_row gt_right" style="background-color: #BBD1E0; color: #000000;">Story Rich</td>
+<td headers="Medio Price" class="gt_row gt_right" style="background-color: #C1D5E1; color: #000000;">2D</td>
 <td headers="Caro" class="gt_row gt_right" style="background-color: #BFD4E1; color: #000000;">Story Rich</td>
-<td headers="Muito Caro" class="gt_row gt_right" style="background-color: #CADCE4; color: #000000;">Exploration</td></tr>
-    <tr><td headers="Free" class="gt_row gt_right" style="background-color: #C8DBE3; color: #000000;">Story Rich</td>
-<td headers="Muito Barato Price" class="gt_row gt_right" style="background-color: #C7DAE3; color: #000000;">Multiplayer</td>
-<td headers="Barato Price" class="gt_row gt_right" style="background-color: #CBDDE4; color: #000000;">Great Soundtrack</td>
-<td headers="Medio Price" class="gt_row gt_right" style="background-color: #CEDFE5; color: #000000;">Great Soundtrack</td>
-<td headers="Caro" class="gt_row gt_right" style="background-color: #C4D8E2; color: #000000;">Anime</td>
-<td headers="Muito Caro" class="gt_row gt_right" style="background-color: #CADCE4; color: #000000;">Replay Value</td></tr>
-    <tr><td headers="Free" class="gt_row gt_right" style="background-color: #D0E1E5; color: #000000;">Fantasy</td>
-<td headers="Muito Barato Price" class="gt_row gt_right" style="background-color: #D2E3E6; color: #000000;">Cute</td>
-<td headers="Barato Price" class="gt_row gt_right" style="background-color: #D1E2E6; color: #000000;">Puzzle</td>
-<td headers="Medio Price" class="gt_row gt_right" style="background-color: #D3E3E6; color: #000000;">Anime</td>
-<td headers="Caro" class="gt_row gt_right" style="background-color: #CCDEE4; color: #000000;">Great Soundtrack</td>
-<td headers="Muito Caro" class="gt_row gt_right" style="background-color: #CADCE4; color: #000000;">Sandbox</td></tr>
-    <tr><td headers="Free" class="gt_row gt_right" style="background-color: #D0E1E5; color: #000000;">Puzzle</td>
-<td headers="Muito Barato Price" class="gt_row gt_right" style="background-color: #D2E3E6; color: #000000;">Great Soundtrack</td>
-<td headers="Barato Price" class="gt_row gt_right" style="background-color: #D2E3E6; color: #000000;">Anime</td>
-<td headers="Medio Price" class="gt_row gt_right" style="background-color: #D4E4E6; color: #000000;">Fantasy</td>
-<td headers="Caro" class="gt_row gt_right" style="background-color: #D3E4E6; color: #000000;">Co-op</td>
-<td headers="Muito Caro" class="gt_row gt_right" style="background-color: #DAE9E8; color: #000000;">Building</td></tr>
-    <tr><td headers="Free" class="gt_row gt_right" style="background-color: #D3E3E6; color: #000000;">Great Soundtrack</td>
-<td headers="Muito Barato Price" class="gt_row gt_right" style="background-color: #D3E4E6; color: #000000;">Anime</td>
-<td headers="Barato Price" class="gt_row gt_right" style="background-color: #D5E5E7; color: #000000;">Funny</td>
-<td headers="Medio Price" class="gt_row gt_right" style="background-color: #D7E6E7; color: #000000;">Exploration</td>
-<td headers="Caro" class="gt_row gt_right" style="background-color: #D3E4E6; color: #000000;">Open World</td>
-<td headers="Muito Caro" class="gt_row gt_right" style="background-color: #DAE9E8; color: #000000;">Colorful</td></tr>
-    <tr><td headers="Free" class="gt_row gt_right" style="background-color: #D5E5E7; color: #000000;">Funny</td>
-<td headers="Muito Barato Price" class="gt_row gt_right" style="background-color: #D5E5E7; color: #000000;">Funny</td>
-<td headers="Barato Price" class="gt_row gt_right" style="background-color: #D6E5E7; color: #000000;">Fantasy</td>
-<td headers="Medio Price" class="gt_row gt_right" style="background-color: #D7E7E7; color: #000000;">Open World</td>
-<td headers="Caro" class="gt_row gt_right" style="background-color: #D7E7E7; color: #000000;">Fantasy</td>
-<td headers="Muito Caro" class="gt_row gt_right" style="background-color: #DAE9E8; color: #000000;">Difficult</td></tr>
-    <tr><td headers="Free" class="gt_row gt_right" style="background-color: #D8E7E7; color: #000000;">Anime</td>
-<td headers="Muito Barato Price" class="gt_row gt_right" style="background-color: #D5E5E7; color: #000000;">Pixel Graphics</td>
-<td headers="Barato Price" class="gt_row gt_right" style="background-color: #D6E6E7; color: #000000;">Female Protagonist</td>
-<td headers="Medio Price" class="gt_row gt_right" style="background-color: #D7E7E7; color: #000000;">Puzzle</td>
-<td headers="Caro" class="gt_row gt_right" style="background-color: #D9E8E8; color: #000000;">Sci-fi</td>
-<td headers="Muito Caro" class="gt_row gt_right" style="background-color: #DAE9E8; color: #000000;">Early Access</td></tr>
-    <tr><td headers="Free" class="gt_row gt_right" style="background-color: #D9E9E8; color: #000000;">First-Person</td>
-<td headers="Muito Barato Price" class="gt_row gt_right" style="background-color: #D8E7E7; color: #000000;">First-Person</td>
-<td headers="Barato Price" class="gt_row gt_right" style="background-color: #D9E8E8; color: #000000;">Exploration</td>
-<td headers="Medio Price" class="gt_row gt_right" style="background-color: #D8E8E8; color: #000000;">First-Person</td>
-<td headers="Caro" class="gt_row gt_right" style="background-color: #DAE9E8; color: #000000;">Cute</td>
-<td headers="Muito Caro" class="gt_row gt_right" style="background-color: #DAE9E8; color: #000000;">Open World</td></tr>
-    <tr><td headers="Free" class="gt_row gt_right" style="background-color: #DAE9E8; color: #000000;">Co-op</td>
-<td headers="Muito Barato Price" class="gt_row gt_right" style="background-color: #DAE9E8; color: #000000;">Female Protagonist</td>
-<td headers="Barato Price" class="gt_row gt_right" style="background-color: #DAE9E8; color: #000000;">Cute</td>
-<td headers="Medio Price" class="gt_row gt_right" style="background-color: #DAE9E8; color: #000000;">Funny</td>
-<td headers="Caro" class="gt_row gt_right" style="background-color: #DAE9E8; color: #000000;">Exploration</td>
-<td headers="Muito Caro" class="gt_row gt_right" style="background-color: #DAE9E8; color: #000000;">Pixel Graphics</td></tr>
+<td headers="Muito Caro" class="gt_row gt_right" style="background-color: #BFD4E1; color: #000000;">Anime</td></tr>
+    <tr><td headers="Free" class="gt_row gt_right" style="background-color: #C7DAE3; color: #000000;">Atmospheric</td>
+<td headers="Muito Barato Price" class="gt_row gt_right" style="background-color: #C5D9E3; color: #000000;">Puzzle</td>
+<td headers="Barato Price" class="gt_row gt_right" style="background-color: #C5D8E2; color: #000000;">Great Soundtrack</td>
+<td headers="Medio Price" class="gt_row gt_right" style="background-color: #C5D9E2; color: #000000;">Great Soundtrack</td>
+<td headers="Caro" class="gt_row gt_right" style="background-color: #C4D8E2; color: #000000;">Great Soundtrack</td>
+<td headers="Muito Caro" class="gt_row gt_right" style="background-color: #BFD4E1; color: #000000;">Multiplayer</td></tr>
+    <tr><td headers="Free" class="gt_row gt_right" style="background-color: #CEE0E5; color: #000000;">Anime</td>
+<td headers="Muito Barato Price" class="gt_row gt_right" style="background-color: #CEDFE5; color: #000000;">Great Soundtrack</td>
+<td headers="Barato Price" class="gt_row gt_right" style="background-color: #D3E3E6; color: #000000;">Puzzle</td>
+<td headers="Medio Price" class="gt_row gt_right" style="background-color: #CADDE4; color: #000000;">Open World</td>
+<td headers="Caro" class="gt_row gt_right" style="background-color: #C7DAE3; color: #000000;">Anime</td>
+<td headers="Muito Caro" class="gt_row gt_right" style="background-color: #BFD4E1; color: #000000;">Pixel Graphics</td></tr>
+    <tr><td headers="Free" class="gt_row gt_right" style="background-color: #D0E1E5; color: #000000;">Early Access</td>
+<td headers="Muito Barato Price" class="gt_row gt_right" style="background-color: #D2E3E6; color: #000000;">First-Person</td>
+<td headers="Barato Price" class="gt_row gt_right" style="background-color: #D7E6E7; color: #000000;">Funny</td>
+<td headers="Medio Price" class="gt_row gt_right" style="background-color: #D5E5E7; color: #000000;">Fantasy</td>
+<td headers="Caro" class="gt_row gt_right" style="background-color: #C8DBE3; color: #000000;">Co-op</td>
+<td headers="Muito Caro" class="gt_row gt_right" style="background-color: #BFD4E1; color: #000000;">Strategy</td></tr>
+    <tr><td headers="Free" class="gt_row gt_right" style="background-color: #D5E5E7; color: #000000;">Puzzle</td>
+<td headers="Muito Barato Price" class="gt_row gt_right" style="background-color: #D4E4E6; color: #000000;">Funny</td>
+<td headers="Barato Price" class="gt_row gt_right" style="background-color: #D7E7E7; color: #000000;">First-Person</td>
+<td headers="Medio Price" class="gt_row gt_right" style="background-color: #D5E5E7; color: #000000;">First-Person</td>
+<td headers="Caro" class="gt_row gt_right" style="background-color: #CBDDE4; color: #000000;">Open World</td>
+<td headers="Muito Caro" class="gt_row gt_right" style="background-color: #CDDFE5; color: #000000;">Casual</td></tr>
+    <tr><td headers="Free" class="gt_row gt_right" style="background-color: #D7E7E7; color: #000000;">First-Person</td>
+<td headers="Muito Barato Price" class="gt_row gt_right" style="background-color: #D5E5E7; color: #000000;">Anime</td>
+<td headers="Barato Price" class="gt_row gt_right" style="background-color: #D8E7E7; color: #000000;">Anime</td>
+<td headers="Medio Price" class="gt_row gt_right" style="background-color: #D8E7E7; color: #000000;">Anime</td>
+<td headers="Caro" class="gt_row gt_right" style="background-color: #D7E6E7; color: #000000;">Difficult</td>
+<td headers="Muito Caro" class="gt_row gt_right" style="background-color: #CDDFE5; color: #000000;">Controller</td></tr>
+    <tr><td headers="Free" class="gt_row gt_right" style="background-color: #D8E7E7; color: #000000;">Pixel Graphics</td>
+<td headers="Muito Barato Price" class="gt_row gt_right" style="background-color: #D6E6E7; color: #000000;">Horror</td>
+<td headers="Barato Price" class="gt_row gt_right" style="background-color: #DAE9E8; color: #000000;">Open World</td>
+<td headers="Medio Price" class="gt_row gt_right" style="background-color: #D9E8E8; color: #000000;">Puzzle</td>
+<td headers="Caro" class="gt_row gt_right" style="background-color: #D7E6E7; color: #000000;">Funny</td>
+<td headers="Muito Caro" class="gt_row gt_right" style="background-color: #CDDFE5; color: #000000;">Fantasy</td></tr>
+    <tr><td headers="Free" class="gt_row gt_right" style="background-color: #D8E8E8; color: #000000;">3D</td>
+<td headers="Muito Barato Price" class="gt_row gt_right" style="background-color: #D7E7E7; color: #000000;">Pixel Graphics</td>
+<td headers="Barato Price" class="gt_row gt_right" style="background-color: #DAE9E8; color: #000000;">Female Protagonist</td>
+<td headers="Medio Price" class="gt_row gt_right" style="background-color: #D9E8E8; color: #000000;">Co-op</td>
+<td headers="Caro" class="gt_row gt_right" style="background-color: #D8E8E8; color: #000000;">Shooter</td>
+<td headers="Muito Caro" class="gt_row gt_right" style="background-color: #CDDFE5; color: #000000;">RPG</td></tr>
+    <tr><td headers="Free" class="gt_row gt_right" style="background-color: #DAE9E8; color: #000000;">Exploration</td>
+<td headers="Muito Barato Price" class="gt_row gt_right" style="background-color: #DAE9E8; color: #000000;">Fantasy</td>
+<td headers="Barato Price" class="gt_row gt_right" style="background-color: #DAE9E8; color: #000000;">Fantasy</td>
+<td headers="Medio Price" class="gt_row gt_right" style="background-color: #DAE9E8; color: #000000;">Early Access</td>
+<td headers="Caro" class="gt_row gt_right" style="background-color: #DAE9E8; color: #000000;">Fantasy</td>
+<td headers="Muito Caro" class="gt_row gt_right" style="background-color: #DAE9E8; color: #000000;">Classic</td></tr>
   </tbody>
   
   
@@ -2045,22 +2058,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-<div class="cell">
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'scales'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following object is masked from 'package:purrr':
-
-    discard</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following object is masked from 'package:readr':
-
-    col_factor</code></pre>
-</div>
-</div>
+</section>
+</section>
+<section id="conclusões" class="level2">
+<h2 class="anchored" data-anchor-id="conclusões">Conclusões</h2>
+<p>Podemos ver algumas categorias de jogos que parecem fazer sucesso. Em geral, existem muito mais jogos singleplayer do que jogos multiplayer, provavelmente por conta do custo e da complexidade de se desenvolver um jogo multiplayer.</p>
+<section id="singleplayer-vs-multiplayer" class="level3">
+<h3 class="anchored" data-anchor-id="singleplayer-vs-multiplayer">Singleplayer vs Multiplayer</h3>
+<p>Mesmo assim, muitos dos jogos mais avaliados são multiplayer, dos 20 mais avaliados, apenas dois não são multiplayer (The Witcher 3 e Cyberpunk 2077), são jogos que possuem entre 450 mil e 7 milhões de avaliações. Em geral, são jogos mais conhecidos na indústria e que fazem bastante sucesso, englobando muitos jogos gratuitos com vendas de itens dentro do jogo, como o CS:GO, Dota 2, Apex, Destiny 2 e Warframe e jogos com preços variados, citando Terraria e Among Us como jogos muito baratos, Tom Clancy’s Rainbow Six® Siege e ARK como jogos baratos, Rust e The Witcher 3 como jogos médios e Elden Ring e Cyberpunk 2077 como jogos mais novos e caros, sem jogos na categoria muito caros.</p>
+<p>Porém, se alterarmos a métrica para os jogos mais bem avaliados, o cenário muda. Ao ordenarmos por taxa de avaliação positiva, os 20 jogos mais bem avaliados com nota máxima (99, os que possuíam notas 100 foram excluídos) são singleplayer, mas estes jogos possuem um número significativamente menor de avaliações, entre 300 e 11 mil, além disso são jogos com preço mais baixos e jogos menos conhecidos, em geral jogos ou baratos ou muito baratos.</p>
+<p>Finalizando, se existe um investimento capaz de suportar o desenvolvimento de jogos multiplayers, a recomendação é que o faça, já que são em geral os jogos com maior número de jogadores e com mais avaliações, a interação entre jogadores, quando bem feita, é algo que costuma prender os jogadores e mantê-los jogando um jogo por longos períodos. Nesse caso é preciso estudar o mercado, buscando jogos similares, e identificar qual modelo de negócio é mais adequado. Em geral, os jogos que tem feito mais sucesso são os jogos gratuitos com formas de benefícios pagas dentro do jogo, seja algum tipo de facilitação dentro do jogo, ou itens cosméticos. A vantagem dos jogos gratuitos é que atingem um grande público, o que é vital para o desenvolvimento de uma comunidade de jogadores, e dentro desta comunidade uma parcela que tem a possibilidade de gastar dentro do jogo poderá o fazer. Lembrando que, em geral, são jogos que vendem cosméticos ou acelerações de desempenho, portanto uma questão muito importante é trabalhar de forma que torne os itens cosméticos e as acelerações de desempenho itens desejáveis.</p>
+<p>Porém, se o orçamento é limitado, jogos com preços baixos e que foquem na experiência Singleplayer se saem melhor, são jogos que podem ter um orçamento menor e estúdos independentes. Os jogos Indie, que surgem por estúdios de desenvolvimento de jogos independentes costumam ter um gasto menor com desenvolvimento, frequentemente com equipes reduzidas e tentam trazer algum diferencial, podendo ser a história do jogo, o design ou até mesmo alguma mecânica de jogabilidade. Jogos como o FTL, Minecraft, Super Meat Boy e Torchlight são exemplos de jogos que começaram como indie e fizeram muito sucesso no mercado de jogos. Inclusive o Minecraft e Torchlight são jogos que perduram até hoje, o primeiro tendo sido comprado por uma gigante no mercado de tecnologias, a Microsoft, e o segundo com o crescimento do estúdio e podendo ser considerado já um estúdio de médio porte.</p>
+<p>Ainda, caso o estúdio tenha dinheiro, porém não quer se preocupar com tanto suporte à longo prazo de servidores, na questão de hackers ou mesmo tenha foco em modos competivivos, existem jogos Singleplayers que tem se destacado no mercado, como o recente Hogwarts Legacy, o The Witcher 3 e o Cyberpunk que estão na lista</p>
 </section>
 </section>
 

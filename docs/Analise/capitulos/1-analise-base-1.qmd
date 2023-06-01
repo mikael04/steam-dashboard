@@ -18,9 +18,9 @@ A base de dados usada para esta análise se encontra no Kaggle, através deste l
   
   <https://www.kaggle.com/datasets/fronkongames/steam-games-dataset>
   
-  ##### Skimr
-  
-  Usarei o Skimr para a base de dados completa e verificarei quais dados podem ser melhor investigados.
+##### Skimr
+
+Usarei o Skimr para a base de dados completa e verificarei quais dados podem ser melhor investigados.
 
 ```{r, mongoCon, echo = T, result = 'hide', message = F, warning = F, error = F}
 # ## Dados de conexão com o banco da Steam no mongo
@@ -122,7 +122,7 @@ df_100 <- df_selected_gen |>
 
 ## Filtrando regras
 df_selected_gen <- df_selected_gen |> 
-  dplyr::filter(positive > 20 & 
+  dplyr::filter(positive >= 100 & 
                   ((as.integer(estimated_owners) > 2 & price > 0) | 
                      (as.integer(estimated_owners) > 3 & price == 0)) &
                   overall < 100)

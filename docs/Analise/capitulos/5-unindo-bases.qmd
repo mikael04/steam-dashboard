@@ -8,20 +8,22 @@
 ########################################################################################## #
 
 ## 0.1 - Bibliotecas e scripts fontes----
-
+library(jsonlite)
 ```
 
 ```{r, joinDBs}
 
 df_selected_gen <- data.table::fread(here::here("data-raw/created-tables/db-games-1.csv"))
 df_games_selTags <- data.table::fread(here::here("data-raw/created-tables/db-games-3.csv"))
+
 ## Jogos presentes na base 1 que não estão na base 3
 df_antijoin_games <- dplyr::anti_join(df_selected_gen, df_games_selTags, by = "app_id") |> 
   dplyr::mutate(rating = 0, price_final = 0, price_original = 0, discount = 0, steam_deck = F, 
-                db1 = T, release_date = lubridate::ymd(release_date)) |>
+                db1 = T, release_date = lubridate::ymd(release_date)) |> 
+  dplyr::mutate(user_reviews = positive+negative) |>
   dplyr::select(app_id, title = name, date_release = release_date, win = windows, mac, linux, rating,
-                positive_ratio = overall, user_reviews = user_score, price_final = price, price_original,
-                discount, steam_deck, db1) 
+                positive_ratio = overall, user_reviews, price_final = price, price_original,
+                discount, steam_deck, db1)
 
 ## Jogos da base 3
 df_games_selTags <- df_games_selTags |> 
@@ -29,6 +31,8 @@ df_games_selTags <- df_games_selTags |>
   dplyr::select(-tags)
 # colnames(df_games_selTags)
 # colnames(df_antijoin_games)
+
+## Unindo base 3 e jogos da base 1 não presentes na base 3
 df_all_games <- rbind(df_games_selTags, df_antijoin_games, fill = T)
 ```
 
@@ -39,7 +43,7 @@ Também foi analisado novamente as duplicatas que foram geradas, e novamente foi
 Agora adicionaremos à base agrupada os dados referentes às informações do jogo, inicialmente adicionando através de outro arquivo presente nos arquivos da base 3.
 
 ```{r, addingInfo}
-run_join <- F
+run_join <- T
 if(run_join){
   # library(jsonlite)
   out <- lapply(readLines(here::here("data-raw/steam-data/db-3/games_metadata.json")), fromJSON)
@@ -55,24 +59,19 @@ if(run_join){
   ## Adicionando coluna de tags do df_metadata, e adicionando colunas de categoria, genero e tags extra do df anterior
   df_all_games <- dplyr::left_join(df_all_games, df_metadata, by = "app_id") |> 
     dplyr::select(-description) |> 
-    dplyr::left_join(df_selected |> 
+    dplyr::left_join(df_selected_gen |> 
                        dplyr::select(app_id, categories, genres, tags) |> 
                        dplyr::rename(tags_extra = tags),
                      by = "app_id")
   
   ## Escrevendo nova base para não precisar rodar os joins e comparações todas as vezes
-  if(!dir.exists("data-raw/steam-data/db-created")){
-    dir.create("data-raw/steam-data/db-created")
+  if(!dir.exists("data-raw/created-tables/")){
+    dir.create("data-raw/created-tables/")
   }
-  data.table::fwrite(df_all_games, here::here("data-raw/steam-data/db-created/db-reviews-join.csv"))
+  data.table::fwrite(df_all_games, here::here("data-raw/created-tables/db-reviews-join.csv"))
   
 }else{
-  df_all_games <- data.table::fread(here::here("data-raw/steam-data/db-created/db-reviews-join.csv"))
-}
-
-## Substituindo células em branco por NA no caso de estar lendo o csv
-if(!run_join){
-  df_all_games <- df_all_games |> 
+  df_all_games <- data.table::fread(here::here("data-raw/created-tables/db-reviews-join.csv")) |> 
     dplyr::mutate(categories = ifelse(categories == "", NA, categories),
                   genres = ifelse(genres == "", NA, genres),
                   tags = ifelse(tags == "", NA, tags),

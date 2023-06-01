@@ -9,6 +9,7 @@
 
 ## 0.1 - Bibliotecas e scripts fontes----
 source(here::here("R/fct-auxiliares/fct_filter_not_games.R"))
+library(dplyr)
 ```
 
 ```{r, db-3}
@@ -25,7 +26,7 @@ Após a análise desta nova base de dados, concluí que ela possui sim dados mai
 
 ```{r, filtro-base-3}
 df_base_3 <- df_base_3 |> 
-  dplyr::filter(positive_ratio < 100 & user_reviews >= 20)
+  dplyr::filter(positive_ratio < 100 & user_reviews >= 100)
 ```
 
 
