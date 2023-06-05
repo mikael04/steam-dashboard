@@ -8,9 +8,9 @@
 ########################################################################################## #
 
 ## 0.1 - Bibliotecas e scripts fontes----
-library(ggplot2)
-# library(janitor)
-source(here::here("R/fct-auxiliares/fct_filter_not_games.R"))
+# library(ggplot2)
+# # library(janitor)
+# source(here::here("R/fct-auxiliares/fct_filter_not_games.R"))
 ```
 
 
@@ -41,7 +41,7 @@ df_base_1 <- data.table::fread(here::here("data-raw/steam-data/db-1/games.csv"))
 ```
 
 ```{r, skimr}
-skimr::skim(df_base_1)
+# skimr::skim(df_base_1)
 ```
 
 ```{r, cleanNames}

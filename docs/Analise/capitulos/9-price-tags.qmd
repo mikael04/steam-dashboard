@@ -377,11 +377,11 @@ Os jogos Indie, que surgem por estúdios de desenvolvimento de jogos independent
 
 Ainda, caso o estúdio tenha dinheiro, porém não quer se preocupar com tanto suporte à longo prazo de servidores, na questão de hackers ou mesmo tenha foco em modos competivivos, existem jogos Singleplayers que tem se destacado no mercado, como o recente Hogwarts Legacy que teve ótima crítica e tem sido bastante falado, e os jogos The Witcher 3 ou Cyberpunk que estão na lista dos 20 jogos mais bem avaliados, porém, fica a ressalva de que esses jogos não são jogos comuns, The Witcher já é o terceiro jogo da série e foi crescendo em público com o tempo, e Cyberpunk é um jogo da mesma desenvolvedora e conseguiu construir uma campanha de marketing para se tornar um jogo muito aguardado.
 
-## Tags mais populares nos 100 jogs com mais reviews
+### Tags mais populares nos 100 jogs com mais reviews
 
-Uma possível verificação que eu acho interessante de ser feita, são as avaliações das tags dos 100 jogos mais populares, para verificar dentre esses que tem mais "sucesso", o que se destaca.
+Uma possível verificação que eu acho interessante de ser feita, são as avaliações das tags dos 100 jogos mais populares, definido pelo número de avaliações positivas no jogo, para verificar dentre esses que tem mais "sucesso", o que se destaca.
 
-```{r, top100-tags}
+```{r, top100-reviews-tags}
 top100_id <- df_all_games |> 
   dplyr::arrange(desc(user_reviews)) |> 
   dplyr::slice_head(n = 100) |> 
@@ -393,10 +393,68 @@ df_top100_tags <- df_price_categ_split |>
   dplyr::summarise(count = n(), .groups = NULL) |> 
   dplyr::arrange(desc(count))
 
+## Jogos do top100
+df_top100_games <- df_all_games |>
+  dplyr::arrange(desc(user_reviews)) |>
+  dplyr::slice_head(n = 100)
+
+
 df_top100_tags |> 
   gt::gt()
 
 ```
 
 Primeiramente vale lembrar que cada jogo pode possuir um número ilimitado de categorias, por isso vemos uma contagem tão alta de aparecimento delas.
-Também é interessante observar como a categoria Ação passou à frente das demais, estando presente em quase todos os jogos (91%), e como no caso dos jogos do top 100, existem mais jogos que se definem como Multiplayer do que Singleplayer (Respectivamente, 74% e 69%), o que nos mostra que boa parte dos jogos desse top possui ambos os modos, tentando agradar diferentes públicos. Outras categorias que valem a pena serem citadas como bastante presentes são a de Cooperativo e Open World ambos com 54%,  categorias não tão fortes na nossa tabela geral, e que ganham mais destaque em jogos mais caros, indicando possivelmente que são jogos mais complexos e mais caros de serem feitos. A categoria FPS aparece bastante também com 41% e Indie também tem seu destaque com 36%.
+Também é interessante observar como a categoria Ação passou à frente das demais, estando presente em quase todos os jogos (91%), e como no caso dos jogos do top 100, existem mais jogos que se definem como Multiplayer do que Singleplayer (Respectivamente, 74% e 69%), o que nos mostra que boa parte dos jogos desse top possui ambos os modos, tentando agradar diferentes públicos. Outras categorias que valem a pena serem citadas como bastante presentes são a de Cooperativo e Open World ambos com 54%, categorias não tão fortes na nossa tabela geral, e que ganham mais destaque em jogos mais caros, indicando possivelmente que são jogos mais complexos e mais caros de serem feitos. A categoria FPS aparece bastante também com 41% e Indie também tem seu destaque com 36%.
+
+Testei novamente a base com os top 200 jogos ao invés de 100, e o resultado foi muito próximo, mostrando o que parece ser uma tendência real dos jogos mais populares.
+
+```{r, top100-reviews-tags-positive}
+
+quantile(df_top100_games$positive_ratio, probs = c(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1))
+
+ggplot(df_top100_games, aes(x = positive_ratio)) +
+  geom_histogram(binwidth = 5) +
+  theme_minimal()
+```
+
+Avaliando a taxa de avaliações positivas, que vai de 0 a 99 e é calculado com base na relação de opiniões positivas e negativas dos usuários, temos um índice bem alto, na maioria dos jogos. Com praticamente metade desses jogos tendo avaliações acima de 90, e concentração das avaliações entre 70-98. Alguns poucos jogos ficaram abaixo disso, e possivelmente são jogos que podem ser investigados para entender o que motiva essas avaliações tão negativas. O maior exemplo é o Battlefield 2042 com o pior índice de avaliações, Tale of Immortal e PUBG: Battlegrounds.
+
+### Tags em jogos com melhores avaliações
+
+Outra análise interessante é a dos jogos mais bem avaliados, definido pela taxa de avaliações positivas, que pode não ser tão precisa pois acaba tendo jogos com um número de avaliações pequeno em comparação ao tópico anterior, mas pode trazer alguns insights em relação a categorias de jogos que são bem avaliadas.
+
+```{r, top100-positive-tags}
+top100_id <- df_all_games |> 
+  dplyr::arrange(desc(positive_ratio)) |> 
+  dplyr::slice_head(n = 100) |> 
+  dplyr::pull(app_id)
+
+df_top100_tags <- df_price_categ_split |> 
+  dplyr::filter(app_id %in% top100_id) |> 
+  dplyr::group_by(tags_all) |> 
+  dplyr::summarise(count = n(), .groups = NULL) |> 
+  dplyr::arrange(desc(count))
+
+# ## Jogos do top100
+# df_top100_games <- df_all_games |>
+#   dplyr::arrange(desc(positive_ratio)) |>
+#   dplyr::slice_head(n = 100)
+
+
+df_top100_tags |> 
+  gt::gt()
+```
+
+Vemos uma diferença considerável nas categorias, mais em linha com os jogos gratuitos e baratos. A categoria Singleplayer está presente em 67% dos jogos, e a categoria Multiplayer aparece em apenas um jogo, mostrando uma diferença enorme da classificação anterior. Outra categoria que ganha mais destaque é a de jogos indie, com quase o dobro de jogos que a avaliação anterior. As categorias Action, Open World e Co-Op caem drásticamente, com respectivos 32% (contra 91% da anterior), 2% (Contra 54% da anterior) e 2% (Contra 54%). Mostrando que as diferenças nessas duas formas de ranquear os jogos refletem em mudanças bem grandes dos jogos.
+
+```{r, top100-positive-tags-reviews}
+
+quantile(df_top100_games$user_reviews, probs = c(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1))
+
+ggplot(df_top100_games, aes(x = user_reviews)) +
+  geom_histogram(binwidth = 1000) +
+  theme_minimal()
+```
+
+Outro ponto que acho importante citar, que podemos notar pelo histograma e pelos quartis, é que aproximadamente dos terços da nossa base possui entre 120-1000 avaliações, com apenas alguns poucos jogos que tem mais avaliações, e por conseguinte mais populares.
