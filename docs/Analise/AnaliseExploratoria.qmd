@@ -15,15 +15,21 @@ code-tools:
 ---
 
 ```{r setup, include=FALSE}
+## Definindo pasta padrão
 knitr::opts_knit$set(root.dir = '/mnt/Netac-Dados/Projetos/R/steam-dashboard',
                      cache.lazy = FALSE)
 path_quarto <- "../../"
+## Definindo
 source(here::here("R/fct-auxiliares/fct_order_strings.R"))
 source(here::here("R/fct-auxiliares/fct_filter_top.R"))
 source(here::here("R/fct-auxiliares/fct_filter_not_games.R"))
+source(here::here("R/fct-auxiliares/fct_filter_not_games.R"))
+## Librarys
+library(ggplot2)
 library(dplyr)
 
-switch_overwrite_initial_tables <- F
+## Switch para reescrever tabelas iniciais
+switch_overwrite_initial_tables <- T
 
 ```
 
@@ -31,11 +37,13 @@ switch_overwrite_initial_tables <- F
 
 ## Objetivo
 
-A ideia desta análise é ilustrar os conhecimentos adquiridos em R, passando pelos pontos de análise exploratória, construção de um dashboard para visualização de dados e por fim trabalhar com modelos de predição para alguns possíveis problemas da indústria.
+A ideia desta análise é ilustrar os conhecimentos adquiridos em R, começando com uma análise exploratória dos dados, e tentando trazer alguns insights relacionados à empresas que queiram lançar jogos e ter sucesso no mercado.
 
 ## Primeiro problema
 
-Somos um estúdio de jogos e queremos analisar: 1 - qual gênero/categoria de jogo tem mais sucesso na steam, definindo sucesso como melhores avaliações; 2 - também queremos analisar qual faixa de preço é mais interessante para o lançamento desse novo jogo, ou seja, qual faixa de preço tem maior número de vendas.
+Somos um estúdio de jogos e queremos analisar: 
+1 - Qual gênero/categoria de jogo tem mais sucesso na steam, definindo sucesso como melhores avaliações; 
+2 - Também queremos analisar qual faixa de preço é mais interessante para o lançamento desse novo jogo, ou seja, qual faixa de preço tem maior número de vendas.
 
 ### Primeiro passo - Análise exploratória
 
