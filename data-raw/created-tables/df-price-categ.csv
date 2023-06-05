@@ -1,0 +1,2187 @@
+tags_all,price_categ,count
+1980s,Barato,71
+1980s,Caro,4
+1980s,Free,59
+1980s,Medio,15
+1980s,Muito Barato,99
+1990's,Barato,125
+1990's,Caro,2
+1990's,Free,78
+1990's,Medio,33
+1990's,Muito Barato,222
+2.5D,Barato,132
+2.5D,Caro,12
+2.5D,Free,81
+2.5D,Medio,49
+2.5D,Muito Barato,121
+2D,Barato,1281
+2D,Caro,24
+2D,Free,907
+2D,Medio,243
+2D,Muito Barato,2009
+2D,Muito Caro,2
+2D Fighter,Barato,62
+2D Fighter,Caro,10
+2D Fighter,Free,45
+2D Fighter,Medio,32
+2D Fighter,Muito Barato,52
+2D Fighter,Muito Caro,2
+2D Platformer,Barato,149
+2D Platformer,Caro,3
+2D Platformer,Free,134
+2D Platformer,Medio,34
+2D Platformer,Muito Barato,209
+3D,Barato,537
+3D,Caro,80
+3D,Free,604
+3D,Medio,315
+3D,Muito Barato,496
+3D,Muito Caro,5
+3D Fighter,Barato,32
+3D Fighter,Caro,10
+3D Fighter,Free,37
+3D Fighter,Medio,6
+3D Fighter,Muito Barato,20
+3D Fighter,Muito Caro,2
+3D Platformer,Barato,115
+3D Platformer,Caro,7
+3D Platformer,Free,158
+3D Platformer,Medio,57
+3D Platformer,Muito Barato,139
+3D Platformer,Muito Caro,2
+3D Vision,Barato,33
+3D Vision,Caro,6
+3D Vision,Free,24
+3D Vision,Medio,9
+3D Vision,Muito Barato,31
+4 Player Local,Barato,153
+4 Player Local,Caro,8
+4 Player Local,Free,45
+4 Player Local,Medio,16
+4 Player Local,Muito Barato,101
+4X,Barato,60
+4X,Caro,9
+4X,Free,20
+4X,Medio,70
+4X,Muito Barato,48
+6DOF,Barato,36
+6DOF,Free,15
+6DOF,Medio,17
+6DOF,Muito Barato,19
+8-bit Music,Medio,1
+8-bit Music,Muito Barato,2
+ATV,Barato,3
+ATV,Free,1
+ATV,Medio,4
+ATV,Muito Barato,2
+Abstract,Barato,31
+Abstract,Free,58
+Abstract,Medio,2
+Abstract,Muito Barato,157
+Action,Barato,2334
+Action,Caro,229
+Action,Free,2058
+Action,Medio,993
+Action,Muito Barato,3319
+Action,Muito Caro,22
+Action RPG,Barato,315
+Action RPG,Caro,62
+Action RPG,Free,199
+Action RPG,Medio,176
+Action RPG,Muito Barato,208
+Action RPG,Muito Caro,2
+Action RTS,Barato,16
+Action RTS,Caro,2
+Action RTS,Free,16
+Action RTS,Medio,8
+Action RTS,Muito Barato,12
+Action Rogue-like,Barato,1
+Action Rogue-like,Free,1
+Action Rogue-like,Muito Barato,4
+Action Roguelike,Barato,194
+Action Roguelike,Caro,1
+Action Roguelike,Free,69
+Action Roguelike,Medio,47
+Action Roguelike,Muito Barato,185
+Action-Adventure,Barato,399
+Action-Adventure,Caro,45
+Action-Adventure,Free,217
+Action-Adventure,Medio,203
+Action-Adventure,Muito Barato,300
+Action-Adventure,Muito Caro,2
+Addictive,Barato,30
+Addictive,Free,32
+Addictive,Medio,11
+Addictive,Muito Barato,102
+Adventure,Barato,2414
+Adventure,Caro,174
+Adventure,Free,1731
+Adventure,Medio,942
+Adventure,Muito Barato,3129
+Adventure,Muito Caro,12
+Agriculture,Barato,65
+Agriculture,Caro,2
+Agriculture,Free,16
+Agriculture,Medio,28
+Agriculture,Muito Barato,32
+Aliens,Barato,95
+Aliens,Caro,11
+Aliens,Free,63
+Aliens,Medio,52
+Aliens,Muito Barato,119
+Alternate History,Barato,86
+Alternate History,Caro,10
+Alternate History,Free,46
+Alternate History,Medio,37
+Alternate History,Muito Barato,78
+Ambient,Barato,2
+Ambient,Caro,1
+Ambient,Free,2
+Ambient,Medio,1
+Ambient,Muito Barato,6
+Ambient,Muito Caro,3
+America,Barato,33
+America,Caro,6
+America,Free,34
+America,Medio,27
+America,Muito Barato,31
+Anime,Barato,694
+Anime,Caro,147
+Anime,Free,569
+Anime,Medio,370
+Anime,Muito Barato,965
+Anime,Muito Caro,9
+Arcade,Barato,347
+Arcade,Caro,30
+Arcade,Free,321
+Arcade,Medio,107
+Arcade,Muito Barato,686
+Arcade,Muito Caro,4
+Archery,Barato,18
+Archery,Caro,1
+Archery,Free,7
+Archery,Medio,4
+Archery,Muito Barato,6
+Arena Shooter,Barato,44
+Arena Shooter,Free,104
+Arena Shooter,Medio,11
+Arena Shooter,Muito Barato,90
+Artificial Intelligence,Barato,53
+Artificial Intelligence,Caro,7
+Artificial Intelligence,Free,32
+Artificial Intelligence,Medio,29
+Artificial Intelligence,Muito Barato,45
+Artificial Intelligence,Muito Caro,1
+Assassin,Barato,31
+Assassin,Caro,6
+Assassin,Free,13
+Assassin,Medio,16
+Assassin,Muito Barato,29
+Assassin,Muito Caro,1
+Asymmetric VR,Barato,13
+Asymmetric VR,Free,2
+Asymmetric VR,Medio,2
+Asymmetric VR,Muito Barato,2
+Asynchronous Multiplayer,Barato,27
+Asynchronous Multiplayer,Caro,2
+Asynchronous Multiplayer,Free,35
+Asynchronous Multiplayer,Medio,11
+Asynchronous Multiplayer,Muito Barato,21
+Atmospheric,Barato,1317
+Atmospheric,Caro,100
+Atmospheric,Free,735
+Atmospheric,Medio,554
+Atmospheric,Muito Barato,1549
+Atmospheric,Muito Caro,6
+Auto Battler,Barato,20
+Auto Battler,Caro,2
+Auto Battler,Free,38
+Auto Battler,Medio,2
+Auto Battler,Muito Barato,27
+Automation,Barato,60
+Automation,Caro,1
+Automation,Free,27
+Automation,Medio,27
+Automation,Muito Barato,35
+Automobile Sim,Barato,117
+Automobile Sim,Caro,16
+Automobile Sim,Free,63
+Automobile Sim,Medio,74
+Automobile Sim,Muito Barato,122
+BMX,Barato,1
+BMX,Free,1
+BMX,Medio,2
+BMX,Muito Barato,4
+Base Building,Barato,89
+Base Building,Free,66
+Base Building,Medio,26
+Base Building,Muito Barato,43
+Base-Building,Barato,228
+Base-Building,Caro,5
+Base-Building,Free,57
+Base-Building,Medio,132
+Base-Building,Muito Barato,80
+Base-Building,Muito Caro,1
+Baseball,Barato,5
+Baseball,Caro,2
+Baseball,Free,4
+Baseball,Medio,1
+Baseball,Muito Barato,1
+Based On A Novel,Barato,15
+Based On A Novel,Free,3
+Based On A Novel,Medio,2
+Based On A Novel,Muito Barato,29
+Basketball,Barato,3
+Basketball,Caro,2
+Basketball,Free,9
+Basketball,Medio,3
+Basketball,Muito Barato,2
+Battle Royale,Barato,18
+Battle Royale,Caro,1
+Battle Royale,Free,105
+Battle Royale,Medio,10
+Battle Royale,Muito Barato,30
+Beat 'em up,Barato,133
+Beat 'em up,Caro,22
+Beat 'em up,Free,68
+Beat 'em up,Medio,48
+Beat 'em up,Muito Barato,99
+Beat 'em up,Muito Caro,3
+Beautiful,Barato,112
+Beautiful,Caro,13
+Beautiful,Free,35
+Beautiful,Medio,30
+Beautiful,Muito Barato,129
+Beautiful,Muito Caro,4
+Benchmark,Barato,2
+Benchmark,Free,5
+Benchmark,Medio,4
+Benchmark,Muito Barato,2
+Bikes,Barato,13
+Bikes,Caro,4
+Bikes,Free,2
+Bikes,Medio,14
+Bikes,Muito Barato,13
+Blood,Barato,67
+Blood,Caro,5
+Blood,Free,26
+Blood,Medio,17
+Blood,Muito Barato,84
+Board Game,Barato,99
+Board Game,Free,95
+Board Game,Medio,38
+Board Game,Muito Barato,135
+Boss Rush,Barato,6
+Boss Rush,Free,1
+Boss Rush,Muito Barato,2
+Bowling,Barato,4
+Bowling,Free,2
+Bowling,Muito Barato,2
+Boxing,Barato,8
+Boxing,Free,3
+Boxing,Medio,6
+Boxing,Muito Barato,8
+Building,Barato,472
+Building,Caro,15
+Building,Free,210
+Building,Medio,214
+Building,Muito Barato,269
+Building,Muito Caro,3
+Bullet Hell,Barato,140
+Bullet Hell,Caro,3
+Bullet Hell,Free,107
+Bullet Hell,Medio,15
+Bullet Hell,Muito Barato,222
+Bullet Time,Barato,43
+Bullet Time,Caro,3
+Bullet Time,Free,15
+Bullet Time,Medio,14
+Bullet Time,Muito Barato,31
+CRPG,Barato,81
+CRPG,Caro,6
+CRPG,Free,41
+CRPG,Medio,45
+CRPG,Muito Barato,77
+Capitalism,Barato,48
+Capitalism,Caro,1
+Capitalism,Free,24
+Capitalism,Medio,23
+Capitalism,Muito Barato,35
+Capitalism,Muito Caro,1
+Card Battler,Barato,90
+Card Battler,Caro,2
+Card Battler,Free,65
+Card Battler,Medio,21
+Card Battler,Muito Barato,46
+Card Game,Barato,133
+Card Game,Caro,2
+Card Game,Free,183
+Card Game,Medio,33
+Card Game,Muito Barato,126
+Card Game,Muito Caro,1
+Cartoon,Barato,135
+Cartoon,Caro,6
+Cartoon,Free,113
+Cartoon,Medio,40
+Cartoon,Muito Barato,190
+Cartoony,Barato,209
+Cartoony,Caro,5
+Cartoony,Free,213
+Cartoony,Medio,99
+Cartoony,Muito Barato,261
+Casual,Barato,1149
+Casual,Caro,31
+Casual,Free,1655
+Casual,Medio,302
+Casual,Muito Barato,2772
+Casual,Muito Caro,3
+Cats,Barato,44
+Cats,Caro,3
+Cats,Free,34
+Cats,Medio,10
+Cats,Muito Barato,97
+Character Action Game,Barato,49
+Character Action Game,Caro,4
+Character Action Game,Free,23
+Character Action Game,Medio,30
+Character Action Game,Muito Barato,53
+Character Customization,Barato,316
+Character Customization,Caro,84
+Character Customization,Free,282
+Character Customization,Medio,194
+Character Customization,Muito Barato,182
+Character Customization,Muito Caro,4
+Chess,Barato,5
+Chess,Free,13
+Chess,Medio,2
+Chess,Muito Barato,16
+Choices Matter,Barato,387
+Choices Matter,Caro,36
+Choices Matter,Free,211
+Choices Matter,Medio,193
+Choices Matter,Muito Barato,356
+Choices Matter,Muito Caro,1
+Choose Your Own Adventure,Barato,183
+Choose Your Own Adventure,Caro,7
+Choose Your Own Adventure,Free,98
+Choose Your Own Adventure,Medio,62
+Choose Your Own Adventure,Muito Barato,183
+Cinematic,Barato,105
+Cinematic,Caro,25
+Cinematic,Free,61
+Cinematic,Medio,70
+Cinematic,Muito Barato,95
+Cinematic,Muito Caro,8
+City Builder,Barato,203
+City Builder,Caro,11
+City Builder,Free,74
+City Builder,Medio,118
+City Builder,Muito Barato,128
+Class-Based,Barato,32
+Class-Based,Caro,6
+Class-Based,Free,45
+Class-Based,Medio,22
+Class-Based,Muito Barato,33
+Classic,Barato,247
+Classic,Caro,8
+Classic,Free,96
+Classic,Medio,98
+Classic,Muito Barato,548
+Clicker,Barato,20
+Clicker,Free,158
+Clicker,Muito Barato,133
+Co-op,Barato,706
+Co-op,Caro,99
+Co-op,Free,585
+Co-op,Medio,355
+Co-op,Muito Barato,558
+Co-op,Muito Caro,10
+Co-op Campaign,Barato,50
+Co-op Campaign,Caro,6
+Co-op Campaign,Free,30
+Co-op Campaign,Medio,36
+Co-op Campaign,Muito Barato,32
+Coding,Barato,1
+Coding,Muito Barato,2
+Cold War,Barato,30
+Cold War,Caro,2
+Cold War,Free,26
+Cold War,Medio,19
+Cold War,Muito Barato,51
+Collectathon,Barato,40
+Collectathon,Caro,2
+Collectathon,Free,38
+Collectathon,Medio,18
+Collectathon,Muito Barato,63
+Colony Sim,Barato,99
+Colony Sim,Free,19
+Colony Sim,Medio,68
+Colony Sim,Muito Barato,47
+Colorful,Barato,560
+Colorful,Caro,29
+Colorful,Free,416
+Colorful,Medio,200
+Colorful,Muito Barato,620
+Colorful,Muito Caro,1
+Combat,Barato,224
+Combat,Caro,39
+Combat,Free,225
+Combat,Medio,146
+Combat,Muito Barato,155
+Combat,Muito Caro,1
+Combat Racing,Barato,27
+Combat Racing,Caro,1
+Combat Racing,Free,22
+Combat Racing,Medio,11
+Combat Racing,Muito Barato,37
+Combat Racing,Muito Caro,2
+Comedy,Barato,477
+Comedy,Caro,25
+Comedy,Free,276
+Comedy,Medio,172
+Comedy,Muito Barato,649
+Comedy,Muito Caro,1
+Comic Book,Barato,78
+Comic Book,Caro,7
+Comic Book,Free,47
+Comic Book,Medio,22
+Comic Book,Muito Barato,63
+Comic Book,Muito Caro,1
+Competitive,Barato,106
+Competitive,Caro,15
+Competitive,Free,185
+Competitive,Medio,54
+Competitive,Muito Barato,90
+Competitive,Muito Caro,2
+Conspiracy,Barato,25
+Conspiracy,Caro,2
+Conspiracy,Free,17
+Conspiracy,Medio,11
+Conspiracy,Muito Barato,36
+Controller,Barato,389
+Controller,Caro,41
+Controller,Free,233
+Controller,Medio,153
+Controller,Muito Barato,311
+Controller,Muito Caro,7
+Conversation,Barato,69
+Conversation,Caro,4
+Conversation,Free,67
+Conversation,Medio,25
+Conversation,Muito Barato,68
+Cooking,Barato,48
+Cooking,Free,14
+Cooking,Medio,14
+Cooking,Muito Barato,30
+Cozy,Barato,29
+Cozy,Free,5
+Cozy,Medio,7
+Cozy,Muito Barato,27
+Crafting,Barato,358
+Crafting,Caro,13
+Crafting,Free,205
+Crafting,Medio,161
+Crafting,Muito Barato,174
+Crafting,Muito Caro,2
+Creature Collector,Barato,33
+Creature Collector,Caro,7
+Creature Collector,Free,14
+Creature Collector,Medio,13
+Creature Collector,Muito Barato,41
+Creature Collector,Muito Caro,1
+Cricket,Barato,2
+Cricket,Caro,2
+Cricket,Medio,2
+Crime,Barato,106
+Crime,Caro,9
+Crime,Free,42
+Crime,Medio,35
+Crime,Muito Barato,82
+Crowdfunded,Barato,26
+Crowdfunded,Free,7
+Crowdfunded,Medio,21
+Crowdfunded,Muito Barato,17
+Cult Classic,Barato,77
+Cult Classic,Caro,3
+Cult Classic,Free,28
+Cult Classic,Medio,24
+Cult Classic,Muito Barato,122
+Cute,Barato,634
+Cute,Caro,37
+Cute,Free,482
+Cute,Medio,241
+Cute,Muito Barato,896
+Cute,Muito Caro,2
+Cyberpunk,Barato,168
+Cyberpunk,Caro,11
+Cyberpunk,Free,81
+Cyberpunk,Medio,58
+Cyberpunk,Muito Barato,130
+Cycling,Barato,5
+Cycling,Free,1
+Cycling,Medio,3
+Cycling,Muito Barato,7
+Dark,Barato,305
+Dark,Caro,24
+Dark,Free,224
+Dark,Medio,115
+Dark,Muito Barato,423
+Dark,Muito Caro,1
+Dark Comedy,Barato,49
+Dark Comedy,Free,39
+Dark Comedy,Medio,14
+Dark Comedy,Muito Barato,83
+Dark Fantasy,Barato,203
+Dark Fantasy,Caro,25
+Dark Fantasy,Free,109
+Dark Fantasy,Medio,116
+Dark Fantasy,Muito Barato,155
+Dark Humor,Barato,118
+Dark Humor,Caro,3
+Dark Humor,Free,69
+Dark Humor,Medio,32
+Dark Humor,Muito Barato,187
+Dating Sim,Barato,151
+Dating Sim,Caro,18
+Dating Sim,Free,119
+Dating Sim,Medio,92
+Dating Sim,Muito Barato,238
+Dating Sim,Muito Caro,2
+Deckbuilding,Barato,96
+Deckbuilding,Caro,2
+Deckbuilding,Free,63
+Deckbuilding,Medio,29
+Deckbuilding,Muito Barato,59
+Deckbuilding,Muito Caro,1
+Demons,Barato,86
+Demons,Caro,8
+Demons,Free,46
+Demons,Medio,37
+Demons,Muito Barato,76
+Destruction,Barato,104
+Destruction,Caro,3
+Destruction,Free,52
+Destruction,Medio,42
+Destruction,Muito Barato,76
+Destruction,Muito Caro,1
+Detective,Barato,147
+Detective,Caro,8
+Detective,Free,81
+Detective,Medio,43
+Detective,Muito Barato,194
+Difficult,Barato,672
+Difficult,Caro,21
+Difficult,Free,284
+Difficult,Medio,215
+Difficult,Muito Barato,851
+Difficult,Muito Caro,3
+Dinosaurs,Barato,31
+Dinosaurs,Caro,4
+Dinosaurs,Free,33
+Dinosaurs,Medio,7
+Dinosaurs,Muito Barato,37
+Diplomacy,Barato,32
+Diplomacy,Caro,2
+Diplomacy,Free,17
+Diplomacy,Medio,20
+Diplomacy,Muito Barato,28
+Dog,Barato,25
+Dog,Caro,3
+Dog,Free,18
+Dog,Medio,15
+Dog,Muito Barato,40
+Dragons,Barato,29
+Dragons,Caro,4
+Dragons,Free,54
+Dragons,Medio,32
+Dragons,Muito Barato,33
+Dragons,Muito Caro,1
+Drama,Barato,192
+Drama,Caro,21
+Drama,Free,115
+Drama,Medio,58
+Drama,Muito Barato,243
+Drama,Muito Caro,1
+Driving,Barato,177
+Driving,Caro,16
+Driving,Free,80
+Driving,Medio,86
+Driving,Muito Barato,151
+Driving,Muito Caro,3
+Dungeon Crawler,Barato,244
+Dungeon Crawler,Caro,7
+Dungeon Crawler,Free,90
+Dungeon Crawler,Medio,66
+Dungeon Crawler,Muito Barato,177
+Dungeons & Dragons,Barato,14
+Dungeons & Dragons,Caro,2
+Dungeons & Dragons,Free,8
+Dungeons & Dragons,Medio,6
+Dungeons & Dragons,Muito Barato,3
+Dynamic Narration,Barato,32
+Dynamic Narration,Caro,1
+Dynamic Narration,Free,18
+Dynamic Narration,Medio,9
+Dynamic Narration,Muito Barato,29
+Dystopian,Barato,105
+Dystopian,Caro,7
+Dystopian,Free,53
+Dystopian,Medio,32
+Dystopian,Muito Barato,71
+Dystopian,Muito Caro,1
+Early Access,Barato,815
+Early Access,Caro,18
+Early Access,Free,618
+Early Access,Medio,310
+Early Access,Muito Barato,552
+Early Access,Muito Caro,2
+Economy,Barato,221
+Economy,Caro,14
+Economy,Free,78
+Economy,Medio,128
+Economy,Muito Barato,151
+Education,Barato,108
+Education,Caro,7
+Education,Free,74
+Education,Medio,45
+Education,Muito Barato,133
+Education,Muito Caro,6
+Electronic,Free,2
+Electronic,Medio,1
+Electronic,Muito Barato,2
+Electronic Music,Barato,5
+Electronic Music,Caro,1
+Electronic Music,Free,3
+Electronic Music,Medio,2
+Electronic Music,Muito Barato,4
+Emotional,Barato,153
+Emotional,Caro,19
+Emotional,Free,113
+Emotional,Medio,69
+Emotional,Muito Barato,171
+Epic,Barato,21
+Epic,Caro,5
+Epic,Free,12
+Epic,Medio,18
+Epic,Muito Barato,24
+Escape Room,Barato,32
+Escape Room,Free,22
+Escape Room,Medio,6
+Escape Room,Muito Barato,81
+Experience,Barato,12
+Experience,Free,18
+Experience,Medio,4
+Experience,Muito Barato,27
+Experimental,Barato,57
+Experimental,Free,66
+Experimental,Medio,7
+Experimental,Muito Barato,146
+Exploration,Barato,863
+Exploration,Caro,46
+Exploration,Free,430
+Exploration,Medio,372
+Exploration,Muito Barato,711
+Exploration,Muito Caro,4
+FMV,Barato,42
+FMV,Caro,2
+FMV,Free,14
+FMV,Medio,9
+FMV,Muito Barato,57
+FMV,Muito Caro,5
+FPS,Barato,404
+FPS,Caro,42
+FPS,Free,519
+FPS,Medio,226
+FPS,Muito Barato,622
+FPS,Muito Caro,5
+Faith,Barato,36
+Faith,Free,16
+Faith,Medio,10
+Faith,Muito Barato,31
+Family Friendly,Barato,451
+Family Friendly,Caro,21
+Family Friendly,Free,314
+Family Friendly,Medio,188
+Family Friendly,Muito Barato,611
+Family Friendly,Muito Caro,4
+Fantasy,Barato,782
+Fantasy,Caro,75
+Fantasy,Free,528
+Fantasy,Medio,368
+Fantasy,Muito Barato,709
+Fantasy,Muito Caro,4
+Farming,Barato,17
+Farming,Caro,4
+Farming,Free,5
+Farming,Medio,7
+Farming,Muito Barato,16
+Farming Sim,Barato,71
+Farming Sim,Caro,4
+Farming Sim,Free,24
+Farming Sim,Medio,36
+Farming Sim,Muito Barato,42
+Fast-Paced,Barato,154
+Fast-Paced,Caro,3
+Fast-Paced,Free,119
+Fast-Paced,Medio,41
+Fast-Paced,Muito Barato,238
+Fast-Paced,Muito Caro,1
+Feature Film,Free,3
+Feature Film,Muito Barato,5
+Female Protagonist,Barato,724
+Female Protagonist,Caro,69
+Female Protagonist,Free,322
+Female Protagonist,Medio,287
+Female Protagonist,Muito Barato,864
+Female Protagonist,Muito Caro,4
+Fighting,Barato,137
+Fighting,Caro,25
+Fighting,Free,87
+Fighting,Medio,76
+Fighting,Muito Barato,111
+Fighting,Muito Caro,3
+First-Person,Barato,815
+First-Person,Caro,58
+First-Person,Free,699
+First-Person,Medio,377
+First-Person,Muito Barato,932
+First-Person,Muito Caro,4
+Fishing,Barato,47
+Fishing,Caro,2
+Fishing,Free,23
+Fishing,Medio,23
+Fishing,Muito Barato,25
+Flight,Barato,81
+Flight,Caro,18
+Flight,Free,61
+Flight,Medio,44
+Flight,Muito Barato,101
+Flight,Muito Caro,8
+Football,Barato,4
+Football,Caro,4
+Football,Free,31
+Football,Medio,6
+Football,Muito Barato,8
+Football (American),Barato,13
+Football (American),Caro,2
+Football (American),Free,4
+Football (American),Medio,3
+Football (American),Muito Barato,6
+Football (Soccer),Barato,5
+Football (Soccer),Free,10
+Football (Soccer),Medio,1
+Football (Soccer),Muito Barato,6
+Football (Soccer),Muito Caro,1
+Foreign,Barato,15
+Foreign,Caro,5
+Foreign,Free,7
+Foreign,Medio,4
+Foreign,Muito Barato,13
+Fox,Free,1
+Fox,Medio,1
+Free to Play,Barato,48
+Free to Play,Caro,11
+Free to Play,Free,2656
+Free to Play,Medio,17
+Free to Play,Muito Barato,88
+Free to Play,Muito Caro,7
+Funny,Barato,782
+Funny,Caro,29
+Funny,Free,550
+Funny,Medio,214
+Funny,Muito Barato,987
+Funny,Muito Caro,2
+Futuristic,Barato,163
+Futuristic,Caro,21
+Futuristic,Free,121
+Futuristic,Medio,86
+Futuristic,Muito Barato,116
+Gambling,Barato,7
+Gambling,Caro,3
+Gambling,Free,20
+Gambling,Medio,2
+Gambling,Muito Barato,11
+GameMaker,Barato,12
+GameMaker,Caro,2
+GameMaker,Free,13
+GameMaker,Medio,1
+GameMaker,Muito Barato,38
+GameMaker,Muito Caro,1
+Games Workshop,Barato,27
+Games Workshop,Caro,5
+Games Workshop,Free,11
+Games Workshop,Medio,19
+Games Workshop,Muito Barato,10
+Gaming,Barato,2
+Gaming,Free,14
+Gaming,Medio,1
+Gaming,Muito Barato,3
+God Game,Barato,46
+God Game,Caro,1
+God Game,Free,19
+God Game,Medio,20
+God Game,Muito Barato,45
+Golf,Barato,9
+Golf,Caro,3
+Golf,Free,4
+Golf,Medio,2
+Golf,Muito Barato,15
+Golf,Muito Caro,1
+Gore,Barato,459
+Gore,Caro,59
+Gore,Free,331
+Gore,Medio,230
+Gore,Muito Barato,648
+Gore,Muito Caro,5
+Gothic,Barato,52
+Gothic,Caro,3
+Gothic,Free,19
+Gothic,Medio,22
+Gothic,Muito Barato,43
+Grand Strategy,Barato,97
+Grand Strategy,Caro,24
+Grand Strategy,Free,52
+Grand Strategy,Medio,94
+Grand Strategy,Muito Barato,87
+Grand Strategy,Muito Caro,1
+Great Soundtrack,Barato,1001
+Great Soundtrack,Caro,109
+Great Soundtrack,Free,371
+Great Soundtrack,Medio,372
+Great Soundtrack,Muito Barato,1163
+Great Soundtrack,Muito Caro,3
+Grid-Based Movement,Barato,42
+Grid-Based Movement,Caro,6
+Grid-Based Movement,Free,19
+Grid-Based Movement,Medio,10
+Grid-Based Movement,Muito Barato,40
+Gun Customization,Barato,37
+Gun Customization,Caro,5
+Gun Customization,Free,33
+Gun Customization,Medio,19
+Gun Customization,Muito Barato,22
+Hack and Slash,Barato,267
+Hack and Slash,Caro,63
+Hack and Slash,Free,138
+Hack and Slash,Medio,154
+Hack and Slash,Muito Barato,173
+Hack and Slash,Muito Caro,1
+Hacking,Barato,49
+Hacking,Caro,3
+Hacking,Free,21
+Hacking,Medio,9
+Hacking,Muito Barato,48
+Hand-drawn,Barato,229
+Hand-drawn,Caro,2
+Hand-drawn,Free,140
+Hand-drawn,Medio,45
+Hand-drawn,Muito Barato,270
+Hardware,Barato,2
+Hardware,Free,2
+Hardware,Medio,1
+Hardware,Muito Barato,4
+Heist,Barato,30
+Heist,Caro,5
+Heist,Free,20
+Heist,Medio,11
+Heist,Muito Barato,36
+Heist,Muito Caro,1
+Hentai,Barato,123
+Hentai,Caro,9
+Hentai,Free,105
+Hentai,Medio,47
+Hentai,Muito Barato,219
+Hentai,Muito Caro,1
+Hero Shooter,Barato,12
+Hero Shooter,Caro,3
+Hero Shooter,Free,39
+Hero Shooter,Medio,9
+Hero Shooter,Muito Barato,16
+Hex Grid,Barato,40
+Hex Grid,Caro,5
+Hex Grid,Free,19
+Hex Grid,Medio,33
+Hex Grid,Muito Barato,46
+Hex Grid,Muito Caro,3
+Hidden Object,Barato,58
+Hidden Object,Free,92
+Hidden Object,Medio,11
+Hidden Object,Muito Barato,281
+Historical,Barato,255
+Historical,Caro,48
+Historical,Free,132
+Historical,Medio,154
+Historical,Muito Barato,280
+Historical,Muito Caro,4
+Hobby Sim,Barato,1
+Hobby Sim,Muito Barato,1
+Hockey,Barato,8
+Hockey,Free,2
+Horror,Barato,580
+Horror,Caro,33
+Horror,Free,562
+Horror,Medio,220
+Horror,Muito Barato,1076
+Horses,Barato,18
+Horses,Caro,3
+Horses,Free,7
+Horses,Medio,10
+Horses,Muito Barato,12
+Hunting,Barato,38
+Hunting,Caro,6
+Hunting,Free,18
+Hunting,Medio,16
+Hunting,Muito Barato,45
+Hunting,Muito Caro,1
+Idler,Barato,14
+Idler,Caro,1
+Idler,Free,124
+Idler,Muito Barato,96
+Illuminati,Barato,26
+Illuminati,Caro,6
+Illuminati,Free,24
+Illuminati,Medio,8
+Illuminati,Muito Barato,64
+Immersive,Barato,36
+Immersive,Caro,2
+Immersive,Free,11
+Immersive,Medio,10
+Immersive,Muito Barato,21
+Immersive,Muito Caro,2
+Immersive Sim,Barato,168
+Immersive Sim,Caro,18
+Immersive Sim,Free,86
+Immersive Sim,Medio,100
+Immersive Sim,Muito Barato,161
+Immersive Sim,Muito Caro,2
+Indie,Barato,2653
+Indie,Caro,13
+Indie,Free,2373
+Indie,Medio,645
+Indie,Muito Barato,4495
+Indie,Muito Caro,4
+Instrumental Music,Free,3
+Instrumental Music,Medio,1
+Instrumental Music,Muito Barato,1
+Intentionally Awkward Controls,Barato,5
+Intentionally Awkward Controls,Free,3
+Intentionally Awkward Controls,Muito Barato,9
+Interactive Fiction,Barato,175
+Interactive Fiction,Caro,8
+Interactive Fiction,Free,108
+Interactive Fiction,Medio,35
+Interactive Fiction,Muito Barato,222
+Inventory Management,Barato,71
+Inventory Management,Caro,2
+Inventory Management,Free,43
+Inventory Management,Medio,23
+Inventory Management,Muito Barato,41
+Investigation,Barato,94
+Investigation,Caro,3
+Investigation,Free,67
+Investigation,Medio,35
+Investigation,Muito Barato,105
+Isometric,Barato,252
+Isometric,Caro,14
+Isometric,Free,83
+Isometric,Medio,113
+Isometric,Muito Barato,209
+JRPG,Barato,262
+JRPG,Caro,95
+JRPG,Free,106
+JRPG,Medio,133
+JRPG,Muito Barato,187
+JRPG,Muito Caro,2
+Jet,Barato,6
+Jet,Caro,5
+Jet,Free,6
+Jet,Medio,5
+Jet,Muito Barato,6
+Job Simulator,Barato,4
+Job Simulator,Medio,1
+Job Simulator,Muito Barato,5
+Jump Scare,Barato,1
+Jump Scare,Caro,1
+Jump Scare,Free,2
+Jump Scare,Muito Barato,13
+Kickstarter,Barato,59
+Kickstarter,Caro,1
+Kickstarter,Free,9
+Kickstarter,Medio,34
+Kickstarter,Muito Barato,30
+LEGO,Barato,28
+LEGO,Caro,1
+LEGO,Free,3
+LEGO,Medio,6
+LEGO,Muito Barato,7
+LGBTQ+,Barato,142
+LGBTQ+,Caro,9
+LGBTQ+,Free,78
+LGBTQ+,Medio,47
+LGBTQ+,Muito Barato,161
+LGBTQ+,Muito Caro,2
+Lemmings,Barato,5
+Lemmings,Free,3
+Lemmings,Muito Barato,7
+Level Editor,Barato,110
+Level Editor,Caro,5
+Level Editor,Free,48
+Level Editor,Medio,34
+Level Editor,Muito Barato,99
+Level Editor,Muito Caro,1
+Life Sim,Barato,129
+Life Sim,Caro,4
+Life Sim,Free,64
+Life Sim,Medio,43
+Life Sim,Muito Barato,154
+Linear,Barato,91
+Linear,Caro,9
+Linear,Free,160
+Linear,Medio,31
+Linear,Muito Barato,176
+Local Co-Op,Barato,333
+Local Co-Op,Caro,29
+Local Co-Op,Free,89
+Local Co-Op,Medio,87
+Local Co-Op,Muito Barato,225
+Local Co-Op,Muito Caro,2
+Local Multiplayer,Barato,311
+Local Multiplayer,Caro,31
+Local Multiplayer,Free,124
+Local Multiplayer,Medio,101
+Local Multiplayer,Muito Barato,256
+Local Multiplayer,Muito Caro,5
+Logic,Barato,74
+Logic,Caro,3
+Logic,Free,60
+Logic,Medio,12
+Logic,Muito Barato,156
+Loot,Barato,116
+Loot,Caro,6
+Loot,Free,60
+Loot,Medio,42
+Loot,Muito Barato,91
+Loot,Muito Caro,1
+Looter Shooter,Barato,20
+Looter Shooter,Caro,2
+Looter Shooter,Free,17
+Looter Shooter,Medio,25
+Looter Shooter,Muito Barato,17
+Looter Shooter,Muito Caro,1
+Lore-Rich,Barato,83
+Lore-Rich,Caro,12
+Lore-Rich,Free,56
+Lore-Rich,Medio,51
+Lore-Rich,Muito Barato,66
+Lore-Rich,Muito Caro,1
+Lovecraftian,Barato,79
+Lovecraftian,Free,38
+Lovecraftian,Medio,29
+Lovecraftian,Muito Barato,85
+MMORPG,Barato,22
+MMORPG,Caro,6
+MMORPG,Free,246
+MMORPG,Medio,30
+MMORPG,Muito Barato,25
+MMORPG,Muito Caro,1
+MOBA,Barato,14
+MOBA,Caro,2
+MOBA,Free,98
+MOBA,Medio,4
+MOBA,Muito Barato,12
+Magic,Barato,227
+Magic,Caro,14
+Magic,Free,143
+Magic,Medio,87
+Magic,Muito Barato,147
+Magic,Muito Caro,2
+Mahjong,Barato,1
+Mahjong,Free,3
+Mahjong,Muito Barato,6
+Management,Barato,450
+Management,Caro,34
+Management,Free,184
+Management,Medio,231
+Management,Muito Barato,351
+Management,Muito Caro,1
+Mars,Barato,18
+Mars,Free,12
+Mars,Medio,10
+Mars,Muito Barato,15
+Martial Arts,Barato,54
+Martial Arts,Caro,2
+Martial Arts,Free,18
+Martial Arts,Medio,26
+Martial Arts,Muito Barato,39
+Massively Multiplayer,Barato,94
+Massively Multiplayer,Caro,16
+Massively Multiplayer,Free,674
+Massively Multiplayer,Medio,71
+Massively Multiplayer,Muito Barato,124
+Massively Multiplayer,Muito Caro,1
+Masterpiece,Free,5
+Masterpiece,Medio,1
+Match 3,Barato,8
+Match 3,Free,39
+Match 3,Medio,1
+Match 3,Muito Barato,71
+Mature,Barato,204
+Mature,Caro,27
+Mature,Free,123
+Mature,Medio,101
+Mature,Muito Barato,272
+Mature,Muito Caro,6
+Mechs,Barato,63
+Mechs,Caro,12
+Mechs,Free,29
+Mechs,Medio,35
+Mechs,Muito Barato,46
+Medical Sim,Barato,16
+Medical Sim,Free,6
+Medical Sim,Medio,8
+Medical Sim,Muito Barato,6
+Medieval,Barato,200
+Medieval,Caro,12
+Medieval,Free,128
+Medieval,Medio,107
+Medieval,Muito Barato,184
+Memes,Barato,194
+Memes,Caro,11
+Memes,Free,167
+Memes,Medio,40
+Memes,Muito Barato,361
+Metroidvania,Barato,181
+Metroidvania,Caro,2
+Metroidvania,Free,35
+Metroidvania,Medio,42
+Metroidvania,Muito Barato,113
+Military,Barato,151
+Military,Caro,27
+Military,Free,124
+Military,Medio,131
+Military,Muito Barato,167
+Military,Muito Caro,10
+Mini Golf,Barato,9
+Mini Golf,Free,2
+Mini Golf,Muito Barato,10
+Minigames,Barato,20
+Minigames,Caro,2
+Minigames,Free,12
+Minigames,Medio,5
+Minigames,Muito Barato,23
+Minimalist,Barato,74
+Minimalist,Free,122
+Minimalist,Medio,13
+Minimalist,Muito Barato,389
+Mining,Barato,39
+Mining,Free,20
+Mining,Medio,15
+Mining,Muito Barato,21
+Mod,Barato,14
+Mod,Free,76
+Mod,Medio,5
+Mod,Muito Barato,18
+Moddable,Barato,204
+Moddable,Caro,12
+Moddable,Free,61
+Moddable,Medio,132
+Moddable,Muito Barato,125
+Moddable,Muito Caro,1
+Modern,Barato,56
+Modern,Caro,10
+Modern,Free,42
+Modern,Medio,22
+Modern,Muito Barato,56
+Modern,Muito Caro,3
+Motocross,Barato,5
+Motocross,Caro,1
+Motocross,Free,2
+Motocross,Medio,12
+Motocross,Muito Barato,4
+Motorbike,Barato,22
+Motorbike,Caro,6
+Motorbike,Free,4
+Motorbike,Medio,20
+Motorbike,Muito Barato,11
+Mouse only,Barato,38
+Mouse only,Free,16
+Mouse only,Medio,3
+Mouse only,Muito Barato,109
+Multiplayer,Barato,1150
+Multiplayer,Caro,176
+Multiplayer,Free,1567
+Multiplayer,Medio,661
+Multiplayer,Muito Barato,1148
+Multiplayer,Muito Caro,18
+Multiple Endings,Barato,329
+Multiple Endings,Caro,19
+Multiple Endings,Free,170
+Multiple Endings,Medio,123
+Multiple Endings,Muito Barato,349
+Multiple Endings,Muito Caro,1
+Music,Barato,98
+Music,Caro,3
+Music,Free,53
+Music,Medio,38
+Music,Muito Barato,158
+Music,Muito Caro,3
+Music-Based Procedural Generation,Barato,13
+Music-Based Procedural Generation,Caro,1
+Music-Based Procedural Generation,Free,6
+Music-Based Procedural Generation,Medio,4
+Music-Based Procedural Generation,Muito Barato,22
+Musou,Barato,1
+Musou,Caro,17
+Musou,Free,1
+Musou,Medio,5
+Musou,Muito Caro,1
+Mystery,Barato,352
+Mystery,Caro,13
+Mystery,Free,229
+Mystery,Medio,127
+Mystery,Muito Barato,509
+Mystery Dungeon,Barato,23
+Mystery Dungeon,Caro,1
+Mystery Dungeon,Free,10
+Mystery Dungeon,Medio,6
+Mystery Dungeon,Muito Barato,29
+Mythology,Barato,66
+Mythology,Caro,8
+Mythology,Free,41
+Mythology,Medio,31
+Mythology,Muito Barato,61
+NSFW,Barato,68
+NSFW,Caro,4
+NSFW,Free,52
+NSFW,Medio,22
+NSFW,Muito Barato,134
+NSFW,Muito Caro,1
+Narration,Barato,122
+Narration,Caro,9
+Narration,Free,69
+Narration,Medio,49
+Narration,Muito Barato,123
+Narrative,Barato,45
+Narrative,Caro,2
+Narrative,Free,14
+Narrative,Medio,16
+Narrative,Muito Barato,20
+Nature,Barato,97
+Nature,Caro,4
+Nature,Free,71
+Nature,Medio,46
+Nature,Muito Barato,98
+Nature,Muito Caro,1
+Naval,Barato,45
+Naval,Caro,1
+Naval,Free,26
+Naval,Medio,32
+Naval,Muito Barato,32
+Naval Combat,Barato,31
+Naval Combat,Free,24
+Naval Combat,Medio,21
+Naval Combat,Muito Barato,23
+Ninja,Barato,39
+Ninja,Caro,6
+Ninja,Free,22
+Ninja,Medio,24
+Ninja,Muito Barato,36
+Noir,Barato,63
+Noir,Caro,2
+Noir,Free,27
+Noir,Medio,14
+Noir,Muito Barato,74
+Nonlinear,Barato,65
+Nonlinear,Free,35
+Nonlinear,Medio,25
+Nonlinear,Muito Barato,60
+Nostalgia,Barato,34
+Nostalgia,Caro,1
+Nostalgia,Free,12
+Nostalgia,Medio,8
+Nostalgia,Muito Barato,55
+Nudity,Barato,356
+Nudity,Caro,56
+Nudity,Free,286
+Nudity,Medio,177
+Nudity,Muito Barato,539
+Nudity,Muito Caro,5
+Offroad,Barato,24
+Offroad,Caro,2
+Offroad,Free,9
+Offroad,Medio,20
+Offroad,Muito Barato,15
+Old School,Barato,167
+Old School,Caro,2
+Old School,Free,92
+Old School,Medio,50
+Old School,Muito Barato,225
+On-Rails Shooter,Barato,9
+On-Rails Shooter,Caro,1
+On-Rails Shooter,Free,14
+On-Rails Shooter,Medio,6
+On-Rails Shooter,Muito Barato,13
+Online Co-Op,Barato,360
+Online Co-Op,Caro,59
+Online Co-Op,Free,372
+Online Co-Op,Medio,198
+Online Co-Op,Muito Barato,271
+Online Co-Op,Muito Caro,5
+Open World,Barato,844
+Open World,Caro,120
+Open World,Free,506
+Open World,Medio,483
+Open World,Muito Barato,545
+Open World,Muito Caro,9
+Open World Survival Craft,Barato,105
+Open World Survival Craft,Caro,3
+Open World Survival Craft,Free,26
+Open World Survival Craft,Medio,50
+Open World Survival Craft,Muito Barato,43
+Otome,Barato,28
+Otome,Caro,3
+Otome,Free,32
+Otome,Medio,15
+Otome,Muito Barato,42
+Outbreak Sim,Barato,14
+Outbreak Sim,Free,2
+Outbreak Sim,Medio,1
+Outbreak Sim,Muito Barato,5
+Parkour,Barato,75
+Parkour,Caro,9
+Parkour,Free,76
+Parkour,Medio,28
+Parkour,Muito Barato,62
+Parkour,Muito Caro,1
+Parody,Barato,34
+Parody,Free,33
+Parody,Medio,5
+Parody,Muito Barato,79
+Party,Barato,22
+Party,Free,12
+Party,Medio,14
+Party,Muito Barato,19
+Party Game,Barato,28
+Party Game,Free,15
+Party Game,Medio,11
+Party Game,Muito Barato,30
+Party-Based RPG,Barato,114
+Party-Based RPG,Caro,25
+Party-Based RPG,Free,44
+Party-Based RPG,Medio,54
+Party-Based RPG,Muito Barato,58
+Party-Based RPG,Muito Caro,2
+Perma Death,Barato,132
+Perma Death,Caro,3
+Perma Death,Free,35
+Perma Death,Medio,38
+Perma Death,Muito Barato,143
+Philosophical,Barato,39
+Philosophical,Caro,1
+Philosophical,Free,36
+Philosophical,Medio,14
+Philosophical,Muito Barato,59
+Physics,Barato,335
+Physics,Caro,14
+Physics,Free,182
+Physics,Medio,102
+Physics,Muito Barato,337
+Physics,Muito Caro,1
+Pinball,Barato,10
+Pinball,Free,10
+Pinball,Medio,2
+Pinball,Muito Barato,9
+Pirates,Barato,49
+Pirates,Caro,3
+Pirates,Free,24
+Pirates,Medio,15
+Pirates,Muito Barato,45
+Pirates,Muito Caro,1
+Pixel Graphics,Barato,671
+Pixel Graphics,Caro,6
+Pixel Graphics,Free,505
+Pixel Graphics,Medio,83
+Pixel Graphics,Muito Barato,1050
+Platformer,Barato,472
+Platformer,Caro,6
+Platformer,Free,331
+Platformer,Medio,99
+Platformer,Muito Barato,645
+Point & Click,Barato,291
+Point & Click,Caro,4
+Point & Click,Free,237
+Point & Click,Medio,48
+Point & Click,Muito Barato,671
+Political,Barato,57
+Political,Caro,7
+Political,Free,29
+Political,Medio,24
+Political,Muito Barato,48
+Political Sim,Barato,41
+Political Sim,Caro,6
+Political Sim,Free,17
+Political Sim,Medio,17
+Political Sim,Muito Barato,40
+Politics,Barato,38
+Politics,Caro,7
+Politics,Free,19
+Politics,Medio,20
+Politics,Muito Barato,50
+Pool,Barato,4
+Pool,Free,3
+Pool,Medio,2
+Pool,Muito Barato,4
+Post-apocalyptic,Barato,218
+Post-apocalyptic,Caro,17
+Post-apocalyptic,Free,116
+Post-apocalyptic,Medio,100
+Post-apocalyptic,Muito Barato,194
+Precision Platformer,Barato,45
+Precision Platformer,Free,54
+Precision Platformer,Medio,6
+Precision Platformer,Muito Barato,73
+Procedural Generation,Barato,311
+Procedural Generation,Caro,4
+Procedural Generation,Free,65
+Procedural Generation,Medio,77
+Procedural Generation,Muito Barato,230
+Procedural Generation,Muito Caro,1
+Programming,Barato,46
+Programming,Caro,1
+Programming,Free,12
+Programming,Medio,6
+Programming,Muito Barato,35
+Psychedelic,Barato,64
+Psychedelic,Caro,2
+Psychedelic,Free,63
+Psychedelic,Medio,13
+Psychedelic,Muito Barato,118
+Psychological,Barato,81
+Psychological,Caro,7
+Psychological,Free,74
+Psychological,Medio,29
+Psychological,Muito Barato,153
+Psychological Horror,Barato,307
+Psychological Horror,Caro,22
+Psychological Horror,Free,405
+Psychological Horror,Medio,142
+Psychological Horror,Muito Barato,737
+Puzzle,Barato,706
+Puzzle,Caro,8
+Puzzle,Free,587
+Puzzle,Medio,165
+Puzzle,Muito Barato,1513
+Puzzle,Muito Caro,1
+Puzzle Platformer,Barato,42
+Puzzle Platformer,Caro,1
+Puzzle Platformer,Free,68
+Puzzle Platformer,Medio,13
+Puzzle Platformer,Muito Barato,64
+Puzzle-Platformer,Barato,115
+Puzzle-Platformer,Free,73
+Puzzle-Platformer,Medio,19
+Puzzle-Platformer,Muito Barato,172
+PvE,Barato,127
+PvE,Caro,19
+PvE,Free,225
+PvE,Medio,86
+PvE,Muito Barato,132
+PvE,Muito Caro,3
+PvP,Barato,250
+PvP,Caro,57
+PvP,Free,621
+PvP,Medio,158
+PvP,Muito Barato,217
+PvP,Muito Caro,5
+Quick-Time Events,Barato,25
+Quick-Time Events,Caro,6
+Quick-Time Events,Free,15
+Quick-Time Events,Medio,11
+Quick-Time Events,Muito Barato,19
+RPG,Barato,1393
+RPG,Caro,162
+RPG,Free,1048
+RPG,Medio,577
+RPG,Muito Barato,1556
+RPG,Muito Caro,10
+RPGMaker,Barato,94
+RPGMaker,Free,97
+RPGMaker,Medio,2
+RPGMaker,Muito Barato,164
+RTS,Barato,214
+RTS,Caro,18
+RTS,Free,115
+RTS,Medio,127
+RTS,Muito Barato,276
+RTS,Muito Caro,1
+Racing,Barato,197
+Racing,Caro,23
+Racing,Free,160
+Racing,Medio,93
+Racing,Muito Barato,263
+Racing,Muito Caro,2
+Real Time Tactics,Barato,93
+Real Time Tactics,Caro,14
+Real Time Tactics,Free,82
+Real Time Tactics,Medio,65
+Real Time Tactics,Muito Barato,93
+Real Time Tactics,Muito Caro,1
+Real-Time,Barato,63
+Real-Time,Caro,2
+Real-Time,Free,22
+Real-Time,Medio,40
+Real-Time,Muito Barato,58
+Real-Time with Pause,Barato,68
+Real-Time with Pause,Caro,6
+Real-Time with Pause,Free,7
+Real-Time with Pause,Medio,46
+Real-Time with Pause,Muito Barato,61
+Realistic,Barato,414
+Realistic,Caro,53
+Realistic,Free,266
+Realistic,Medio,250
+Realistic,Muito Barato,328
+Realistic,Muito Caro,10
+Reboot,Barato,5
+Reboot,Free,1
+Reboot,Medio,4
+Reboot,Muito Barato,2
+Relaxing,Barato,362
+Relaxing,Caro,7
+Relaxing,Free,255
+Relaxing,Medio,119
+Relaxing,Muito Barato,585
+Relaxing,Muito Caro,1
+Remake,Barato,104
+Remake,Caro,9
+Remake,Free,18
+Remake,Medio,44
+Remake,Muito Barato,61
+Replay Value,Barato,308
+Replay Value,Caro,5
+Replay Value,Free,95
+Replay Value,Medio,127
+Replay Value,Muito Barato,286
+Replay Value,Muito Caro,2
+Resource Management,Barato,254
+Resource Management,Caro,10
+Resource Management,Free,122
+Resource Management,Medio,140
+Resource Management,Muito Barato,175
+Retro,Barato,491
+Retro,Caro,2
+Retro,Free,251
+Retro,Medio,80
+Retro,Muito Barato,787
+Rhythm,Barato,56
+Rhythm,Caro,4
+Rhythm,Free,32
+Rhythm,Medio,25
+Rhythm,Muito Barato,96
+Robots,Barato,111
+Robots,Caro,12
+Robots,Free,82
+Robots,Medio,49
+Robots,Muito Barato,109
+Rock Music,Barato,2
+Rock Music,Medio,4
+Rock Music,Muito Barato,1
+Rogue-like,Barato,310
+Rogue-like,Caro,1
+Rogue-like,Free,43
+Rogue-like,Medio,61
+Rogue-like,Muito Barato,223
+Rogue-like Deckbuilder,Barato,2
+Rogue-lite,Barato,266
+Rogue-lite,Caro,4
+Rogue-lite,Free,30
+Rogue-lite,Medio,64
+Rogue-lite,Muito Barato,182
+Roguelike,Barato,111
+Roguelike,Caro,1
+Roguelike,Free,55
+Roguelike,Medio,20
+Roguelike,Muito Barato,145
+Roguelike Deckbuilder,Barato,47
+Roguelike Deckbuilder,Free,10
+Roguelike Deckbuilder,Medio,9
+Roguelike Deckbuilder,Muito Barato,27
+Roguelite,Barato,115
+Roguelite,Free,63
+Roguelite,Medio,16
+Roguelite,Muito Barato,111
+Roguevania,Barato,15
+Roguevania,Free,2
+Roguevania,Medio,3
+Roguevania,Muito Barato,5
+Romance,Barato,168
+Romance,Caro,25
+Romance,Free,104
+Romance,Medio,104
+Romance,Muito Barato,227
+Romance,Muito Caro,1
+Rome,Barato,22
+Rome,Caro,3
+Rome,Free,7
+Rome,Medio,10
+Rome,Muito Barato,24
+Rugby,Barato,2
+Rugby,Caro,1
+Rugby,Medio,1
+Rugby,Muito Barato,1
+Runner,Barato,23
+Runner,Free,38
+Runner,Medio,4
+Runner,Muito Barato,76
+Sailing,Barato,30
+Sailing,Caro,1
+Sailing,Free,17
+Sailing,Medio,14
+Sailing,Muito Barato,15
+Sandbox,Barato,683
+Sandbox,Caro,28
+Sandbox,Free,274
+Sandbox,Medio,320
+Sandbox,Muito Barato,428
+Sandbox,Muito Caro,3
+Satire,Barato,33
+Satire,Caro,1
+Satire,Free,29
+Satire,Medio,5
+Satire,Muito Barato,48
+Sci-fi,Barato,698
+Sci-fi,Caro,54
+Sci-fi,Free,366
+Sci-fi,Medio,343
+Sci-fi,Muito Barato,651
+Sci-fi,Muito Caro,2
+Science,Barato,55
+Science,Caro,1
+Science,Free,21
+Science,Medio,30
+Science,Muito Barato,42
+Score Attack,Barato,42
+Score Attack,Caro,3
+Score Attack,Free,52
+Score Attack,Medio,11
+Score Attack,Muito Barato,137
+Sequel,Barato,22
+Sequel,Caro,5
+Sequel,Free,2
+Sequel,Medio,13
+Sequel,Muito Barato,37
+Sequel,Muito Caro,1
+Sexual Content,Barato,337
+Sexual Content,Caro,81
+Sexual Content,Free,298
+Sexual Content,Medio,197
+Sexual Content,Muito Barato,528
+Sexual Content,Muito Caro,4
+Shoot 'Em Up,Barato,114
+Shoot 'Em Up,Caro,3
+Shoot 'Em Up,Free,125
+Shoot 'Em Up,Medio,18
+Shoot 'Em Up,Muito Barato,270
+Shooter,Barato,546
+Shooter,Caro,55
+Shooter,Free,599
+Shooter,Medio,235
+Shooter,Muito Barato,810
+Shooter,Muito Caro,4
+Shop Keeper,Barato,3
+Shop Keeper,Medio,1
+Shop Keeper,Muito Barato,1
+Side Scroller,Barato,306
+Side Scroller,Caro,1
+Side Scroller,Free,140
+Side Scroller,Medio,46
+Side Scroller,Muito Barato,349
+Silent Protagonist,Barato,7
+Silent Protagonist,Caro,1
+Silent Protagonist,Free,11
+Silent Protagonist,Medio,2
+Silent Protagonist,Muito Barato,27
+Simulation,Barato,1414
+Simulation,Caro,114
+Simulation,Free,899
+Simulation,Medio,653
+Simulation,Muito Barato,1786
+Simulation,Muito Caro,21
+Singleplayer,Barato,3149
+Singleplayer,Caro,296
+Singleplayer,Free,1920
+Singleplayer,Medio,1376
+Singleplayer,Muito Barato,3798
+Singleplayer,Muito Caro,25
+Skateboarding,Barato,6
+Skateboarding,Free,3
+Skateboarding,Medio,4
+Skateboarding,Muito Barato,2
+Skating,Barato,7
+Skating,Free,2
+Skating,Medio,5
+Skating,Muito Barato,3
+Skiing,Barato,3
+Skiing,Free,1
+Skiing,Medio,3
+Skiing,Muito Barato,3
+Sniper,Barato,10
+Sniper,Caro,4
+Sniper,Free,20
+Sniper,Medio,6
+Sniper,Muito Barato,28
+Snooker,Barato,1
+Snooker,Free,2
+Snooker,Medio,1
+Snooker,Muito Barato,4
+Snow,Barato,10
+Snow,Free,8
+Snow,Medio,8
+Snow,Muito Barato,13
+Snowboarding,Barato,3
+Snowboarding,Free,1
+Snowboarding,Medio,4
+Snowboarding,Muito Barato,1
+Soccer,Barato,1
+Soccer,Caro,3
+Soccer,Free,31
+Soccer,Medio,2
+Soccer,Muito Barato,9
+Social Deduction,Barato,5
+Social Deduction,Free,14
+Social Deduction,Medio,4
+Social Deduction,Muito Barato,20
+Sokoban,Barato,6
+Sokoban,Free,8
+Sokoban,Medio,1
+Sokoban,Muito Barato,31
+Solitaire,Barato,12
+Solitaire,Free,15
+Solitaire,Medio,1
+Solitaire,Muito Barato,28
+Souls-like,Barato,99
+Souls-like,Caro,13
+Souls-like,Free,45
+Souls-like,Medio,78
+Souls-like,Muito Barato,63
+Souls-like,Muito Caro,1
+Soundtrack,Barato,81
+Soundtrack,Caro,6
+Soundtrack,Free,42
+Soundtrack,Medio,41
+Soundtrack,Muito Barato,120
+Soundtrack,Muito Caro,5
+Space,Barato,298
+Space,Caro,22
+Space,Free,155
+Space,Medio,151
+Space,Muito Barato,295
+Space Sim,Barato,81
+Space Sim,Caro,5
+Space Sim,Free,31
+Space Sim,Medio,43
+Space Sim,Muito Barato,42
+Spaceships,Barato,8
+Spaceships,Free,5
+Spaceships,Medio,10
+Spaceships,Muito Barato,4
+Spectacle fighter,Barato,38
+Spectacle fighter,Caro,4
+Spectacle fighter,Free,18
+Spectacle fighter,Medio,28
+Spectacle fighter,Muito Barato,29
+Spectacle fighter,Muito Caro,2
+Spelling,Free,6
+Spelling,Medio,1
+Spelling,Muito Barato,15
+Split Screen,Barato,82
+Split Screen,Caro,10
+Split Screen,Free,24
+Split Screen,Medio,28
+Split Screen,Muito Barato,45
+Split Screen,Muito Caro,2
+Sports,Barato,224
+Sports,Caro,39
+Sports,Free,209
+Sports,Medio,114
+Sports,Muito Barato,269
+Sports,Muito Caro,5
+Stealth,Barato,195
+Stealth,Caro,23
+Stealth,Free,95
+Stealth,Medio,99
+Stealth,Muito Barato,197
+Stealth,Muito Caro,1
+Steam Machine,Barato,1
+Steam Machine,Free,3
+Steam Machine,Muito Barato,6
+Steampunk,Barato,80
+Steampunk,Caro,1
+Steampunk,Free,31
+Steampunk,Medio,28
+Steampunk,Muito Barato,57
+Story Rich,Barato,1280
+Story Rich,Caro,159
+Story Rich,Free,608
+Story Rich,Medio,586
+Story Rich,Muito Barato,1233
+Story Rich,Muito Caro,8
+Strategy,Barato,1300
+Strategy,Caro,83
+Strategy,Free,1078
+Strategy,Medio,586
+Strategy,Muito Barato,1748
+Strategy,Muito Caro,7
+Strategy RPG,Barato,138
+Strategy RPG,Caro,19
+Strategy RPG,Free,80
+Strategy RPG,Medio,66
+Strategy RPG,Muito Barato,90
+Strategy RPG,Muito Caro,1
+Stylized,Barato,268
+Stylized,Caro,7
+Stylized,Free,201
+Stylized,Medio,94
+Stylized,Muito Barato,337
+Stylized,Muito Caro,3
+Submarine,Barato,9
+Submarine,Free,7
+Submarine,Medio,8
+Submarine,Muito Barato,13
+Superhero,Barato,32
+Superhero,Caro,10
+Superhero,Free,22
+Superhero,Medio,14
+Superhero,Muito Barato,19
+Supernatural,Barato,84
+Supernatural,Caro,3
+Supernatural,Free,43
+Supernatural,Medio,28
+Supernatural,Muito Barato,93
+Surreal,Barato,160
+Surreal,Caro,5
+Surreal,Free,128
+Surreal,Medio,36
+Surreal,Muito Barato,258
+Survival,Barato,543
+Survival,Caro,27
+Survival,Free,397
+Survival,Medio,247
+Survival,Muito Barato,549
+Survival,Muito Caro,1
+Survival Horror,Barato,221
+Survival Horror,Caro,17
+Survival Horror,Free,147
+Survival Horror,Medio,90
+Survival Horror,Muito Barato,314
+Swordplay,Barato,61
+Swordplay,Caro,6
+Swordplay,Free,32
+Swordplay,Medio,38
+Swordplay,Muito Barato,40
+Tabletop,Barato,75
+Tabletop,Caro,2
+Tabletop,Free,62
+Tabletop,Medio,33
+Tabletop,Muito Barato,110
+Tactical,Barato,327
+Tactical,Caro,38
+Tactical,Free,228
+Tactical,Medio,230
+Tactical,Muito Barato,290
+Tactical,Muito Caro,2
+Tactical RPG,Barato,129
+Tactical RPG,Caro,19
+Tactical RPG,Free,47
+Tactical RPG,Medio,73
+Tactical RPG,Muito Barato,69
+Tanks,Barato,30
+Tanks,Caro,3
+Tanks,Free,36
+Tanks,Medio,29
+Tanks,Muito Barato,31
+Tanks,Muito Caro,1
+Team-Based,Barato,86
+Team-Based,Caro,13
+Team-Based,Free,171
+Team-Based,Medio,48
+Team-Based,Muito Barato,100
+Team-Based,Muito Caro,1
+Tennis,Barato,5
+Tennis,Caro,1
+Tennis,Free,2
+Tennis,Medio,8
+Tennis,Muito Barato,2
+Text-Based,Barato,80
+Text-Based,Caro,4
+Text-Based,Free,75
+Text-Based,Medio,22
+Text-Based,Muito Barato,146
+Third Person,Barato,474
+Third Person,Caro,107
+Third Person,Free,377
+Third Person,Medio,328
+Third Person,Muito Barato,419
+Third Person,Muito Caro,9
+Third-Person Shooter,Barato,119
+Third-Person Shooter,Caro,30
+Third-Person Shooter,Free,144
+Third-Person Shooter,Medio,70
+Third-Person Shooter,Muito Barato,170
+Third-Person Shooter,Muito Caro,3
+Thriller,Barato,101
+Thriller,Caro,4
+Thriller,Free,58
+Thriller,Medio,31
+Thriller,Muito Barato,131
+Tile-Matching,Free,1
+Time Attack,Barato,23
+Time Attack,Free,5
+Time Attack,Medio,3
+Time Attack,Muito Barato,21
+Time Management,Barato,68
+Time Management,Caro,2
+Time Management,Free,47
+Time Management,Medio,30
+Time Management,Muito Barato,88
+Time Manipulation,Barato,31
+Time Manipulation,Caro,2
+Time Manipulation,Free,26
+Time Manipulation,Medio,12
+Time Manipulation,Muito Barato,35
+Time Travel,Barato,45
+Time Travel,Caro,1
+Time Travel,Free,22
+Time Travel,Medio,23
+Time Travel,Muito Barato,40
+Top-Down,Barato,311
+Top-Down,Caro,13
+Top-Down,Free,194
+Top-Down,Medio,80
+Top-Down,Muito Barato,344
+Top-Down,Muito Caro,1
+Top-Down Shooter,Barato,90
+Top-Down Shooter,Free,73
+Top-Down Shooter,Medio,15
+Top-Down Shooter,Muito Barato,136
+Touch-Friendly,Barato,28
+Touch-Friendly,Free,18
+Touch-Friendly,Medio,2
+Touch-Friendly,Muito Barato,90
+Tower Defense,Barato,89
+Tower Defense,Caro,1
+Tower Defense,Free,85
+Tower Defense,Medio,24
+Tower Defense,Muito Barato,164
+TrackIR,Barato,13
+TrackIR,Caro,3
+TrackIR,Free,5
+TrackIR,Medio,6
+TrackIR,Muito Barato,5
+TrackIR,Muito Caro,1
+Trading,Barato,58
+Trading,Caro,5
+Trading,Free,39
+Trading,Medio,27
+Trading,Muito Barato,42
+Trading Card Game,Barato,17
+Trading Card Game,Caro,1
+Trading Card Game,Free,80
+Trading Card Game,Medio,7
+Trading Card Game,Muito Barato,34
+Trading Card Game,Muito Caro,1
+Traditional Rogue-like,Barato,1
+Traditional Roguelike,Barato,27
+Traditional Roguelike,Free,4
+Traditional Roguelike,Medio,3
+Traditional Roguelike,Muito Barato,28
+Trains,Barato,36
+Trains,Caro,1
+Trains,Free,8
+Trains,Medio,29
+Trains,Muito Barato,31
+Trains,Muito Caro,1
+Transhumanism,Barato,17
+Transhumanism,Free,6
+Transhumanism,Medio,7
+Transhumanism,Muito Barato,10
+Transportation,Barato,28
+Transportation,Caro,2
+Transportation,Free,9
+Transportation,Medio,30
+Transportation,Muito Barato,18
+Trivia,Barato,2
+Trivia,Free,5
+Trivia,Medio,10
+Trivia,Muito Barato,11
+Turn-Based,Barato,366
+Turn-Based,Caro,43
+Turn-Based,Free,134
+Turn-Based,Medio,201
+Turn-Based,Muito Barato,296
+Turn-Based,Muito Caro,3
+Turn-Based Combat,Barato,274
+Turn-Based Combat,Caro,43
+Turn-Based Combat,Free,101
+Turn-Based Combat,Medio,153
+Turn-Based Combat,Muito Barato,158
+Turn-Based Combat,Muito Caro,2
+Turn-Based Strategy,Barato,296
+Turn-Based Strategy,Caro,37
+Turn-Based Strategy,Free,148
+Turn-Based Strategy,Medio,193
+Turn-Based Strategy,Muito Barato,253
+Turn-Based Strategy,Muito Caro,3
+Turn-Based Tactics,Barato,216
+Turn-Based Tactics,Caro,25
+Turn-Based Tactics,Free,116
+Turn-Based Tactics,Medio,127
+Turn-Based Tactics,Muito Barato,165
+Twin Stick Shooter,Barato,79
+Twin Stick Shooter,Caro,1
+Twin Stick Shooter,Free,51
+Twin Stick Shooter,Medio,8
+Twin Stick Shooter,Muito Barato,97
+Typing,Barato,18
+Typing,Free,10
+Typing,Medio,1
+Typing,Muito Barato,21
+Underground,Barato,22
+Underground,Free,17
+Underground,Medio,3
+Underground,Muito Barato,15
+Underwater,Barato,36
+Underwater,Free,16
+Underwater,Medio,15
+Underwater,Muito Barato,42
+Unforgiving,Barato,12
+Unforgiving,Free,3
+Unforgiving,Medio,4
+Unforgiving,Muito Barato,10
+VR,Barato,281
+VR,Caro,23
+VR,Free,229
+VR,Medio,176
+VR,Muito Barato,160
+VR,Muito Caro,8
+VR Only,Barato,57
+VR Only,Caro,2
+VR Only,Free,29
+VR Only,Medio,53
+VR Only,Muito Barato,20
+Vampire,Barato,32
+Vampire,Caro,4
+Vampire,Free,18
+Vampire,Medio,10
+Vampire,Muito Barato,41
+Vehicular Combat,Barato,41
+Vehicular Combat,Caro,2
+Vehicular Combat,Free,28
+Vehicular Combat,Medio,27
+Vehicular Combat,Muito Barato,28
+Vikings,Barato,13
+Vikings,Caro,1
+Vikings,Free,2
+Vikings,Medio,10
+Vikings,Muito Barato,14
+Villain Protagonist,Barato,50
+Villain Protagonist,Free,8
+Villain Protagonist,Medio,14
+Villain Protagonist,Muito Barato,46
+Violent,Barato,439
+Violent,Caro,75
+Violent,Free,339
+Violent,Medio,271
+Violent,Muito Barato,615
+Violent,Muito Caro,6
+Visual Novel,Barato,366
+Visual Novel,Caro,36
+Visual Novel,Free,291
+Visual Novel,Medio,169
+Visual Novel,Muito Barato,581
+Visual Novel,Muito Caro,1
+Voice Control,Barato,9
+Voice Control,Caro,1
+Voice Control,Free,2
+Voice Control,Medio,1
+Voice Control,Muito Barato,1
+Volleyball,Barato,2
+Volleyball,Muito Barato,1
+Voxel,Barato,47
+Voxel,Caro,2
+Voxel,Free,23
+Voxel,Medio,20
+Voxel,Muito Barato,49
+Walking Simulator,Barato,182
+Walking Simulator,Caro,4
+Walking Simulator,Free,143
+Walking Simulator,Medio,55
+Walking Simulator,Muito Barato,268
+War,Barato,214
+War,Caro,38
+War,Free,163
+War,Medio,149
+War,Muito Barato,206
+War,Muito Caro,5
+Wargame,Barato,71
+Wargame,Caro,10
+Wargame,Free,72
+Wargame,Medio,79
+Wargame,Muito Barato,69
+Wargame,Muito Caro,4
+Warhammer 40K,Barato,23
+Warhammer 40K,Caro,5
+Warhammer 40K,Free,9
+Warhammer 40K,Medio,13
+Warhammer 40K,Muito Barato,5
+Well-Written,Barato,5
+Well-Written,Caro,2
+Well-Written,Free,4
+Well-Written,Medio,2
+Well-Written,Muito Barato,3
+Werewolves,Barato,12
+Werewolves,Free,12
+Werewolves,Medio,1
+Werewolves,Muito Barato,13
+Western,Barato,28
+Western,Caro,2
+Western,Free,22
+Western,Medio,11
+Western,Muito Barato,46
+Wholesome,Barato,34
+Wholesome,Free,5
+Wholesome,Medio,8
+Wholesome,Muito Barato,24
+Word Game,Barato,19
+Word Game,Caro,1
+Word Game,Free,18
+Word Game,Medio,10
+Word Game,Muito Barato,85
+World War I,Barato,21
+World War I,Free,15
+World War I,Medio,15
+World War I,Muito Barato,18
+World War I,Muito Caro,1
+World War II,Barato,86
+World War II,Caro,14
+World War II,Free,82
+World War II,Medio,57
+World War II,Muito Barato,139
+World War II,Muito Caro,4
+Wrestling,Barato,6
+Wrestling,Caro,2
+Wrestling,Free,4
+Wrestling,Medio,4
+Wrestling,Muito Barato,6
+Zombies,Barato,186
+Zombies,Caro,19
+Zombies,Free,173
+Zombies,Medio,73
+Zombies,Muito Barato,267
+e-sports,Free,12
+eSports,Barato,43
+eSports,Caro,11
+eSports,Free,85
+eSports,Medio,28
+eSports,Muito Barato,36
+eSports,Muito Caro,3

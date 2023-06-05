@@ -1,0 +1,168 @@
+---
+title: "Analise Exploratoria"
+author: "Mikael M Coletto"
+date: "01/05/2023"
+toc: true
+execute:
+  warning: false
+cache: FALSE
+lang: pt
+theme: cerulean
+reference-location: margin
+code-fold: true
+code-tools: 
+      source: https://github.com/mikael04/steam-dashboard.git
+---
+
+```{r setup, include=FALSE}
+knitr::opts_knit$set(root.dir = '/mnt/Netac-Dados/Projetos/R/steam-dashboard',
+                     cache.lazy = FALSE)
+path_quarto <- "../../"
+source(here::here("R/fct-auxiliares/fct_order_strings.R"))
+source(here::here("R/fct-auxiliares/fct_filter_top.R"))
+source(here::here("R/fct-auxiliares/fct_filter_not_games.R"))
+library(dplyr)
+
+switch_overwrite_initial_tables <- F
+
+```
+
+# Análise dos dados da Steam
+
+## Objetivo
+
+A ideia desta análise é ilustrar os conhecimentos adquiridos em R, passando pelos pontos de análise exploratória, construção de um dashboard para visualização de dados e por fim trabalhar com modelos de predição para alguns possíveis problemas da indústria.
+
+## Primeiro problema
+
+Somos um estúdio de jogos e queremos analisar: 1 - qual gênero/categoria de jogo tem mais sucesso na steam, definindo sucesso como melhores avaliações; 2 - também queremos analisar qual faixa de preço é mais interessante para o lançamento desse novo jogo, ou seja, qual faixa de preço tem maior número de vendas.
+
+### Primeiro passo - Análise exploratória
+
+Inicialmente iremos fazer uma análise exploratória de algumas bases de dados e suas variáveis que podem ser interessantes para determinar sucesso de um jogo, a faixa de preço, a quantidade de vendas e relacionar essas questões aos gêneros e categorias. Foram feitas análises de três bases de dados, a primeira mais completa, e as duas seguintes mais focadas em reviews de usuários.
+
+#### Base de dados - 1
+
+```{r, child="docs/Analise/capitulos/1-analise-base-1.qmd", eval=switch_overwrite_initial_tables}
+```
+
+#### Base de dados - 2
+
+```{r, child="docs/Analise/capitulos/2-analise-base-2.qmd", eval=switch_overwrite_initial_tables}
+```
+
+#### Base de dados - 3
+
+```{r, child="docs/Analise/capitulos/3-analise-base-3.qmd", eval=switch_overwrite_initial_tables}
+```
+
+#### Diferenças entre base 1 e 3
+
+```{r, child="docs/Analise/capitulos/4-dif-entre-bases.qmd"}
+```
+
+#### Unindo as bases
+
+```{r, child="docs/Analise/capitulos/5-unindo-bases.qmd"}
+```
+
+### Analisando dados dos jogos
+
+Agora que já uni as duas bases, e tenho uma quantidade mais razoável de jogos a serem analisados, precisarei definir qual será a forma de avaliar os estilos/gêneros/categorias dos jogos, por ser uma coluna presente em ambas as bases, a variável `tags` é uma ótima candidata, porém ela apresenta um número de possibilidades bastante grande e distinta, o que poderia ser prejudicial à análise. Já as outras variáveis `categories` e `genres` que são mais específicas, não estão presentes em aproximadamente 20% da base de dados. A análise será feita inicialmente nas três para posterior decisão de qual ou quais usar.
+
+#### Categorias
+
+```{r, categs-count}
+df_all_games |> 
+  dplyr::filter(!(is.na(categories)) & categories != "") |> 
+  nrow()
+```
+
+Ou seja, temos aproximadamente 20% da base de dados sem nenhuma informação de categorias, a variável poderia ser utilizada, porém com algumas ressalvas.
+
+#### Gêneros
+
+```{r, genres-count}
+df_all_games |> 
+  dplyr::filter(!(is.na(genres)) & genres != "") |> 
+  nrow()
+```
+
+Novamente, cerca de 20% da base sem informações de gênero.
+
+#### Categorias e Gênero
+
+```{r, categs-genres-count}
+df_all_games |> 
+  dplyr::filter(!(is.na(categories)) & categories != "") |> 
+  dplyr::filter(!(is.na(genres)) & genres != "") |> 
+  nrow()
+```
+
+E, para efeito de comparação, podemos ver que os valores sem categorias e gênero são as mesmas observações, o que faz bastante sentido já que foram unidas e uma das duas bases não possuía essas colunas.
+
+#### Tags
+
+```{r, tags-count}
+df_all_games |> 
+  dplyr::filter(!(is.na(tags)) & tags != "" ||
+                (is.na(tags_extra)) & tags_extra != "") |> 
+  nrow()
+```
+
+Já no caso das tags, temos todas as observações com tags ou tags_extra (o que também faz sentido, já que unimos duas bases diferentes e uma delas possuia a coluna tags e a outra tags_extra).
+
+Portanto, faremos uma análise mais aprofundada para gerar uma única coluna que possa ser analisada.
+
+```{r, child="docs/Analise/capitulos/6-tags.qmd"}
+```
+
+#### Investigando preços
+
+Vamos agora nos debruçar sobre as faixas de preços e em seguida faremos um cruzamento dos dados de preços e tags.
+
+```{r, child="docs/Analise/capitulos/7-price.qmd"}
+```
+
+#### Investigando jogos bem avaliados
+
+```{r, child="docs/Analise/capitulos/8-well-reviewed.qmd"}
+```
+
+#### Investigando variações das tags em categorias de preços
+
+```{r, child="docs/Analise/capitulos/9-price-tags.qmd"}
+```
+
+![Paleta de cores](capitulos/cap-images/ranking_palette_genres_prices.png){fig-alt="Imagem com paleta de cores e suas porcentagens"}
+
+#### Tentando criar um modelo para jogos mais bem avaliados
+```{r}
+## Variáveis (independentes) que podem ser relevantes para prever o sucesso (medido por positive_ratio)
+## windows (binária, dummie), linux (binária, dummie), mac (binária, dummie),
+## price_final (numérica, discreta), steam_deck (binária, dummie),
+## tags_all (categórica, precisa ser transformada em dummies)
+
+## Variável target (dependente) positive_ratio, numérica
+
+```
+
+
+
+#### Resposta do chatGPT
+
+Para analisar a melhor faixa de preço para lançar um produto com base nas informações de preços de outros competidores, você pode seguir os seguintes passos:
+
+Coletar informações sobre os preços dos produtos concorrentes: colete informações sobre os preços dos produtos concorrentes na mesma categoria ou segmento de mercado do seu produto. Você pode usar ferramentas como pesquisas online, visitas a lojas, análise de dados de mercado, entre outras.
+
+Analisar a faixa de preços dos produtos concorrentes: depois de coletar as informações sobre os preços dos produtos concorrentes, analise a faixa de preços. Você pode agrupar os preços em categorias, como baixo, médio e alto, ou usar técnicas estatísticas, como análise de quartis ou médias, para identificar a faixa de preços.
+
+Comparar os preços com as características dos produtos: avalie as características dos produtos concorrentes que estão na mesma faixa de preços. Analise aspectos como qualidade, design, funcionalidades, marca, reputação, entre outros.
+
+Definir uma faixa de preços para o seu produto: com base nas informações coletadas e na análise dos preços e características dos produtos concorrentes, defina uma faixa de preços para o seu produto. Lembre-se de considerar fatores como os custos de produção, a margem de lucro desejada, a percepção de valor pelos clientes, entre outros.
+
+Testar a faixa de preços: depois de definir a faixa de preços, teste-a com potenciais clientes. Você pode realizar pesquisas de mercado, criar ofertas promocionais ou realizar testes de preços em pequena escala para avaliar a receptividade dos clientes e fazer ajustes se necessário.
+
+Monitorar e ajustar os preços: monitore continuamente os preços dos produtos concorrentes e a demanda pelo seu produto e faça ajustes na faixa de preços conforme necessário para manter uma posição competitiva no mercado.
+
+Lembre-se de que a análise de preços dos concorrentes é apenas uma das informações que você deve considerar ao definir a faixa de preços para o seu produto. Outros fatores, como o posicionamento da marca, o público-alvo, a estratégia de marketing e os objetivos de negócios também devem ser levados em consideração.
