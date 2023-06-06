@@ -17,5 +17,5 @@ func_add_price_categ <- function(df, debug){
                                                  price_original > 20 ~ "Medio",
                                                  price_original > 10 ~ "Barato",
                                                  price_original > 0 ~ "Muito Barato",
-                                                 price_original == 0 ~ "Free"))
+                                                 price_original == 0 ~ "Gratuito"))
 }

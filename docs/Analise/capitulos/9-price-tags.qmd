@@ -12,6 +12,7 @@ library(ggplot2)
 library(dplyr)
 # library(janitor)
 source(here::here("R/fct-auxiliares/fct_filter_not_games.R"))
+source(here::here("R/fc-auxiliares/fct_add_price_categ.R"))
 switch_overwrite_initial_tables <- F
 ```
 

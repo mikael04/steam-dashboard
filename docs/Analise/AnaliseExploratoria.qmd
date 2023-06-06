@@ -23,7 +23,6 @@ path_quarto <- "../../"
 source(here::here("R/fct-auxiliares/fct_order_strings.R"))
 source(here::here("R/fct-auxiliares/fct_filter_top.R"))
 source(here::here("R/fct-auxiliares/fct_filter_not_games.R"))
-source(here::here("R/fct-auxiliares/fct_filter_not_games.R"))
 ## Librarys
 library(ggplot2)
 library(dplyr)
@@ -37,7 +36,7 @@ switch_overwrite_initial_tables <- T
 
 ## Objetivo
 
-A ideia desta análise é ilustrar os conhecimentos adquiridos em R, começando com uma análise exploratória dos dados, e tentando trazer alguns insights relacionados à empresas que queiram lançar jogos e ter sucesso no mercado.
+A ideia desta análise é ilustrar os conhecimentos adquiridos em R, começando com uma análise exploratória dos dados, e tentando trazer alguns insights relacionados à empresas que queiram lançar jogos de sucesso no mercado.
 
 ## Primeiro problema
 
@@ -134,7 +133,7 @@ Vamos agora nos debruçar sobre as faixas de preços e em seguida faremos um cru
 
 #### Investigando jogos bem avaliados
 
-```{r, child="docs/Analise/capitulos/8-well-reviewed.qmd"}
+```{r, child="docs/Analise/capitulos/8-reviews.qmd"}
 ```
 
 #### Investigando variações das tags em categorias de preços

@@ -1,4 +1,4 @@
-```{r, header-base-1}
+```{r, header-base-1, echo = F}
 ########################################################################################## #
 #'  Parte do arquivo de análise exploratória
 #'  Arquivo focado na análise da primeira base

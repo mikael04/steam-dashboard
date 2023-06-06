@@ -1,0 +1,69 @@
+```{r, header-well-reviewed}
+########################################################################################## #
+#'  Parte do arquivo de análise exploratória
+#'  Arquivo focado em uma análise exploratória da relação preço vs tags
+#' 
+#'  Autor: Mikael Marin Coletto
+#'  Data: 30/03/23
+########################################################################################## #
+
+## 0.1 - Bibliotecas e scripts fontes----
+library(ggplot2)
+library(dplyr)
+source(here::here("R/fct-auxiliares/fct_add_price_categ.R"))
+```
+
+## Mais avaliações positivas
+
+Primeiramente vamos analisar os jogos que tem mais avaliações positivas. Utilizaremos apenas os 100 jogos mais bem avaliados da base. Além disso, faremos um filtro de ano, para que tenhamos jogos mais atuais, após 2019.
+
+```{r, well-reviewed}
+## Usado para escrever o qmd, porém não preciso utilizar ao rodar a análise completa (outro qmd já fará a leitura desse arquivo)
+df_all_games <- data.table::fread(here::here("data-raw/created-tables/db-all-games-tags-all.csv"))
+
+df_well_reviewed <- func_add_price_categ(df_all_games, F) |> 
+  dplyr::filter(user_reviews > 50000 & date_release > '2019-01-01') |>
+  dplyr::arrange(desc(user_reviews)) |> 
+  dplyr::slice_head(n = 100)
+
+df_well_reviewed$price_categ <- as.factor(df_well_reviewed$price_categ)
+
+df_well_reviewed$price_categ <- factor(df_well_reviewed$price_categ,
+                                       levels = c("Gratuito", "Muito Barato", "Barato",
+                                                  "Medio", "Caro", "Muito Caro"))
+
+ggplot(df_well_reviewed, aes(x = price_categ)) +
+  geom_bar() +
+  theme_minimal() +
+  labs(title = "Contagem de jogos por categoria de preço",
+       x = "Preço",
+       y = "Contagem") #+
+  # scale_color_discrete(values = rep(c("lightblue"), 6))
+
+```
+
+A avaliação dos 30 jogos com mais avaliações de usuários, que foram lançados após 2019, para que tenhamos um mercado observado mais próximo dos dias auais, e possuem pelo menos 50000 avaliações, numa primeira avaliação não mostrou trouxe nenhuma conclusão, existem jogos baratos que foram lançados e fizeram sucesso, como Phasmophobia, Valheim e Raft, existem jogos que são gratuitos e lucram através de itens cosméticos como o Apex Legends, Destiny 2 (que foi pago e se tornou gratuito), Lost Ark, e existem jogos caros que foram lançados e fizeram sucesso, como CyberPunk 2077, Elden Ring, Red Dead Redemption 2, Forza e Sekiro. 
+
+## Mais bem avaliados
+
+```{r, positive-ratio}
+df_best_ratio <- df_all_games |> 
+  dplyr::filter(user_reviews > 10000 & date_release > '2019-01-01') |>
+  dplyr::arrange(desc(positive_ratio)) |>
+  dplyr::slice_head(n = 100)
+
+## Menor valor de preço
+min(df_best_ratio$price_final, df_best_ratio$price_original)
+## Maior valor de preço
+max(df_best_ratio$price_final, df_best_ratio$price_original)
+## Mediana de valores de preço
+median(df_best_ratio$price_original)
+
+## Verificando quartis
+quantile(df_best_ratio$price_original, probs = c(0, 0.25, 0.5, 0.75, 1))
+
+```
+
+Uma outra forma de avaliar os jogos, que é a taxa de avaliações positivas, parece ter trazido uma variedade de jogos menos abrangente, apesar de, no top 50 avaliações positivas, ainda encontrarmos alguns jogos com preço perto da margem de "topo", que seria $60, boa parte deles está nas faixas entre 9-25 dólares.
+
+O que pode indicar uma faixa de preço interessante para o lançamento de um jogo. Porém, vamos tentar analisar outros aspectos usando análises mais complexas.
