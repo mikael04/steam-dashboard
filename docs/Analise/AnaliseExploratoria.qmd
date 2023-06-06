@@ -44,40 +44,40 @@ Somos um estúdio de jogos e queremos analisar:
 1 - Qual gênero/categoria de jogo tem mais sucesso na steam, definindo sucesso como melhores avaliações; 
 2 - Também queremos analisar qual faixa de preço é mais interessante para o lançamento desse novo jogo, ou seja, qual faixa de preço tem maior número de vendas.
 
-### Primeiro passo - Análise exploratória
+## Análise exploratória
 
-Inicialmente iremos fazer uma análise exploratória de algumas bases de dados e suas variáveis que podem ser interessantes para determinar sucesso de um jogo, a faixa de preço, a quantidade de vendas e relacionar essas questões aos gêneros e categorias. Foram feitas análises de três bases de dados, a primeira mais completa, e as duas seguintes mais focadas em reviews de usuários.
+Inicialmente iremos fazer uma análise exploratória de algumas bases de dados e suas variáveis que podem ser interessantes para determinar sucesso de um jogo, a faixa de preço, a quantidade de vendas e relacionar essas questões aos gêneros e categorias. Foram feitas análises de três bases de dados, a primeira mais completa, e as duas seguintes mais focadas em reviews de usuários. São bases de dadas extraídas do Kaggle que serão utilizadas para o estudo.
 
-#### Base de dados - 1
+### Base de dados - 1
 
 ```{r, child="docs/Analise/capitulos/1-analise-base-1.qmd", eval=switch_overwrite_initial_tables}
 ```
 
-#### Base de dados - 2
+### Base de dados - 2
 
 ```{r, child="docs/Analise/capitulos/2-analise-base-2.qmd", eval=switch_overwrite_initial_tables}
 ```
 
-#### Base de dados - 3
+### Base de dados - 3
 
 ```{r, child="docs/Analise/capitulos/3-analise-base-3.qmd", eval=switch_overwrite_initial_tables}
 ```
 
-#### Diferenças entre base 1 e 3
+### Diferenças entre base 1 e 3
 
 ```{r, child="docs/Analise/capitulos/4-dif-entre-bases.qmd"}
 ```
 
-#### Unindo as bases
+### Unindo as bases
 
 ```{r, child="docs/Analise/capitulos/5-unindo-bases.qmd"}
 ```
 
-### Analisando dados dos jogos
+## Analisando dados dos jogos
 
 Agora que já uni as duas bases, e tenho uma quantidade mais razoável de jogos a serem analisados, precisarei definir qual será a forma de avaliar os estilos/gêneros/categorias dos jogos, por ser uma coluna presente em ambas as bases, a variável `tags` é uma ótima candidata, porém ela apresenta um número de possibilidades bastante grande e distinta, o que poderia ser prejudicial à análise. Já as outras variáveis `categories` e `genres` que são mais específicas, não estão presentes em aproximadamente 20% da base de dados. A análise será feita inicialmente nas três para posterior decisão de qual ou quais usar.
 
-#### Categorias
+### Categorias
 
 ```{r, categs-count}
 df_all_games |> 
@@ -87,7 +87,7 @@ df_all_games |>
 
 Ou seja, temos aproximadamente 20% da base de dados sem nenhuma informação de categorias, a variável poderia ser utilizada, porém com algumas ressalvas.
 
-#### Gêneros
+### Gêneros
 
 ```{r, genres-count}
 df_all_games |> 
@@ -97,7 +97,7 @@ df_all_games |>
 
 Novamente, cerca de 20% da base sem informações de gênero.
 
-#### Categorias e Gênero
+### Categorias e Gênero
 
 ```{r, categs-genres-count}
 df_all_games |> 
@@ -108,7 +108,7 @@ df_all_games |>
 
 E, para efeito de comparação, podemos ver que os valores sem categorias e gênero são as mesmas observações, o que faz bastante sentido já que foram unidas e uma das duas bases não possuía essas colunas.
 
-#### Tags
+### Tags
 
 ```{r, tags-count}
 df_all_games |> 
@@ -124,19 +124,19 @@ Portanto, faremos uma análise mais aprofundada para gerar uma única coluna que
 ```{r, child="docs/Analise/capitulos/6-tags.qmd"}
 ```
 
-#### Investigando preços
+### Investigando preços
 
 Vamos agora nos debruçar sobre as faixas de preços e em seguida faremos um cruzamento dos dados de preços e tags.
 
 ```{r, child="docs/Analise/capitulos/7-price.qmd"}
 ```
 
-#### Investigando jogos bem avaliados
+### Investigando jogos bem avaliados
 
 ```{r, child="docs/Analise/capitulos/8-reviews.qmd"}
 ```
 
-#### Investigando variações das tags em categorias de preços
+### Investigando variações das tags em categorias de preços
 
 ```{r, child="docs/Analise/capitulos/9-price-tags.qmd"}
 ```
