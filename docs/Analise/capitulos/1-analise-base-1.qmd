@@ -19,7 +19,7 @@ Esta base de dados se encontra no Kaggle, através deste link:
 
 #### Skimr
 
-Usaremos o Skimr para a base de dados completa e verificarei quais dados podem ser melhor investigados. Essa função faz um resumo geral das variáveis e é bem útil para uma primeira visualização.
+Usarei o Skimr para a base de dados completa e verificarei quais dados podem ser melhor investigados. Essa função faz um resumo geral das variáveis e é bem útil para uma primeira visualização.
 
 ```{r, mongoCon, echo = T, result = 'hide', message = F, warning = F, error = F}
 # ## Dados de conexão com o banco da Steam no mongo
@@ -78,7 +78,7 @@ df_selected_gen <- func_filter_not_games(df_selected_gen, notGames, mode = 2)
 
 ##### Escolhendo as variáveis
 
-Após uma análise inicial das tabelas geradas pelo `skimr`, selecionei algumas variáveis que seriam analisadas mais profundamente. A começar pelas variáveis relativas a notas, críticas e avaliações dos jogos.
+E então, análisando as tabelas geradas pelo `skimr`, selecionei algumas variáveis que seriam analisadas mais profundamente. A começar pelas variáveis relativas a notas, críticas e avaliações dos jogos.
 
 ```{r, varReview}
 
@@ -90,7 +90,7 @@ ggplot(df_selected_gen, aes(metacritic_score)) +
        y = "Contagem")
 ```
 
-Pelo Histograma podemos ver que a variável *Metacritic Score* (renomeada para metacritic_score) não é muito interessante, seu preenchimento foi visto como completo pelo skim, porém quase em sua totalidade as notas são "0", ou seja, não temos uma nota definida para avaliar os jogos.
+Pelo Histograma pude ver que a variável *Metacritic Score* (renomeada para metacritic_score) não é muito interessante, seu preenchimento foi visto como completo pelo skim, porém quase em sua totalidade as notas são "0", ou seja, não temos uma nota definida para avaliar os jogos.
 
 Outras variáveis de avaliação como *Reviews*, *User Score*, e *Recommendations*, foram analisadas porém apresentaram pouco úteis, ou por terem um preenchimento muito baixo ou por envolverem outros tipos de dados (que não fossem uma avaliação direta).
 
@@ -106,7 +106,7 @@ df_selected_gen$overall <- df_selected_gen$positive*100/(df_selected_gen$positiv
 df_selected_gen$overall[1:100]
 ```
 
-Analisando essa nova métrica, verificamos que possuímos dados `NaN` e valores de 100, respectivamente, resultados de de divisões $0/0$ e de jogos sem avaliação negativa. Os números NaN serão removidos, já que não serão úteis para avaliação dos jogos, os números 100 serão investigados mais a fundo.
+Analisando uma parte da base de dados com essa nova métrica, verifiquei que a tabela possuía dados `NaN` e valores de 100, respectivamente, resultados de de divisões $0/0$ e de jogos sem avaliação negativa. Os números NaN serão removidos, já que não serão úteis para avaliação dos jogos, os números 100 serão investigados mais a fundo.
 
 ##### Filtrando dados inválidos
 

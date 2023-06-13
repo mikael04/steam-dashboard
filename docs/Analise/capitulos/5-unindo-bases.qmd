@@ -11,9 +11,13 @@
 library(jsonlite)
 ```
 
+Como comentado nas diferenças entre as bases, eu considerei algumas faltas de avaliações/jogadores como inconsistentets na base 1, portanto utilizarei a base 3 e farei a adição dos jogos não presentes nela, que estão presentets na base 1.
+
 ```{r, joinDBs}
 
+## Base 1
 df_selected_gen <- data.table::fread(here::here("data-raw/created-tables/db-games-1.csv"))
+## Base 3
 df_games_selTags <- data.table::fread(here::here("data-raw/created-tables/db-games-3.csv"))
 
 ## Jogos presentes na base 1 que não estão na base 3
@@ -78,8 +82,5 @@ if(run_join){
                   tags_extra = ifelse(tags_extra == "", NA, tags_extra))
 }
 
-## Verificando quantos jogos não possuem categorias, gêneros ou tags/tags_extra definidos
-nrow(df_all_games[is.na(categories), ])
-nrow(df_all_games[is.na(genres), ])
-nrow(df_all_games[is.na(tags) & is.na(tags_extra), ])
+
 ```

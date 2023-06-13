@@ -28,7 +28,7 @@ library(ggplot2)
 library(dplyr)
 
 ## Switch para reescrever tabelas iniciais
-switch_overwrite_initial_tables <- T
+switch_overwrite_initial_tables <- F
 
 ```
 
@@ -46,7 +46,7 @@ Somos um estúdio de jogos e queremos analisar:
 
 ## Análise exploratória
 
-Inicialmente iremos fazer uma análise exploratória de algumas bases de dados e suas variáveis que podem ser interessantes para determinar sucesso de um jogo, a faixa de preço, a quantidade de vendas e relacionar essas questões aos gêneros e categorias. Foram feitas análises de três bases de dados, a primeira mais completa, e as duas seguintes mais focadas em reviews de usuários. São bases de dadas extraídas do Kaggle que serão utilizadas para o estudo.
+Inicialmente irei fazer uma análise exploratória de algumas bases de dados e suas variáveis que podem ser interessantes para determinar sucesso de um jogo, a faixa de preço, a quantidade de vendas e relacionar essas questões aos gêneros e categorias. Foram feitas análises de três bases de dados, a primeira mais completa, e as duas seguintes mais focadas em reviews de usuários. São bases de dadas extraídas do Kaggle que serão utilizadas para o estudo.
 
 ### Base de dados - 1
 
@@ -65,7 +65,7 @@ Inicialmente iremos fazer uma análise exploratória de algumas bases de dados e
 
 ### Diferenças entre base 1 e 3
 
-```{r, child="docs/Analise/capitulos/4-dif-entre-bases.qmd"}
+```{r, child="docs/Analise/capitulos/4-dif-entre-bases.qmd", eval=switch_overwrite_initial_tables}
 ```
 
 ### Unindo as bases
@@ -75,27 +75,27 @@ Inicialmente iremos fazer uma análise exploratória de algumas bases de dados e
 
 ## Analisando dados dos jogos
 
-Agora que já uni as duas bases, e tenho uma quantidade mais razoável de jogos a serem analisados, precisarei definir qual será a forma de avaliar os estilos/gêneros/categorias dos jogos, por ser uma coluna presente em ambas as bases, a variável `tags` é uma ótima candidata, porém ela apresenta um número de possibilidades bastante grande e distinta, o que poderia ser prejudicial à análise. Já as outras variáveis `categories` e `genres` que são mais específicas, não estão presentes em aproximadamente 20% da base de dados. A análise será feita inicialmente nas três para posterior decisão de qual ou quais usar.
+Agora que já uni as duas bases, e tenho uma quantidade mais razoável de jogos a serem analisados, precisarei definir qual será a forma de avaliar os estilos/gêneros/categorias dos jogos, por ser uma coluna presente em ambas as bases, a variável `tags` é uma ótima candidata, porém ela apresenta um número de possibilidades bastante grande e distinta, o que poderia ser prejudicial à análise. Já as outras variáveis `categories` e `genres` que são mais específicas, não estão presentes em aproximadamente `r paste0(round(nrow(df_all_games[is.na(categories), ])*100/nrow(df_all_games), 0), "%")` da base de dados. A análise será feita inicialmente nas três para posterior decisão de qual ou quais usar.
 
 ### Categorias
 
 ```{r, categs-count}
-df_all_games |> 
+rows_categ <- df_all_games |> 
   dplyr::filter(!(is.na(categories)) & categories != "") |> 
   nrow()
 ```
 
-Ou seja, temos aproximadamente 20% da base de dados sem nenhuma informação de categorias, a variável poderia ser utilizada, porém com algumas ressalvas.
+Ou seja, na base de dados aproximadamente `r paste0(round(rows_categ*100/nrow(df_all_games), 0), "%")` das linas não tem informação de categorias, a variável poderia ser utilizada, porém com algumas ressalvas.
 
 ### Gêneros
 
 ```{r, genres-count}
-df_all_games |> 
+rows_genres <- df_all_games |> 
   dplyr::filter(!(is.na(genres)) & genres != "") |> 
   nrow()
 ```
 
-Novamente, cerca de 20% da base sem informações de gênero.
+Novamente, cerca de `r paste0(round(rows_genres*100/nrow(df_all_games), 0), "%")` da base não possui informações de gênero.
 
 ### Categorias e Gênero
 
@@ -117,16 +117,16 @@ df_all_games |>
   nrow()
 ```
 
-Já no caso das tags, temos todas as observações com tags ou tags_extra (o que também faz sentido, já que unimos duas bases diferentes e uma delas possuia a coluna tags e a outra tags_extra).
+Já no caso das tags, todas as observações possuem alguma informação nas variáveis `tags` ou `tags_extra` (o que também faz sentido, já que unimos duas bases diferentes e uma delas possuia a coluna tags e a outra tags_extra).
 
-Portanto, faremos uma análise mais aprofundada para gerar uma única coluna que possa ser analisada.
+Portanto, farei uma análise mais aprofundada para gerar uma única coluna que possa ser analisada.
 
 ```{r, child="docs/Analise/capitulos/6-tags.qmd"}
 ```
 
 ### Investigando preços
 
-Vamos agora nos debruçar sobre as faixas de preços e em seguida faremos um cruzamento dos dados de preços e tags.
+Vou agora me debruçar sobre as faixas de preços e em seguida farei um cruzamento dos dados de preços e tags.
 
 ```{r, child="docs/Analise/capitulos/7-price.qmd"}
 ```
@@ -144,6 +144,7 @@ Vamos agora nos debruçar sobre as faixas de preços e em seguida faremos um cru
 ![Paleta de cores](capitulos/cap-images/ranking_palette_genres_prices.png){fig-alt="Imagem com paleta de cores e suas porcentagens"}
 
 #### Tentando criar um modelo para jogos mais bem avaliados
+
 ```{r}
 ## Variáveis (independentes) que podem ser relevantes para prever o sucesso (medido por positive_ratio)
 ## windows (binária, dummie), linux (binária, dummie), mac (binária, dummie),
@@ -153,8 +154,6 @@ Vamos agora nos debruçar sobre as faixas de preços e em seguida faremos um cru
 ## Variável target (dependente) positive_ratio, numérica
 
 ```
-
-
 
 #### Resposta do chatGPT
 
