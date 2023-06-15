@@ -1,4 +1,4 @@
-```{r, header-unindo-bases}
+```{r, header-unindo-bases, echo=FALSE, message=FALSE}
 ########################################################################################## #
 #'  Parte do arquivo de análise exploratória
 #'  Arquivo focado na união das duas bases utilizadas

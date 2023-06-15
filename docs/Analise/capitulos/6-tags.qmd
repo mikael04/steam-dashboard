@@ -1,4 +1,4 @@
-```{r, header-tags}
+```{r, header-tags, echo=FALSE, message=FALSE}
 ########################################################################################## #
 #'  Parte do arquivo de análise exploratória
 #'  Arquivo focado em analisar as variáveis de tags da base unida

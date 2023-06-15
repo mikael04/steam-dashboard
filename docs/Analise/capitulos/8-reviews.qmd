@@ -1,4 +1,4 @@
-```{r, header-reviews}
+```{r, header-reviews, echo=FALSE, message=FALSE}
 ########################################################################################## #
 #'  Parte do arquivo de análise exploratória
 #'  Arquivo focado em uma análise exploratória da relação preço vs tags

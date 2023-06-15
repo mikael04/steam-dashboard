@@ -1,4 +1,4 @@
-```{r, header-dif-entre-bases}
+```{r, header-dif-entre-bases, echo=FALSE, message=FALSE}
 ########################################################################################## #
 #'  Parte do arquivo de análise exploratória
 #'  Arquivo focado em verificar a diferença entre as bases
