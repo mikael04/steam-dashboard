@@ -196,7 +196,8 @@ df_all_games_split <- df_all_games_new_tags |>
   tidyr::separate_longer_delim(tags_all, delim = ",") |>  
   dplyr::rowwise() |> 
   dplyr::mutate(tags_all = func_filter_not_games_line(tags_all, notGames)) |> 
-  dplyr::filter(tags_all != "notGame")
+  dplyr::filter(tags_all != "notGame") |> 
+  dplyr::filter(title != "Houdini Indie")
 
 ## Escrevendo base de dados
 data.table::fwrite(df_all_games_split, here::here("data-raw/created-tables/db-all-games-tags-all-split.csv"))
