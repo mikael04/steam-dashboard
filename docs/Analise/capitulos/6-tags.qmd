@@ -177,7 +177,7 @@ E então, para finalizar a organização das tags, nós vamos excluir as caracte
 df_all_games_new_tags <- df_all_games |> 
   dplyr::select(-tags, -tags_extra) |> 
   dplyr::inner_join(df_tags_all, by = "app_id") |> 
-dplyr::rename(tags_all = tags)
+  dplyr::rename(tags_all = tags)
 ```
 
 

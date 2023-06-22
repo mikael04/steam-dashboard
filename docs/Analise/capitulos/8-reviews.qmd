@@ -1,3 +1,9 @@
+---
+editor: 
+  markdown: 
+    wrap: sentence
+---
+
 ```{r, header-reviews, echo=FALSE, message=FALSE}
 ########################################################################################## #
 #'  Parte do arquivo de análise exploratória
@@ -13,9 +19,16 @@ library(dplyr)
 source(here::here("R/fct-auxiliares/fct_add_price_categ.R"))
 ```
 
-## Mais avaliações positivas
+#### Mais avaliações positivas
 
-Primeiramente vou analisar os jogos que tem mais avaliações positivas. Utilizei apenas os 100 jogos mais bem avaliados da base. Além disso, faremos um filtro de ano, para que tenhamos jogos mais atuais.
+Primeiramente vou analisar os jogos que tem mais avaliações positivas, decidi utilizar os 100 jogos mais bem avaliados da base para tentar trazer algum insight.
+Além disso, faremos um filtro de ano, para que tenhamos jogos mais atuais.
+
+Para isso, defini alguns filtros para os jogos:
+
+1.  Ter sido lançados de 2019 até os dias de hoje, para que tenhamos um mercado observado mais próximo dos dias atuais.
+
+2.  Possuírem pelo menos 50000 avaliações.
 
 ```{r, more-reviews}
 ## Usado para escrever o qmd, porém não preciso utilizar ao rodar a análise completa (outro qmd já fará a leitura desse arquivo)
@@ -48,7 +61,6 @@ df_med_games[nrow(df_med_games)+1, ] = c("Máximo", max_best)
 
 ```
 
-
 ```{r, more-reviews-graph}
 df_more_reviewed$price_categ <- as.factor(df_more_reviewed$price_categ)
 
@@ -65,17 +77,16 @@ ggplot(df_more_reviewed, aes(x = price_categ, )) +
 
 ```
 
-Para investigar os 100 jogos com mais avaliações de usuários definimos alguns filtros: 
-1 - Precisariam ser lançados de 2019 até os dias de hoje, para que tenhamos um mercado observado mais próximo dos dias atuais.
-2 - Possuem pelo menos 50000 avaliações.
+O primeiro gráfico não trouxe nenhuma conclusão, existem jogos baratos que foram lançados e fizeram sucesso, como Phasmophobia, Valheim e Raft, existem jogos que são gratuitos e lucram através de itens cosméticos como o Apex Legends, Destiny 2 (que foi pago e se tornou gratuito), Lost Ark, e existem jogos caros que foram lançados e fizeram sucesso, como CyberPunk 2077, Elden Ring, Red Dead Redemption 2, Forza e Sekiro.
+Em resumo, os **jogos mais bem avaliados não** **parecem ter um padrão relacionado à faixa de preço**.
 
-A primeira vista não trouxe nenhuma conclusão, existem jogos baratos que foram lançados e fizeram sucesso, como Phasmophobia, Valheim e Raft, existem jogos que são gratuitos e lucram através de itens cosméticos como o Apex Legends, Destiny 2 (que foi pago e se tornou gratuito), Lost Ark, e existem jogos caros que foram lançados e fizeram sucesso, como CyberPunk 2077, Elden Ring, Red Dead Redemption 2, Forza e Sekiro.
-Em resumo, os jogos mais bem avaliados não parecem ter um padrão relacionado à faixa de preço.
+#### Mais bem avaliados
 
-## Mais bem avaliados
+Decidi então observar os jogos que possuiam mais avaliações positivas.
+E para isso tambem definimos filtros similares.
 
-Decidi então observar os jogos que possuiam mais avaliações positivas. E para isso tambem definimos filtros similares.
 1 - Também terão que ser lançados recentemente, de 2019 até os dias de hoje.
+
 2 - Possuírem pelo menos 10000 avaliações.
 
 ```{r, positive-ratio}
@@ -108,7 +119,6 @@ df_med_games[nrow(df_med_games)+1, ] = c("Máximo", max_best)
 
 ```
 
-
 ```{r, positive-ratio-graph}
 df_best_ratio <- func_add_price_categ(df_best_ratio, F)
 
@@ -127,7 +137,8 @@ ggplot(df_best_ratio, aes(x = price_categ)) +
 
 ```
 
-Dessa forma, agora ranqueando pelos jogos mais bem avaliados, observei uma concentração maior nas faixas de preço mais baixas, dos muito baratos até os medios, ainda com alguma representação de jogos caros, mas sem jogos muito caros como era visto anteriormente.
+Dessa forma, agora ranqueando pelos jogos mais bem avaliados, observei uma concentração maior nas faixas de preço mais baixas, dos muito baratos até os médios, ainda com alguma representação de jogos caros, mas sem jogos muito caros como era visto anteriormente.
 Comparando com o gráfico anterior, vemos uma diminuição grande de jogos gratuitos e jogos caros, praticamente metade em ambos os casos, e um crescimento grande dos jogos muito baratos e baratos, os jogos médios se mantiveram mais ou menos com a mesma proporção, e os jogos muito caros não apareceram no segundo gráfico.
 
-O que pode indicar uma faixa de preço interessante para o lançamento de um jogo seja tanto esse aumento de jogos muito baratos e baratos, quanto essa constância dos jogos de médio preço. Porém, vamos tentar analisar outros aspectos usando análises mais complexas.
+O que **pode indicar** **uma faixa de preço** interessante para o lançamento de um jogo seja tanto esse aumento de **jogos muito baratos e baratos**, quanto essa constância dos jogos de **preço médio**.
+Porém, vamos tentar analisar outros aspectos usando análises mais complexas.
