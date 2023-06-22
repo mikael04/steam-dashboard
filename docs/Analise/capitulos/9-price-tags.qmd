@@ -12,11 +12,13 @@ library(ggplot2)
 library(dplyr)
 # library(janitor)
 source(here::here("R/fct-auxiliares/fct_filter_not_games.R"))
-source(here::here("R/fc-auxiliares/fct_add_price_categ.R"))
+source(here::here("R/fct-auxiliares/fct_add_price_categ.R"))
 switch_overwrite_initial_tables <- F
 ```
 
-## Categorias e performance em reviews
+#### Categorias e preços
+
+Agora vou cruzar as informações relacionadas às categorias e preços.
 
 ```{r, tag-price-group, echo=F}
   if(switch_overwrite_initial_tables){
@@ -69,9 +71,9 @@ df_categs <- df_price_categ |>
 
 Vou fazer um agrupamento entre as categorias (na base, definida como "tags") dos jogos e uma recategorização para a variável de preços, visando facilitar a comparação entre os jogos. Essa recategorização irá replicar cada jogo separando as categorias, portanto teremos ao final um número de linhas muito maior que o número de jogos da nossa base inicial, porque cada jogo pode possuir um número de 1 à `r (max(stringr::str_count(df_all_games$tags_all, ","))+1)` categorias.
 
-O número de **categorias distintas** na base de dados é de **`r length(unique(df_price_categ$tags_all))`**, e para cada categoria, a **média** de vezes em que ela aparece nos jogos é de **`r round(mean(df_categs$games),0)`** e a mediana é de **`r median(df_categs$games)`**, e pela diferença entre média e mediana percebemos que a **distribuição** dos jogos por categoria é bastante **irregular**, analisaremos então esta diferença de outra forma.
+O número de **categorias distintas** na base de dados é de **`r length(unique(df_price_categ$tags_all))`**, e para cada categoria, a **média** de vezes em que ela aparece nos jogos é de **`r round(mean(df_categs$games),0)`** e a mediana é de **`r median(df_categs$games)`**, e pela diferença entre média e mediana percebemos que a **distribuição** das categorias nos jogos é bastante **irregular**, analisaremos então esta diferença de outra forma.
 
-```{r, graph-dist-categs, echo=FALSE}
+```{r, dist-categs-graph}
 ggplot(df_categs, aes(x = games, fill = after_stat(count))) +
   geom_histogram(bins = 20) +
   scale_fill_gradient(low = "lightblue", high = "blue") +
@@ -84,191 +86,212 @@ ggplot(df_categs, aes(x = games, fill = after_stat(count))) +
        fill = "")
 ```
 
-Utilizando o histograma vemos quantas vezes cada categoria apareceu, e temos uma grande parte distribuída entre as primeiras barras, porém podemos observar algumas barras muito menores que aparecem mais vezes, ou seja, categorias que aparecem em muitos jogos. Algumas dessas mais frequentes inclusive estão presentes em mais de metade dos **`r total_jogos` jogos**.
+Utilizando o histograma é possível verificar quantas vezes cada categoria apareceu, e temos uma grande parte distribuída entre as primeiras barras do histograma, que foi separado por faixas, porém podemos observar algumas barras muito menores que aparecem mais vezes, ou seja, categorias que aparecem em muitos jogos. Algumas dessas mais frequentes inclusive estão presentes em mais de metade dos **`r total_jogos` jogos**.
 
-## Análise por faixa de preço
+#### Análise por faixa de preço
 
-A nossa análise será feita nas faixas de preço definidas, os jogos foram separados em gratuitos (preço = 0), jogos muito baratos (preço entre \$0.01 e \$10.00), jogos baratos (preço entre \$10.01 e \$20.00), jogos médios (preço entre \$20.01 e \$40.00), jogos caros (preço entre \$40.01 e \$60.00) e jogos muito caros (preço de $60.01 ou mais).
+A análise será feita nas faixas de preço definidas, os jogos foram separados em ***Gratuitos*** (preço = 0), jogos **Muito baratos** (preço entre \$0.01 e \$10.00), jogos **Baratos** (preço entre \$10.01 e \$20.00), jogos de preço **Médio** (preço entre \$20.01 e \$40.00), jogos **Caros** (preço entre \$40.01 e \$60.00) e jogos **Muito caros** (preço de \$60.01 ou mais).
 
-### Avaliando os jogos muito caros (Muito Caro)
+Para avaliar as categorias, defini um número máximo de tags à serem analisadas por faixa de preço, utilizaremos as 20 tags que tem mais aparecem nos jogos por intervalo de preço.
 
-```{r, tag-price-verExp-mean-median, echo = FALSE}
+```{r, n_tags, echo = F}
+n_show <- 10
+```
+
+##### Avaliando os jogos muito caros (Muito Caro)
+
+```{r, tag-price-verExp-mean-median}
 ## Verificando média e mediana por categoria "Muito Caro"
 mean_verExp <- round(mean(df_price_categ$count[df_price_categ$price_categ == "Muito Caro"]), 2)
 median_verExp <- round(median(df_price_categ$count[df_price_categ$price_categ == "Muito Caro"]), 2)
 sd_verExp <- round(sd(df_price_categ$count[df_price_categ$price_categ == "Muito Caro"]), 2)
 ```
 
-Definimos essa faixa de preço dos muito caros como jogos acima de 60 dólares, e podemos ver pelos valores de média (`r mean_verExp`) e mediana (`r median_verExp`) são próximos, aliados ao desvio padão que também não é alto (`r sd_verExp`), ou seja, temos pouca variação do número de jogos por categoria nessa faixa de preço.
+Defini essa faixa de preço dos muito caros como jogos **acima de 60 dólares**, e vemos valores de média (`r mean_verExp`) e mediana (`r median_verExp`) próximos, aliados ao desvio padão que também não é alto (`r sd_verExp`), ou seja, temos **pouca variação** do número de **jogos por categoria** nessa faixa de preço, indicando uma **distribuição mais uniforme** das categorias.
 
-```{r, tag-price-verExp, echo = FALSE}
+```{r, tag-price-verExp}
 
-# df_all_games_verExp <- df_all_games |> 
-#   dplyr::filter(price_categ == "Muito Caro",
-#                 stringr::str_detect(tags_all, "Indie"))
-
-## Separando as 20 categorias que mais aparecem
 df_price_categ_verExp <- df_price_categ |> 
   dplyr::filter(price_categ == "Muito Caro") |> 
-  dplyr::arrange(desc(count)) |> 
-  dplyr::slice_head(n = 20)
+  dplyr::arrange(desc(count))
 
 df_price_categ_verExp |> 
-  gt::gt()
+  dplyr::slice_head(n = n_show) |> 
+  dplyr::select(-price_categ) |>
+  gt::gt() |> 
+  gt::cols_label("tags_all" = "Categorias", "count" = "Contagem Muito Caros")
 ```
 
-Vemos também que a maioria das categorias possui poucas amostras, ou seja, na nossa base de dados e em geral na Steam, poucos jogos são lançados acima dos $60 independente da categoria.
+Observei que a maioria das categorias possui poucas amostras, ou seja, na nossa base de dados e em geral na Steam, **poucos jogos são lançados acima dos \$60 independente da categoria**, o que reflete na pouca quantidade de categorias dentre os jogos.
 
-Em comparação com a população de jogos, a amostra para essa categoria é pequena comparada ao tamanho da nossa base de dados, do total de **`r total_jogos`** apenas **`r round(100*sum(df_price_count[df_price_count$price_categ == "Muito Caro",]$count)/sum(df_price_count$count),2)`%** ou `r df_price_count[df_price_count$price_categ == "Muito Caro"]$count` jogos (compondo um total de `r sum(df_price_categ[df_price_categ$price_categ == "Muito Caro",]$count)` tags) estão nesta faixa de valores.
+Em comparação com a população de jogos, o tamanho da amostra para essa categoria é pequena comparada à nossa base de dados, do total de **`r total_jogos`** apenas **`r round(100*sum(df_price_count[df_price_count$price_categ == "Muito Caro",]$count)/sum(df_price_count$count),2)`%** ou `r df_price_count[df_price_count$price_categ == "Muito Caro"]$count` jogos (um total de `r sum(df_price_categ[df_price_categ$price_categ == "Muito Caro",]$count)` tags) estão nesta faixa de valores.
 
-### Avaliando os jogos caros (Caro)
+##### Avaliando os jogos caros (Caro)
 
-```{r, tag-price-exp-mean-median, echo = FALSE}
+```{r, tag-price-exp-mean-median}
 ## Verificando média e mediana por categoria "Caro"
 mean_exp <- round(mean(df_price_categ$count[df_price_categ$price_categ == "Caro"]), 2)
 median_exp <- round(median(df_price_categ$count[df_price_categ$price_categ == "Caro"]), 2)
 sd_exp <- round(sd(df_price_categ$count[df_price_categ$price_categ == "Caro"]), 2)
 ```
 
-Já nos jogos caros, entre 40 e 60 dólares, vemos valores de média (`r mean_exp`) e mediana (`r median_exp`), agora com uma diferença maior, indicando uma distribuição não-normal. O desvio padrão aumentou (`r sd_exp`), junto com a diferença entre média e mediana indica uma variação maior entre categorias.
+Já nos jogos caros, entre **40 e 60 dólares**, os valores de média (`r mean_exp`) e mediana (`r median_exp`) possuem uma diferença maior, indicando uma **distribuição mais irregular**. O desvio padrão aumentou (`r sd_exp`), junto com a diferença entre média e mediana **indica uma variação maior entre categorias**.
 
 ```{r, tag-price-exp}
-## Separando as 20 categorias que mais aparecem
 df_price_categ_exp <- df_price_categ |> 
   dplyr::filter(price_categ == "Caro") |> 
-  dplyr::arrange(desc(count)) |> 
-  dplyr::slice_head(n = 20)
+  dplyr::arrange(desc(count))
 
 df_price_categ_exp |> 
-  gt::gt()
+  dplyr::slice_head(n = n_show) |> 
+  dplyr::select(-price_categ) |> 
+  gt::gt() |> 
+  gt::cols_label("tags_all" = "Categorias", "count" = "Contagem Caros")
 ```
 
-O número de contagem por categoria já é consideravelmente maior, ou seja temos uma quantidade de jogos maior nessa faixa de preços.
+O número de contagem por categoria **já é consideravelmente maior** que a faixa anterior, ou seja temos uma quantidade de jogos maior nessa faixa de preços.
 
-Os números de comparando com a população de jogos já é superior, com **`r round(100*sum(df_price_count[df_price_count$price_categ == "Caro",]$count)/sum(df_price_count$count),2)`%** dos jogos, ou `r df_price_count[df_price_count$price_categ == "Caro"]$count` jogos (compondo um total de `r sum(df_price_categ[df_price_categ$price_categ == "Caro",]$count)` tags) estão nesse segmento.
+Nesta faixa temos **`r round(100*sum(df_price_count[df_price_count$price_categ == "Caro",]$count)/sum(df_price_count$count),2)`%** dos jogos, ou `r df_price_count[df_price_count$price_categ == "Caro"]$count` jogos (um total de `r sum(df_price_categ[df_price_categ$price_categ == "Caro",]$count)` tags) nesse segmento. Indicando um aumento significativo da quantidade de jogos, mas ainda uma proporção pequena na Steam.
 
+##### Avaliando os jogos medianos (Medio)
 
-### Avaliando os jogos medianos (Medio)
-
-```{r, tag-price-med-mean-median, echo = FALSE}
+```{r, tag-price-med-mean-median}
 ## Verificando média e mediana por categoria "Medio"
 mean_med <- round(mean(df_price_categ$count[df_price_categ$price_categ == "Medio"]), 2)
 median_med <- round(median(df_price_categ$count[df_price_categ$price_categ == "Medio"]), 2)
 sd_med <- round(sd(df_price_categ$count[df_price_categ$price_categ == "Medio"]), 2)
 ```
 
-Os jogos de preço médio, entre 20 e 40 dólares, vemos valores de média (`r mean_med`), mediana (`r median_med`) e desvio padrão (`r sd_med`) novamente com acréscimo de variação.
+Os jogos de preço médio, **entre 20 e 40 dólares**, vemos valores de média (`r mean_med`), mediana (`r median_med`) e desvio padrão (`r sd_med`) novamente **aumentando sua variação**.
 
 ```{r, tag-price-med}
-## Separando as 20 categorias que mais aparecem
 df_price_categ_med <- df_price_categ |> 
   dplyr::filter(price_categ == "Medio") |> 
-  dplyr::arrange(desc(count)) |> 
-  dplyr::slice_head(n = 20)
+  dplyr::arrange(desc(count))
 
 df_price_categ_med |> 
-  gt::gt()
+  dplyr::slice_head(n = n_show) |> 
+  dplyr::select(-price_categ) |> 
+  gt::gt() |> 
+  gt::cols_label("tags_all" = "Categorias", "count" = "Contagem Médios")
 ```
 
-Os números de continua crescendo na faixa de preço continua crescendo, com **`r round(100*sum(df_price_count[df_price_count$price_categ == "Medio",]$count)/sum(df_price_count$count),2)`%** dos jogos, ou `r df_price_count[df_price_count$price_categ == "Medio"]$count` jogos (compondo um total de `r sum(df_price_categ[df_price_categ$price_categ == "Medio",]$count)` tags) estão nesse segmento, um aumento de 10% na quantidade de jogos comparados à faixa de preço anterior.
+Os números na faixa de preço continuam crescendo, com **`r round(100*sum(df_price_count[df_price_count$price_categ == "Medio",]$count)/sum(df_price_count$count),2)`%** dos jogos, ou `r df_price_count[df_price_count$price_categ == "Medio"]$count` jogos (um total de `r sum(df_price_categ[df_price_categ$price_categ == "Medio",]$count)` tags) nesse segmento, chegando à um valor mais expressivo de 10% da base de dados.
 
-### Avaliando os jogos "baratos" (Barato)
+##### Avaliando os jogos "baratos" (Barato)
 
-```{r, tag-price-low-mean-median, echo = FALSE}
+```{r, tag-price-low-mean-median}
 ## Verificando média e mediana por categoria "Barato"
 mean_low <- round(mean(df_price_categ$count[df_price_categ$price_categ == "Barato"]), 2)
 median_low <- round(median(df_price_categ$count[df_price_categ$price_categ == "Barato"]), 2)
 sd_low <- round(sd(df_price_categ$count[df_price_categ$price_categ == "Barato"]), 2)
 ```
 
-Nos jogos de preço baixo, entre 10 e 20 dólares, a variação continua a aumentar temos de média `r mean_low`, mediana `r median_low` e desvio padrão `r sd_low`. O que pode ser explicado pelo aumento do número de jogos e concentração de jogos em algumas categorias.
+Nos jogos de preço baixo, **entre 10 e 20 dólares**, a variação aumenta temos de média `r mean_low`, mediana `r median_low` e desvio padrão `r sd_low`. O que pode ser explicado pelo aumento do número de jogos e concentração de jogos em algumas categorias.
 
 ```{r, tag-price-low}
-## Separando as 20 categorias que mais aparecem
 df_price_categ_low <- df_price_categ |> 
   dplyr::filter(price_categ == "Barato") |> 
-  dplyr::arrange(desc(count)) |> 
-  dplyr::slice_head(n = 20)
+  dplyr::arrange(desc(count))
 
 df_price_categ_low |> 
-  gt::gt()
+  dplyr::slice_head(n = n_show) |> 
+  dplyr::select(-price_categ) |> 
+  gt::gt() |> 
+  gt::cols_label("tags_all" = "Categorias", "count" = "Contagem Baratos")
 ```
 
-Os números de continua crescendo na faixa de preço continua crescendo, com **`r round(100*sum(df_price_count[df_price_count$price_categ == "Barato",]$count)/sum(df_price_count$count),2)`%** dos jogos, ou `r df_price_count[df_price_count$price_categ == "Barato"]$count` jogos (compondo um total de `r sum(df_price_categ[df_price_categ$price_categ == "Barato",]$count)` tags) estão nesse segmento, ou seja, temos praticamente um terço dos jogos disponíveis na steam.
+Os números de jogos para esse intervalo de preço são **`r round(100*sum(df_price_count[df_price_count$price_categ == "Barato",]$count)/sum(df_price_count$count),2)`%** dos jogos, ou `r df_price_count[df_price_count$price_categ == "Barato"]$count` jogos (um total de `r sum(df_price_categ[df_price_categ$price_categ == "Barato",]$count)` tags) nesse segmento, mais um crescimento grande, agora com um quarto dos dados da nossa base.
 
-### Avaliando os jogos "muito baratos" (Muito Barato)
+##### Avaliando os jogos "muito baratos" (Muito Barato)
 
-```{r, tag-price-verLow-mean-median, echo = FALSE}
+```{r, tag-price-verLow-mean-median}
 ## Verificando média e mediana por categoria "Muito Barato"
 mean_verLow <- round(mean(df_price_categ$count[df_price_categ$price_categ == "Muito Barato"]), 2)
 median_verLow <- round(median(df_price_categ$count[df_price_categ$price_categ == "Muito Barato"]), 2)
 sd_verLow <- round(sd(df_price_categ$count[df_price_categ$price_categ == "Muito Barato"]), 2)
 ```
 
-Para os jogos de preço, de preços até 10 dólares, classificados como "Muito Baratos" temos variações ainda crescentes mas mais próximos da categoria anterior, a média é de`r mean_verLow`, mediana `r median_verLow` e o desvio padrão `r sd_verLow`.
+Para os jogos de preço, de preços **até 10 dólares**, classificados como "Muito Baratos" temos variações ainda crescentes mas mais próximos da categoria anterior, a média é de `r mean_verLow`, mediana `r median_verLow` e o desvio padrão `r sd_verLow`.
 
 ```{r, tag-price-verLow}
-## Separando as 20 categorias que mais aparecem
 df_price_categ_verLow <- df_price_categ |> 
   dplyr::filter(price_categ == "Muito Barato") |> 
-  dplyr::arrange(desc(count)) |> 
-  dplyr::slice_head(n = 20)
+  dplyr::arrange(desc(count))
 
 df_price_categ_verLow |> 
-  gt::gt()
+  dplyr::slice_head(n = n_show) |> 
+  dplyr::select(-price_categ) |> 
+  gt::gt() |> 
+  gt::cols_label("tags_all" = "Categorias", "count" = "Contagem Muito Baratos")
 ```
 
-Os números na faixa de preço crescem um pouco mais, com **`r round(100*sum(df_price_count[df_price_count$price_categ == "Muito Barato",]$count)/sum(df_price_count$count),2)`%** dos jogos, ou `r df_price_count[df_price_count$price_categ == "Muito Barato"]$count` jogos (compondo um total de `r sum(df_price_categ[df_price_categ$price_categ == "Muito Barato",]$count)` tags) estão nesse segmento, ou seja, temos praticamente quase metade dos jogos aqui nesta categoria. Se pensarmos nas duas categorias de jogos mais baratas, temos quase 80% dos jogos da base de dados, sem dúvida onde os jogos estão mais concentrados.
+Os números na faixa de preço crescem um pouco mais, com **`r round(100*sum(df_price_count[df_price_count$price_categ == "Muito Barato",]$count)/sum(df_price_count$count),2)`%** dos jogos, ou `r df_price_count[df_price_count$price_categ == "Muito Barato"]$count` jogos (um total de `r sum(df_price_categ[df_price_categ$price_categ == "Muito Barato",]$count)` tags) nesse segmento, ou seja, mais de um terço da nossa base. Se pensarmos nas duas categorias de jogos mais baratas, temos mais da metade dos jogos cadastrados, sem dúvida onde os jogos estão mais concentrados.
 
-### Avaliando os jogos gratuitos (Free)
+##### Avaliando os jogos gratuitos (Free)
 
-```{r, tag-price-free-mean-median, echo = FALSE}
+```{r, tag-price-free-mean-median}
 ## Verificando média e mediana por categoria "Free"
 mean_free <- round(mean(df_price_categ$count[df_price_categ$price_categ == "Free"]), 2)
 median_free <- round(median(df_price_categ$count[df_price_categ$price_categ == "Free"]), 2)
 sd_free <- round(sd(df_price_categ$count[df_price_categ$price_categ == "Free"]), 2)
 ```
 
-Na última categoria de preços, os jogos gratuitos, as variações diminuem. A média é de`r mean_free`, mediana `r median_free` e o desvio padrão `r sd_free`.
+Na última categoria de preços, os **jogos gratuitos**, as variações diminuem. A média é de`r mean_free`, mediana `r median_free` e o desvio padrão `r sd_free`.
 
 ```{r, tag-price-free}
-## Separando as 20 categorias que mais aparecem
 df_price_categ_free <- df_price_categ |> 
   dplyr::filter(price_categ == "Free") |> 
-  dplyr::arrange(desc(count)) |> 
-  dplyr::slice_head(n = 20)
+  dplyr::arrange(desc(count))
 
 df_price_categ_free |> 
-gt::gt()
+  dplyr::slice_head(n = n_show) |> 
+  dplyr::select(-price_categ) |> 
+  gt::gt() |> 
+  gt::cols_label("tags_all" = "Categorias", "count" = "Contagem Gratuitos")
 ```
 
-Agora temos uma diminução condiserável do número de jogos, podendo ser causada tanto pelas filtragens, sendo uma delas a quantidade de avaliações e usuários por jogo, quanto a própria baixa popularidade desta categoria de preço, com **`r round(100*sum(df_price_count[df_price_count$price_categ == "Free",]$count)/sum(df_price_count$count),2)`%** dos jogos, ou `r df_price_count[df_price_count$price_categ == "Free"]$count` jogos (compondo um total de `r sum(df_price_categ[df_price_categ$price_categ == "Free",]$count)` tags) nesse segmento, ou seja, essa categoria tem números mais próximos da categoria "Caro" do que das de jogos médios e baratos.
+Agora temos uma pequena diminução do número de jogos em relação a classificação anterior, podendo ser causada tanto pelas filtragens, sendo uma delas a quantidade de avaliações e usuários por jogo, quanto a própria baixa popularidade desta categoria de preço, com **`r round(100*sum(df_price_count[df_price_count$price_categ == "Free",]$count)/sum(df_price_count$count),2)`%** dos jogos, ou `r df_price_count[df_price_count$price_categ == "Free"]$count` jogos (um total de `r sum(df_price_categ[df_price_categ$price_categ == "Free",]$count)` tags) nesse segmento, ainda uma quantidade considerável.
 
-## Resumo das faixas de preço
+#### Resumo das faixas de preço
 
-Um ponto interessante e que foi observado após a 
-
-Como observamos, boa parte dos jogos da Steam, cerca de 80%, que se encaixaram nos nossos filtros de avaliações positivas e números de usuários, estão nas faixas de preço até \$20 (de \$0-10 como "Muito Baratos" e de \$10-20 como "Baratos"), são jogos que exibem uma grande diversidade de categorias e classificações. É um comportamento interessante, porque por serem jogos baratos, contam com o preço como forma de atrair usuários, e podem pensar em estratégias diferentes de acertar um público alvo. 
+Um ponto interessante e que foi observado foi de praticamente **dois terços**, que se encaixaram nos nossos filtros de avaliações positivas e números de usuários, estão nas faixas de preço até \$20 (de \$0-10 como "Muito Baratos" ou de \$10-20 como "Baratos"), e mais 25% de jogos gratuitos, são faixas de preços que exibem uma **grande diversidade de categorias e classificações**. É um comportamento interessante, porque por serem **jogos baratos ou gratuitos**, contam com o **preço** como forma de **atrair usuários**, e podem pensar em **estratégias diferentes de acertar um público alvo**.
 
 ### Visualizando top categorias por faixa de preço
 
 ```{r, r-cbind-categoria-preco}
-
 ## Visualizar no formato de tabelas
-df_price_categ_all <- cbind(df_price_categ_verExp, df_price_categ_exp, df_price_categ_med, df_price_categ_low, df_price_categ_verLow, df_price_categ_free) |> 
+df_price_categ_all <- cbind(df_price_categ_verExp |> 
+                              dplyr::filter(!(tags_all %in% c("Singleplayer", "Multiplayer"))) |> 
+                              dplyr::slice_head(n = n_show),
+                            df_price_categ_exp |> 
+                              dplyr::filter(!(tags_all %in% c("Singleplayer", "Multiplayer"))) |> 
+                              dplyr::slice_head(n = n_show), 
+                            df_price_categ_med |> 
+                              dplyr::filter(!(tags_all %in% c("Singleplayer", "Multiplayer"))) |> 
+                              dplyr::slice_head(n = n_show), 
+                            df_price_categ_low |> 
+                              dplyr::filter(!(tags_all %in% c("Singleplayer", "Multiplayer"))) |> 
+                              dplyr::slice_head(n = n_show), 
+                            df_price_categ_verLow |> 
+                              dplyr::filter(!(tags_all %in% c("Singleplayer", "Multiplayer"))) |> 
+                              dplyr::slice_head(n = n_show), 
+                            df_price_categ_free |> 
+                              dplyr::filter(!(tags_all %in% c("Singleplayer", "Multiplayer"))) |> 
+                              dplyr::slice_head(n = n_show)) |> 
   dplyr::rename(tags_verExp = 1, price_verExp = 2, count_verExp = 3,
                 tags_exp = 4, price_exp = 5, count_exp = 6,
                 tags_med = 7, price_med = 8, count_med = 9,
                 tags_low = 10, price_low = 11, count_low = 12,
                 tags_verLow = 13, price_verLow = 14, count_verLow = 15,
                 tags_free = 16, price_free = 17, count_free = 18) |> 
-  dplyr::select(-2, -5, -8, -11, -14, -17) |> 
-  dplyr::mutate(prop_free = round(count_free/sum(count_free)*100, 2), 
-                prop_verLow = round(count_verLow/sum(count_verLow)*100, 2),
-                prop_low = round(count_low/sum(count_low)*100, 2), 
-                prop_med = round(count_med/sum(count_med)*100, 2), 
-                prop_exp = round(count_exp/sum(count_exp)*100, 2), 
-                prop_verExp = round(count_verExp/sum(count_verExp)*100, 2)) |> 
+  dplyr::select(-2, -5, -8, -11, -14, -17) |>
+  dplyr::mutate(prop_free = round(count_free/sum(count_free)*100, 1), 
+                prop_verLow = round(count_verLow/sum(count_verLow)*100, 1),
+                prop_low = round(count_low/sum(count_low)*100, 1), 
+                prop_med = round(count_med/sum(count_med)*100, 1), 
+                prop_exp = round(count_exp/sum(count_exp)*100, 1), 
+                prop_verExp = round(count_verExp/sum(count_verExp)*100, 1)) |> 
   dplyr::select(tags_free, count_free, prop_free,
                 tags_verLow, count_verLow,prop_verLow,
                 tags_low, count_low, prop_low,
@@ -276,54 +299,112 @@ df_price_categ_all <- cbind(df_price_categ_verExp, df_price_categ_exp, df_price_
                 tags_exp, count_exp, prop_exp,
                 tags_verExp, count_verExp, prop_verExp)
 
+tabela_price_categ_all <- df_price_categ_all |> 
+  dplyr::mutate(prop_free = paste0(prop_free, "%"),
+                prop_verLow = paste0(prop_verLow, "%"),
+                prop_low = paste0(prop_low, "%"),
+                prop_med = paste0(prop_med, "%"),
+                prop_exp = paste0(prop_exp, "%"),
+                prop_verExp = paste0(prop_verExp, "%")) |> 
+  gt::gt() |> 
+  gt::tab_spanner(
+    label = "Gratuitos",
+    columns = c("tags_free", "count_free", "prop_free")
+  ) |> 
+  gt::tab_spanner(
+    label = "Muito baratos",
+    columns = c("tags_verLow", "count_verLow", "prop_verLow")
+  ) |> 
+  gt::tab_spanner(
+    label = "Baratos",
+    columns = c("tags_low", "count_low", "prop_low")
+  ) |> 
+  gt::tab_spanner(
+    label = "Médios",
+    columns = c("tags_med", "count_med", "prop_med")
+  ) |> 
+  gt::tab_spanner(
+    label = "Caros",
+    columns = c("tags_exp", "count_exp", "prop_exp")
+  ) |> 
+  gt::tab_spanner(
+    label = "Muito Caros",
+    columns = c("tags_verExp", "count_verExp", "prop_verExp")
+  ) |> 
+  gt::cols_label("tags_free" = "Categoria", "count_free" = "N", "prop_free" = "Perc",
+                "tags_verLow" = "Categoria", "count_verLow" = "N", "prop_verLow" = "Perc",
+                "tags_low" = "Categoria", "count_low" = "N", "prop_low" = "Perc",
+                "tags_med" = "Categoria", "count_med" = "N", "prop_med" = "Perc",
+                "tags_exp" = "Categoria", "count_exp" = "N", "prop_exp" = "Perc",
+                "tags_verExp" = "Categoria", "count_verExp" = "N", "prop_verExp" = "Perc")
 
+tabela_price_categ_all
+```
+
+Coloquei as informações separadas por categoria de preços, mostrando a proporção de cada categoria nas faixas de preço, mas, pelo tamanho da tabela, decidi apresentar de forma diferente.
+
+```{r, categ-price-graph}
+## Removendo coluna de preço para tabela
 df_tab <- df_price_categ_all
+# 
+# newline <- data.frame(tags_free = "Total", count_free = sum(df_tab$count_free), prop_free = 100,
+#                       tags_verLow = "Total", count_verLow = sum(df_tab$count_verLow), prop_verLow = 100,
+#                       tags_low = "Total", count_low = sum(df_tab$count_low), prop_low = 100,
+#                       tags_med = "Total", count_med = sum(df_tab$count_med), prop_med = 100,
+#                       tags_exp = "Total", count_exp = sum(df_tab$count_exp), prop_exp = 100,
+#                       tags_verExp = "Total", count_verExp = sum(df_tab$count_verExp), prop_verExp = 100)
+# 
+# # df_tab <- df_tab |> 
+# #   dplyr::select(-dplyr::starts_with("count")) |>
+# #   dplyr::slice_head(n = 20)
+# 
+# df_tab <- rbind(df_tab, newline)
+# 
+# tabela_categ_all <- df_tab |> 
+#   DT::datatable()
+#
+# ## Usar na construção do gráfico
+# df_price_categ_graph <- rbind(df_price_categ_verExp |>
+#                                 dplyr::filter(!(tags_all %in% c("Singleplayer", "Multiplayer")))|> 
+#                                 dplyr::slice_head(n = 10),
+#                             df_price_categ_exp |>
+#                                 dplyr::filter(!(tags_all %in% c("Singleplayer", "Multiplayer"))) |> 
+#                                 dplyr::slice_head(n = 10),
+#                             df_price_categ_med |>
+#                                 dplyr::filter(!(tags_all %in% c("Singleplayer", "Multiplayer"))) |> 
+#                                 dplyr::slice_head(n = 10),
+#                             df_price_categ_low |>
+#                                 dplyr::filter(!(tags_all %in% c("Singleplayer", "Multiplayer"))) |> 
+#                                 dplyr::slice_head(n = 10),
+#                             df_price_categ_verLow |>
+#                                 dplyr::filter(!(tags_all %in% c("Singleplayer", "Multiplayer"))) |> 
+#                                 dplyr::slice_head(n = 10),
+#                             df_price_categ_free |>
+#                                 dplyr::filter(!(tags_all %in% c("Singleplayer", "Multiplayer"))) |> 
+#                                 dplyr::slice_head(n = 10)) |>
+#   dplyr::group_by(price_categ) |>
+#   dplyr::mutate(prop = round(count/sum(count)*100, 2),
+#                 price_categ = as.factor(price_categ),
+#                 price_categ = forcats::fct_relevel(price_categ, "Free", "Muito Barato", "Barato", "Medio", "Caro", "Muito Caro")) |>
+#   dplyr::ungroup()
+#
+# ggplot(df_price_categ_graph, aes(x = price_categ, y = prop, group = tags_all, colour = tags_all)) +
+#   geom_line() +
+#   theme_minimal() +
+#   labs()
 
-newline <- data.frame(tags_free = "Total", prop_free = sum(df_tab$count_free),
-                      tags_verLow = "Total", prop_verLow = sum(df_tab$count_verLow),
-                      tags_low = "Total", prop_low = sum(df_tab$count_low),
-                      tags_med = "Total", prop_med = sum(df_tab$count_med),
-                      tags_exp = "Total", prop_exp = sum(df_tab$count_exp),
-                      tags_verExp = "Total", prop_verExp = sum(df_tab$count_verExp))
-
-df_tab <- df_tab |> 
-  dplyr::select(-dplyr::starts_with("count")) |>
-  dplyr::slice_head(n = 20)
-
-df_tab <- rbind(df_tab, newline)
-
-tabela_categ_all <- df_tab |> 
-  DT::datatable()
-
-## Usar na construção do gráfico
-df_price_categ_all <- rbind(df_price_categ_verExp |> dplyr::slice_head(n = 10), 
-                            df_price_categ_exp |> dplyr::slice_head(n = 10),
-                            df_price_categ_med |> dplyr::slice_head(n = 10),
-                            df_price_categ_low |> dplyr::slice_head(n = 10),
-                            df_price_categ_verLow |> dplyr::slice_head(n = 10),
-                            df_price_categ_free |> dplyr::slice_head(n = 10)) |> 
-  dplyr::group_by(price_categ) |> 
-  dplyr::mutate(prop = round(count/sum(count)*100, 2),
-                price_categ = as.factor(price_categ),
-                price_categ = forcats::fct_relevel(price_categ, "Free", "Muito Barato", "Barato", "Medio", "Caro", "Muito Caro")) |> 
-  dplyr::ungroup()
-
-ggplot(df_price_categ_all, aes(x = price_categ, y = prop, group = tags_all, colour = tags_all)) +
-  geom_line() +
-  theme_minimal() +
-  labs()
-
-### Trabalhar com  Highlight Table ou Spark Lines ou Small Multiples
+## Trabalhar com  Highlight Table ou Spark Lines ou Small Multiples
 
 ```
 
-### Trabalhando com uma tabela no formato highlight table
+Utilizando a forma gráfica por linhas, por termos muitas categorias, o gráfico ficou confuso, então achei melhor voltar ao formato de tabela, mas usando uma técnica diferente.
+
+##### Trabalhando com tabela de destaque
 
 ```{r}
 library(gt)
-library(tidyverse)
 
-df_tab[1:20,] |> 
+df_tab[1:n_show,] |> 
   mutate(`Free` = prop_free, `Muito Barato` = prop_verLow, `Barato` = prop_low,
          `Medio` = prop_med, `Caro` = prop_exp, `Muito Caro` = prop_verExp) |> 
   gt() |> 
@@ -356,29 +437,46 @@ cols_merge(
     pattern = "{2}") |> 
 cols_move_to_start(c(`Free`, `Muito Barato`, `Barato`,
                        `Medio`, `Caro`, `Muito Caro`)) |> 
-  gt::cols_hide(columns = contains(c("tags", "prop")))
+  gt::cols_hide(columns = contains(c("tags", "prop", "count")))
 
 
 ```
 
-## Conclusões
+```{r creating-fig-palette, echo=FALSE}
+library(scales)
+# pal <- col_bin("Greens", domain = 0:100)
+# show_col(pal(sort(runif(10, 60, 100))))
 
-Podemos ver algumas categorias de jogos que parecem fazer sucesso. Em geral, existem muito mais jogos singleplayer do que jogos multiplayer, provavelmente por conta do custo e da complexidade de se desenvolver um jogo multiplayer.
+df_tab_prob <- df_tab |> 
+  dplyr::select(contains("prop_"))
+  # dplyr::filter(row_number() < n()) ## Caso tenha uma linha de total, remover última linha
 
-### Singleplayer vs Multiplayer
+## Baseado em quantis
+brks_all <- quantile(df_tab_prob, probs = seq(.01, .99, .1), na.rm = TRUE)
 
-Mesmo assim, muitos dos jogos mais avaliados são multiplayer, dos 20 mais avaliados, apenas dois não são multiplayer (The Witcher 3 e Cyberpunk 2077), são jogos que possuem entre 450 mil e 7 milhões de avaliações. Em geral, são jogos mais conhecidos na indústria e que fazem bastante sucesso, englobando muitos jogos gratuitos com vendas de itens dentro do jogo, como o CS:GO, Dota 2, Apex, Destiny 2 e Warframe e jogos com preços variados, citando Terraria e Among Us como jogos muito baratos, Tom Clancy's Rainbow Six® Siege e ARK como jogos baratos, Rust e The Witcher 3 como jogos médios e Elden Ring e Cyberpunk 2077 como jogos mais novos e caros, sem jogos na categoria muito caros.
+## Baseado em mínimos e máximos
+brks_all <- c(round(seq(min(df_tab_prob), max(df_tab_prob), length.out = 12), 1))
 
-Porém, se alterarmos a métrica para os jogos mais bem avaliados, o cenário muda. Ao ordenarmos por taxa de avaliação positiva, os 20 jogos mais bem avaliados com nota máxima (99, os que possuíam notas 100 foram excluídos) são Singleplayer, mas estes jogos possuem um número significativamente menor de avaliações, entre 300 e 11 mil e consequentemente um número menor de vendas, além disso são jogos com preço mais baixos e jogos menos conhecidos, e são, em geral, jogos ou baratos ou muito baratos.
 
-Finalizando, se existe um investimento capaz de suportar o desenvolvimento de jogos multiplayers, a recomendação é que o faça, já que são em geral os jogos com maior número de jogadores e com mais avaliações, a interação entre jogadores, quando bem feita, é algo que costuma prender os jogadores e mantê-los jogando um jogo por longos períodos. Nesse caso é preciso estudar o mercado, buscando jogos similares, e identificar qual modelo de negócio é mais adequado. Em geral, os jogos que tem feito mais sucesso são os jogos gratuitos com formas de benefícios pagas dentro do jogo, seja algum tipo de facilitação dentro do jogo, ou itens cosméticos. A vantagem dos jogos gratuitos é que atingem um grande público, o que é vital para o desenvolvimento de uma comunidade de jogadores, e dentro desta comunidade uma parcela que tem a possibilidade de gastar dentro do jogo poderá o fazer. Lembrando que, em geral, são jogos que vendem cosméticos ou acelerações de desempenho, portanto uma questão muito importante é trabalhar de forma que torne os itens cosméticos e as acelerações de desempenho itens desejáveis. 
+# ## Salvando imagem
+# ggsave(paste0(here::here(), "/docs/Analise/capitulos/data-raw/ranking_color_pal.png"), show_col(col_numeric(c("#DAE9E8", "#2A7DC0"), domain = NULL)(brks_all), labels = F))
+# ## Após salvar imagem, eu fiz manualmente a adição dos valores em formato de texto 
 
-Porém, se o orçamento é limitado, jogos com preços baixos e que foquem na experiência Singleplayer se saem melhor, são jogos que podem ter um orçamento menor e estúdos independentes. 
-Os jogos Indie, que surgem por estúdios de desenvolvimento de jogos independentes costumam ter um gasto menor com desenvolvimento, frequentemente com equipes reduzidas e tentam trazer algum diferencial, podendo ser a história do jogo, o design ou até mesmo alguma mecânica de jogabilidade. Jogos como o FTL, Minecraft, Super Meat Boy e Torchlight são exemplos de jogos que começaram como indie e fizeram muito sucesso no mercado de jogos. Inclusive o Minecraft e Torchlight são jogos que perduram até hoje, o primeiro tendo sido comprado por uma gigante no mercado de tecnologias, a Microsoft, e o segundo com o crescimento do estúdio e podendo ser considerado já um estúdio de médio porte.
+```
 
-Ainda, caso o estúdio tenha dinheiro, porém não quer se preocupar com tanto suporte à longo prazo de servidores, na questão de hackers ou mesmo tenha foco em modos competivivos, existem jogos Singleplayers que tem se destacado no mercado, como o recente Hogwarts Legacy que teve ótima crítica e tem sido bastante falado, e os jogos The Witcher 3 ou Cyberpunk que estão na lista dos 20 jogos mais bem avaliados, porém, fica a ressalva de que esses jogos não são jogos comuns, The Witcher já é o terceiro jogo da série e foi crescendo em público com o tempo, e Cyberpunk é um jogo da mesma desenvolvedora e conseguiu construir uma campanha de marketing para se tornar um jogo muito aguardado.
+![Paleta de cores](cap-images/ranking_palette_genres_prices.png "Title: cores e percentuais"){fig-alt="Imagem com paleta de cores e suas porcentagens" width="30%"}
 
-### Tags mais populares nos 100 jogs com mais reviews
+#### Análises preço e categorias
+
+Podemos ver algumas categorias de jogos que parecem fazer sucesso, relembrando que as categorias não são excludentes, [um jogo pode ter mais de uma categoria]{.underline}, e em geral todos os jogos possuem muitas delas. Em relação ao modo de jogo, um jogo pode ser definido como sendo de único jogador (Singleplayer) e/ou multijogador (Multiplayer). E existem proporcionalmente mais jogos com modo singleplayer do que multiplayer, ainda que esse filtro esteja presente , provavelmente por conta do custo e da complexidade de se desenvolver um jogo multiplayer.
+
+##### Singleplayer vs Multiplayer
+
+Mesmo sendo **mais custosos**, muitos dos **jogos mais avaliados são multiplayer**, dos 20 mais avaliados, apenas não possuem modo multiplayer (The Witcher 3 e Cyberpunk 2077), são jogos que possuem entre 450 mil e 7 milhões de avaliações e em geral, são jogos que fazem bastante sucesso, ou seja, são muito vendidos (no caso dos pagos) e jogados. Alem disso existem **diferentes modelos de negócio** dentro destes jogos mais avaliados, existem muitos **jogos gratuitos** **com vendas** de itens **dentro do jogo**, como o CS:GO, Dota 2, Apex, Destiny 2 e Warframe, que são gratuitos mas vendem benefícios dentro do jogo para quem quiser comprar. Existem **jogos com preços variados**, citando Terraria e Among Us como jogos **muito baratos**, Tom Clancy's Rainbow Six® Siege e ARK como jogos **baratos**, Rust e The Witcher 3 como jogos **médios** e Elden Ring e Cyberpunk 2077 como jogos **mais novos e caros**, a **única** categoria que **não** apareceu foi a de **muito caros**.
+
+Porém, se **alterarmos a métrica** **para** os jogos mais **bem avaliados**, o cenário muda. Ao ordenarmos por taxa de avaliação positiva, os 20 **jogos mais bem avaliados** com nota máxima **são Singleplayer**, **mas** estes jogos **possuem um número** significativamente **menor de avaliações**, entre 300 e 11 mil **e consequentemente** um **número menor de vendas**, além disso são **jogos com preço mais baixos e jogos menos conhecidos**, e são, em geral, jogos ou baratos ou muito baratos.
+
+##### Tags mais populares nos 100 jogs com mais reviews
 
 Uma possível verificação que eu acho interessante de ser feita, são as avaliações das tags dos 100 jogos mais populares, definido pelo número de avaliações positivas no jogo, para verificar dentre esses que tem mais "sucesso", o que se destaca.
 
@@ -405,8 +503,7 @@ df_top100_tags |>
 
 ```
 
-Primeiramente vale lembrar que cada jogo pode possuir um número ilimitado de categorias, por isso vemos uma contagem tão alta de aparecimento delas.
-Também é interessante observar como a categoria Ação passou à frente das demais, estando presente em quase todos os jogos (91%), e como no caso dos jogos do top 100, existem mais jogos que se definem como Multiplayer do que Singleplayer (Respectivamente, 74% e 69%), o que nos mostra que boa parte dos jogos desse top possui ambos os modos, tentando agradar diferentes públicos. Outras categorias que valem a pena serem citadas como bastante presentes são a de Cooperativo e Open World ambos com 54%, categorias não tão fortes na nossa tabela geral, e que ganham mais destaque em jogos mais caros, indicando possivelmente que são jogos mais complexos e mais caros de serem feitos. A categoria FPS aparece bastante também com 41% e Indie também tem seu destaque com 36%.
+Primeiramente vale lembrar que cada jogo pode possuir um número ilimitado de categorias, por isso vemos uma contagem tão alta de aparecimento delas. Também é interessante observar como a **categoria Ação** passou à frente das demais, estando **presente em quase todos os jogos** (91%), e como no caso dos jogos do top 100, existem **mais jogos que se definem como Multiplayer do que Singleplayer** (Respectivamente, 74% e 69%), o que nos mostra que **boa parte dos jogos** desse top **possui ambos os modos**, tentando agradar diferentes públicos. Outras categorias que valem a pena serem citadas como bastante presentes são a de **Cooperativo e Open World** ambos com 54%, categorias não tão fortes na nossa tabela geral, e que **ganham mais destaque em jogos mais caros**, indicando possivelmente que são jogos mais complexos e mais custosos de serem feitos. A categoria FPS aparece bastante também com 41% e Indie também tem seu destaque com 36%.
 
 Testei novamente a base com os top 200 jogos ao invés de 100, e o resultado foi muito próximo, mostrando o que parece ser uma tendência real dos jogos mais populares.
 
@@ -415,13 +512,13 @@ Testei novamente a base com os top 200 jogos ao invés de 100, e o resultado foi
 quantile(df_top100_games$positive_ratio, probs = c(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1))
 
 ggplot(df_top100_games, aes(x = positive_ratio)) +
-  geom_histogram(binwidth = 5) +
+  geom_histogram(binwidth = 5, fill = "lightblue") +
   theme_minimal()
 ```
 
-Avaliando a taxa de avaliações positivas, que vai de 0 a 99 e é calculado com base na relação de opiniões positivas e negativas dos usuários, temos um índice bem alto, na maioria dos jogos. Com praticamente metade desses jogos tendo avaliações acima de 90, e concentração das avaliações entre 70-98. Alguns poucos jogos ficaram abaixo disso, e possivelmente são jogos que podem ser investigados para entender o que motiva essas avaliações tão negativas. O maior exemplo é o Battlefield 2042 com o pior índice de avaliações, Tale of Immortal e PUBG: Battlegrounds.
+Avaliando a taxa de avaliações positivas, que vai de 0 a 99 e é calculado com base na relação de opiniões positivas e negativas dos usuários, temos um índice bem alto, na maioria dos jogos. Com praticamente metade desses jogos tendo avaliações acima de 90, e concentração das avaliações entre 70-98. Alguns poucos jogos ficaram abaixo disso, e possivelmente são jogos que podem ser investigados para entender o que motiva essas avaliações tão negativas. O maior exemplo é o Battlefield 2042 com o pior índice de avaliações (35/100), Tale of Immortal (51/100) e PUBG: Battlegrounds (57/100). Em minha experiência, são jogos que realmente foram lançados com problemas e/ou tiveram problemas pós lançamento, portanto é justificável esse resultado baixo nas avaliações.
 
-### Tags em jogos com melhores avaliações
+##### Tags em jogos com melhores avaliações
 
 Outra análise interessante é a dos jogos mais bem avaliados, definido pela taxa de avaliações positivas, que pode não ser tão precisa pois acaba tendo jogos com um número de avaliações pequeno em comparação ao tópico anterior, mas pode trazer alguns insights em relação a categorias de jogos que são bem avaliadas.
 
@@ -442,12 +539,11 @@ df_top100_tags <- df_price_categ_split |>
 #   dplyr::arrange(desc(positive_ratio)) |>
 #   dplyr::slice_head(n = 100)
 
-
 df_top100_tags |> 
   gt::gt()
 ```
 
-Vemos uma diferença considerável nas categorias, mais em linha com os jogos gratuitos e baratos. A categoria Singleplayer está presente em 67% dos jogos, e a categoria Multiplayer aparece em apenas um jogo, mostrando uma diferença enorme da classificação anterior. Outra categoria que ganha mais destaque é a de jogos indie, com quase o dobro de jogos que a avaliação anterior. As categorias Action, Open World e Co-Op caem drásticamente, com respectivos 32% (contra 91% da anterior), 2% (Contra 54% da anterior) e 2% (Contra 54%). Mostrando que as diferenças nessas duas formas de ranquear os jogos refletem em mudanças bem grandes dos jogos.
+Vemos uma diferença considerável nas categorias comparado aos jogos com mais avaliações, agora mais em linha com os jogos gratuitos e baratos. A **categoria Singleplayer** está presente em **67% dos jogos**, e a **categoria Multiplayer** aparece em **apenas um jogo**, mostrando uma diferença enorme da classificação anterior. Outra categoria que **ganha mais destaque** é a de **jogos indie**, com **quase o dobro de jogos** que a avaliação anterior. As **categorias Action, Open World e Co-Op caem drásticamente**, com respectivos 32% (contra 91% da anterior), 2% (Contra 54% da anterior) e 2% (Contra 54%). Mostrando que as diferenças nessas duas formas de ranquear os jogos refletem em mudanças bem grandes dos jogos.
 
 ```{r, top100-positive-tags-reviews}
 
@@ -458,4 +554,22 @@ ggplot(df_top100_games, aes(x = user_reviews)) +
   theme_minimal()
 ```
 
-Outro ponto que acho importante citar, que podemos notar pelo histograma e pelos quartis, é que aproximadamente dos terços da nossa base possui entre 120-1000 avaliações, com apenas alguns poucos jogos que tem mais avaliações, e por conseguinte mais populares.
+Outro ponto que acho importante citar, que podemos notar pelo histograma e pelos quartis, é que **aproximadamente dos terços** da nossa base p**ossui entre 120-1000 avaliações**, com apenas alguns poucos jogos que tem mais avaliações, e por conseguinte mais populares.
+
+##### Jogos competitivos
+
+Outra análise adicional que achei interessante de fazer, é sobre jogos com modos competitivos, são jogos que existe toda uma comunidade em volta, de pessoas que transmitem seus jogos através do youtube ou interagindo mais com seu público em lives na twitch ou youtube, gerando assim mais engajamento e aumentando a vida útil do jogo. Os jogadores também costumam se manter no jogo por mais tempo, por criar objetivos dentro do jogo de se melhorar e atingir níveis mais altos de ranking, mostrando melhores habilidades. Também são jogos que geralmente são jogados com amigos e grupos, o que tende a aumentar o tempo que um jogador permanece jogando. Porém, são jogos que também trazem seus problemas, principalmente ligados à balanceamento, por serem jogos que dependem de um público grande, é preciso que existam muitos jogadores para que todos possam jogar contra jogadores de seu nível. Além disso, o modelo de negócio, por depender de uma base de jogadores grande, tende a ser gratuita para que muitos possam jogar, com a venda de itens dentro do jogo, normalmente itens cosméticos, que não influênciam nas mecânicas. A questão da distância dos jogadores com os servidores também pode impactar negativamente a experiência do jogo. Além, é claro, dos jogadores que usam programas ilegais para obterem benefícios como mira automática, mais recursos no jogo, etc.
+
+Vou retornar à lista dos 100 jogos mais populares, e analisar quantos deles tem modos competitivos.
+
+```{r, jogos-comp}
+df_top100_games_comp <- df_top100_games |> 
+  dplyr::filter(stringr::str_detect(stringr::str_to_lower(tags_all), "comp") |
+                  stringr::str_detect(stringr::str_to_lower(categories), "comp") |
+                  stringr::str_detect(stringr::str_to_lower(genres), "comp"))
+
+```
+
+Em análise através das tags, verificamos um total de 10 jogos competitivos, como a minha experiência de jogador achou um número baixo, decidi investigar os 100 jogos um à um, e cheguei num total de 16 jogos (+6 além dos que já haviam sido encontrados). O jogo mais bem avaliado deste top 100 que possui modo competitivo é o Counter Strike (sua primeira versão), que é um fenômeno único e ainda é um jogo muito jogado em suas versões mais novas, tanto que o CS GO também aparece neste top 100. Alguns jogos como Dota 2, Apex, Battlefields e Call of dutys, também apareceram e são jogos que tem seu modo competitivo bastante falado (atualmente).
+
+Concluindo, mesmo totalizando 16 jogos, **não é um número tão relevante** se considerarmos a população de 100 jogos **e dado às complicações** que esta categoria pode trazer, **a recomendação** seria de manter **apenas** com modo **Multiplayer casual**, ou seja, sem um ranqueamento, parecem ser mais bem aceitos atualmente.

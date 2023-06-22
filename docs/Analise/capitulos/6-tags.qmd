@@ -165,8 +165,8 @@ data.table::fwrite(df_tags_count, here::here("data-raw/created-tables/df-tags-co
 ## Utilllizamos as 50 tags que mais aparecem e criamos uma nova tabela para visualização
 df_tags_count |> 
   dplyr::arrange(desc(count)) |> 
-  dplyr::slice_head(n = 50) |> 
-  DT::datatable()
+  dplyr::slice_head(n = 10) |> 
+  gt::gt()
 ```
 
 ##### Organizando nova tabela

@@ -51,10 +51,10 @@ df_med_games |>
 ## Verificando decis
 # Preço original
 dec_orig <- quantile(df_payed_games$price_original, probs = c(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1))
-dec_orig
+# dec_orig
 # Preço final
 dec_fin <- quantile(df_payed_games$price_final, probs = c(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1))
-dec_fin
+# dec_fin
 
 ```
 
@@ -80,10 +80,10 @@ ggplot(df_payed_games, aes(y = price_original)) +
         axis.ticks.x=element_blank())
 ```
 
-E aqui podemos ver que ele classificou muitos jogos como outliers, em faixas superiores à $45, portanto resolvemos tirar os jogos do primeiro e último decis. Depois de remover os 10% inferiores e superiores:
+E aqui podemos ver que ele classificou muitos jogos como outliers, em faixas superiores à $45, portanto resolvemos tirar os jogos do primeiro e último decis, de acordo com seu preço. Depois de remover os 10% inferiores e superiores:
 
 ```{r, graph-price-cut}
-ggplot(df_payed_games[(df_payed_games$price_original >= dec_orig[2] & df_payed_games$price_original <= dec_orig[10]),], 
+ggplot(df_payed_games[(df_payed_games$price_original > dec_orig[1] & df_payed_games$price_original < dec_orig[10]),], 
        aes(y = price_original)) +
   geom_boxplot() +
   theme_minimal() +
