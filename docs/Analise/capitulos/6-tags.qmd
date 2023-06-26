@@ -1,4 +1,9 @@
-```{r, header-tags}
+---
+title: "My Child Report"
+params:
+  overwrite_tables: "T"
+---
+```{r, header-tags, echo=FALSE, message=FALSE}
 ########################################################################################## #
 #'  Parte do arquivo de análise exploratória
 #'  Arquivo focado em analisar as variáveis de tags da base unida
@@ -15,6 +20,15 @@ source(here::here("R/fct-auxiliares/fct_ajustando_tags.R"))
 source(here::here("R/fct-auxiliares/fct_filter_not_games.R"))
 ```
 
+Como uni duas bases de dados, precisamos tratar e unificar a nossa coluna que será definida como classificadora dos jogos. A base 1 possuía dados nas colunas `genres`, `categories` e `tags`, já a base 3 apenas em `tags`.
+
+A coluna que se adequava melhor aos objetivos no caso da base 1, era a variável `tags`, já que possuía mais classificações para os jogos que a variável `genres`, normalmente possuindo tudo que estava presente nela e mais algumas outras características. E a variável `Categories` estava mais associada ao modo de jogo e informações da Steam, como se possuía *Achievements*, conquistas nos jogos, se tinha suporte a controle pela Steam, etc.
+
+Como alguns jogos estavam em ambas as bases de dados, por fim acabei ficando com duas colunas de classificação, e para não perder nenhuma classificação, achei interessante comparar as características e adicionar as faltantes, fazendo uma união de tudo que aparecia em ambas as variáveis.
+
+
+##### Separação de tags
+
 ```{r, tags}
 teste_interno <- T
 if(teste_interno){
@@ -27,15 +41,11 @@ df_all_games <- data.table::fread(here::here("data-raw/created-tables/db-reviews
 
 ## Verificando as diferenças entre tags de um df e do outro (tags e tags_extra)
 df_tags <- dplyr::select(df_all_games, 
-                         app_id, title, tags, tags_extra)
+                         app_id, title, tags, tags_extra) |> 
+  dplyr::filter(!is.na(tags) | !is.na(tags_extra))
+
 df_tags_equal <- df_tags[tags == tags_extra,]
 df_tags_not_equal <- df_tags[tags != tags_extra,]
-
-# df_tags_equal_ <- df_tags_equal
-# df_tags_not_equal_ <- df_tags_not_equal
-
-# nrow(df_tags[is.na(tags_extra), ])
-# nrow(df_tags[is.na(tags), ])
 
 ## Primeiro check será em jogos que possuem números de tags diferentes
 tags_dif_ids <- df_tags_not_equal |> 
@@ -45,6 +55,10 @@ tags_dif_ids <- df_tags_not_equal |>
 ```
 
 ##### Analisando tags diferentes
+
+Então, será criado uma nova coluna para as tags diferentes. É feita uma comparação, entre as duas colunas, e é mantido em um vetor o que temos de elementos iguais (`equal`), depois em outro vetor o que temos a mais em uma coluna (`diff1`) e no terceiro o que temos a mais na outra coluna (`diff2`).
+
+Depois transformei novamente estes vetores em colunas para poder inspecionar como ficaram as novas colunas. E nesse momento verifiquei que por serem bases diferentes, em alguns casos existiam pequenas variações no nome da classificação, que foram ajustados para que não influênciassem na contagem final. Um exemplo destes casos era a categorização "Rogue like", que em uma base estava definida como "Rogue like" e na outra "Rogue-like", isso e mais algumas outras categorizações foram normalizadas.
 
 ```{r, tags-all}
 ### XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX ####
@@ -108,12 +122,37 @@ df_diff <- df_diff |>
   dplyr::select(id, tags)
 ```
 
+##### Tags NA
+
+Após a separação e tratamento de ambas os conjuntos de dados, observei um número grande de dados que não havia sido incluído em nenhuma base, nem no que possuía as tags iguais nem nos que possuíam as tags diferentes. Descobri que isso foi causado pela forma como o `R` trata `NA`, as colunas que possuem `NA` não são comparadas diretamente, então elas ficaram excluídas da junção anterior. Portanto, tratei de forma que também adicionasse estes casos de forma simples, copiando os dados de uma coluna à outra, para tratar de forma similar à que seria tratado o conjunto de dados que possuía as colunas iguais.
+
+```{r, tags-na}
+## Como ainda possuíamos um número grande de NAs em uma das duas colunas, a solução foi copiar
+## a coluna preenchida e tratar como se fosse uma junção que não precisaria de tratamento
+## Tags e Tags_extra NA
+df_tags_na_1 <- df_tags[is.na(tags)]
+## Clonando a coluna de tags para que seja tratada da mesma forma para o df com tags iguais
+df_tags_na_1$tags <- df_tags_na_1$tags_extra
+
+df_tags_na_3 <- df_tags[is.na(tags_extra)]
+## Clonando a coluna de tags para que seja tratada da mesma forma para o df com tags iguais
+df_tags_na_3$tags_extra <- df_tags_na_3$tags
+
+df_tags_equal <- rbind(df_tags_equal, df_tags_na_1, df_tags_na_3)
+```
+
 ##### Visualzando tags mais frequentes
 
-Após a organização e certa limpeza das tags, vou começar com uma visualização simples para identificar as tags mais utilizadas (e as menos utilizadas). Esse processo poderá ser feito no futuro para as outras variáveis de categoria e gênero, de forma similar, já que a estrutura das variáveis é a mesma.
+Após a organização e limpeza das tags, vou começar com uma visualização simples para identificar as tags mais utilizadas (e as menos utilizadas). Outro detalhe é que farei uma junção, agora da tabela com as tags diferentes e com as que defini como tags iguais.
 
 ```{r, count-tags}
-all_ordered <- df_diff$tags |> 
+
+df_tags_all <- df_tags_equal |> 
+  dplyr::select(app_id, tags) |> 
+  rbind(df_diff |> 
+          dplyr::rename(app_id = id))
+
+all_ordered <- df_tags_all$tags |> 
   purrr::map(\(x) stringr::str_sort(stringr::str_split_1(x, pattern = ",")))
 
 ## Colocando tudo numa única lista para contagem
@@ -124,56 +163,45 @@ df_tags_count <- as.data.frame(table(all_string_listwise), stringsAsFactors = F)
 ## Renomeando colunas
 names(df_tags_count) <- c("tag", "count")
 
-data.table::fwrite(df_tags_count, here::here("data-raw/created-tables/df-tags-count.csv"))
+## Escrevendo base de dados
+if(params$overwrite_tables == "T"){
+  data.table::fwrite(df_tags_count, here::here("data-raw/created-tables/df-tags-count.csv"))
+}
 
 ## Utilllizamos as 50 tags que mais aparecem e criamos uma nova tabela para visualização
 df_tags_count |> 
   dplyr::arrange(desc(count)) |> 
-  dplyr::slice_head(n = 50) |> 
-  DT::datatable()
+  dplyr::slice_head(n = 10) |> 
+  gt::gt()
 ```
 
-```{r, df-newTags}
-# df_tags_not_equal$tags_all <- df_diff$tags
-# df_tags_equal$tags_all <- df_tags_equal$tags
+##### Organizando nova tabela
 
-df_diff <- dplyr::rename(df_diff, tags_all = tags, app_id = id)
+E então, para finalizar a organização das tags, nós vamos excluir as características dos jogos que vieram de ambas as bases, e vamos adicionar essa nova coluna tratada.
 
-df_tags_equal <- dplyr::rename(df_tags_equal, tags_all = tags) |> 
-  dplyr::select(-tags_extra)
-df_tags_not_equal <- dplyr::inner_join(df_tags_not_equal, df_diff, by = "app_id") |> 
-  dplyr::select(-tags, -tags_extra)
-
-df_all_games_newtags <- rbind(df_tags_equal, df_tags_not_equal) |> 
-  dplyr::select(app_id, tags_all)
-
-df_all_games_newtags <- dplyr::inner_join(df_all_games, df_all_games_newtags, by="app_id") |> 
-  dplyr::select(-tags, -tags_extra)
-
-## Adicionando jogos que tinham tags ou tags_extra NA, e não foram comparados
-df_all_games_na <- df_all_games |> 
-  dplyr::filter(is.na(tags) | is.na(tags_extra)) |> 
-  dplyr::mutate(tags_all = ifelse(is.na(tags), tags_extra, tags)) |> 
-  dplyr::select(-tags, -tags_extra)
-
-df_all_games <- rbind(df_all_games_newtags, df_all_games_na)
-
+```{r, df-allgames-newtags}
+df_all_games_new_tags <- df_all_games |> 
+  dplyr::select(-tags, -tags_extra) |> 
+  dplyr::inner_join(df_tags_all, by = "app_id") |> 
+  dplyr::rename(tags_all = tags)
 ```
 
-```{r, filter-notGames}
-## Categorias consideradas não jogos
-notGames <- c("360 Video", "Accounting", "Animation & Modeling", "Audio Production", "Design & Illustration", "Documentary", "Episodic", "Game Development", "Movie", "Photo Editing", "Short", "Software", "Software Training", "Tutorial", "Utilities", "Video Production", "Web Publishing")
-notGames_genres <- paste0(notGames, collapse = "|")
 
+##### Criando base no formato long
+
+Para futuras comparações, decidi criar dois tipos de bases de dados, uma no formato long, com cada linha possuindo uma única tag, e outra com todas as tags agrupadas em uma única coluna, unida por vírgula.
+
+```{r, both-bases}
 ## dataframe filtrando generos e tags que não são considerados jogos
-df_all_games_split <- df_all_games |> 
-  dplyr::filter(is.na(genres) | !stringr::str_detect(genres, notGames_genres)) |> 
+df_all_games_split <- df_all_games_new_tags |> 
+  dplyr::filter(title != "Houdini Indie") |> 
   tidyr::separate_longer_delim(tags_all, delim = ",") |>  
-  dplyr::rowwise() |> 
-  dplyr::mutate(tags_all = func_filter_not_games_line(tags_all, notGames)) |> 
-  dplyr::filter(tags_all != "notGame")
+  dplyr::rowwise()
 
-data.table::fwrite(df_all_games_split, here::here("data-raw/created-tables/db-all-games-tags-all-split.csv"))
+## Escrevendo base de dados
+if(params$overwrite_tables){
+  data.table::fwrite(df_all_games_split, here::here("data-raw/created-tables/db-all-games-tags-all-split.csv"))
+}
 
 df_all_games_filt <- df_all_games_split |> 
   dplyr::group_by(app_id) |> 
@@ -182,5 +210,9 @@ df_all_games_filt <- df_all_games_split |>
   dplyr::select(-tags_all) |> 
   dplyr::rename(tags_all = tags_all_)
 
-data.table::fwrite(df_all_games_filt, here::here("data-raw/created-tables/db-all-games-tags-all.csv"))
+## Escrevendo base de dados
+if(params$overwrite_tables){
+  data.table::fwrite(df_all_games_filt, here::here("data-raw/created-tables/db-all-games-tags-all.csv"))
+}
+
 ```

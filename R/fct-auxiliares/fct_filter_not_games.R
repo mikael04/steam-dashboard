@@ -16,18 +16,18 @@
 ## 0.1 - Bibliotecas e scripts fontes----
 
 ## 1. - Função para filtrar um dataframe inteiro ----
-func_filter_not_games <- function(df_selected, notGames_vector, mode){
+func_filter_not_games <- function(df_selected, notGames_col, mode){
   if(mode == 1){
     df_selected <- df_selected |> 
-      dplyr::filter(!(genres %in% notGames_vector))
+      dplyr::filter(!(stringr::str_detect(genres, notGames_col)))
   }
   if(mode == 2){
     df_selected <- df_selected |> 
-      dplyr::filter(!(tags %in% notGames_vector))
+    dplyr::filter(!(stringr::str_detect(tags, notGames_col)))
   }
   if(mode == 3){
-    df_selected <- df_selected |> 
-      dplyr::filter(!(tags_all %in% notGames_vector))
+    df_selected <- df_selected |>
+      dplyr::filter(!(stringr::str_detect(tags_all, notGames_col)))
   }
   return(df_selected)
   

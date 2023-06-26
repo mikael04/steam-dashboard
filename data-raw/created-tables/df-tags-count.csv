@@ -1,444 +1,446 @@
 tag,count
-1980s,104
-1990's,233
-2.5d,205
-2d,2224
-2d fighter,104
-2d platformer,180
-360 video,6
-3d,706
-3d fighter,44
-3d platformer,203
-3d vision,49
-4 player local,180
-4x,96
-6dof,26
-abstract,95
-action,3869
+1980s,234
+1990's,442
+2.5d,355
+2d,4035
+2d fighter,193
+2d platformer,498
+3d,1857
+3d fighter,100
+3d platformer,428
+3d vision,89
+4 player local,314
+4x,206
+6dof,81
+8-bit music,2
+abstract,198
+action,8605
 action rogue-like,6
-action roguelike,311
-action rpg,481
-action rts,27
-action-adventure,485
-addictive,97
-adventure,3785
-agriculture,63
-aliens,171
-alternate history,123
-ambient,7
-america,49
-animation & modeling,34
-anime,1193
-arcade,705
-archery,14
-arena shooter,112
-artificial intelligence,76
-assassin,47
-asymmetric vr,6
-asynchronous multiplayer,32
-atmospheric,2193
-atv,7
-audio production,12
-auto battler,32
-automation,77
-automobile sim,158
-base-building,502
-baseball,2
-based on a novel,28
-basketball,6
-battle royale,55
-beat 'em up,194
-beautiful,167
-benchmark,6
-bikes,23
-blood,107
-bmx,4
-board game,143
-boss rush,7
-boxing,11
-building,647
-bullet hell,214
-bullet time,47
-capitalism,64
-card battler,76
-card game,176
-cartoon,183
-cartoony,320
-casual,2261
-cats,65
-character action game,64
-character customization,565
-chess,10
-choices matter,555
-choose your own adventure,188
-cinematic,165
-city builder,280
-class-based,70
-classic,657
-clicker,99
-co-op,1334
-co-op campaign,86
-cold war,63
-collectathon,56
-colony sim,151
-colorful,716
-combat,289
-combat racing,40
-comedy,821
-comic book,89
-competitive,245
-conspiracy,45
-controller,579
-conversation,80
-cooking,36
-cozy,35
-crafting,489
-creature collector,39
-cricket,1
-crime,142
-crowdfunded,38
-crpg,117
-cult classic,176
-cute,979
-cyberpunk,250
-cycling,9
-dark,532
-dark comedy,79
-dark fantasy,310
-dark humor,216
-dating sim,261
-deckbuilding,97
-demons,116
-design & illustration,58
-destruction,132
-detective,243
-difficult,1195
-dinosaurs,40
-diplomacy,50
-documentary,5
-dog,34
-dragons,61
-drama,225
-driving,204
-dungeon crawler,330
-dungeons & dragons,20
-dynamic narration,40
-dystopian,136
-early access,1066
-economy,314
-education,149
-electronic,2
-electronic music,3
-emotional,170
-epic,47
-episodic,54
-escape room,82
-esports,132
-experience,20
-experimental,111
-exploration,1155
-faith,25
-family friendly,785
-fantasy,1211
-farming,20
-farming sim,70
-fast-paced,302
-feature film,2
-female protagonist,1118
-fighting,223
-first-person,1364
-fishing,58
-flight,121
-fmv,55
-football,32
-football (american),12
-foreign,19
+action roguelike,486
+action rpg,943
+action rts,50
+action-adventure,1113
+addictive,167
+adventure,7752
+agriculture,138
+aliens,326
+alternate history,248
+ambient,10
+america,123
+animation & modeling,1
+anime,2611
+arcade,1421
+archery,36
+arena shooter,241
+artificial intelligence,149
+assassin,91
+asymmetric vr,19
+asynchronous multiplayer,90
+atmospheric,3746
+atv,10
+auto battler,87
+automation,135
+automobile sim,378
+base building,212
+base-building,481
+baseball,13
+based on a novel,47
+basketball,19
+battle royale,160
+beat 'em up,362
+beautiful,245
+benchmark,5
+bikes,46
+blood,190
+bmx,8
+board game,346
+boss rush,8
+bowling,8
+boxing,25
+building,1106
+bullet hell,473
+bullet time,97
+capitalism,122
+card battler,220
+card game,464
+cartoon,442
+cartoony,728
+casual,5281
+cats,172
+character action game,154
+character customization,1019
+chess,33
+choices matter,1070
+choose your own adventure,472
+cinematic,308
+city builder,505
+class-based,133
+classic,955
+clicker,290
+co-op,2257
+co-op campaign,148
+coding,1
+cold war,118
+collectathon,148
+colony sim,228
+colorful,1649
+combat,762
+combat racing,96
+comedy,1450
+comic book,187
+competitive,434
+conspiracy,83
+controller,1027
+conversation,204
+cooking,101
+cozy,56
+crafting,878
+creature collector,98
+cricket,6
+crime,250
+crowdfunded,63
+crpg,245
+cult classic,245
+cute,2033
+cyberpunk,419
+cycling,15
+dark,964
+dark comedy,167
+dark fantasy,588
+dark humor,367
+dating sim,591
+deckbuilding,245
+demons,243
+design & illustration,1
+destruction,254
+detective,410
+difficult,1926
+dinosaurs,108
+diplomacy,94
+dog,90
+dragons,146
+drama,566
+driving,494
+dungeon crawler,578
+dungeons & dragons,28
+dynamic narration,73
+dystopian,244
+e-sports,12
+early access,2231
+economy,544
+education,291
+electronic,4
+electronic music,13
+emotional,446
+epic,75
+episodic,1
+escape room,121
+esports,191
+experience,40
+experimental,202
+exploration,2189
+faith,86
+family friendly,1373
+fantasy,2330
+farming,47
+farming sim,171
+fast-paced,486
+female protagonist,2065
+fighting,421
+first-person,2623
+fishing,115
+flight,298
+fmv,108
+football,53
+football (american),28
+football (soccer),22
+foreign,42
 fox,2
-fps,847
-free to play,885
-funny,1334
-futuristic,250
-gambling,18
-game development,35
-gamemaker,42
-games workshop,47
-gaming,9
-god game,79
-golf,17
-gore,792
-gothic,75
-grand strategy,152
-great soundtrack,1862
-grid-based movement,54
-gun customization,67
-hack and slash,435
-hacking,57
-hand-drawn,274
-hardware,4
-heist,40
-hentai,247
-hero shooter,25
-hex grid,70
-hidden object,169
-historical,375
+fps,1742
+free to play,2562
+funny,2342
+futuristic,476
+gambling,42
+gamemaker,53
+games workshop,71
+gaming,10
+god game,120
+golf,33
+gore,1658
+gothic,135
+grand strategy,349
+great soundtrack,2706
+grid-based movement,110
+gun customization,112
+hack and slash,780
+hacking,113
+hand-drawn,598
+hardware,6
+heist,97
+hentai,485
+hero shooter,73
+hex grid,140
+hidden object,374
+historical,834
 hobby sim,2
-hockey,2
-horror,1163
-horses,19
-hunting,41
-idler,77
-illuminati,60
-immersive,35
-immersive sim,208
-indie,4193
-intentionally awkward controls,8
-interactive fiction,195
-inventory management,86
-investigation,131
-isometric,381
-jet,14
-job simulator,8
-jrpg,383
+hockey,10
+horror,2228
+horses,46
+hunting,119
+idler,223
+illuminati,116
+immersive,72
+immersive sim,479
+indie,9323
+instrumental music,3
+intentionally awkward controls,14
+interactive fiction,458
+inventory management,170
+investigation,278
+isometric,635
+jet,24
+job simulator,10
+jrpg,756
 jump scare,11
-kickstarter,85
-lego,32
-lemmings,10
-level editor,179
-lgbtq+,169
-life sim,133
-linear,128
-local co-op,466
-local multiplayer,457
-logic,106
-loot,189
-looter shooter,40
-lore-rich,104
-lovecraftian,126
-magic,258
+kickstarter,116
+lego,41
+lemmings,14
+level editor,274
+lgbtq+,398
+life sim,363
+linear,404
+local co-op,744
+local multiplayer,797
+logic,255
+loot,312
+looter shooter,81
+lore-rich,256
+lovecraftian,213
+magic,594
 mahjong,10
-management,622
-mars,35
-martial arts,71
-massively multiplayer,385
-masterpiece,1
-match 3,43
-mature,398
-mechs,92
-medical sim,16
-medieval,301
-memes,380
-metroidvania,209
-military,282
-mini golf,10
-minigames,31
-minimalist,217
-mining,54
-mmorpg,146
-moba,45
-mod,31
-moddable,302
-modern,72
-motocross,9
-motorbike,26
-mouse only,76
-movie,19
-multiplayer,2391
-multiple endings,419
-music,130
-music-based procedural generation,16
-musou,15
-mystery,570
-mystery dungeon,30
-mythology,101
-narration,154
-narrative,32
-nature,113
-naval,61
-naval combat,41
-ninja,63
-noir,94
-nonlinear,68
-nostalgia,71
-nsfw,131
-nudity,661
-offroad,27
-old school,231
-on-rails shooter,15
-online co-op,694
-open world,1349
-open world survival craft,158
-otome,42
-outbreak sim,10
-parkour,134
-parody,58
-party,39
-party game,45
-party-based rpg,145
-perma death,219
-philosophical,62
-photo editing,9
-physics,460
-pinball,12
-pirates,74
-pixel graphics,1120
-platformer,836
-point & click,620
-political,68
-political sim,45
-politics,57
-pool,8
-post-apocalyptic,334
-precision platformer,64
-procedural generation,421
-programming,42
-psychedelic,116
-psychological,149
-psychological horror,782
-puzzle,1439
-puzzle-platformer,375
-pve,257
-pvp,572
-quick-time events,41
-racing,290
-real time tactics,162
-real-time,120
-real-time with pause,129
-realistic,535
-reboot,7
-relaxing,511
-remake,168
-replay value,487
-resource management,381
-retro,853
-rhythm,82
-robots,195
-rock music,4
-rogue-like,634
+management,1177
+mars,54
+martial arts,136
+massively multiplayer,972
+masterpiece,5
+match 3,116
+mature,690
+mechs,178
+medical sim,35
+medieval,607
+memes,708
+metroidvania,358
+military,596
+mini golf,21
+minigames,57
+minimalist,466
+mining,93
+mmorpg,327
+moba,126
+mod,106
+moddable,507
+modern,179
+motocross,24
+motorbike,62
+mouse only,139
+movie,2
+multiplayer,4554
+multiple endings,911
+music,300
+music-based procedural generation,41
+musou,25
+mystery,1037
+mystery dungeon,68
+mythology,200
+narration,298
+narrative,74
+nature,274
+naval,134
+naval combat,98
+ninja,127
+noir,147
+nonlinear,170
+nostalgia,107
+nsfw,274
+nudity,1345
+offroad,70
+old school,506
+on-rails shooter,40
+online co-op,1236
+open world,2423
+open world survival craft,226
+otome,116
+outbreak sim,22
+parkour,234
+parody,129
+party,65
+party game,82
+party-based rpg,287
+perma death,340
+philosophical,126
+photo editing,1
+physics,883
+pinball,30
+pirates,133
+pixel graphics,2132
+platformer,1420
+point & click,992
+political,157
+political sim,117
+politics,129
+pool,13
+post-apocalyptic,598
+precision platformer,156
+procedural generation,660
+programming,72
+psychedelic,231
+psychological,285
+psychological horror,1429
+puzzle,2579
+puzzle platformer,169
+puzzle-platformer,313
+pve,560
+pvp,1265
+quick-time events,55
+racing,720
+real time tactics,338
+real-time,182
+real-time with pause,185
+realistic,1248
+reboot,12
+relaxing,1075
+remake,225
+replay value,775
+resource management,663
+retro,1486
+rhythm,191
+robots,326
+rock music,6
+rogue-like,631
 rogue-like deckbuilder,2
-rogue-lite,546
-roguelike deckbuilder,39
-roguevania,15
-romance,242
-rome,26
-rpg,2031
-rpgmaker,147
-rts,384
-rugby,1
-runner,48
-sailing,35
-sandbox,970
-satire,36
-sci-fi,1099
-science,78
-score attack,99
-sequel,39
-sexual content,690
-shoot 'em up,228
-shooter,1150
+rogue-lite,540
+roguelike,326
+roguelike deckbuilder,93
+roguelite,298
+roguevania,25
+romance,578
+rome,65
+rpg,4623
+rpgmaker,334
+rts,741
+rugby,5
+runner,135
+sailing,75
+sandbox,1651
+satire,101
+sci-fi,1980
+science,137
+score attack,219
+sequel,71
+sexual content,1373
+shoot 'em up,510
+shooter,2167
 shop keeper,4
-short,373
-side scroller,449
-silent protagonist,30
-simulation,1893
-singleplayer,5237
-skateboarding,6
-skating,9
-skiing,7
-sniper,35
-snooker,6
-snow,17
-snowboarding,4
-soccer,26
-social deduction,19
-software,53
-software training,12
-sokoban,17
-solitaire,6
-souls-like,148
-soundtrack,102
-space,477
-space sim,114
-spaceships,15
-spectacle fighter,51
-spelling,5
-split screen,105
-sports,292
-stealth,304
-steam machine,3
-steampunk,101
-story rich,1927
-strategy,2030
-strategy rpg,168
-stylized,362
-submarine,18
-superhero,48
-supernatural,105
-surreal,290
-survival,936
-survival horror,390
-swordplay,81
-tabletop,93
-tactical,556
-tactical rpg,156
-tanks,57
-team-based,196
-tennis,2
-text-based,93
-third person,886
-third-person shooter,271
-thriller,137
+short,17
+side scroller,764
+silent protagonist,38
+simulation,4649
+singleplayer,9632
+skateboarding,15
+skating,17
+skiing,10
+sniper,67
+snooker,8
+snow,34
+snowboarding,9
+soccer,46
+social deduction,42
+software,16
+software training,4
+sokoban,44
+solitaire,54
+souls-like,290
+soundtrack,254
+space,869
+space sim,198
+spaceships,27
+spectacle fighter,115
+spelling,18
+split screen,185
+sports,847
+stealth,581
+steam machine,6
+steampunk,181
+story rich,3447
+strategy,4669
+strategy rpg,385
+stylized,792
+submarine,35
+superhero,89
+supernatural,220
+surreal,474
+survival,1692
+survival horror,751
+swordplay,169
+tabletop,262
+tactical,1092
+tactical rpg,323
+tanks,129
+team-based,411
+tennis,17
+text-based,299
+third person,1616
+third-person shooter,518
+thriller,291
 tile-matching,1
-time attack,31
-time management,88
-time manipulation,46
-time travel,64
-top-down,463
-top-down shooter,167
-touch-friendly,67
-tower defense,181
-trackir,13
-trading,78
-trading card game,53
+time attack,50
+time management,221
+time manipulation,92
+time travel,110
+top-down,892
+top-down shooter,308
+touch-friendly,120
+tower defense,355
+trackir,32
+trading,159
+trading card game,132
 traditional rogue-like,1
-traditional roguelike,38
-trains,53
-transhumanism,20
-transportation,41
-trivia,10
-turn-based,557
-turn-based combat,347
-turn-based strategy,407
-turn-based tactics,285
-tutorial,45
-twin stick shooter,136
-typing,26
-underground,22
-underwater,54
-unforgiving,15
-utilities,44
-vampire,51
-vehicular combat,62
-video production,19
-vikings,25
-villain protagonist,71
-violent,743
-visual novel,566
-voice control,7
-volleyball,1
-voxel,87
-vr,393
-vr only,160
-walking simulator,278
-war,389
-wargame,131
-warhammer 40k,33
-web publishing,17
-well-written,5
-werewolves,12
-western,50
-wholesome,39
-word game,38
-world war i,38
-world war ii,170
-wrestling,6
-zombies,326
+traditional roguelike,61
+trains,102
+transhumanism,35
+transportation,77
+trivia,25
+turn-based,1020
+turn-based combat,711
+turn-based strategy,909
+turn-based tactics,627
+tutorial,2
+twin stick shooter,234
+typing,41
+underground,53
+underwater,97
+unforgiving,27
+vampire,104
+vehicular combat,122
+vikings,40
+villain protagonist,113
+violent,1692
+visual novel,1303
+voice control,11
+volleyball,3
+voxel,133
+vr,797
+vr only,153
+walking simulator,472
+war,756
+wargame,298
+warhammer 40k,55
+well-written,12
+werewolves,38
+western,104
+wholesome,62
+word game,123
+world war i,69
+world war ii,375
+wrestling,22
+zombies,678
