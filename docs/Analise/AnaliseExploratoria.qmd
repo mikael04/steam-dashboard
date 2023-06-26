@@ -11,7 +11,10 @@ theme: cerulean
 reference-location: margin
 code-fold: true
 code-tools: 
-      source: https://github.com/mikael04/steam-dashboard.git
+    source: https://github.com/mikael04/steam-dashboard.git
+params:
+  run_all_code: "T"
+  overwrite_tables: "T"
 ---
 
 ```{r setup, include=FALSE}
@@ -28,15 +31,16 @@ library(ggplot2)
 library(dplyr)
 
 ## Switch para reescrever tabelas iniciais
-switch_overwrite_initial_tables <- T
+# switch_overwrite_tables <- T
 
+print(paste0("Parametro de reescrita de tabelas = ", params$overwrite_tables))
 ```
 
 # Análise dos dados da Steam
 
 ## Introdução
 
-A ideia desta análise é ilustrar os conhecimentos adquiridos em R, começando com uma análise exploratória dos dados, e tentando trazer alguns insights relacionados à empresas que queiram lançar jogos de sucesso no mercado. Para isso vou passar pelas etapas de elaboração do objetivo, trabalho no tratamento e limpeza dos dados, fazer análises de variáveis de interesse individualmente e depois cruzando algumas delas para tentar traçar algumas conclusões, e sugerir alguns caminhos para empresas que pretendem lançar seus jogos no mercado da Steam.
+A ideia desta análise é ilustrar os conhecimentos adquiridos em R, começando com uma análise exploratória dos dados e tentando trazer alguns insights relacionados à jogos de sucesso no mercado. Para isso vou passar pelas etapas de elaboração do objetivo, trabalho no tratamento e limpeza dos dados, fazer análises de variáveis de interesse individualmente e depois cruzando algumas delas para tentar traçar algumas conclusões, que, por fim, podem sugerir alguns caminhos para empresas que pretendem lançar seus jogos terem sucesso na Steam.
 
 ## O objetivo
 
@@ -44,50 +48,64 @@ Somos um estúdio de jogos e queremos analisar:
 
 1.  Qual gênero/categoria de jogo tem mais sucesso na steam, definindo sucesso como melhores avaliações;
 
-2.  Também queremos analisar qual faixa de preço é mais interessante para o lançamento desse novo jogo, ou seja, qual faixa de preço tem maior número de vendas.
+2.  Também queremos analisar qual faixa de preço é mais interessante para o lançamento desse novo jogo, como a faixa de preço se relaciona com o número de vendas e com a categoria.
 
 ## Análise exploratória das bases de dados
 
 Inicialmente irei fazer uma análise exploratória de algumas bases de dados e suas variáveis que podem ser interessantes para determinar sucesso de um jogo, a faixa de preço, a quantidade de vendas e relacionar essas questões aos gêneros e categorias. Foram feitas análises de três bases de dados, a primeira mais completa, e as duas seguintes mais focadas em reviews de usuários. São bases de dadas extraídas do Kaggle que serão utilizadas para o estudo.
 
+
 ### Base de dados - 1
 
-```{r, child="docs/Analise/capitulos/1-analise-base-1.qmd", eval=switch_overwrite_initial_tables}
+```{r}
+#| eval: !expr params$run_all_code=="T"
+#| child: "docs/Analise/capitulos/1-analise-base-1.qmd"
 ```
 
 ### Base de dados - 2
 
-```{r, child="docs/Analise/capitulos/2-analise-base-2.qmd", eval=switch_overwrite_initial_tables}
+```{r}
+#| eval: !expr params$run_all_code=="T"
+#| child: "docs/Analise/capitulos/2-analise-base-2.qmd"
 ```
 
 ### Base de dados - 3
 
-```{r, child="docs/Analise/capitulos/3-analise-base-3.qmd", eval=switch_overwrite_initial_tables}
+```{r}
+#| eval: !expr params$run_all_code=="T"
+#| child: "docs/Analise/capitulos/3-analise-base-3.qmd"
 ```
 
 ### Diferenças entre base 1 e 3
 
-```{r, child="docs/Analise/capitulos/4-dif-entre-bases.qmd", eval=switch_overwrite_initial_tables}
+```{r}
+#| eval: !expr params$run_all_code=="T"
+#| child: "docs/Analise/capitulos/4-dif-entre-bases.qmd"
 ```
 
 ## Unindo as bases
 
-```{r, child="docs/Analise/capitulos/5-unindo-bases.qmd"}
+```{r}
+#| eval: !expr params$run_all_code=="T"
+#| child: docs/Analise/capitulos/5-unindo-bases.qmd
 ```
 
 ## Analisando dados
 
-Agora que já uni as duas bases, e tenho uma quantidade mais razoável de jogos a serem analisados, precisarei definir qual será a forma de avaliar os estilos/gêneros/categorias dos jogos, por ser uma coluna presente em ambas as bases, a variável `tags` é uma ótima candidata, porém ela apresenta um número de possibilidades bastante grande e distinta, o que poderia ser prejudicial à análise. Já as outras variáveis `categories` e `genres` que são mais específicas, não estão presentes em aproximadamente `r paste0(round(nrow(df_all_games[is.na(categories), ])*100/nrow(df_all_games), 0), "%")` da base de dados. A análise será feita inicialmente nas três para posterior decisão de qual ou quais usar.
+Agora que já uni as duas bases, e tenho uma quantidade mais razoável de jogos a serem analisados, precisarei definir qual será a forma de avaliar os estilos/gêneros/categorias dos jogos, por ser uma coluna presente em ambas as bases, a variável `tags` é uma ótima candidata, porém ela apresenta um número de possibilidades bastante grande e distinta, o que poderia ser prejudicial à análise. Já as outras variáveis `categories` e `genres` que são mais específicas, não estão presentes em boa parte dos dados. A análise será feita inicialmente nas três para posterior decisão de qual ou quais usar.
 
 ### Categorias
 
 ```{r, categs-count}
+if(params$run_all_code == "F"){
+  df_all_games <- data.table::fread(here::here("data-raw/created-tables/db-all-games-tags-all.csv"))
+}
 rows_categ <- df_all_games |> 
   dplyr::filter(!(is.na(categories)) & categories != "") |> 
   nrow()
 ```
 
-Ou seja, na base de dados aproximadamente `r paste0(round(rows_categ*100/nrow(df_all_games), 0), "%")` das linas não tem informação de categorias, a variável poderia ser utilizada, porém com algumas ressalvas.
+Ou seja, na base de dados aproximadamente `r paste0(round(rows_categ*100/nrow(df_all_games), 0), "%")` das linhas não tem informação de categorias, a variável poderia ser utilizada, porém com algumas ressalvas.
 
 ### Gêneros
 
@@ -102,47 +120,57 @@ Novamente, cerca de `r paste0(round(rows_genres*100/nrow(df_all_games), 0), "%")
 ### Categorias e Gênero
 
 ```{r, categs-genres-count}
-df_all_games |> 
+rows_gen_cat <- df_all_games |> 
   dplyr::filter(!(is.na(categories)) & categories != "") |> 
   dplyr::filter(!(is.na(genres)) & genres != "") |> 
   nrow()
 ```
 
-E, para efeito de comparação, podemos ver que os valores sem categorias e gênero são as mesmas observações, o que faz bastante sentido já que foram unidas e uma das duas bases não possuía essas colunas.
+E, para efeito de comparação, podemos ver que os valores sem categorias e gênero tem o mesmo percentual (`r paste0(round(rows_gen_cat*100/nrow(df_all_games), 0), "%")`), o que faz bastante sentido já essas informações faltantes vem da primeira base que não possuía essas colunas, os valores que temos, os 40%, são dos jogos adicionados pela base 1.
 
 ### Tags
 
 ```{r, tags-count}
-df_all_games |> 
-  dplyr::filter(!(is.na(tags)) & tags != "" ||
-                (is.na(tags_extra)) & tags_extra != "") |> 
-  nrow()
+if(params$run_all_code == "F"){
+  rows_tags <- df_all_games |> 
+    dplyr::filter(!(is.na(tags_all)) & tags_all != "") |> 
+    nrow()
+}else{
+  rows_tags <- df_all_games |> 
+    dplyr::filter(!(is.na(tags)) & tags != "" ||
+                  (is.na(tags_extra)) & tags_extra != "") |> 
+    nrow()
+}
 ```
 
-Já no caso das tags, todas as observações possuem alguma informação nas variáveis `tags` ou `tags_extra` (o que também faz sentido, já que unimos duas bases diferentes e uma delas possuia a coluna tags e a outra tags_extra).
+Já no caso das tags, `r paste0(round(rows_tags*100/nrow(df_all_games), 0), "%")` das observações possuem alguma informação nas variáveis `tags` ou `tags_extra` (o que também faz sentido, já que unimos duas bases diferentes e uma delas possuia a coluna tags e a outra tags_extra).
 
-Portanto, farei uma análise mais aprofundada para gerar uma única coluna que possa ser analisada.
+Portanto, farei uma análise mais aprofundada desta variável para gerar uma única coluna que possa ser analisada.
 
-```{r, child="docs/Analise/capitulos/6-tags.qmd"}
+```{r}
+#| child: "docs/Analise/capitulos/6-tags.qmd"
 ```
 
 ### Investigando preços
 
 Vou agora me debruçar sobre as faixas de preços e em seguida farei um cruzamento dos dados de preços e tags.
 
-```{r, child="docs/Analise/capitulos/7-price.qmd"}
+```{r}
+#| child: "docs/Analise/capitulos/7-price.qmd"
 ```
 
 ### Investigando jogos bem avaliados
 
-```{r, child="docs/Analise/capitulos/8-reviews.qmd"}
+```{r}
+#| child: "docs/Analise/capitulos/8-reviews.qmd"
 ```
 
 ## Analise de variáveis combinadas
 
 ### Investigando variações das tags em categorias de preços
 
-```{r, child="docs/Analise/capitulos/9-price-tags.qmd"}
+```{r}
+#| child: "docs/Analise/capitulos/9-price-tags.qmd"
 ```
 
 ## Conclusão

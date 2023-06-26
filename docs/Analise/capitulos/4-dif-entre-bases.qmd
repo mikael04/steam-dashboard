@@ -8,9 +8,9 @@
 ########################################################################################## #
 ```
 
-Após a seleção e limpeza das duas tabelas relacionadas a informações de jogos, decidi investigar as diferenças entre as bases, para tentar entender qual seria o processo de ajuste para futura união das bases de dados.
+Depois da seleção e limpeza das duas tabelas relacionadas a informações de jogos, decidi investigar as diferenças entre as bases de dados, para tentar entender qual seria o processo de ajuste necessário para a união delas.
 
-Usei o `anti_join` como método para avaliar os jogos que estávam apenas em uma das bases e não na outra. Ao verificar os resultados, percebi que a base 1 excluíu muitos jogos devido aos filtros aplicados, principalmente os filtros relacionados a avaliações positivas e número de jogadores. Investigando os mesmos jogos na Base 3, que não possui informações do número de jogadores, cheguei à números bem mais altos de avaliação, e levando em conta o conhecimento prévio sobre esses jogos, interpretei como uma certa inconsistência nos dados da base 1. 
+Usei o `anti_join` como método para avaliar os jogos que estávam apenas em uma das bases e não na outra. Percebi que a base 1 excluíu muitos jogos devido aos filtros aplicados, principalmente os filtros relacionados a avaliações positivas e número de jogadores. Investigando os mesmos jogos na Base 3, que não possui informações do número de jogadores, cheguei à números bem mais altos de avaliação, e levando em conta o conhecimento prévio sobre esses jogos, interpretei como uma certa inconsistência nos dados da base 1. 
 
 ```{r, compareDBs, eval=FALSE}
 # ## Base 1

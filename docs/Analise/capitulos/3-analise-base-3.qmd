@@ -17,7 +17,7 @@ Esta base de dados se encontra no Kaggle, através deste link:
 
 <https://www.kaggle.com/datasets/antonkozyriev/game-recommendations-on-steam>
 
-Após a exclusão da segunda base de dados, decidi verificar mais uma base de dados que havia encontrado de jogos da Steam.
+Após a exclusão da segunda base de dados, decidi verificar a última que havia encontrado de jogos da Steam.
 
 ```{r, db-3}
 df_base_3_reviews <- data.table::fread(here::here("data-raw/steam-data/db-3/recommendations.csv"))
@@ -27,7 +27,7 @@ df_base_3 <- data.table::fread(here::here("data-raw/steam-data/db-3/games.csv"))
 
 ```
 
-Após a análise inicial desta nova base de dados, concluí que ela possuía dados atualizados dos jogos, mas possui menos dados que a primeira base analisada. Não temos informações de línguas suportadas (tanto legendas quanto áudios), dados de pico de usuários, dados de DLC, dados de empresas (como sites, e-mail de suporte, imagem do jogo), dados do Metacritic e dados de tempo de jogo. Então utilizarei ela apenas para verificar a avaliação dos usuários (através das colunas `positive_ratio` e `user_reviews`).
+Na análise inicial desta nova bases, concluí que ela possuía dados atualizados dos jogos, mas possui menos dados que a primeira base analisada. Não temos informações de línguas suportadas (tanto legendas quanto áudios), dados de pico de usuários, dados de DLC, dados de empresas (como sites, e-mail de suporte, imagem do jogo), dados do Metacritic e dados de tempo de jogo. Então utilizarei ela apenas para verificar a avaliação dos usuários (através das colunas `positive_ratio` e `user_reviews`).
 
 ##### Filtrando dados inválidos
 
@@ -44,7 +44,7 @@ df_base_3 <- df_base_3 |>
   dplyr::filter(positive_ratio < 100 & user_reviews >= 100)
 ```
 
-E para o terceiro filtro, a ideia seria fazer uma contagem através da tabela de reviews para verificar a quantidade do número de usuários por jogo. Que é a única tabela que possui os ids de jogos e jogadores numa única tabela.
+E para o terceiro filtro, a ideia seria fazer uma contagem através da tabela de reviews para verificar a quantidade do número de usuários por jogo. Que é a única tabela que possui os *IDs* de jogos e jogadores numa única tabela.
 
 ```{r, filtro-base-3-users}
 df_games_users <- df_base_3_reviews |> 
@@ -87,15 +87,22 @@ df_base_3_complete <- dplyr::left_join(df_base_3, df_metadata, by = "app_id") |>
 
 ##### Removendo não jogos
 
-Por fim, também removi as observações que se enquadravam nas categorias que definimos como não jogos.
+Após a junção a nterior, também removi as observações que se enquadravam nas categorias que definimos como não jogos.
 
 ```{r, tagsNotGames}
 ## Categorias consideradas não jogos
 notGames <- c("Utilities", "Design & Illustration", "Animation & Modeling", "Game Development", "Photo Editing", "Audio Production", "Video Production", "Accounting", "Movie", "Documentary", "Episodic", "Short", "Tutorial", "360 Video")
+notGames_col <- paste0(notGames, collapse = "|")
 
 ## Filtrando categorias consideradas não jogos
-df_games_selTags <- func_filter_not_games(df_base_3_complete, notGames, mode = 2)
 ## mode = 2, comparação com tags
+df_games_selTags <- func_filter_not_games(df_base_3_complete, notGames_col, mode = 2)
 
-# data.table::fwrite(df_games_selTags, here::here("data-raw/created-tables/db-games-3.csv"))
+if(params$overwrite_tables == "TS"){
+  data.table::fwrite(df_games_selTags, here::here("data-raw/created-tables/db-games-3.csv"))
+}
 ```
+
+#### Finalizando limpeza e transformação
+
+E então, finalizando as filtragens, limpezas e transformações, tenho por fim a segunda base que utilizarei para as análises.

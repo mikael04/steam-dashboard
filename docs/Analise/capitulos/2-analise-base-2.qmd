@@ -8,9 +8,13 @@
 ########################################################################################## #
 ```
 
+##### Fonte
+
 Esta base de dados se encontra no Kaggle, através deste link:
 
 <https://www.kaggle.com/datasets/souyama/steam-dataset>
+
+##### Visão inicial
 
 Como os dados de avaliações na primeira base eram escassos e eu já havia encontrado outras bases de dados nas buscas que fiz, decidi analisar outras bases e verificar se alguma outra teria informações mais úteis com propósito de verificar dados de avaliação dos jogos.
 
@@ -20,7 +24,7 @@ df_base_2 <- data.table::fread(here::here("data-raw/steam-data/db-4/dataset.csv"
 
 name <- unique(df_base_2$app_name)
 
-unique(df_base_2$review_score)
+unique_val_review <- unique(df_base_2$review_score)
 
 df_base_2$positive <- dplyr::if_else(df_base_2$review_score == 1, 1, 0)
 df_base_2$negative <- dplyr::if_else(df_base_2$review_score == -1, 1, 0)
@@ -41,4 +45,8 @@ db_unique <- df_base_2[!duplicated(df_base_2[, c("app_id", "app_name")]), c("app
 # df_base_2 <- data.table::fread("data-raw/steam-data/db-5/GamesAndRecommendation/recommendations.csv")
 ```
 
-Porém, investigando a base, notei que ela era um pouco antiga, por não possuir títulos como o "Counter-Strike: Global Offensive", os jogos mais novos da série "Battlefield", entre outros, decidi então deixá-lá de lado e partir para a análise da outra base encontrada.
+Porém, investigando a base, notei que ela era um pouco antiga, por não possuir títulos como o "Counter-Strike: Global Offensive", os jogos mais novos da série "Battlefield", entre outros, o que seria um problema para traçarmos conclusões no mercado atual.
+
+#### Excluíndo a base
+
+E então, após contatar os problemas citados, decidi não utilizar esta base para a análise.

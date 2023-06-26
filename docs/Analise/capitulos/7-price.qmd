@@ -11,7 +11,7 @@
 library(ggplot2)
 ```
 
-Utilizarei a base criada anteriormente, com a nova coluna de característica dos jogos (`tags`). E criarei uma tabela com as informações descritivas relacionadas ao preço, para essa análise irei excluir os jogos gratuitos, para que não influêncie tanto nas métricas.
+Utilizarei a base criada anteriormente, com a coluna de característica dos jogos ajustada (`tags`). E farei uma tabela com as informações descritivas relacionadas ao preço, para essa análise irei excluir os jogos gratuitos, para que não influêncie tanto nas métricas.
 
 ```{r, price}
 ## Usado para escrever o qmd, porém não preciso utilizar ao rodar a análise completa (outro qmd já fará a leitura desse arquivo)
@@ -82,7 +82,7 @@ ggplot(df_payed_games, aes(y = price_original)) +
         axis.ticks.x=element_blank())
 ```
 
-E aqui podemos ver que ele classificou muitos jogos como outliers, em faixas superiores à \$45, portanto resolvemos tirar os jogos do primeiro e último decis, de acordo com seu preço. Depois de remover os 10% inferiores e superiores:
+E aqui podemos ver que ele classificou muitos jogos como outliers, em faixas superiores à \$45, portanto resolvi tirar os jogos do primeiro e último decis, de acordo com seu preço. Depois de remover os 10% inferiores e superiores:
 
 ```{r, graph-price-cut}
 ggplot(df_payed_games[(df_payed_games$price_original > dec_orig[1] & df_payed_games$price_original < dec_orig[10]),], 
@@ -100,9 +100,9 @@ ggplot(df_payed_games[(df_payed_games$price_original > dec_orig[1] & df_payed_ga
   scale_y_continuous(breaks=seq(0, 30, 5))
 ```
 
-Observamos então uma distribuição com menos valores discrepantes, tendo sua **mediana** em torno dos **\$12**, **mínimo próximo de zero** e **máximo próximo de \$30**, com **1° quartil em \$5** e **3° quartil em \$15**.
+Observei então uma distribuição com menos valores discrepantes, tendo sua **mediana** em torno dos **\$12**, **mínimo próximo de zero** e **máximo próximo de \$30**, com **1° quartil em \$5** e **3° quartil em \$15**.
 
-Vamos investigar a hipótese da possibilidade de descartar estes jogos para a análise, inicialmente eu defendo a exclusão dos mais caros, pois costumeiramente são os jogos mais famosos e conhecidos, que já tem seu público definido e podem se dar ao luxo de cobrar mais caro. Já os jogos mais baratos, imagino que sejam jogos menores e que não se encaixam na nossa proposta de um jogo que fosse lucrativo, muitas vezes também são jogos mais antigos que foram tendo cortes de preços para continuarem vendendo. De qualquer forma, investigaremos nos dados ambas as hipóteses.
+Investigando a hipótese da possibilidade de descartar estes jogos para a análise, inicialmente eu defendo a exclusão dos mais caros, pois costumeiramente são os jogos mais famosos e conhecidos, que já tem seu público definido e podem se dar ao luxo de cobrar mais caro. Já os jogos mais baratos, imagino que sejam jogos menores e que não se encaixam na nossa proposta de um jogo que fosse lucrativo, muitas vezes também são jogos mais antigos que foram tendo cortes de preços para continuarem vendendo. De qualquer forma, investigaremos nos dados ambas as hipóteses.
 
 ##### Investigando os 10% mais caros
 
@@ -157,9 +157,9 @@ ggplot(df_all_games_year, aes(x = year_release, y = median_price)) +
 
 ```
 
-Apesar de já ter verificarmos um **aumento na mediana e na média de preços**, por ter acompanhado esse mercado por alguns anos tive a impressão de que o resultado não refletia exatamente os aumentos observados por mim, então decidi me debruçar mais sobre alguns exemplos de jogos considerados "triple A".
+Apesar de já ter verificado um **aumento na mediana e na média de preços**, por ter acompanhado esse mercado por alguns anos tive a impressão de que o resultado não refletia exatamente os aumentos observados por mim, então decidi me debruçar mais sobre alguns exemplos de jogos considerados "triple A".
 
-Seguindo alguns exemplos de **jogos que são grandes franquias e são lançados quase que anualmente**, podemos observar bem esta tendência no preço. Vamos usar como exemplo os jogos Assassin's Creed, Battlefield, Call Of Duty, Far Cry, Final Fantasy, NieR que são franquias já muito conhecidas e que estiveram em alguns períodos no catálogo da Steam (algumas foram removidas para figurarem apenas em lojas próprias). Removemos os Remasters nos jogos que possuíam, que são jogos que são relançados geralmente com pequenas alterações gráficas e acabam tendo preço mais baixo, por ser um jogo mais antigo e no caso do Final Fantasy, como existem muitos jogos menores sendo relançados, mantivemos apenas o preço mais alto do ano. As franquias Battlefield e Call Of Duty também tiveram que ser corrigida em seus anos de lançamento, pois muitos jogos foram adicionados com sua data de lançamento incorreta.
+Seguindo alguns exemplos de **jogos que são grandes franquias e são lançados quase que anualmente**, pude observar bem esta tendência de aumento no preço. Vamos usar como exemplo os jogos Assassin's Creed, Battlefield, Call Of Duty, Far Cry, Final Fantasy, NieR que são franquias já muito conhecidas e que estiveram em alguns períodos no catálogo da Steam (alguns dos jogos não estão presentes de forma integral por figurarem apenas em lojas próprias das empresas). Removi os Remasters nos jogos que possuíam, que são jogos que são relançados geralmente com pequenas alterações gráficas e acabam tendo preço mais baixo, por ser um jogo mais antigo e no caso do Final Fantasy, como existem muitos jogos menores sendo relançados, mantive apenas o preço mais alto do ano. As franquias Battlefield e Call Of Duty também tiveram que ser corrigida em seus anos de lançamento, pois muitos jogos foram adicionados com sua data de lançamento incorreta.
 
 ```{r, price-year-franchises}
 ## Selecionando jogos
