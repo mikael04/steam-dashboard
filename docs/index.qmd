@@ -13,7 +13,7 @@ code-fold: true
 code-tools: 
     source: https://github.com/mikael04/steam-dashboard.git
 params:
-  run_all_code: "F"
+  run_all_code: "T"
   overwrite_tables: "F"
 ---
 
