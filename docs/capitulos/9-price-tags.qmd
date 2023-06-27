@@ -532,8 +532,7 @@ df_top100_tags <- df_price_categ_split |>
   dplyr::filter(app_id %in% top100_id) |> 
   dplyr::group_by(tags_all) |> 
   dplyr::summarise(count = n(), .groups = NULL) |> 
-  dplyr::arrange(desc(count)) |>
-  dplyr::slice_head(n = 10)
+  dplyr::arrange(desc(count))
 
 # ## Jogos do top100
 # df_top100_games <- df_all_games |>
