@@ -1,9 +1,0 @@
-Texto do arquivo de teste
-
-```{r}
-print("Print do filho")
-```
-
-### Capítulo do arquivo de teste
-
-Mais texto pós capítulo
